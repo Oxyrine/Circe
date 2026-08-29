@@ -5,7 +5,6 @@
 /contract/    @person-b
 /scoring/     @person-a
 /data/        @person-c
-/viz/         @person-c
 /demo/        @person-c
 
 # fixtures/ is C's, except the one file B seeds at hour 1
