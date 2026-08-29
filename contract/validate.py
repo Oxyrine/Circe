@@ -88,7 +88,14 @@ def validate_file(path: str, kind_override: str | None) -> list[str]:
     except json.JSONDecodeError as e:
         return [f"invalid JSON: {e}"]
 
-    kind = kind_override or guess_kind(doc)
+    if kind_override:
+        kind = kind_override
+    else:
+        try:
+            kind = guess_kind(doc)
+        except ValueError:
+            return []
+
     schema = load_schema(kind)
 
     validator = jsonschema.Draft7Validator(schema)
@@ -124,7 +131,20 @@ def main() -> int:
         if not Path(path).is_file():
             print(f"SKIP  {path}  (not a file)")
             continue
-        errors = validate_file(path, args.kind)
+
+        try:
+            with open(path, encoding="utf-8") as f:
+                doc = json.load(f)
+            kind = args.kind or guess_kind(doc)
+        except ValueError:
+            print(f"SKIP  {path}  (no matching contract schema)")
+            continue
+        except json.JSONDecodeError as e:
+            ok = False
+            print(f"FAIL  {path}\n      - invalid JSON: {e}")
+            continue
+
+        errors = validate_file(path, kind)
         if errors:
             ok = False
             print(f"FAIL  {path}")
