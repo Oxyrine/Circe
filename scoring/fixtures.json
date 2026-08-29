@@ -1,0 +1,111 @@
+{
+  "sample_rings": [
+    {
+      "ring_id": "R01",
+      "canonical_key": "E001|E002|E003",
+      "closure_type": "corporate",
+      "entities": ["E001", "E002", "E003"],
+      "hops": [
+        {
+          "from": "E001",
+          "to": "E002",
+          "value": 100000000,
+          "hop_type": "invoice",
+          "invoice_date": "2023-01-01",
+          "hs_code": "84713010"
+        },
+        {
+          "from": "E002",
+          "to": "E003",
+          "value": 100000000,
+          "hop_type": "invoice",
+          "invoice_date": "2023-01-02",
+          "hs_code": "84713010"
+        },
+        {
+          "from": "E003",
+          "to": "E001",
+          "hop_type": "corporate_bridge"
+        }
+      ]
+    },
+    {
+      "ring_id": "R02",
+      "canonical_key": "E010|E011|E012",
+      "closure_type": "transaction",
+      "entities": ["E010", "E011", "E012"],
+      "hops": [
+        {
+          "from": "E010",
+          "to": "E011",
+          "value": 100000000,
+          "hop_type": "invoice",
+          "invoice_date": "2023-01-01",
+          "hs_code": "72081000"
+        },
+        {
+          "from": "E011",
+          "to": "E012",
+          "value": 120000000,
+          "hop_type": "invoice",
+          "invoice_date": "2023-01-05",
+          "hs_code": "72081000"
+        },
+        {
+          "from": "E012",
+          "to": "E010",
+          "value": 140000000,
+          "hop_type": "invoice",
+          "invoice_date": "2023-01-10",
+          "hs_code": "72081000"
+        }
+      ]
+    }
+  ],
+  "sample_entities": {
+    "E001": {
+      "id": "E001",
+      "name": "Alpha Corp",
+      "industry_code": "8471",
+      "industry_class": "manufacturing"
+    },
+    "E002": {
+      "id": "E002",
+      "name": "Beta Tech",
+      "industry_code": "8471",
+      "industry_class": "manufacturing"
+    },
+    "E003": {
+      "id": "E003",
+      "name": "Gamma Logistics",
+      "industry_code": "8471",
+      "industry_class": "holding"
+    },
+    "E010": {
+      "id": "E010",
+      "name": "Steel Mills Ltd",
+      "industry_code": "7208",
+      "industry_class": "manufacturing"
+    },
+    "E011": {
+      "id": "E011",
+      "name": "Metal Traders",
+      "industry_code": "7208",
+      "industry_class": "trading"
+    },
+    "E012": {
+      "id": "E012",
+      "name": "Heavy Foundry",
+      "industry_code": "7208",
+      "industry_class": "manufacturing"
+    }
+  },
+  "sample_invoices": [
+    {"from": "E001", "to": "E002", "value": 100000000},
+    {"from": "E002", "to": "E003", "value": 100000000},
+    {"from": "E010", "to": "E011", "value": 100000000},
+    {"from": "E011", "to": "E012", "value": 120000000},
+    {"from": "E012", "to": "E010", "value": 140000000},
+    {"from": "E010", "to": "E999", "value": 50000000}
+  ]
+}
