@@ -152,7 +152,8 @@
       "industry_code": "NIC-2610",
       "industry_class": "manufacturing",
       "directors": [
-        "D123"
+        "D123",
+        "D42"
       ],
       "address": "42 Sadar Bazaar, Chandigarh 160002",
       "registration_date": "2011-02-12"
@@ -265,7 +266,7 @@
         "D339"
       ],
       "address": "59 Whitefield Main Road, Hyderabad 500081",
-      "registration_date": "2016-04-09"
+      "registration_date": "2017-12-24"
     },
     {
       "id": "E025",
@@ -295,8 +296,7 @@
       "industry_code": "NIC-5229",
       "industry_class": "distribution",
       "directors": [
-        "D42",
-        "D339"
+        "D42"
       ],
       "address": "73 Electronic City, Hyderabad 500081",
       "registration_date": "2020-10-02"
