@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "source_dataset": "seed42-regimeA",
+  "count": 6,
+  "injected_rings": [
+    {
+      "truth_id": "T01",
+      "entities": [
+        "E005",
+        "E019",
+        "E007",
+        "E003",
+        "E022"
+      ],
+      "hidden_legs": []
+    },
+    {
+      "truth_id": "T02",
+      "entities": [
+        "E025",
+        "E017",
+        "E031",
+        "E014",
+        "E006",
+        "E027",
+        "E007"
+      ],
+      "hidden_legs": []
+    },
+    {
+      "truth_id": "T03",
+      "entities": [
+        "E009",
+        "E002",
+        "E010",
+        "E027",
+        "E016",
+        "E023"
+      ],
+      "hidden_legs": []
+    },
+    {
+      "truth_id": "T04",
+      "entities": [
+        "E027",
+        "E012",
+        "E006",
+        "E024"
+      ],
+      "hidden_legs": [
+        {
+          "from": "E024",
+          "to": "E027",
+          "value": 73305621
+        }
+      ]
+    },
+    {
+      "truth_id": "T05",
+      "entities": [
+        "E023",
+        "E018",
+        "E011",
+        "E027",
+        "E021",
+        "E006",
+        "E025"
+      ],
+      "hidden_legs": []
+    },
+    {
+      "truth_id": "T06",
+      "entities": [
+        "E024",
+        "E018",
+        "E006",
+        "E028"
+      ],
+      "hidden_legs": [
+        {
+          "from": "E028",
+          "to": "E024",
+          "value": 25310470
+        }
+      ]
+    }
+  ]
+}
