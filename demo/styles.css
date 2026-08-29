@@ -1,25 +1,29 @@
 :root {
+  /* Navy -> teal -> mint -> sand -> amber -> red: extends the shader
+     background's own 4-stop gradient (navy/teal/mint/sand) with the two
+     warm tones the shader doesn't use, so badges/bridge/danger read as
+     part of the same family instead of a bolted-on accent color. */
   color-scheme: dark;
-  --bg: #05070a;
-  --surface: #0a0e15;
-  --surface-2: #10151f;
-  --ink: #dbe6f2;
-  --ink-mid: #8ea0b8;
-  --ink-soft: #56647a;
-  --ink-faint: #232d3c;
-  --rule: #1c2534;
-  --rule-soft: #131a26;
-  --accent: #2dd4f0;
-  --accent-ink: #7ce6fa;
-  --accent-soft: #06222b;
-  --danger: #ff5c7a;
-  --danger-bg: #2b0c16;
-  --ok: #2de0a8;
-  --ok-bg: #062a20;
-  --bridge: #ffb454;
-  --glow: 0 0 6px rgba(45, 212, 240, .35);
-  --shadow: 0 1px 2px rgba(0, 0, 0, .6), 0 10px 28px -16px rgba(45, 212, 240, .12);
-  --shadow-hover: 0 2px 6px rgba(0, 0, 0, .7), 0 0 0 1px rgba(45, 212, 240, .35), 0 18px 40px -18px rgba(45, 212, 240, .25);
+  --bg: #030a0b;
+  --surface: #081619;
+  --surface-2: #0d1f22;
+  --ink: #f2e9d0;
+  --ink-mid: #9fb8b2;
+  --ink-soft: #5c7570;
+  --ink-faint: #263533;
+  --rule: #1c2e2c;
+  --rule-soft: #132220;
+  --accent: #94d2bd;
+  --accent-ink: #b8e3d3;
+  --accent-soft: #0d2620;
+  --danger: #d1442c;
+  --danger-bg: #2a0e0a;
+  --ok: #0a9396;
+  --ok-bg: #062422;
+  --bridge: #ee9b00;
+  --glow: 0 0 6px rgba(148, 210, 189, .35);
+  --shadow: 0 1px 2px rgba(0, 0, 0, .6), 0 10px 28px -16px rgba(148, 210, 189, .12);
+  --shadow-hover: 0 2px 6px rgba(0, 0, 0, .7), 0 0 0 1px rgba(148, 210, 189, .35), 0 18px 40px -18px rgba(148, 210, 189, .25);
 }
 
 * { box-sizing: border-box; }
@@ -33,14 +37,13 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-#constellation-bg {
+#shader-bg {
   position: fixed;
   inset: 0;
+  width: 100vw;
+  height: 100vh;
   z-index: -1;
   display: block;
-}
-@media (prefers-reduced-motion: reduce) {
-  #constellation-bg { opacity: .6; }
 }
 
 .topbar {
@@ -237,7 +240,7 @@ body {
   height: 100%;
   width: var(--fill, 0%);
   background: var(--accent);
-  box-shadow: 0 0 6px rgba(45, 212, 240, .6);
+  box-shadow: 0 0 6px rgba(148, 210, 189, .6);
   animation: fill-in .5s ease-out backwards;
   animation-delay: .1s;
 }
