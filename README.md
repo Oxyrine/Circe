@@ -59,9 +59,24 @@ pytest -q
       14 new tests, including the demo case: a ring with its closing
       invoice removed still surfaces, flagged corporate, with real
       evidence attached. 48/48 total.
-- [ ] M3.5 — real entity canonicalization (hours 24-28, if M3 lands clean;
-      currently skipped, transaction-closed + corporate-closed both landed
-      clean but there's no remaining hour-budget signal to act on)
+- [x] M3.5 — real entity canonicalization (`graph/canonicalize.py`).
+      Blocking on normalized (name, address) only — never either alone,
+      that stays corporate.py's job — no fuzzy matching, no similarity
+      threshold. Found and fixed a real latent bug the identity stub had
+      been masking: `build_transaction_graph` and `corporate.py` were
+      reading two different id-spaces (canonical vs. raw); harmless while
+      canonicalization was a no-op, silently wrong the moment it wasn't.
+      Fixed by computing `canon_map` once in `run.py` and threading it
+      through both. Flagship test: a bridge that's only findable after
+      merging two aliases' director records — proves spec §3's "same
+      machinery closes fragmented loops" claim, not just asserts it.
+      **Honest result on C's real dataset: zero merges** (32 entities in,
+      32 singleton clusters out) — no aliased/duplicate registrations
+      exist in the current generator output, so this is currently a
+      no-op on live data, same observable behavior as the old identity
+      stub. Machinery is real and tested; nothing to do yet on this
+      dataset. 13 new tests, 71/71 total. Artifact regenerates
+      byte-identical.
 - [x] M4 — hardened against messy input. Two failure classes handled
       differently: a **degradable gap** (missing HS code / invoice_date /
       discounting_date) still produces the ring with the field null, for

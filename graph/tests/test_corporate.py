@@ -3,6 +3,7 @@ and the end-to-end demo case — a ring with its closing invoice deliberately
 removed still surfaces, flagged corporate, with real evidence."""
 import time
 
+from graph.canonicalize import canonicalize
 from graph.corporate import (
     MAX_STEPS_PER_PAIR,
     _paths_from_to,
@@ -196,7 +197,8 @@ def test_find_corporate_bridged_rings_returns_no_ring_id_yet():
         _invoice("I001", "E001", "E002", 1_000_000, "2026-01-01"),
         _invoice("I002", "E002", "E003", 1_020_000, "2026-01-05"),
     ]
-    adj, edge_invoices = build_transaction_graph(entities, invoices)
+    canon_map = canonicalize(entities)
+    adj, edge_invoices = build_transaction_graph(canon_map, invoices)
     rings, warnings = find_corporate_bridged_rings(entities, adj, edge_invoices, max_depth=8)
     assert len(rings) == 1
     assert "ring_id" not in rings[0]
