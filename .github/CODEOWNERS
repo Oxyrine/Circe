@@ -11,3 +11,12 @@
 # fixtures/ is C's, except the one file B seeds at hour 1
 /fixtures/                              @person-c
 /fixtures/candidate_rings.sample.json   @person-b
+
+# CI + this file itself
+/.github/     @person-b
+
+# artifacts/*.json is committed, not gitignored (the decoupling
+# mechanism — see WIRE_PROTOCOL.md §2), so single-writer ownership here
+# matters more than almost anywhere else in the repo.
+/artifacts/candidate_rings.json   @person-b
+/artifacts/scored_rings.json      @person-a
