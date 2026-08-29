@@ -24,7 +24,8 @@ FRAUD_HS_POOL = ["72081000", "39012000", "74031100", "10063000"]
 def _ring_lengths(params, rng):
     lo, hi = params["fraud_ring_length_range"]
     min_long = params["fraud_ring_min_long"]
-    lengths = [rng.randint(6, hi) for _ in range(min_long)]
+    long_floor = min(6, hi)  # never exceed hi, or randint(6, hi) raises when hi < 6
+    lengths = [rng.randint(long_floor, hi) for _ in range(min_long)]
     lengths += [rng.randint(lo, hi) for _ in range(params["num_fraud_rings"] - min_long)]
     rng.shuffle(lengths)
     return lengths
@@ -44,6 +45,7 @@ def _apply_bridge(entity_by_id, frm, to, kind, rng):
 def inject(entities, invoices, params, rng, next_inv_n, next_eid_n):
     entity_by_id = {e["id"]: e for e in entities}
     all_ids = list(entity_by_id.keys())
+    bridged_entities = set()  # an entity's bridge evidence must not be overwritten by a later ring
 
     start = date.fromisoformat(params["date_start"])
     span = params["date_span_days"]
@@ -57,8 +59,8 @@ def inject(entities, invoices, params, rng, next_inv_n, next_eid_n):
     injected_rings = []
 
     for ring_idx, length in enumerate(_ring_lengths(params, rng), start=1):
-        length = min(length, len(all_ids))
-        chosen = rng.sample(all_ids, length)
+        sample_size = min(length, len(all_ids))
+        chosen = rng.sample(all_ids, sample_size)
         while len(chosen) < length:
             next_eid_n += 1
             new_id = "E{:03d}".format(next_eid_n)
@@ -70,6 +72,16 @@ def inject(entities, invoices, params, rng, next_inv_n, next_eid_n):
             chosen.append(new_id)
 
         corporate = rng.random() < corp_fraction
+        if corporate:
+            # The closing ("to") entity is whichever one sits at chosen[0].
+            # Rotate until that entity hasn't already had its bridge
+            # evidence set by an earlier ring, so we never overwrite it.
+            corporate = False
+            for _ in range(length):
+                if chosen[0] not in bridged_entities:
+                    corporate = True
+                    break
+                chosen = chosen[1:] + chosen[:1]
         hidden_idx = length - 1 if corporate else None
 
         cur_value = rng.randint(lo_v, hi_v)
@@ -80,12 +92,14 @@ def inject(entities, invoices, params, rng, next_inv_n, next_eid_n):
         for i in range(length):
             frm, to = chosen[i], chosen[(i + 1) % length]
             cur_value = int(cur_value * (1 + rng.uniform(-variance, variance)))
+            cur_value = max(lo_v, min(cur_value, hi_v * 2))
             cur_date = cur_date + timedelta(days=rng.randint(gap_lo, gap_hi))
             disc_date = cur_date + timedelta(days=rng.randint(gap_lo, gap_hi * 2))
 
             if i == hidden_idx:
                 hidden_legs.append({"from": frm, "to": to, "value": cur_value})
                 _apply_bridge(entity_by_id, frm, to, rng.choice(BRIDGE_KINDS), rng)
+                bridged_entities.add(to)
                 continue
 
             next_inv_n += 1
