@@ -145,6 +145,25 @@ C's status:
       regimes run clean). Caught a real bug during review: a hidden leg
       could coincidentally match a real invoice generated elsewhere in the
       same dataset, silently un-hiding it. Fixed and pinned down by a test.
+- [x] **Fixed the precision@k = 0% finding** (diagnosed against the real
+      pipeline: first true hit at position ~51/1832, 0% precision through
+      k=20). Root cause: fraud entities were sampled from the real economy's
+      32-firm pool, so every fraud entity also carried substantial genuine
+      trade (5–20 invoices, ₹182M–₹1.3B) — `S_externality` had no "outside
+      economy" left to contrast a sealed cluster against. Five of six fraud
+      rings now use freshly-minted shell entities that carry zero
+      legitimate trade by construction (never touch `economy.py`'s invoice
+      graph, never reused across rings); one ring is deliberately kept
+      drawing from the real economy as the adversarial hard case (spec
+      §8.5) rather than hiding the difficulty. Result on the real pipeline:
+      recall 6/6, first true hit now at position **1**, precision@6 =
+      **66.7%** (4/6 — was 0/6). New test:
+      `test_clean_rings_carry_no_trade_outside_their_own_entities`.
+      **Flagged for B, not changed here:** verifying this required
+      `--max-depth 8` — B's own `--max-depth 6` (a deliberate file-size
+      tradeoff, see M2 above) finds 0 corporate-closed rings on the fixed
+      dataset where depth 8 finds the real one. `graph/` is B's file per
+      CODEOWNERS; this needs a joint call, not a unilateral change.
 - [x] `viz/` — ring queue sorted by `expected_loss`, with a stats header
       (rings flagged, total expected loss, corporate-closed count, avg
       aggregate), each ring drawn at full fidelity over a dimmed backdrop of
