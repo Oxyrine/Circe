@@ -5,7 +5,7 @@
   // mouse-shockwave repulsion). No React behavior was actually used by the
   // original — it's plain Canvas API + mousemove — so this is a 1:1 port,
   // retuned as a dim background behind content instead of a foreground
-  // hero: wider spacing, lower baseline opacity, matrix-green palette
+  // hero: wider spacing, lower baseline opacity, ink/accent-blue palette
   // instead of cyan, and it sits still (single static frame) for anyone
   // with prefers-reduced-motion set.
 
@@ -26,9 +26,9 @@
   var SPRING_K = 18;
   var DAMPING = 0.82;
 
-  var BG = "#010604";
-  var NODE_RGB = "93, 255, 143";     // --ink
-  var ACCENT_RGB = "57, 255, 140";   // --accent
+  var BG = "#05070a";
+  var NODE_RGB = "219, 230, 242";    // --ink
+  var ACCENT_RGB = "45, 212, 240";   // --accent
 
   function initNodes() {
     nodes = [];
