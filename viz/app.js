@@ -97,8 +97,11 @@
   }
 
   function scoreRow(signal, score, abstained, evidence) {
+    var isNumber = typeof score === "number" && !isNaN(score);
+    var display = abstained || !isNumber;
+
     var row = document.createElement("div");
-    row.className = "score-row" + (abstained ? " abstained" : "");
+    row.className = "score-row" + (display ? " abstained" : "");
 
     var label = document.createElement("span");
     label.className = "score-label";
@@ -108,12 +111,12 @@
     track.className = "score-track";
     var fill = document.createElement("div");
     fill.className = "score-fill";
-    fill.style.width = (abstained ? 0 : Math.round(score * 100)) + "%";
+    fill.style.width = (display ? 0 : Math.round(score * 100)) + "%";
     track.appendChild(fill);
 
     var val = document.createElement("span");
     val.className = "score-val";
-    val.textContent = abstained ? "abstained" : score.toFixed(2);
+    val.textContent = display ? (abstained ? "abstained" : "—") : score.toFixed(2);
 
     row.appendChild(label);
     row.appendChild(track);
@@ -149,7 +152,7 @@
 
     var agg = document.createElement("span");
     agg.className = "ring-agg";
-    agg.textContent = "agg " + ring.aggregate.toFixed(2);
+    agg.textContent = "agg " + (typeof ring.aggregate === "number" ? ring.aggregate.toFixed(2) : "—");
 
     head.appendChild(idEl);
     head.appendChild(badge);
@@ -197,7 +200,7 @@
       return;
     }
     var rings = SCORED.rings.slice().sort(function (a, b) {
-      return b.expected_loss - a.expected_loss;
+      return (b.expected_loss || 0) - (a.expected_loss || 0);
     });
     rings.forEach(function (ring) {
       root.appendChild(buildCard(ring));
