@@ -15,10 +15,30 @@ data-quality noise). Blocking on normalized name + address, union-find merge.
 """
 from __future__ import annotations
 
+import sys
+
 
 def canonicalize(entities: list[dict]) -> dict[str, str]:
     """Return a map of entity_id -> canonical_entity_id.
 
     Identity mapping for now: every entity maps to itself.
+
+    M4 hardening: an entity record missing `id` is skipped, loudly — it
+    can't be canonicalized to anything, and the rest of the pipeline
+    already treats an id absent from this map by falling back to the raw
+    value it was given (see transaction_graph.build_transaction_graph's
+    canon_map.get(x, x)), so omitting it here is safe, not silent-drop.
     """
-    return {e["id"]: e["id"] for e in entities}
+    result = {}
+    skipped = 0
+    for e in entities:
+        eid = e.get("id")
+        if not eid:
+            skipped += 1
+            continue
+        result[eid] = eid
+
+    if skipped:
+        print(f"[graph.canonicalize] WARNING: skipped {skipped} entity record(s) missing id", file=sys.stderr)
+
+    return result

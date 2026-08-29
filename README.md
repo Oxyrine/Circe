@@ -59,9 +59,32 @@ pytest -q
       14 new tests, including the demo case: a ring with its closing
       invoice removed still surfaces, flagged corporate, with real
       evidence attached. 48/48 total.
-- [ ] M3.5 — real entity canonicalization (hours 24-28, if M3 lands clean)
-- [ ] M4 — harden edge cases: missing HS code, missing date, duplicate
-      invoices between the same pair (self-loops already filtered at M1)
+- [ ] M3.5 — real entity canonicalization (hours 24-28, if M3 lands clean;
+      currently skipped, transaction-closed + corporate-closed both landed
+      clean but there's no remaining hour-budget signal to act on)
+- [x] M4 — hardened against messy input. Two failure classes handled
+      differently: a **degradable gap** (missing HS code / invoice_date /
+      discounting_date) still produces the ring with the field null, for
+      A's signals to abstain around — the exact behavior spec §8.3's
+      messiness injection needs. An **unusable record** (invoice missing
+      from/to/value, entity missing id) is skipped and counted with a
+      loud stderr warning, never silently, and never crashes the run over
+      one bad row. Single-node SCCs, self-loops, duplicate invoices on
+      the same pair were already correct as of M1/M3 — this pass adds
+      regression tests locking that in, plus a combined-messiness
+      end-to-end case. 10 new tests, 58/58 total. Verified byte-identical
+      output on C's real dataset before/after (no regression — these edge
+      cases don't exist in what's currently committed).
+
+**Flagged, not resolved:** `contract/invoice.schema.json` currently makes
+`invoice_date`/`discounting_date` non-nullable, which conflicts with spec
+§8.3's own "missing dates" messiness mode. Fixing this is a `contract/`
+change and needs A+C sign-off per our own process (see `WIRE_PROTOCOL.md`
+§6) — not decided unilaterally here. Candidate direction: `invoice_date`
+probably stays required (basic invoice metadata), `discounting_date`
+probably becomes nullable (undiscounted invoices have no discounting
+date yet, and A's scoring never reads this field per §7.3 anyway, so
+loosening it costs nothing downstream).
 
 ## Running C's track
 

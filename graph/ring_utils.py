@@ -27,8 +27,21 @@ def canonical_key(entity_ids: list[str]) -> str:
 def pick_representative_invoice(candidates: list[dict]) -> dict:
     """Deterministic across reruns: earliest invoice_date represents the
     initiating transaction on that leg; invoice_id breaks ties.
+
+    M4 hardening: invoice_date/invoice_id are required by the current
+    schema, but the sort key is defensive anyway — a missing or null
+    invoice_date sorts first (empty string) rather than raising KeyError
+    or TypeError (None can't be compared to a string in Python 3). This
+    matters even under a strict schema: better to degrade to a stable,
+    arbitrary-but-deterministic choice than to crash the whole pipeline
+    over one messy record, live, on stage.
     """
-    return min(candidates, key=lambda inv: (inv["invoice_date"], inv["invoice_id"]))
+    def sort_key(inv: dict) -> tuple[str, str]:
+        date = inv.get("invoice_date") or ""
+        inv_id = inv.get("invoice_id") or ""
+        return (date, inv_id)
+
+    return min(candidates, key=sort_key)
 
 
 def build_invoice_hops(
@@ -46,6 +59,17 @@ def build_invoice_hops(
     Returns None if any required edge has no real invoice — defensive;
     every edge here came from the same graph these nodes were found in,
     so this should never actually trigger.
+
+    M4 hardening: hs_code/invoice_date/discounting_date degrade to null
+    on a missing field rather than crashing — these are exactly the
+    fields spec §8.3's messiness injection targets, and emitting the ring
+    with a gap (for A's signals to handle: abstain, don't crash) is the
+    whole point of candidate generation being "cheap, high recall,
+    deliberately over-inclusive," not a data-quality gate. `value`,
+    `invoice_id`, `from`, `to` stay hard-required: silently defaulting a
+    missing `value` (e.g. to 0) would corrupt S_value's net-position math
+    in a way that's invisible rather than absent — a wrong number is
+    worse than a missing ring, so those fail loudly instead.
     """
     hops = []
     n = len(nodes)
@@ -62,8 +86,8 @@ def build_invoice_hops(
             "invoice_id": inv["invoice_id"],
             "value": inv["value"],
             "hs_code": inv.get("hs_code"),
-            "invoice_date": inv["invoice_date"],
-            "discounting_date": inv["discounting_date"],
+            "invoice_date": inv.get("invoice_date"),
+            "discounting_date": inv.get("discounting_date"),
         })
     return hops
 
