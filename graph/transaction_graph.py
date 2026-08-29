@@ -7,27 +7,32 @@ from __future__ import annotations
 import sys
 from collections import defaultdict
 
-from graph.canonicalize import canonicalize
-
 
 def build_transaction_graph(
-    entities: list[dict], invoices: list[dict]
+    canon_map: dict[str, str], invoices: list[dict]
 ) -> tuple[dict[str, list[str]], dict[tuple[str, str], list[dict]]]:
     """Returns (adj, edge_invoices).
-    adj: canonical entity id -> sorted list of successor entity ids.
+    adj: canonical entity id -> sorted list of successor canonical ids.
     edge_invoices: (u, v) -> list of every real invoice from u to v.
-    Self-loop invoices (an entity invoicing itself) are dropped — that's
-    not a circular-trading pattern, it's M4 hardening territory.
+
+    canon_map comes from canonicalize.canonicalize(), computed ONCE by
+    the caller and threaded through to both this function and
+    corporate.find_corporate_bridged_rings — computing it twice, or
+    letting one caller skip it, would let the two halves of the pipeline
+    silently disagree on what a given entity id even refers to.
+
+    Self-loop invoices are dropped after remapping through canon_map, not
+    before: two DIFFERENT raw ids that canonicalize to the same firm
+    invoicing each other is exactly the self-dealing pattern this filter
+    exists to catch, not a coincidence to preserve.
 
     M4 hardening: an invoice missing `from`, `to`, or `value` can't form a
     valid graph edge at all — there's no gap to degrade gracefully around,
     unlike a missing hs_code or date (see ring_utils.build_invoice_hops).
-    Such a record is skipped and counted, LOUDLY (a warning, not silence),
-    rather than raising and taking the entire run down over one bad row
-    among possibly thousands of good ones.
+    Such a record is skipped and counted, LOUDLY, rather than raising and
+    taking the entire run down over one bad row among possibly thousands
+    of good ones.
     """
-    canon_map = canonicalize(entities)
-
     edge_invoices: dict[tuple[str, str], list[dict]] = defaultdict(list)
     adj_sets: dict[str, set[str]] = defaultdict(set)
 
