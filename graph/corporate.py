@@ -20,6 +20,7 @@ just deduplicated later.
 """
 from __future__ import annotations
 
+import sys
 from collections import defaultdict
 
 from graph.ring_utils import build_invoice_hops, canonical_key
@@ -40,16 +41,39 @@ def find_bridgeable_pairs(entities: list[dict]) -> dict[tuple[str, str], dict]:
 
     Value: {"bridge_kind": ..., "bridge_evidence": {...}} using only
     attributes actually present in the data — no fabricated fields.
+
+    M4 hardening: an entity missing `id` entirely can't be referenced by
+    any bridge and is skipped, loudly. An entity missing `address` or
+    `registration_date` just doesn't participate in THAT grouping — no
+    crash, no fabricated match, same degrade-the-gap principle as
+    ring_utils.build_invoice_hops. `directors` was already defensive
+    (`.get(..., [])`).
     """
     by_director: dict[str, list[str]] = defaultdict(list)
     by_address: dict[str, list[str]] = defaultdict(list)
     by_reg_date: dict[str, list[str]] = defaultdict(list)
 
+    skipped = 0
     for e in entities:
+        eid = e.get("id")
+        if not eid:
+            skipped += 1
+            continue
         for d in e.get("directors", []):
-            by_director[d].append(e["id"])
-        by_address[e["address"]].append(e["id"])
-        by_reg_date[e["registration_date"]].append(e["id"])
+            by_director[d].append(eid)
+        address = e.get("address")
+        if address:
+            by_address[address].append(eid)
+        reg_date = e.get("registration_date")
+        if reg_date:
+            by_reg_date[reg_date].append(eid)
+
+    if skipped:
+        print(
+            f"[graph.corporate] WARNING: skipped {skipped} entity record(s) missing id "
+            f"— cannot be referenced by any bridge",
+            file=sys.stderr,
+        )
 
     pairs: dict[tuple[str, str], dict] = {}
 
