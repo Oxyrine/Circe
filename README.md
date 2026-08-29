@@ -1,4 +1,4 @@
-# Circe (Ouroboros)
+# Circe
 
 Automated discrimination of legitimate vs. fabricated circular trading rings
 on a TReDS-style invoice platform. DevJams'26.
