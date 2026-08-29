@@ -28,6 +28,7 @@ import json
 import sys
 from pathlib import Path
 
+from graph.canonicalize import apply_canonicalization, canonicalize
 from graph.corporate import find_corporate_bridged_rings
 from graph.cycles import find_transaction_closed_rings
 from graph.ring_utils import assign_ring_ids, canonical_key
@@ -100,10 +101,18 @@ def find_candidate_rings(entities: list[dict], invoices: list[dict], max_depth: 
     if not entities or not invoices:
         return _hardcoded_rings()
 
-    adj, edge_invoices = build_transaction_graph(entities, invoices)
+    # Computed ONCE, threaded through both closure mechanisms — see
+    # transaction_graph.build_transaction_graph's docstring for why
+    # letting either half of the pipeline compute its own canon_map (or
+    # skip canonicalization) would let them silently disagree on what an
+    # entity id refers to.
+    canon_map = canonicalize(entities)
+    canonical_entities = apply_canonicalization(entities, canon_map)
+
+    adj, edge_invoices = build_transaction_graph(canon_map, invoices)
 
     tx_rings, tx_warnings = find_transaction_closed_rings(adj, edge_invoices, max_depth)
-    corp_rings, corp_warnings = find_corporate_bridged_rings(entities, adj, edge_invoices, max_depth)
+    corp_rings, corp_warnings = find_corporate_bridged_rings(canonical_entities, adj, edge_invoices, max_depth)
 
     for w in tx_warnings + corp_warnings:
         print(f"[graph.run] WARNING: {w}", file=sys.stderr)
