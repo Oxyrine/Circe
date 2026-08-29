@@ -24,6 +24,50 @@ def canonical_key(entity_ids: list[str]) -> str:
     return "|".join(best)
 
 
+def pick_representative_invoice(candidates: list[dict]) -> dict:
+    """Deterministic across reruns: earliest invoice_date represents the
+    initiating transaction on that leg; invoice_id breaks ties.
+    """
+    return min(candidates, key=lambda inv: (inv["invoice_date"], inv["invoice_id"]))
+
+
+def build_invoice_hops(
+    nodes: list[str],
+    edge_invoices: dict[tuple[str, str], list[dict]],
+    wrap: bool,
+) -> list[dict] | None:
+    """Build hop_type='invoice' hops along nodes[0]->nodes[1]->...->nodes[-1].
+
+    wrap=True includes the closing edge nodes[-1]->nodes[0] too (a full
+    transaction-closed cycle). wrap=False stops at nodes[-1] — the
+    remaining closure is a corporate_bridge hop the caller appends
+    separately, since that edge has no real invoice behind it.
+
+    Returns None if any required edge has no real invoice — defensive;
+    every edge here came from the same graph these nodes were found in,
+    so this should never actually trigger.
+    """
+    hops = []
+    n = len(nodes)
+    edge_count = n if wrap else n - 1
+    for i in range(edge_count):
+        u, v = nodes[i], nodes[(i + 1) % n]
+        candidates = edge_invoices.get((u, v))
+        if not candidates:
+            return None
+        inv = pick_representative_invoice(candidates)
+        hops.append({
+            "hop_type": "invoice",
+            "from": u, "to": v,
+            "invoice_id": inv["invoice_id"],
+            "value": inv["value"],
+            "hs_code": inv.get("hs_code"),
+            "invoice_date": inv["invoice_date"],
+            "discounting_date": inv["discounting_date"],
+        })
+    return hops
+
+
 def assign_ring_ids(rings: list[dict]) -> list[dict]:
     """Assign ring_id by SORTED canonical_key, never by discovery order.
 

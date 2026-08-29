@@ -4,11 +4,17 @@ scripts, not asserted on in this test suite since it can change."""
 from graph.run import find_candidate_rings
 
 
-def _entity(id_, industry="manufacturing"):
+def _entity(id_, industry="manufacturing", address=None, directors=None, reg_date=None):
+    # Unique address/registration_date per entity by default — otherwise
+    # every test entity would accidentally satisfy corporate.py's
+    # shared_address/registration_cohort bridging, corrupting every test
+    # in this file that isn't specifically testing corporate closure.
     return {
         "id": id_, "name": id_, "industry_code": "NIC-0000",
-        "industry_class": industry, "directors": [], "address": "n/a",
-        "registration_date": "2020-01-01",
+        "industry_class": industry,
+        "directors": directors if directors is not None else [],
+        "address": address if address is not None else f"{id_} unique address",
+        "registration_date": reg_date if reg_date is not None else f"2020-{(int(id_[1:]) % 12) + 1:02d}-15",
     }
 
 
