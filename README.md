@@ -49,10 +49,16 @@ pytest -q
       (chosen over the spec's full 8 for file size — see commit `625e361`
       for the recall data behind that call). Recall against
       `ground_truth.json`: 6/6 at Jaccard≥0.5.
-- [ ] M3 — corporate-graph closure (hours 16-26). Note: current recall
-      hits on the two hidden-leg rings (T04, T06) come from a *different*
-      overlapping cycle, not the injected ring itself — worth checking
-      before M3 whether the demo needs a cleaner before/after case.
+- [x] M3 — corporate-graph closure (`graph/corporate.py`), the stated
+      differentiator. Direct pairwise evidence only (shared director /
+      address / registration date), never transitive through a cluster.
+      Real result: 74 corporate-closed rings on C's dataset; T04 and T06
+      (the two hidden-leg ground-truth rings) now hit at Jaccard **1.00**
+      via `closure_type=corporate` — the bridge recovers the exact
+      injected entity set, not the coincidental overlap M1/M2 relied on.
+      14 new tests, including the demo case: a ring with its closing
+      invoice removed still surfaces, flagged corporate, with real
+      evidence attached. 48/48 total.
 - [ ] M3.5 — real entity canonicalization (hours 24-28, if M3 lands clean)
 - [ ] M4 — harden edge cases: missing HS code, missing date, duplicate
       invoices between the same pair (self-loops already filtered at M1)
