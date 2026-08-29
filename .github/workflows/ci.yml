@@ -46,13 +46,26 @@ jobs:
         run: pytest -q
 
       - name: candidate_rings.json is fresh (if present)
+        # MAX_DEPTH is not an arbitrary constant — it trades off recall,
+        # precision@k, and file size against each other, and the right
+        # value depends on the CURRENT shape of data/entities.json +
+        # invoices.json (ring lengths, entity-pool density). It has
+        # already changed once this project (6 -> 8) when the fraud
+        # injector's design changed. If this check ever fails, don't just
+        # rerun the command below on autopilot — first check whether
+        # MAX_DEPTH itself is still the right number for the CURRENT
+        # dataset (compare recall/precision/size across a couple of
+        # depths), THEN regenerate. See graph/run.py's module docstring
+        # and README.md's Status section for the reasoning behind the
+        # current value.
         run: |
+          MAX_DEPTH=8
           if [ -f artifacts/candidate_rings.json ] && [ -f data/entities.json ] && [ -f data/invoices.json ]; then
             cp artifacts/candidate_rings.json /tmp/committed_candidates.json
             python -m graph.run --entities data/entities.json --invoices data/invoices.json \
-              --out artifacts/candidate_rings.json --max-depth 6
+              --out artifacts/candidate_rings.json --max-depth $MAX_DEPTH
             diff -q /tmp/committed_candidates.json artifacts/candidate_rings.json || \
-              (echo "::error::committed candidate_rings.json is stale — graph/ changed but the artifact wasn't regenerated. Run: python -m graph.run --entities data/entities.json --invoices data/invoices.json --out artifacts/candidate_rings.json --max-depth 6" && exit 1)
+              (echo "::error::committed candidate_rings.json is stale for --max-depth $MAX_DEPTH. Before just rerunning the regen command, check whether $MAX_DEPTH is still the right value for the current dataset — it has changed before. Regen command: python -m graph.run --entities data/entities.json --invoices data/invoices.json --out artifacts/candidate_rings.json --max-depth $MAX_DEPTH" && exit 1)
           else
             echo "candidate_rings.json or data/*.json not present yet — skipping freshness check"
           fi
