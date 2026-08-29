@@ -19,6 +19,9 @@ degrade loudly, not hang during the demo.
 """
 from __future__ import annotations
 
+from graph.ring_utils import build_invoice_hops, canonical_key
+from graph.scc import non_trivial_sccs
+
 MAX_CYCLES_PER_SCC = 50_000
 MAX_STEPS_PER_SCC = 2_000_000
 
@@ -85,3 +88,45 @@ def find_cycles_in_scc(
                 break
 
     return cycles, budget_hit
+
+
+def find_transaction_closed_rings(
+    adj: dict[str, list[str]],
+    edge_invoices: dict[tuple[str, str], list[dict]],
+    max_depth: int,
+) -> tuple[list[dict], list[str]]:
+    """All transaction-closed candidate rings (closure_type='transaction')
+    across every non-trivial SCC. Returns (rings, warnings) — rings have
+    canonical_key/closure_type/entities/hops but NOT ring_id yet, since
+    that's assigned once at the end after merging with corporate-closed
+    rings (run.py's job).
+    """
+    warnings: list[str] = []
+    rings: list[dict] = []
+    seen_keys: set[str] = set()
+
+    for scc_nodes in non_trivial_sccs(adj):
+        scc_node_set = set(scc_nodes)
+        scc_adj = {n: [w for w in adj.get(n, []) if w in scc_node_set] for n in scc_nodes}
+        cycles, budget_hit = find_cycles_in_scc(scc_node_set, scc_adj, max_depth)
+        if budget_hit:
+            warnings.append(
+                f"SCC of size {len(scc_nodes)} hit its cycle-search budget — "
+                f"candidate generation TRUNCATED for this SCC."
+            )
+        for cycle in cycles:
+            key = canonical_key(cycle)
+            if key in seen_keys:
+                continue  # defensive net; find_cycles_in_scc already guarantees uniqueness
+            hops = build_invoice_hops(cycle, edge_invoices, wrap=True)
+            if hops is None:
+                continue
+            seen_keys.add(key)
+            rings.append({
+                "canonical_key": key,
+                "closure_type": "transaction",
+                "entities": cycle,
+                "hops": hops,
+            })
+
+    return rings, warnings
