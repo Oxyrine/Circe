@@ -57,6 +57,7 @@ def main():
     ap.add_argument("--out", required=True)
     ap.add_argument("--entities", help="optional: compile a dimmed backdrop graph alongside SCORED")
     ap.add_argument("--invoices", help="optional, required if --entities is given")
+    ap.add_argument("--limit", type=int, default=50, help="max top-ranked rings to bundle for UI responsiveness (default: 50, 0 for all)")
     args = ap.parse_args()
 
     errors = validate_file(args.scored, "scored")
@@ -68,6 +69,11 @@ def main():
         return 1
 
     data = _load(args.scored)
+    if args.limit and args.limit > 0 and len(data.get("rings", [])) > args.limit:
+        # Sort descending by expected loss and take top-k
+        sorted_rings = sorted(data.get("rings", []), key=lambda r: r.get("expected_loss", 0), reverse=True)
+        data["rings"] = sorted_rings[:args.limit]
+        data["count"] = len(data["rings"])
 
     backdrop = None
     if args.entities:

@@ -13,7 +13,7 @@ PARAMS = {
     "tau_t": 30.0,
     "w_uniform": 0.5,
     # Flat 1/4 — matches spec §8.1 AND the Wire Protocol's worked example.
-    # Capping externality to 0.20 (spec §7.4) is an evidenced TUNING move for H16–24,
+    # Capping externality to 0.10 is an evidenced TUNING move for H16–24,
     # triggered when operational FPR on top-k exceeds 15% (ADR-0005).
     "exponents": {
         "value": 0.25,
@@ -24,10 +24,10 @@ PARAMS = {
 }
 
 CAPPED_EXPONENTS = {
-    "value": 0.30,
-    "product": 0.25,
+    "value": 0.35,
+    "product": 0.30,
     "timing": 0.25,
-    "externality": 0.20,
+    "externality": 0.10,
 }
 
 
