@@ -89,11 +89,46 @@ def main():
                 return 1
         backdrop = _build_backdrop(args.entities, args.invoices)
 
+    entities_dict = None
+    invoices_dict = None
+
+    if args.entities and args.invoices:
+        entities_list = _load(args.entities).get("entities", [])
+        invoices_list = _load(args.invoices).get("invoices", [])
+        entities_dict = {e["id"]: e for e in entities_list}
+        invoices_dict = {i["invoice_id"]: i for i in invoices_list}
+
+        for inv in invoices_list:
+            if inv["from"] not in entities_dict:
+                print(f"FAIL invoice {inv['invoice_id']} seller {inv['from']} not in entities", file=sys.stderr)
+                return 1
+            if inv["to"] not in entities_dict:
+                print(f"FAIL invoice {inv['invoice_id']} buyer {inv['to']} not in entities", file=sys.stderr)
+                return 1
+
+        for r in data.get("rings", []):
+            for e_id in r.get("entities", []):
+                if e_id not in entities_dict:
+                    print(f"FAIL ring {r['ring_id']} entity {e_id} not in entities", file=sys.stderr)
+                    return 1
+            for hop in r.get("hops", []):
+                if hop["hop_type"] == "invoice":
+                    if hop["invoice_id"] not in invoices_dict:
+                        print(f"FAIL ring {r['ring_id']} invoice hop {hop['invoice_id']} not in invoices", file=sys.stderr)
+                        return 1
+                elif hop["hop_type"] != "corporate_bridge":
+                    print(f"FAIL ring {r['ring_id']} has unknown hop_type {hop['hop_type']}", file=sys.stderr)
+                    return 1
+
     with open(args.out, "w", encoding="utf-8") as f:
         f.write("const SCORED = ")
         json.dump(data, f, indent=2)
         f.write(";\nconst BACKDROP = ")
         json.dump(backdrop, f, indent=2)
+        f.write(";\nconst ENTITIES = ")
+        json.dump(entities_dict, f, indent=2)
+        f.write(";\nconst INVOICES = ")
+        json.dump(invoices_dict, f, indent=2)
         f.write(";\n")
 
     msg = "wrote {} rings".format(data.get("count", len(data.get("rings", []))))

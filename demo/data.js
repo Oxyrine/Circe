@@ -5107,3 +5107,2216 @@ const BACKDROP = {
     }
   ]
 };
+const ENTITIES = {
+  "E001": {
+    "id": "E001",
+    "name": "Meridian Supply Chain Ltd",
+    "industry_code": "NIC-5229",
+    "industry_class": "distribution",
+    "directors": [
+      "D45"
+    ],
+    "address": "18 Avinashi Road, Chennai 600002",
+    "registration_date": "2012-11-24"
+  },
+  "E002": {
+    "id": "E002",
+    "name": "Coastal Trading Pvt Ltd",
+    "industry_code": "NIC-4662",
+    "industry_class": "trading",
+    "directors": [
+      "D367"
+    ],
+    "address": "30 Residency Road, Chennai 600002",
+    "registration_date": "2020-01-18"
+  },
+  "E003": {
+    "id": "E003",
+    "name": "Trueform Logistics Co",
+    "industry_code": "NIC-5210",
+    "industry_class": "distribution",
+    "directors": [
+      "D175"
+    ],
+    "address": "  36 MG Road ,  Chandigarh 160002",
+    "registration_date": "2023-03-23"
+  },
+  "E004": {
+    "id": "E004",
+    "name": "Silverline Industries Pvt Ltd",
+    "industry_code": "NIC-2610",
+    "industry_class": "manufacturing",
+    "directors": [
+      "D23"
+    ],
+    "address": "49 Anna Salai, Bengaluru 560066",
+    "registration_date": "2016-06-20"
+  },
+  "E005": {
+    "id": "E005",
+    "name": "Ashoka Freight Pvt Ltd",
+    "industry_code": "NIC-4690",
+    "industry_class": "distribution",
+    "directors": [
+      "D361"
+    ],
+    "address": "38 Industrial Area Phase II, Pune 411001",
+    "registration_date": "2020-06-19"
+  },
+  "E006": {
+    "id": "E006",
+    "name": "Redstone Industries Pvt Ltd",
+    "industry_code": "NIC-2610",
+    "industry_class": "manufacturing",
+    "directors": [
+      "D84"
+    ],
+    "address": "30 Anna Salai, Indore 452001",
+    "registration_date": "2017-05-15"
+  },
+  "E007": {
+    "id": "E007",
+    "name": "Silverline Commodities Pvt Ltd",
+    "industry_code": "NIC-4662",
+    "industry_class": "trading",
+    "directors": [
+      "D237"
+    ],
+    "address": "82 Marine Drive, Chandigarh 160002",
+    "registration_date": "2019-12-08"
+  },
+  "E008": {
+    "id": "E008",
+    "name": "Redstone Commodities Pvt Ltd",
+    "industry_code": "NIC-4662",
+    "industry_class": "trading",
+    "directors": [
+      "D291"
+    ],
+    "address": "5 Hinjewadi Phase I, Chennai 600002",
+    "registration_date": "2017-05-03"
+  },
+  "E009": {
+    "id": "E009",
+    "name": "Falcon Business Services Co",
+    "industry_code": "NIC-6202",
+    "industry_class": "services",
+    "directors": [
+      "D382"
+    ],
+    "address": "83 Sadar Bazaar, Mumbai 400070",
+    "registration_date": "2013-05-05"
+  },
+  "E010": {
+    "id": "E010",
+    "name": "Amber Impex Co",
+    "industry_code": "NIC-4662",
+    "industry_class": "trading",
+    "directors": [
+      "D57"
+    ],
+    "address": "29 Marine Drive, Mumbai 400021",
+    "registration_date": "2019-08-03"
+  },
+  "E011": {
+    "id": "E011",
+    "name": "Global Works Pvt Ltd",
+    "industry_code": "NIC-1392",
+    "industry_class": "manufacturing",
+    "directors": [
+      "D6"
+    ],
+    "address": "49 Nariman Point, Mumbai 400070",
+    "registration_date": "2018-09-09"
+  },
+  "E012": {
+    "id": "E012",
+    "name": "Ashoka Supply Chain LLP",
+    "industry_code": "NIC-5229",
+    "industry_class": "distribution",
+    "directors": [
+      "D369"
+    ],
+    "address": "38 Sector 18, Bengaluru 560066",
+    "registration_date": "2013-08-01"
+  },
+  "E013": {
+    "id": "E013",
+    "name": "Granite Components Pvt Ltd",
+    "industry_code": "NIC-1392",
+    "industry_class": "manufacturing",
+    "directors": [
+      "D102"
+    ],
+    "address": "81 Whitefield Main Road, Indore 452001",
+    "registration_date": "2024-11-17"
+  },
+  "E014": {
+    "id": "E014",
+    "name": "Global Fabricators Pvt Ltd",
+    "industry_code": "NIC-2610",
+    "industry_class": "manufacturing",
+    "directors": [
+      "D123",
+      "D42"
+    ],
+    "address": "42 Sadar Bazaar, Chandigarh 160002",
+    "registration_date": "2011-02-12"
+  },
+  "E015": {
+    "id": "E015",
+    "name": "Suncrest Manufacturing Co",
+    "industry_code": "NIC-2013",
+    "industry_class": "manufacturing",
+    "directors": [
+      "D282"
+    ],
+    "address": "9 Residency Road, Indore 452001",
+    "registration_date": "2023-03-05"
+  },
+  "E016": {
+    "id": "E016",
+    "name": "Highbank Fabricators Co",
+    "industry_code": "NIC-2610",
+    "industry_class": "manufacturing",
+    "directors": [
+      "D205"
+    ],
+    "address": "70 Avinashi Road, Chennai 600002",
+    "registration_date": "2022-04-23"
+  },
+  "E017": {
+    "id": "E017",
+    "name": "Marigold Advisory Co",
+    "industry_code": "NIC-8299",
+    "industry_class": "services",
+    "directors": [
+      "D284"
+    ],
+    "address": "32 Electronic City, Bengaluru 560066",
+    "registration_date": "2012-06-01"
+  },
+  "E018": {
+    "id": "E018",
+    "name": "Redstone Manufacturing Pvt Ltd",
+    "industry_code": "NIC-2610",
+    "industry_class": "manufacturing",
+    "directors": [
+      "D37"
+    ],
+    "address": "81 MG Road, Coimbatore 641018",
+    "registration_date": "2014-02-02"
+  },
+  "E019": {
+    "id": "E019",
+    "name": "Ironclad Impex Ltd",
+    "industry_code": "NIC-4620",
+    "industry_class": "trading",
+    "directors": [
+      "D125"
+    ],
+    "address": "17 Avinashi Road, Pune 411001",
+    "registration_date": "2025-10-19"
+  },
+  "E020": {
+    "id": "E020",
+    "name": "Trueform Logistics Pvt Ltd",
+    "industry_code": "NIC-5210",
+    "industry_class": "distribution",
+    "directors": [
+      "D374"
+    ],
+    "address": "85 Sector 18, Bengaluru 560066",
+    "registration_date": "2016-07-14"
+  },
+  "E021": {
+    "id": "E021",
+    "name": "Kaveri Manufacturing Co",
+    "industry_code": "NIC-1392",
+    "industry_class": "manufacturing",
+    "directors": [
+      "D230"
+    ],
+    "address": "44 Anna Salai, Coimbatore 641018",
+    "registration_date": "2014-04-07"
+  },
+  "E022": {
+    "id": "E022",
+    "name": "Sapphire Industries Co",
+    "industry_code": "NIC-2410",
+    "industry_class": "manufacturing",
+    "directors": [
+      "D334"
+    ],
+    "address": "10 Sadar Bazaar, Chennai 600002",
+    "registration_date": "2023-09-04"
+  },
+  "E023": {
+    "id": "E023",
+    "name": "Vertex Consultants Ltd",
+    "industry_code": "NIC-7020",
+    "industry_class": "services",
+    "directors": [
+      "D31"
+    ],
+    "address": "53 Sadar Bazaar, Bengaluru 560100",
+    "registration_date": "2018-04-28"
+  },
+  "E024": {
+    "id": "E024",
+    "name": "Vertex Works LLP",
+    "industry_code": "NIC-1392",
+    "industry_class": "manufacturing",
+    "directors": [
+      "D339"
+    ],
+    "address": "59 Whitefield Main Road, Hyderabad 500081",
+    "registration_date": "2017-12-24"
+  },
+  "E025": {
+    "id": "E025",
+    "name": "Deccan Logistics LLP",
+    "industry_code": "NIC-5229",
+    "industry_class": "distribution",
+    "directors": [
+      "D161"
+    ],
+    "address": "8 Nariman Point, Chennai 600002",
+    "registration_date": "2022-09-02"
+  },
+  "E026": {
+    "id": "E026",
+    "name": "Brightline Fabricators Ltd",
+    "industry_code": "NIC-1392",
+    "industry_class": "manufacturing",
+    "directors": [
+      "D35"
+    ],
+    "address": "66 Anna Salai, Bengaluru 560001",
+    "registration_date": "2024-03-03"
+  },
+  "E027": {
+    "id": "E027",
+    "name": "Northgate Freight Pvt Ltd",
+    "industry_code": "NIC-5229",
+    "industry_class": "distribution",
+    "directors": [
+      "D42"
+    ],
+    "address": "73 Electronic City, Hyderabad 500081",
+    "registration_date": "2020-10-02"
+  },
+  "E028": {
+    "id": "E028",
+    "name": "Highbank Commodities LLP",
+    "industry_code": "NIC-4620",
+    "industry_class": "trading",
+    "directors": [
+      "D68"
+    ],
+    "address": "86 Avinashi Road, Chennai 600002",
+    "registration_date": "2016-04-09"
+  },
+  "E029": {
+    "id": "E029",
+    "name": "Palmgrove Freight LLP",
+    "industry_code": "NIC-4690",
+    "industry_class": "distribution",
+    "directors": [
+      "D38"
+    ],
+    "address": "10 MG Road, Hyderabad 500081",
+    "registration_date": "2018-10-19"
+  },
+  "E030": {
+    "id": "E030",
+    "name": "Granite Commodities Ltd",
+    "industry_code": "NIC-4620",
+    "industry_class": "trading",
+    "directors": [
+      "D81"
+    ],
+    "address": "45 Anna Salai, Hyderabad 500081",
+    "registration_date": "2025-04-12"
+  },
+  "E031": {
+    "id": "E031",
+    "name": "Palmgrove Trading LLP",
+    "industry_code": "NIC-4662",
+    "industry_class": "trading",
+    "directors": [
+      "D55"
+    ],
+    "address": "85 Anna Salai, Hyderabad 500081",
+    "registration_date": "2025-03-09"
+  },
+  "E032": {
+    "id": "E032",
+    "name": "Deccan Supply Chain LLP",
+    "industry_code": "NIC-5229",
+    "industry_class": "distribution",
+    "directors": [
+      "D136"
+    ],
+    "address": "27 Avinashi Road, Chandigarh 160002",
+    "registration_date": "2016-04-22"
+  },
+  "E033": {
+    "id": "E033",
+    "name": "Granite Advisory Ltd",
+    "industry_code": "NIC-8299",
+    "industry_class": "services",
+    "directors": [
+      "D247"
+    ],
+    "address": "26 Nariman Point, Indore 452001",
+    "registration_date": "2021-09-19"
+  },
+  "E034": {
+    "id": "E034",
+    "name": "Kaveri Distribution LLP",
+    "industry_code": "NIC-5210",
+    "industry_class": "distribution",
+    "directors": [
+      "D47"
+    ],
+    "address": "21 Whitefield Main Road, Bengaluru 560066",
+    "registration_date": "2018-09-05"
+  },
+  "E035": {
+    "id": "E035",
+    "name": "Novapoint Commodities Pvt Ltd",
+    "industry_code": "NIC-4620",
+    "industry_class": "trading",
+    "directors": [
+      "D42"
+    ],
+    "address": "7 Sector 18, Mumbai 400070",
+    "registration_date": "2019-06-08"
+  },
+  "E036": {
+    "id": "E036",
+    "name": "Redstone Distribution LLP",
+    "industry_code": "NIC-4690",
+    "industry_class": "distribution",
+    "directors": [
+      "D71"
+    ],
+    "address": "13 Avinashi Road, Hyderabad 500081",
+    "registration_date": "2021-06-26"
+  },
+  "E037": {
+    "id": "E037",
+    "name": "Crestline Works Ltd",
+    "industry_code": "NIC-2410",
+    "industry_class": "manufacturing",
+    "directors": [
+      "D132"
+    ],
+    "address": "61 Sadar Bazaar, Gurugram 122015",
+    "registration_date": "2020-01-03"
+  },
+  "E038": {
+    "id": "E038",
+    "name": "Deccan Impex Pvt Ltd",
+    "industry_code": "NIC-4662",
+    "industry_class": "trading",
+    "directors": [
+      "D215"
+    ],
+    "address": "37 Electronic City, Gurugram 122015",
+    "registration_date": "2015-02-02"
+  },
+  "E039": {
+    "id": "E039",
+    "name": "Nilgiri Consultants Co",
+    "industry_code": "NIC-6202",
+    "industry_class": "services",
+    "directors": [
+      "D368"
+    ],
+    "address": "69 MG Road, Chandigarh 160002",
+    "registration_date": "2021-09-19"
+  },
+  "E040": {
+    "id": "E040",
+    "name": "Brightline Business Services Ltd",
+    "industry_code": "NIC-6202",
+    "industry_class": "services",
+    "directors": [
+      "D22"
+    ],
+    "address": "59 MG Road, Bengaluru 560066",
+    "registration_date": "2015-04-02"
+  },
+  "E041": {
+    "id": "E041",
+    "name": "Palmgrove Freight Co",
+    "industry_code": "NIC-4690",
+    "industry_class": "distribution",
+    "directors": [
+      "D336"
+    ],
+    "address": "5 Industrial Area Phase II, Chennai 600032",
+    "registration_date": "2014-05-12"
+  },
+  "E042": {
+    "id": "E042",
+    "name": "Ironclad Distribution LLP",
+    "industry_code": "NIC-4690",
+    "industry_class": "distribution",
+    "directors": [
+      "D255"
+    ],
+    "address": "52 Avinashi Road, Mumbai 400070",
+    "registration_date": "2018-07-11"
+  },
+  "E043": {
+    "id": "E043",
+    "name": "Marigold Solutions Pvt Ltd",
+    "industry_code": "NIC-6202",
+    "industry_class": "services",
+    "directors": [
+      "D280"
+    ],
+    "address": "55 Anna Salai, Coimbatore 641018",
+    "registration_date": "2017-10-27"
+  },
+  "E044": {
+    "id": "E044",
+    "name": "Falcon Distribution Pvt Ltd",
+    "industry_code": "NIC-5229",
+    "industry_class": "distribution",
+    "directors": [
+      "D219"
+    ],
+    "address": "85 Whitefield Main Road, Mumbai 400021",
+    "registration_date": "2015-08-20"
+  },
+  "E045": {
+    "id": "E045",
+    "name": "Novapoint Commodities Co",
+    "industry_code": "NIC-4662",
+    "industry_class": "trading",
+    "directors": [
+      "D39"
+    ],
+    "address": "46 Nariman Point, Bengaluru 560001",
+    "registration_date": "2017-05-21"
+  },
+  "E046": {
+    "id": "E046",
+    "name": "Amber Industries Co",
+    "industry_code": "NIC-2410",
+    "industry_class": "manufacturing",
+    "directors": [
+      "D70"
+    ],
+    "address": "79 Whitefield Main Road, Chennai 600002",
+    "registration_date": "2022-08-07"
+  },
+  "E047": {
+    "id": "E047",
+    "name": "Novapoint Components Co",
+    "industry_code": "NIC-2410",
+    "industry_class": "manufacturing",
+    "directors": [
+      "D282"
+    ],
+    "address": "88 Hinjewadi Phase I, Bengaluru 560066",
+    "registration_date": "2021-06-23"
+  },
+  "E048": {
+    "id": "E048",
+    "name": "Palmgrove Logistics Ltd",
+    "industry_code": "NIC-4690",
+    "industry_class": "distribution",
+    "directors": [
+      "D122"
+    ],
+    "address": "47 Residency Road, Gurugram 122015",
+    "registration_date": "2014-02-07"
+  },
+  "E049": {
+    "id": "E049",
+    "name": "Meridian Solutions LLP",
+    "industry_code": "NIC-7020",
+    "industry_class": "services",
+    "directors": [
+      "D204"
+    ],
+    "address": "71 Marine Drive, Pune 411057",
+    "registration_date": "2020-02-03"
+  },
+  "E050": {
+    "id": "E050",
+    "name": "Global Logistics LLP",
+    "industry_code": "NIC-4690",
+    "industry_class": "distribution",
+    "directors": [
+      "D129"
+    ],
+    "address": "29 Hinjewadi Phase I, Hyderabad 500081",
+    "registration_date": "2019-05-28"
+  },
+  "E051": {
+    "id": "E051",
+    "name": "Ironclad Traders LLP",
+    "industry_code": "NIC-4669",
+    "industry_class": "trading",
+    "directors": [
+      "D298"
+    ],
+    "address": "69 Anna Salai, Chandigarh 160002",
+    "registration_date": "2019-11-06"
+  },
+  "E052": {
+    "id": "E052",
+    "name": "Global Commodities Pvt Ltd",
+    "industry_code": "NIC-4669",
+    "industry_class": "trading",
+    "directors": [
+      "D136"
+    ],
+    "address": "4 Anna Salai, Indore 452001",
+    "registration_date": "2011-11-25"
+  },
+  "E053": {
+    "id": "E053",
+    "name": "Trueform Trading Co",
+    "industry_code": "NIC-4620",
+    "industry_class": "trading",
+    "directors": [
+      "D126"
+    ],
+    "address": "81 Residency Road, Hyderabad 500081",
+    "registration_date": "2015-11-10"
+  },
+  "E054": {
+    "id": "E054",
+    "name": "Palmgrove Advisory Pvt Ltd",
+    "industry_code": "NIC-7020",
+    "industry_class": "services",
+    "directors": [
+      "D105"
+    ],
+    "address": "8 Marine Drive, Coimbatore 641018",
+    "registration_date": "2018-07-16"
+  },
+  "E055": {
+    "id": "E055",
+    "name": "Deccan Supply Chain LLP",
+    "industry_code": "NIC-5229",
+    "industry_class": "distribution",
+    "directors": [
+      "D55"
+    ],
+    "address": "45 Sector 18, Coimbatore 641018",
+    "registration_date": "2013-06-17"
+  },
+  "E056": {
+    "id": "E056",
+    "name": "Northgate Freight Pvt Ltd",
+    "industry_code": "NIC-5210",
+    "industry_class": "distribution",
+    "directors": [
+      "D197"
+    ],
+    "address": "58 Electronic City, Chennai 600032",
+    "registration_date": "2013-02-02"
+  },
+  "E057": {
+    "id": "E057",
+    "name": "Horizon Industries LLP",
+    "industry_code": "NIC-1392",
+    "industry_class": "manufacturing",
+    "directors": [
+      "D349"
+    ],
+    "address": "50 Residency Road, Bengaluru 560066",
+    "registration_date": "2018-09-09"
+  },
+  "E058": {
+    "id": "E058",
+    "name": "Wavelength Manufacturing Co",
+    "industry_code": "NIC-1392",
+    "industry_class": "manufacturing",
+    "directors": [
+      "D261"
+    ],
+    "address": "44 Residency Road, Mumbai 400021",
+    "registration_date": "2016-03-07"
+  },
+  "E059": {
+    "id": "E059",
+    "name": "Granite Consultants Pvt Ltd",
+    "industry_code": "NIC-7020",
+    "industry_class": "services",
+    "directors": [
+      "D77"
+    ],
+    "address": "18 Avinashi Road, Bengaluru 560001",
+    "registration_date": "2016-08-17"
+  },
+  "E060": {
+    "id": "E060",
+    "name": "Falcon Commodities Ltd",
+    "industry_code": "NIC-4620",
+    "industry_class": "trading",
+    "directors": [
+      "D260"
+    ],
+    "address": "79 Avinashi Road, Mumbai 400070",
+    "registration_date": "2024-05-19"
+  }
+};
+const INVOICES = {
+  "I0001": {
+    "invoice_id": "I0001",
+    "from": "E032",
+    "to": "E009",
+    "value": 16932722,
+    "hs_code": "49011000",
+    "invoice_date": "2026-01-10",
+    "discounting_date": "2026-01-15"
+  },
+  "I0002": {
+    "invoice_id": "I0002",
+    "from": "E022",
+    "to": "E023",
+    "value": 40217838,
+    "hs_code": "26011100",
+    "invoice_date": "2026-02-22",
+    "discounting_date": "2026-04-01"
+  },
+  "I0003": {
+    "invoice_id": "I0003",
+    "from": "E001",
+    "to": "E023",
+    "value": 25507235,
+    "hs_code": "84571000",
+    "invoice_date": "2026-02-03",
+    "discounting_date": "2026-03-15"
+  },
+  "I0004": {
+    "invoice_id": "I0004",
+    "from": "E010",
+    "to": "E001",
+    "value": 48705681,
+    "hs_code": "74031100",
+    "invoice_date": "2025-11-11",
+    "discounting_date": "2025-12-06"
+  },
+  "I0005": {
+    "invoice_id": "I0005",
+    "from": "E016",
+    "to": "E025",
+    "value": 94645150,
+    "hs_code": "39012000",
+    "invoice_date": "2026-02-13",
+    "discounting_date": "2026-03-27"
+  },
+  "I0006": {
+    "invoice_id": "I0006",
+    "from": "E016",
+    "to": "E011",
+    "value": 60488316,
+    "hs_code": "39012000",
+    "invoice_date": "2026-01-25",
+    "discounting_date": "2026-02-23"
+  },
+  "I0007": {
+    "invoice_id": "I0007",
+    "from": "E018",
+    "to": "E007",
+    "value": 65316026,
+    "hs_code": "39012000",
+    "invoice_date": "2026-03-01",
+    "discounting_date": "2026-03-18"
+  },
+  "I0008": {
+    "invoice_id": "I0008",
+    "from": "E030",
+    "to": "E012",
+    "value": 33667381,
+    "hs_code": "10063000",
+    "invoice_date": "2025-12-20",
+    "discounting_date": "2026-01-17"
+  },
+  "I0009": {
+    "invoice_id": "I0009",
+    "from": "E018",
+    "to": "E014",
+    "value": 57889740,
+    "hs_code": "85176200",
+    "invoice_date": "2026-02-11",
+    "discounting_date": "2026-03-20"
+  },
+  "I0010": {
+    "invoice_id": "I0010",
+    "from": "E002",
+    "to": "E014",
+    "value": 30280545,
+    "hs_code": "72081000",
+    "invoice_date": "2026-01-07",
+    "discounting_date": "2026-01-12"
+  },
+  "I0011": {
+    "invoice_id": "I0011",
+    "from": "E028",
+    "to": "E025",
+    "value": 70944216,
+    "hs_code": "27101990",
+    "invoice_date": "2026-03-11",
+    "discounting_date": "2026-03-21"
+  },
+  "I0012": {
+    "invoice_id": "I0012",
+    "from": "E013",
+    "to": "E030",
+    "value": 2569921,
+    "hs_code": "39012000",
+    "invoice_date": "2026-03-18",
+    "discounting_date": "2026-05-02"
+  },
+  "I0013": {
+    "invoice_id": "I0013",
+    "from": "E024",
+    "to": "E025",
+    "value": 52195157,
+    "hs_code": "94036000",
+    "invoice_date": "2025-12-02",
+    "discounting_date": "2025-12-24"
+  },
+  "I0014": {
+    "invoice_id": "I0014",
+    "from": "E020",
+    "to": "E015",
+    "value": 66619754,
+    "hs_code": "49011000",
+    "invoice_date": "2026-03-22",
+    "discounting_date": "2026-04-02"
+  },
+  "I0015": {
+    "invoice_id": "I0015",
+    "from": "E027",
+    "to": "E016",
+    "value": 29747022,
+    "hs_code": "84571000",
+    "invoice_date": "2026-01-17",
+    "discounting_date": "2026-02-14"
+  },
+  "I0016": {
+    "invoice_id": "I0016",
+    "from": "E001",
+    "to": "E010",
+    "value": 58795148,
+    "hs_code": "39012000",
+    "invoice_date": "2026-01-22",
+    "discounting_date": "2026-02-23"
+  },
+  "I0017": {
+    "invoice_id": "I0017",
+    "from": "E029",
+    "to": "E021",
+    "value": 79184989,
+    "hs_code": "49011000",
+    "invoice_date": "2025-12-14",
+    "discounting_date": "2026-01-28"
+  },
+  "I0018": {
+    "invoice_id": "I0018",
+    "from": "E019",
+    "to": "E025",
+    "value": 17639956,
+    "hs_code": "74031100",
+    "invoice_date": "2025-12-31",
+    "discounting_date": "2026-01-22"
+  },
+  "I0019": {
+    "invoice_id": "I0019",
+    "from": "E013",
+    "to": "E002",
+    "value": 43465756,
+    "hs_code": "26011100",
+    "invoice_date": "2025-11-19",
+    "discounting_date": "2025-12-21"
+  },
+  "I0020": {
+    "invoice_id": "I0020",
+    "from": "E013",
+    "to": "E027",
+    "value": 77235477,
+    "hs_code": "72081000",
+    "invoice_date": "2025-12-08",
+    "discounting_date": "2026-01-21"
+  },
+  "I0021": {
+    "invoice_id": "I0021",
+    "from": "E007",
+    "to": "E008",
+    "value": 79086079,
+    "hs_code": "72081000",
+    "invoice_date": "2026-03-13",
+    "discounting_date": "2026-04-14"
+  },
+  "I0022": {
+    "invoice_id": "I0022",
+    "from": "E016",
+    "to": "E006",
+    "value": 32027661,
+    "hs_code": "94036000",
+    "invoice_date": "2026-02-27",
+    "discounting_date": "2026-04-13"
+  },
+  "I0023": {
+    "invoice_id": "I0023",
+    "from": "E021",
+    "to": "E018",
+    "value": 89902530,
+    "hs_code": "39012000",
+    "invoice_date": "2026-03-21",
+    "discounting_date": "2026-04-21"
+  },
+  "I0024": {
+    "invoice_id": "I0024",
+    "from": "E031",
+    "to": "E012",
+    "value": 47188161,
+    "hs_code": "74031100",
+    "invoice_date": "2026-03-14",
+    "discounting_date": "2026-04-17"
+  },
+  "I0025": {
+    "invoice_id": "I0025",
+    "from": "E018",
+    "to": "E020",
+    "value": 99283231,
+    "hs_code": "72081000",
+    "invoice_date": "2026-01-21",
+    "discounting_date": "2026-02-27"
+  },
+  "I0026": {
+    "invoice_id": "I0026",
+    "from": "E009",
+    "to": "E016",
+    "value": 20171677,
+    "hs_code": null,
+    "invoice_date": "2025-11-17",
+    "discounting_date": "2025-12-16"
+  },
+  "I0027": {
+    "invoice_id": "I0027",
+    "from": "E022",
+    "to": "E027",
+    "value": 11303463,
+    "hs_code": "94036000",
+    "invoice_date": "2026-02-16",
+    "discounting_date": "2026-03-15"
+  },
+  "I0028": {
+    "invoice_id": "I0028",
+    "from": "E002",
+    "to": "E031",
+    "value": 48945753,
+    "hs_code": "10063000",
+    "invoice_date": "2025-11-02",
+    "discounting_date": "2025-11-27"
+  },
+  "I0029": {
+    "invoice_id": "I0029",
+    "from": "E025",
+    "to": "E029",
+    "value": 21159182,
+    "hs_code": "49011000",
+    "invoice_date": "2026-03-20",
+    "discounting_date": "2026-04-30"
+  },
+  "I0030": {
+    "invoice_id": "I0030",
+    "from": "E032",
+    "to": "E017",
+    "value": 70930840,
+    "hs_code": "84571000",
+    "invoice_date": "2026-01-26",
+    "discounting_date": "2026-03-12"
+  },
+  "I0031": {
+    "invoice_id": "I0031",
+    "from": "E026",
+    "to": "E029",
+    "value": 23838632,
+    "hs_code": "26011100",
+    "invoice_date": "2026-03-17",
+    "discounting_date": "2026-03-21"
+  },
+  "I0032": {
+    "invoice_id": "I0032",
+    "from": "E002",
+    "to": "E016",
+    "value": 53174713,
+    "hs_code": "10063000",
+    "invoice_date": "2025-12-17",
+    "discounting_date": "2025-12-23"
+  },
+  "I0033": {
+    "invoice_id": "I0033",
+    "from": "E025",
+    "to": "E031",
+    "value": 19712652,
+    "hs_code": "39012000",
+    "invoice_date": "2026-02-06",
+    "discounting_date": "2026-02-26"
+  },
+  "I0034": {
+    "invoice_id": "I0034",
+    "from": "E017",
+    "to": "E029",
+    "value": 85103166,
+    "hs_code": null,
+    "invoice_date": "2025-11-14",
+    "discounting_date": "2025-12-09"
+  },
+  "I0035": {
+    "invoice_id": "I0035",
+    "from": "E005",
+    "to": "E001",
+    "value": 7643842,
+    "hs_code": "84571000",
+    "invoice_date": "2025-12-22",
+    "discounting_date": "2025-12-26"
+  },
+  "I0036": {
+    "invoice_id": "I0036",
+    "from": "E010",
+    "to": "E018",
+    "value": 68366640,
+    "hs_code": "10063000",
+    "invoice_date": "2025-12-26",
+    "discounting_date": "2026-01-27"
+  },
+  "I0037": {
+    "invoice_id": "I0037",
+    "from": "E024",
+    "to": "E007",
+    "value": 29806141,
+    "hs_code": "72081000",
+    "invoice_date": "2025-11-28",
+    "discounting_date": "2026-01-07"
+  },
+  "I0038": {
+    "invoice_id": "I0038",
+    "from": "E020",
+    "to": "E030",
+    "value": 122941841,
+    "hs_code": "84571000",
+    "invoice_date": "2025-12-21",
+    "discounting_date": "2025-12-28"
+  },
+  "I0039": {
+    "invoice_id": "I0039",
+    "from": "E016",
+    "to": "E019",
+    "value": 64301279,
+    "hs_code": "85176200",
+    "invoice_date": "2026-03-25",
+    "discounting_date": "2026-03-30"
+  },
+  "I0040": {
+    "invoice_id": "I0040",
+    "from": "E028",
+    "to": "E009",
+    "value": 82458160,
+    "hs_code": "27101990",
+    "invoice_date": "2025-11-04",
+    "discounting_date": "2025-12-03"
+  },
+  "I0041": {
+    "invoice_id": "I0041",
+    "from": "E007",
+    "to": "E025",
+    "value": 35512876,
+    "hs_code": "10063000",
+    "invoice_date": "2026-02-20",
+    "discounting_date": "2026-03-06"
+  },
+  "I0042": {
+    "invoice_id": "I0042",
+    "from": "E031",
+    "to": "E020",
+    "value": 24056189,
+    "hs_code": "27101990",
+    "invoice_date": "2025-11-23",
+    "discounting_date": "2025-12-13"
+  },
+  "I0043": {
+    "invoice_id": "I0043",
+    "from": "E016",
+    "to": "E023",
+    "value": 59411007,
+    "hs_code": "39012000",
+    "invoice_date": "2026-03-07",
+    "discounting_date": "2026-03-30"
+  },
+  "I0044": {
+    "invoice_id": "I0044",
+    "from": "E032",
+    "to": "E017",
+    "value": 52730277,
+    "hs_code": "49011000",
+    "invoice_date": "2026-01-10",
+    "discounting_date": "2026-02-17"
+  },
+  "I0045": {
+    "invoice_id": "I0045",
+    "from": "E013",
+    "to": "E030",
+    "value": 78457894,
+    "hs_code": "26011100",
+    "invoice_date": "2026-01-01",
+    "discounting_date": "2026-02-03"
+  },
+  "I0046": {
+    "invoice_id": "I0046",
+    "from": "E029",
+    "to": "E003",
+    "value": 93130035,
+    "hs_code": "84571000",
+    "invoice_date": "2026-01-02",
+    "discounting_date": "2026-01-24"
+  },
+  "I0047": {
+    "invoice_id": "I0047",
+    "from": "E024",
+    "to": "E032",
+    "value": 54641861,
+    "hs_code": "85176200",
+    "invoice_date": "2026-03-21",
+    "discounting_date": "2026-04-14"
+  },
+  "I0048": {
+    "invoice_id": "I0048",
+    "from": "E030",
+    "to": "E020",
+    "value": 84274070,
+    "hs_code": "72081000",
+    "invoice_date": "2025-12-20",
+    "discounting_date": "2026-01-12"
+  },
+  "I0049": {
+    "invoice_id": "I0049",
+    "from": "E012",
+    "to": "E023",
+    "value": 52157070,
+    "hs_code": "84571000",
+    "invoice_date": "2026-03-31",
+    "discounting_date": "2026-05-06"
+  },
+  "I0050": {
+    "invoice_id": "I0050",
+    "from": "E019",
+    "to": "E031",
+    "value": 71326148,
+    "hs_code": "10063000",
+    "invoice_date": "2026-02-01",
+    "discounting_date": "2026-02-15"
+  },
+  "I0051": {
+    "invoice_id": "I0051",
+    "from": "E001",
+    "to": "E011",
+    "value": 8095617,
+    "hs_code": "39012000",
+    "invoice_date": "2025-11-14",
+    "discounting_date": "2025-12-22"
+  },
+  "I0052": {
+    "invoice_id": "I0052",
+    "from": "E009",
+    "to": "E029",
+    "value": 100973640,
+    "hs_code": null,
+    "invoice_date": "2026-03-27",
+    "discounting_date": "2026-04-17"
+  },
+  "I0053": {
+    "invoice_id": "I0053",
+    "from": "E031",
+    "to": "E005",
+    "value": 78494117,
+    "hs_code": "72081000",
+    "invoice_date": "2026-03-03",
+    "discounting_date": "2026-03-13"
+  },
+  "I0054": {
+    "invoice_id": "I0054",
+    "from": "E026",
+    "to": "E001",
+    "value": 24150021,
+    "hs_code": "72081000",
+    "invoice_date": "2026-03-25",
+    "discounting_date": "2026-04-16"
+  },
+  "I0055": {
+    "invoice_id": "I0055",
+    "from": "E016",
+    "to": "E030",
+    "value": 64082904,
+    "hs_code": "26011100",
+    "invoice_date": "2026-02-06",
+    "discounting_date": "2026-03-09"
+  },
+  "I0056": {
+    "invoice_id": "I0056",
+    "from": "E020",
+    "to": "E029",
+    "value": 98071917,
+    "hs_code": "84571000",
+    "invoice_date": "2025-11-16",
+    "discounting_date": "2025-12-28"
+  },
+  "I0057": {
+    "invoice_id": "I0057",
+    "from": "E007",
+    "to": "E008",
+    "value": 32874063,
+    "hs_code": "74031100",
+    "invoice_date": "2025-11-21",
+    "discounting_date": "2025-12-04"
+  },
+  "I0058": {
+    "invoice_id": "I0058",
+    "from": "E012",
+    "to": "E008",
+    "value": 53403007,
+    "hs_code": "49011000",
+    "invoice_date": "2026-03-01",
+    "discounting_date": "2026-03-22"
+  },
+  "I0059": {
+    "invoice_id": "I0059",
+    "from": "E015",
+    "to": "E019",
+    "value": 70899137,
+    "hs_code": "94036000",
+    "invoice_date": "2025-12-30",
+    "discounting_date": "2026-01-18"
+  },
+  "I0060": {
+    "invoice_id": "I0060",
+    "from": "E013",
+    "to": "E032",
+    "value": 37949407,
+    "hs_code": "72081000",
+    "invoice_date": "2026-01-08",
+    "discounting_date": "2026-01-20"
+  },
+  "I0061": {
+    "invoice_id": "I0061",
+    "from": "E004",
+    "to": "E019",
+    "value": 96761430,
+    "hs_code": "26011100",
+    "invoice_date": "2026-02-21",
+    "discounting_date": "2026-03-03"
+  },
+  "I0062": {
+    "invoice_id": "I0062",
+    "from": "E020",
+    "to": "E014",
+    "value": 97589062,
+    "hs_code": "84571000",
+    "invoice_date": "2026-02-21",
+    "discounting_date": "2026-03-01"
+  },
+  "I0063": {
+    "invoice_id": "I0063",
+    "from": "E003",
+    "to": "E027",
+    "value": 98268296,
+    "hs_code": "84571000",
+    "invoice_date": "2025-12-29",
+    "discounting_date": "2026-02-06"
+  },
+  "I0064": {
+    "invoice_id": "I0064",
+    "from": "E002",
+    "to": "E030",
+    "value": 50648445,
+    "hs_code": "27101990",
+    "invoice_date": "2025-12-15",
+    "discounting_date": "2026-01-17"
+  },
+  "I0065": {
+    "invoice_id": "I0065",
+    "from": "E018",
+    "to": "E030",
+    "value": 85035182,
+    "hs_code": "26011100",
+    "invoice_date": "2026-03-01",
+    "discounting_date": "2026-03-26"
+  },
+  "I0066": {
+    "invoice_id": "I0066",
+    "from": "E022",
+    "to": "E007",
+    "value": 26320543,
+    "hs_code": "26011100",
+    "invoice_date": "2026-03-07",
+    "discounting_date": "2026-03-28"
+  },
+  "I0067": {
+    "invoice_id": "I0067",
+    "from": "E003",
+    "to": "E028",
+    "value": 103807836,
+    "hs_code": "49011000",
+    "invoice_date": "2026-02-12",
+    "discounting_date": "2026-03-19"
+  },
+  "I0068": {
+    "invoice_id": "I0068",
+    "from": "E030",
+    "to": "E012",
+    "value": 95439735,
+    "hs_code": "27101990",
+    "invoice_date": "2026-03-08",
+    "discounting_date": "2026-04-20"
+  },
+  "I0069": {
+    "invoice_id": "I0069",
+    "from": "E004",
+    "to": "E008",
+    "value": 46254186,
+    "hs_code": "72081000",
+    "invoice_date": "2026-03-05",
+    "discounting_date": "2026-03-15"
+  },
+  "I0070": {
+    "invoice_id": "I0070",
+    "from": "E016",
+    "to": "E020",
+    "value": 55978875,
+    "hs_code": "39012000",
+    "invoice_date": "2026-02-13",
+    "discounting_date": "2026-02-21"
+  },
+  "I0071": {
+    "invoice_id": "I0071",
+    "from": "E008",
+    "to": "E003",
+    "value": 53177285,
+    "hs_code": "10063000",
+    "invoice_date": "2026-01-14",
+    "discounting_date": "2026-02-18"
+  },
+  "I0072": {
+    "invoice_id": "I0072",
+    "from": "E027",
+    "to": "E032",
+    "value": 112159236,
+    "hs_code": "49011000",
+    "invoice_date": "2025-12-08",
+    "discounting_date": "2026-01-04"
+  },
+  "I0073": {
+    "invoice_id": "I0073",
+    "from": "E009",
+    "to": "E023",
+    "value": 92186165,
+    "hs_code": null,
+    "invoice_date": "2026-03-10",
+    "discounting_date": "2026-03-30"
+  },
+  "I0074": {
+    "invoice_id": "I0074",
+    "from": "E019",
+    "to": "E023",
+    "value": 120930545,
+    "hs_code": "27101990",
+    "invoice_date": "2026-03-06",
+    "discounting_date": "2026-03-18"
+  },
+  "I0075": {
+    "invoice_id": "I0075",
+    "from": "E031",
+    "to": "E032",
+    "value": 80273443,
+    "hs_code": "74031100",
+    "invoice_date": "2026-01-22",
+    "discounting_date": "2026-02-06"
+  },
+  "I0076": {
+    "invoice_id": "I0076",
+    "from": "E025",
+    "to": "E017",
+    "value": 39548391,
+    "hs_code": "39012000",
+    "invoice_date": "2026-03-02",
+    "discounting_date": "2026-03-29"
+  },
+  "I0077": {
+    "invoice_id": "I0077",
+    "from": "E010",
+    "to": "E001",
+    "value": 67641361,
+    "hs_code": "27101990",
+    "invoice_date": "2026-01-24",
+    "discounting_date": "2026-02-02"
+  },
+  "I0078": {
+    "invoice_id": "I0078",
+    "from": "E007",
+    "to": "E029",
+    "value": 31439592,
+    "hs_code": "74031100",
+    "invoice_date": "2026-02-13",
+    "discounting_date": "2026-03-29"
+  },
+  "I0079": {
+    "invoice_id": "I0079",
+    "from": "E005",
+    "to": "E019",
+    "value": 92203262,
+    "hs_code": "49011000",
+    "invoice_date": "2026-02-10",
+    "discounting_date": "2026-03-26"
+  },
+  "I0080": {
+    "invoice_id": "I0080",
+    "from": "E022",
+    "to": "E021",
+    "value": 65768839,
+    "hs_code": "72081000",
+    "invoice_date": "2026-03-05",
+    "discounting_date": "2026-04-11"
+  },
+  "I0081": {
+    "invoice_id": "I0081",
+    "from": "E005",
+    "to": "E023",
+    "value": 98077236,
+    "hs_code": "49011000",
+    "invoice_date": "2025-11-24",
+    "discounting_date": "2025-12-24"
+  },
+  "I0082": {
+    "invoice_id": "I0082",
+    "from": "E007",
+    "to": "E020",
+    "value": 27878671,
+    "hs_code": "10063000",
+    "invoice_date": "2025-11-15",
+    "discounting_date": "2025-12-06"
+  },
+  "I0083": {
+    "invoice_id": "I0083",
+    "from": "E024",
+    "to": "E012",
+    "value": 82996546,
+    "hs_code": "39012000",
+    "invoice_date": "2025-12-17",
+    "discounting_date": "2025-12-30"
+  },
+  "I0084": {
+    "invoice_id": "I0084",
+    "from": "E006",
+    "to": "E027",
+    "value": 36816867,
+    "hs_code": "39012000",
+    "invoice_date": "2026-03-30",
+    "discounting_date": "2026-04-11"
+  },
+  "I0085": {
+    "invoice_id": "I0085",
+    "from": "E030",
+    "to": "E017",
+    "value": 100627925,
+    "hs_code": "74031100",
+    "invoice_date": "2026-02-28",
+    "discounting_date": "2026-03-21"
+  },
+  "I0086": {
+    "invoice_id": "I0086",
+    "from": "E005",
+    "to": "E028",
+    "value": 92449408,
+    "hs_code": "39012000",
+    "invoice_date": "2026-02-17",
+    "discounting_date": "2026-03-08"
+  },
+  "I0087": {
+    "invoice_id": "I0087",
+    "from": "E020",
+    "to": "E017",
+    "value": 29867274,
+    "hs_code": "39012000",
+    "invoice_date": "2026-02-06",
+    "discounting_date": "2026-03-17"
+  },
+  "I0088": {
+    "invoice_id": "I0088",
+    "from": "E019",
+    "to": "E008",
+    "value": 114847359,
+    "hs_code": "72081000",
+    "invoice_date": "2026-02-10",
+    "discounting_date": "2026-03-02"
+  },
+  "I0089": {
+    "invoice_id": "I0089",
+    "from": "E004",
+    "to": "E021",
+    "value": 48702844,
+    "hs_code": "85176200",
+    "invoice_date": "2025-12-29",
+    "discounting_date": "2026-02-08"
+  },
+  "I0090": {
+    "invoice_id": "I0090",
+    "from": "E015",
+    "to": "E020",
+    "value": 78321488,
+    "hs_code": "26011100",
+    "invoice_date": "2025-11-11",
+    "discounting_date": "2025-12-03"
+  },
+  "I0091": {
+    "invoice_id": "I0091",
+    "from": "E003",
+    "to": "E008",
+    "value": 65510456,
+    "hs_code": "49011000",
+    "invoice_date": "2026-01-23",
+    "discounting_date": "2026-02-21"
+  },
+  "I0092": {
+    "invoice_id": "I0092",
+    "from": "E013",
+    "to": "E028",
+    "value": 84263562,
+    "hs_code": "85176200",
+    "invoice_date": "2026-01-09",
+    "discounting_date": "2026-01-22"
+  },
+  "I0093": {
+    "invoice_id": "I0093",
+    "from": "E031",
+    "to": "E008",
+    "value": 86365017,
+    "hs_code": "74031100",
+    "invoice_date": "2026-02-28",
+    "discounting_date": "2026-03-07"
+  },
+  "I0094": {
+    "invoice_id": "I0094",
+    "from": "E015",
+    "to": "E026",
+    "value": 82838596,
+    "hs_code": "72081000",
+    "invoice_date": "2026-03-23",
+    "discounting_date": "2026-04-18"
+  },
+  "I0095": {
+    "invoice_id": "I0095",
+    "from": "E026",
+    "to": "E007",
+    "value": 93087149,
+    "hs_code": "26011100",
+    "invoice_date": "2026-01-07",
+    "discounting_date": "2026-02-16"
+  },
+  "I0096": {
+    "invoice_id": "I0096",
+    "from": "E024",
+    "to": "E010",
+    "value": 68871306,
+    "hs_code": "94036000",
+    "invoice_date": "2026-03-24",
+    "discounting_date": "2026-04-16"
+  },
+  "I0097": {
+    "invoice_id": "I0097",
+    "from": "E015",
+    "to": "E029",
+    "value": 78601176,
+    "hs_code": "72081000",
+    "invoice_date": "2025-11-30",
+    "discounting_date": "2025-12-11"
+  },
+  "I0098": {
+    "invoice_id": "I0098",
+    "from": "E003",
+    "to": "E031",
+    "value": 56869830,
+    "hs_code": "39012000",
+    "invoice_date": "2026-03-18",
+    "discounting_date": "2026-03-29"
+  },
+  "I0099": {
+    "invoice_id": "I0099",
+    "from": "E030",
+    "to": "E032",
+    "value": 99275859,
+    "hs_code": "72081000",
+    "invoice_date": "2025-12-10",
+    "discounting_date": "2026-01-08"
+  },
+  "I0100": {
+    "invoice_id": "I0100",
+    "from": "E032",
+    "to": "E014",
+    "value": 117945293,
+    "hs_code": "39012000",
+    "invoice_date": "2025-12-26",
+    "discounting_date": "2026-01-26"
+  },
+  "I0101": {
+    "invoice_id": "I0101",
+    "from": "E016",
+    "to": "E006",
+    "value": 61623811,
+    "hs_code": "26011100",
+    "invoice_date": "2026-01-31",
+    "discounting_date": "2026-02-06"
+  },
+  "I0102": {
+    "invoice_id": "I0102",
+    "from": "E018",
+    "to": "E007",
+    "value": 73038452,
+    "hs_code": "94036000",
+    "invoice_date": "2025-12-25",
+    "discounting_date": "2026-02-07"
+  },
+  "I0103": {
+    "invoice_id": "I0103",
+    "from": "E002",
+    "to": "E015",
+    "value": 54235013,
+    "hs_code": "72081000",
+    "invoice_date": "2026-03-25",
+    "discounting_date": "2026-04-10"
+  },
+  "I0104": {
+    "invoice_id": "I0104",
+    "from": "E014",
+    "to": "E012",
+    "value": 142109183,
+    "hs_code": "39012000",
+    "invoice_date": "2025-11-01",
+    "discounting_date": "2025-11-21"
+  },
+  "I0105": {
+    "invoice_id": "I0105",
+    "from": "E009",
+    "to": "E008",
+    "value": 97482987,
+    "hs_code": null,
+    "invoice_date": "2025-11-07",
+    "discounting_date": "2025-11-18"
+  },
+  "I0106": {
+    "invoice_id": "I0106",
+    "from": "E023",
+    "to": "E012",
+    "value": 103290650,
+    "hs_code": null,
+    "invoice_date": "2026-01-07",
+    "discounting_date": "2026-01-13"
+  },
+  "I0107": {
+    "invoice_id": "I0107",
+    "from": "E027",
+    "to": "E007",
+    "value": 41958528,
+    "hs_code": "84571000",
+    "invoice_date": "2026-02-01",
+    "discounting_date": "2026-03-08"
+  },
+  "I0108": {
+    "invoice_id": "I0108",
+    "from": "E007",
+    "to": "E012",
+    "value": 50159263,
+    "hs_code": "27101990",
+    "invoice_date": "2026-03-14",
+    "discounting_date": "2026-04-05"
+  },
+  "I0109": {
+    "invoice_id": "I0109",
+    "from": "E002",
+    "to": "E018",
+    "value": 49344704,
+    "hs_code": "27101990",
+    "invoice_date": "2025-11-28",
+    "discounting_date": "2026-01-01"
+  },
+  "I0110": {
+    "invoice_id": "I0110",
+    "from": "E005",
+    "to": "E027",
+    "value": 83449956,
+    "hs_code": "84571000",
+    "invoice_date": "2026-01-10",
+    "discounting_date": "2026-02-21"
+  },
+  "I0111": {
+    "invoice_id": "I0111",
+    "from": "E021",
+    "to": "E019",
+    "value": 56062341,
+    "hs_code": "72081000",
+    "invoice_date": "2026-02-19",
+    "discounting_date": "2026-02-28"
+  },
+  "I0112": {
+    "invoice_id": "I0112",
+    "from": "E014",
+    "to": "E012",
+    "value": 131837635,
+    "hs_code": "26011100",
+    "invoice_date": "2026-02-25",
+    "discounting_date": "2026-03-25"
+  },
+  "I0113": {
+    "invoice_id": "I0113",
+    "from": "E007",
+    "to": "E025",
+    "value": 47197478,
+    "hs_code": "72081000",
+    "invoice_date": "2025-12-10",
+    "discounting_date": "2026-01-12"
+  },
+  "I0114": {
+    "invoice_id": "I0114",
+    "from": "E006",
+    "to": "E011",
+    "value": 65895135,
+    "hs_code": "94036000",
+    "invoice_date": "2026-02-04",
+    "discounting_date": "2026-02-15"
+  },
+  "I0115": {
+    "invoice_id": "I0115",
+    "from": "E004",
+    "to": "E032",
+    "value": 86359380,
+    "hs_code": "85176200",
+    "invoice_date": "2025-12-02",
+    "discounting_date": "2025-12-31"
+  },
+  "I0116": {
+    "invoice_id": "I0116",
+    "from": "E028",
+    "to": "E030",
+    "value": 104796883,
+    "hs_code": "72081000",
+    "invoice_date": "2026-01-19",
+    "discounting_date": "2026-02-13"
+  },
+  "I0117": {
+    "invoice_id": "I0117",
+    "from": "E014",
+    "to": "E031",
+    "value": 143828973,
+    "hs_code": "85176200",
+    "invoice_date": "2026-01-29",
+    "discounting_date": "2026-03-08"
+  },
+  "I0118": {
+    "invoice_id": "I0118",
+    "from": "E008",
+    "to": "E028",
+    "value": 118095206,
+    "hs_code": "72081000",
+    "invoice_date": "2026-03-24",
+    "discounting_date": "2026-05-05"
+  },
+  "I0119": {
+    "invoice_id": "I0119",
+    "from": "E018",
+    "to": "E019",
+    "value": 60906538,
+    "hs_code": "39012000",
+    "invoice_date": "2026-01-29",
+    "discounting_date": "2026-02-01"
+  },
+  "I0120": {
+    "invoice_id": "I0120",
+    "from": "E010",
+    "to": "E027",
+    "value": 74269089,
+    "hs_code": "74031100",
+    "invoice_date": "2025-11-08",
+    "discounting_date": "2025-11-16"
+  },
+  "I0121": {
+    "invoice_id": "I0121",
+    "from": "E025",
+    "to": "E028",
+    "value": 53050466,
+    "hs_code": "84571000",
+    "invoice_date": "2026-01-23",
+    "discounting_date": "2026-03-03"
+  },
+  "I0122": {
+    "invoice_id": "I0122",
+    "from": "E006",
+    "to": "E013",
+    "value": 74003244,
+    "hs_code": "85176200",
+    "invoice_date": "2025-11-13",
+    "discounting_date": "2025-11-21"
+  },
+  "I0123": {
+    "invoice_id": "I0123",
+    "from": "E029",
+    "to": "E018",
+    "value": 89042300,
+    "hs_code": "49011000",
+    "invoice_date": "2025-12-26",
+    "discounting_date": "2026-01-30"
+  },
+  "I0124": {
+    "invoice_id": "I0124",
+    "from": "E023",
+    "to": "E019",
+    "value": 113317145,
+    "hs_code": null,
+    "invoice_date": "2026-01-18",
+    "discounting_date": "2026-01-23"
+  },
+  "I0125": {
+    "invoice_id": "I0125",
+    "from": "E026",
+    "to": "E004",
+    "value": 90367350,
+    "hs_code": "85176200",
+    "invoice_date": "2025-12-25",
+    "discounting_date": "2026-01-05"
+  },
+  "I0126": {
+    "invoice_id": "I0126",
+    "from": "E019",
+    "to": "E001",
+    "value": 135912903,
+    "hs_code": "27101990",
+    "invoice_date": "2025-12-15",
+    "discounting_date": "2025-12-26"
+  },
+  "I0127": {
+    "invoice_id": "I0127",
+    "from": "E015",
+    "to": "E025",
+    "value": 61253795,
+    "hs_code": "72081000",
+    "invoice_date": "2025-11-11",
+    "discounting_date": "2025-12-11"
+  },
+  "I0128": {
+    "invoice_id": "I0128",
+    "from": "E030",
+    "to": "E031",
+    "value": 122104280,
+    "hs_code": "27101990",
+    "invoice_date": "2026-03-27",
+    "discounting_date": "2026-04-24"
+  },
+  "I0129": {
+    "invoice_id": "I0129",
+    "from": "E019",
+    "to": "E004",
+    "value": 122878237,
+    "hs_code": "72081000",
+    "invoice_date": "2026-02-26",
+    "discounting_date": "2026-03-24"
+  },
+  "I0130": {
+    "invoice_id": "I0130",
+    "from": "E028",
+    "to": "E007",
+    "value": 61950968,
+    "hs_code": "27101990",
+    "invoice_date": "2026-03-15",
+    "discounting_date": "2026-03-23"
+  },
+  "I0131": {
+    "invoice_id": "I0131",
+    "from": "E020",
+    "to": "E013",
+    "value": 94441896,
+    "hs_code": "84571000",
+    "invoice_date": "2025-11-20",
+    "discounting_date": "2025-12-25"
+  },
+  "I0132": {
+    "invoice_id": "I0132",
+    "from": "E008",
+    "to": "E012",
+    "value": 109202386,
+    "hs_code": "72081000",
+    "invoice_date": "2025-12-08",
+    "discounting_date": "2025-12-26"
+  },
+  "I0133": {
+    "invoice_id": "I0133",
+    "from": "E010",
+    "to": "E005",
+    "value": 82786275,
+    "hs_code": "27101990",
+    "invoice_date": "2025-11-20",
+    "discounting_date": "2025-12-04"
+  },
+  "I0134": {
+    "invoice_id": "I0134",
+    "from": "E030",
+    "to": "E031",
+    "value": 119445501,
+    "hs_code": "10063000",
+    "invoice_date": "2026-03-25",
+    "discounting_date": "2026-05-08"
+  },
+  "I0135": {
+    "invoice_id": "I0135",
+    "from": "E021",
+    "to": "E007",
+    "value": 55445344,
+    "hs_code": "94036000",
+    "invoice_date": "2026-01-17",
+    "discounting_date": "2026-02-06"
+  },
+  "I0136": {
+    "invoice_id": "I0136",
+    "from": "E004",
+    "to": "E007",
+    "value": 140369769,
+    "hs_code": "85176200",
+    "invoice_date": "2025-11-10",
+    "discounting_date": "2025-11-16"
+  },
+  "I0137": {
+    "invoice_id": "I0137",
+    "from": "E019",
+    "to": "E006",
+    "value": 127696693,
+    "hs_code": "72081000",
+    "invoice_date": "2026-03-29",
+    "discounting_date": "2026-05-06"
+  },
+  "I0138": {
+    "invoice_id": "I0138",
+    "from": "E029",
+    "to": "E012",
+    "value": 92042068,
+    "hs_code": "49011000",
+    "invoice_date": "2026-03-09",
+    "discounting_date": "2026-03-21"
+  },
+  "I0139": {
+    "invoice_id": "I0139",
+    "from": "E029",
+    "to": "E017",
+    "value": 90462863,
+    "hs_code": "49011000",
+    "invoice_date": "2025-12-15",
+    "discounting_date": "2025-12-20"
+  },
+  "I0140": {
+    "invoice_id": "I0140",
+    "from": "E029",
+    "to": "E005",
+    "value": 88392555,
+    "hs_code": "39012000",
+    "invoice_date": "2026-01-12",
+    "discounting_date": "2026-02-08"
+  },
+  "I0141": {
+    "invoice_id": "I0141",
+    "from": "E019",
+    "to": "E007",
+    "value": 23154815,
+    "hs_code": null,
+    "invoice_date": "2025-12-14",
+    "discounting_date": "2025-12-22"
+  },
+  "I0142": {
+    "invoice_id": "I0142",
+    "from": "E007",
+    "to": "E003",
+    "value": 22966287,
+    "hs_code": "39012000",
+    "invoice_date": "2025-12-16",
+    "discounting_date": "2025-12-24"
+  },
+  "I0143": {
+    "invoice_id": "I0143",
+    "from": "E003",
+    "to": "E022",
+    "value": 23314076,
+    "hs_code": "39012000",
+    "invoice_date": "2025-12-20",
+    "discounting_date": "2025-12-24"
+  },
+  "I0144": {
+    "invoice_id": "I0144",
+    "from": "E022",
+    "to": "E009",
+    "value": 23047551,
+    "hs_code": "39012000",
+    "invoice_date": "2025-12-24",
+    "discounting_date": "2025-12-28"
+  },
+  "I0145": {
+    "invoice_id": "I0145",
+    "from": "E009",
+    "to": "E019",
+    "value": 23665866,
+    "hs_code": "39012000",
+    "invoice_date": "2025-12-28",
+    "discounting_date": "2026-01-05"
+  },
+  "I0146": {
+    "invoice_id": "I0146",
+    "from": "E033",
+    "to": "E034",
+    "value": 58683548,
+    "hs_code": "74031100",
+    "invoice_date": "2025-11-05",
+    "discounting_date": "2025-11-08"
+  },
+  "I0147": {
+    "invoice_id": "I0147",
+    "from": "E034",
+    "to": "E035",
+    "value": 57224489,
+    "hs_code": "74031100",
+    "invoice_date": "2025-11-08",
+    "discounting_date": "2025-11-10"
+  },
+  "I0148": {
+    "invoice_id": "I0148",
+    "from": "E035",
+    "to": "E036",
+    "value": 57375843,
+    "hs_code": "74031100",
+    "invoice_date": "2025-11-09",
+    "discounting_date": "2025-11-16"
+  },
+  "I0149": {
+    "invoice_id": "I0149",
+    "from": "E036",
+    "to": "E037",
+    "value": 55804437,
+    "hs_code": "74031100",
+    "invoice_date": "2025-11-13",
+    "discounting_date": "2025-11-19"
+  },
+  "I0150": {
+    "invoice_id": "I0150",
+    "from": "E037",
+    "to": "E038",
+    "value": 54184687,
+    "hs_code": "74031100",
+    "invoice_date": "2025-11-14",
+    "discounting_date": "2025-11-20"
+  },
+  "I0151": {
+    "invoice_id": "I0151",
+    "from": "E038",
+    "to": "E039",
+    "value": 54695446,
+    "hs_code": "74031100",
+    "invoice_date": "2025-11-15",
+    "discounting_date": "2025-11-21"
+  },
+  "I0152": {
+    "invoice_id": "I0152",
+    "from": "E040",
+    "to": "E041",
+    "value": 58056130,
+    "hs_code": null,
+    "invoice_date": "2026-02-04",
+    "discounting_date": "2026-02-12"
+  },
+  "I0153": {
+    "invoice_id": "I0153",
+    "from": "E041",
+    "to": "E042",
+    "value": 56548644,
+    "hs_code": "39012000",
+    "invoice_date": "2026-02-07",
+    "discounting_date": "2026-02-13"
+  },
+  "I0154": {
+    "invoice_id": "I0154",
+    "from": "E042",
+    "to": "E043",
+    "value": 56776799,
+    "hs_code": "39012000",
+    "invoice_date": "2026-02-09",
+    "discounting_date": "2026-02-17"
+  },
+  "I0155": {
+    "invoice_id": "I0155",
+    "from": "E043",
+    "to": "E044",
+    "value": 56340798,
+    "hs_code": "39012000",
+    "invoice_date": "2026-02-10",
+    "discounting_date": "2026-02-13"
+  },
+  "I0156": {
+    "invoice_id": "I0156",
+    "from": "E044",
+    "to": "E045",
+    "value": 55996107,
+    "hs_code": "39012000",
+    "invoice_date": "2026-02-13",
+    "discounting_date": "2026-02-17"
+  },
+  "I0157": {
+    "invoice_id": "I0157",
+    "from": "E045",
+    "to": "E040",
+    "value": 54403286,
+    "hs_code": "39012000",
+    "invoice_date": "2026-02-15",
+    "discounting_date": "2026-02-23"
+  },
+  "I0158": {
+    "invoice_id": "I0158",
+    "from": "E046",
+    "to": "E047",
+    "value": 67315196,
+    "hs_code": "10063000",
+    "invoice_date": "2026-03-16",
+    "discounting_date": "2026-03-19"
+  },
+  "I0159": {
+    "invoice_id": "I0159",
+    "from": "E047",
+    "to": "E048",
+    "value": 67890089,
+    "hs_code": "10063000",
+    "invoice_date": "2026-03-20",
+    "discounting_date": "2026-03-28"
+  },
+  "I0160": {
+    "invoice_id": "I0160",
+    "from": "E048",
+    "to": "E049",
+    "value": 67256734,
+    "hs_code": "10063000",
+    "invoice_date": "2026-03-22",
+    "discounting_date": "2026-03-25"
+  },
+  "I0161": {
+    "invoice_id": "I0161",
+    "from": "E049",
+    "to": "E046",
+    "value": 68914123,
+    "hs_code": "10063000",
+    "invoice_date": "2026-03-23",
+    "discounting_date": "2026-03-25"
+  },
+  "I0162": {
+    "invoice_id": "I0162",
+    "from": "E050",
+    "to": "E051",
+    "value": 59214275,
+    "hs_code": "39012000",
+    "invoice_date": "2026-01-06",
+    "discounting_date": "2026-01-10"
+  },
+  "I0163": {
+    "invoice_id": "I0163",
+    "from": "E051",
+    "to": "E052",
+    "value": 59208112,
+    "hs_code": "39012000",
+    "invoice_date": "2026-01-10",
+    "discounting_date": "2026-01-18"
+  },
+  "I0164": {
+    "invoice_id": "I0164",
+    "from": "E052",
+    "to": "E053",
+    "value": 59198769,
+    "hs_code": "39012000",
+    "invoice_date": "2026-01-11",
+    "discounting_date": "2026-01-18"
+  },
+  "I0165": {
+    "invoice_id": "I0165",
+    "from": "E053",
+    "to": "E054",
+    "value": 60856405,
+    "hs_code": null,
+    "invoice_date": "2026-01-13",
+    "discounting_date": "2026-01-19"
+  },
+  "I0166": {
+    "invoice_id": "I0166",
+    "from": "E054",
+    "to": "E055",
+    "value": 60058052,
+    "hs_code": "39012000",
+    "invoice_date": "2026-01-17",
+    "discounting_date": "2026-01-22"
+  },
+  "I0167": {
+    "invoice_id": "I0167",
+    "from": "E055",
+    "to": "E056",
+    "value": 61309081,
+    "hs_code": "39012000",
+    "invoice_date": "2026-01-21",
+    "discounting_date": "2026-01-24"
+  },
+  "I0168": {
+    "invoice_id": "I0168",
+    "from": "E056",
+    "to": "E050",
+    "value": 62145979,
+    "hs_code": null,
+    "invoice_date": "2026-01-25",
+    "discounting_date": "2026-01-31"
+  },
+  "I0169": {
+    "invoice_id": "I0169",
+    "from": "E057",
+    "to": "E058",
+    "value": 73338794,
+    "hs_code": "74031100",
+    "invoice_date": "2026-03-07",
+    "discounting_date": "2026-03-13"
+  },
+  "I0170": {
+    "invoice_id": "I0170",
+    "from": "E058",
+    "to": "E059",
+    "value": 71620926,
+    "hs_code": "74031100",
+    "invoice_date": "2026-03-11",
+    "discounting_date": "2026-03-16"
+  },
+  "I0171": {
+    "invoice_id": "I0171",
+    "from": "E059",
+    "to": "E060",
+    "value": 72589201,
+    "hs_code": "74031100",
+    "invoice_date": "2026-03-12",
+    "discounting_date": "2026-03-20"
+  },
+  "I0172": {
+    "invoice_id": "I0172",
+    "from": "E060",
+    "to": "E057",
+    "value": 73266854,
+    "hs_code": "74031100",
+    "invoice_date": "2026-03-14",
+    "discounting_date": "2026-03-15"
+  }
+};
