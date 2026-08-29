@@ -1,0 +1,45 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "invoice.schema.json",
+  "title": "InvoiceArtifact",
+  "type": "object",
+  "required": ["schema_version", "source_dataset", "count", "invoices"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": { "const": 1 },
+    "source_dataset": { "type": "string" },
+    "count": { "type": "integer", "minimum": 0 },
+    "invoices": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/invoice" }
+    }
+  },
+  "definitions": {
+    "invoice": {
+      "type": "object",
+      "required": ["invoice_id", "from", "to", "value", "hs_code", "invoice_date", "discounting_date"],
+      "additionalProperties": false,
+      "properties": {
+        "invoice_id": { "type": "string", "pattern": "^I[0-9]+$" },
+        "from": { "type": "string", "pattern": "^E[0-9]+$" },
+        "to": { "type": "string", "pattern": "^E[0-9]+$" },
+        "value": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Integer rupees. Never a float — net_e sums must land on exact zero."
+        },
+        "hs_code": {
+          "type": ["string", "null"],
+          "pattern": "^[0-9]{8}$",
+          "description": "8-digit HS code, or null under injected messiness."
+        },
+        "invoice_date": { "type": "string", "format": "date" },
+        "discounting_date": {
+          "type": "string",
+          "format": "date",
+          "description": "Present for platform realism. Scoring must never read this field — invoice_date only."
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,13 @@
+# Nobody edits the same file. This makes that mechanical instead of
+# remembered at 4am. See WIRE_PROTOCOL.md for the reasoning.
+
+/graph/       @person-b
+/contract/    @person-b
+/scoring/     @person-a
+/data/        @person-c
+/viz/         @person-c
+/demo/        @person-c
+
+# fixtures/ is C's, except the one file B seeds at hour 1
+/fixtures/                              @person-c
+/fixtures/candidate_rings.sample.json   @person-b

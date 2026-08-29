@@ -1,0 +1,82 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "candidate_ring.schema.json",
+  "title": "CandidateRingArtifact",
+  "type": "object",
+  "required": ["schema_version", "source_dataset", "count", "rings"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": { "const": 1 },
+    "source_dataset": { "type": "string" },
+    "count": { "type": "integer", "minimum": 0 },
+    "rings": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/ring" }
+    }
+  },
+  "definitions": {
+    "ring": {
+      "type": "object",
+      "required": ["ring_id", "canonical_key", "closure_type", "entities", "hops"],
+      "additionalProperties": false,
+      "properties": {
+        "ring_id": { "type": "string", "pattern": "^R[0-9]+$" },
+        "canonical_key": {
+          "type": "string",
+          "description": "Pipe-joined entity ids in the lexicographically smallest ROTATION of the ring. Rotations only, not reflections — direction is meaningful. This is what makes ring_id assignment and dedup deterministic across reruns."
+        },
+        "closure_type": { "type": "string", "enum": ["transaction", "corporate"] },
+        "entities": {
+          "type": "array",
+          "items": { "type": "string", "pattern": "^E[0-9]+$" },
+          "minItems": 3
+        },
+        "hops": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 8,
+          "items": { "$ref": "#/definitions/hop" }
+        }
+      }
+    },
+    "hop": {
+      "oneOf": [
+        { "$ref": "#/definitions/invoiceHop" },
+        { "$ref": "#/definitions/bridgeHop" }
+      ]
+    },
+    "invoiceHop": {
+      "type": "object",
+      "required": ["hop_type", "from", "to", "invoice_id", "value", "hs_code", "invoice_date", "discounting_date"],
+      "additionalProperties": false,
+      "properties": {
+        "hop_type": { "const": "invoice" },
+        "from": { "type": "string", "pattern": "^E[0-9]+$" },
+        "to": { "type": "string", "pattern": "^E[0-9]+$" },
+        "invoice_id": { "type": "string", "pattern": "^I[0-9]+$" },
+        "value": { "type": "integer", "minimum": 1 },
+        "hs_code": { "type": ["string", "null"], "pattern": "^[0-9]{8}$" },
+        "invoice_date": { "type": "string", "format": "date" },
+        "discounting_date": { "type": "string", "format": "date" }
+      }
+    },
+    "bridgeHop": {
+      "type": "object",
+      "required": ["hop_type", "from", "to", "bridge_kind", "bridge_evidence"],
+      "additionalProperties": false,
+      "properties": {
+        "hop_type": { "const": "corporate_bridge" },
+        "from": { "type": "string", "pattern": "^E[0-9]+$" },
+        "to": { "type": "string", "pattern": "^E[0-9]+$" },
+        "bridge_kind": {
+          "type": "string",
+          "enum": ["shared_director", "shared_address", "registration_cohort"]
+        },
+        "bridge_evidence": {
+          "type": "object",
+          "description": "Free-form but must be self-explanatory — this is what C renders on hover over the dashed edge."
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,46 @@
+name: contract
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: install
+        run: pip install jsonschema pytest
+
+      - name: validate fixtures
+        run: python contract/validate.py fixtures/*.json
+
+      - name: validate data (if present)
+        run: |
+          shopt -s nullglob
+          files=(data/*.json)
+          if [ ${#files[@]} -gt 0 ]; then
+            python contract/validate.py "${files[@]}"
+          else
+            echo "no data/*.json yet — skipping"
+          fi
+
+      - name: validate artifacts (if present)
+        run: |
+          shopt -s nullglob
+          files=(artifacts/*.json)
+          if [ ${#files[@]} -gt 0 ]; then
+            python contract/validate.py "${files[@]}"
+          else
+            echo "no artifacts/*.json yet — skipping"
+          fi
+
+      - name: pytest
+        run: pytest -q

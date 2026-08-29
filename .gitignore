@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+venv/
+*.egg-info/
+.DS_Store
+Thumbs.db
+
+# artifacts/*.json is COMMITTED, not ignored — see WIRE_PROTOCOL.md §2.
+# That's the decoupling mechanism: A never runs B's code, C never runs A's.

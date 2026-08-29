@@ -1,0 +1,39 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "entity.schema.json",
+  "title": "EntityArtifact",
+  "type": "object",
+  "required": ["schema_version", "source_dataset", "count", "entities"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": { "const": 1 },
+    "source_dataset": { "type": "string" },
+    "count": { "type": "integer", "minimum": 0 },
+    "entities": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/entity" }
+    }
+  },
+  "definitions": {
+    "entity": {
+      "type": "object",
+      "required": ["id", "name", "industry_code", "industry_class", "directors", "address", "registration_date"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string", "pattern": "^E[0-9]+$" },
+        "name": { "type": "string", "minLength": 1 },
+        "industry_code": { "type": "string" },
+        "industry_class": {
+          "type": "string",
+          "enum": ["manufacturing", "trading", "distribution", "services"]
+        },
+        "directors": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "address": { "type": "string" },
+        "registration_date": { "type": "string", "format": "date" }
+      }
+    }
+  }
+}

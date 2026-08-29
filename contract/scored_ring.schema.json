@@ -1,0 +1,90 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "scored_ring.schema.json",
+  "title": "ScoredRingArtifact",
+  "type": "object",
+  "required": ["schema_version", "source_dataset", "count", "rings"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": { "const": 1 },
+    "source_dataset": { "type": "string" },
+    "count": { "type": "integer", "minimum": 0 },
+    "rings": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/scoredRing" }
+    }
+  },
+  "definitions": {
+    "scoredRing": {
+      "type": "object",
+      "required": [
+        "ring_id", "canonical_key", "closure_type", "entities", "hops",
+        "scores", "abstained", "aggregate", "expected_loss", "evidence"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "ring_id": { "type": "string", "pattern": "^R[0-9]+$" },
+        "canonical_key": { "type": "string" },
+        "closure_type": { "type": "string", "enum": ["transaction", "corporate"] },
+        "entities": {
+          "type": "array",
+          "items": { "type": "string", "pattern": "^E[0-9]+$" },
+          "minItems": 3,
+          "description": "Copied through verbatim from the candidate ring — C draws from this file alone, never joins two artifacts."
+        },
+        "hops": {
+          "type": "array",
+          "minItems": 3,
+          "description": "Copied through verbatim from the candidate ring, same hop shapes as candidate_ring.schema.json."
+        },
+        "scores": {
+          "type": "object",
+          "required": ["value", "product", "timing", "externality"],
+          "additionalProperties": false,
+          "properties": {
+            "value": { "$ref": "#/definitions/scoreOrNull" },
+            "product": { "$ref": "#/definitions/scoreOrNull" },
+            "timing": { "$ref": "#/definitions/scoreOrNull" },
+            "externality": { "$ref": "#/definitions/scoreOrNull" }
+          }
+        },
+        "abstained": {
+          "type": "array",
+          "items": { "type": "string", "enum": ["value", "product", "timing", "externality"] },
+          "description": "Signal names with no usable data for this ring. Corresponding entries in `scores` must be null. C renders these greyed with a reason, never as a misleading zero."
+        },
+        "aggregate": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Weighted geometric mean over non-abstained signals, exponents renormalized to sum to 1."
+        },
+        "expected_loss": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "aggregate * sum(invoice-hop value), integer rupees. C sorts the queue by THIS field, not aggregate."
+        },
+        "evidence": {
+          "type": "object",
+          "required": ["value", "product", "timing", "externality", "industry"],
+          "additionalProperties": false,
+          "properties": {
+            "value": { "type": "string" },
+            "product": { "type": "string" },
+            "timing": { "type": "string" },
+            "externality": { "type": "string" },
+            "industry": {
+              "type": "string",
+              "description": "Industry-consistency check. Deliberately outside `scores` — kept separate so no aggregate number needs a compound explanation."
+            }
+          }
+        }
+      }
+    },
+    "scoreOrNull": {
+      "type": ["number", "null"],
+      "minimum": 0,
+      "maximum": 1
+    }
+  }
+}
