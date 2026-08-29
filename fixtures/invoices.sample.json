@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "source_dataset": "fixture-h4",
+  "count": 12,
+  "invoices": [
+    { "invoice_id": "I0001", "from": "E001", "to": "E004", "value": 100000000, "hs_code": "72081000", "invoice_date": "2026-03-01", "discounting_date": "2026-03-04" },
+    { "invoice_id": "I0002", "from": "E004", "to": "E009", "value": 101500000, "hs_code": "72081000", "invoice_date": "2026-03-02", "discounting_date": "2026-03-06" },
+    { "invoice_id": "I0003", "from": "E009", "to": "E006", "value": 99200000,  "hs_code": "85176200", "invoice_date": "2026-03-03", "discounting_date": "2026-03-09" },
+    { "invoice_id": "I0004", "from": "E006", "to": "E012", "value": 100800000, "hs_code": "72081000", "invoice_date": "2026-03-04", "discounting_date": "2026-03-11" },
+    { "invoice_id": "I0005", "from": "E012", "to": "E008", "value": 99900000,  "hs_code": "72081000", "invoice_date": "2026-03-05", "discounting_date": "2026-03-14" },
+
+    { "invoice_id": "I0006", "from": "E005", "to": "E010", "value": 45000000, "hs_code": "39012000", "invoice_date": "2026-01-15", "discounting_date": "2026-02-20" },
+    { "invoice_id": "I0007", "from": "E010", "to": "E013", "value": 52000000, "hs_code": "39012000", "invoice_date": "2026-02-10", "discounting_date": "2026-03-05" },
+    { "invoice_id": "I0008", "from": "E013", "to": "E005", "value": 61000000, "hs_code": "10063000", "invoice_date": "2026-03-20", "discounting_date": "2026-04-25" },
+
+    { "invoice_id": "I0009", "from": "E002", "to": "E007", "value": 8000000, "hs_code": null, "invoice_date": "2026-02-01", "discounting_date": "2026-02-15" },
+    { "invoice_id": "I0010", "from": "E007", "to": "E011", "value": 7600000, "hs_code": null, "invoice_date": "2026-02-10", "discounting_date": "2026-02-25" },
+
+    { "invoice_id": "I0011", "from": "E003", "to": "E006", "value": 12000000, "hs_code": "49011000", "invoice_date": "2026-01-05", "discounting_date": "2026-01-20" },
+    { "invoice_id": "I0012", "from": "E006", "to": "E003", "value": 3000000,  "hs_code": "49011000", "invoice_date": "2026-04-01", "discounting_date": "2026-04-10" }
+  ]
+}

@@ -1,0 +1,360 @@
+{
+  "schema_version": 1,
+  "source_dataset": "seed42-regimeA",
+  "count": 32,
+  "entities": [
+    {
+      "id": "E001",
+      "name": "Meridian Supply Chain Ltd",
+      "industry_code": "NIC-5229",
+      "industry_class": "distribution",
+      "directors": [
+        "D45"
+      ],
+      "address": "18 Avinashi Road, Chennai 600002",
+      "registration_date": "2012-11-24"
+    },
+    {
+      "id": "E002",
+      "name": "Coastal Trading Pvt Ltd",
+      "industry_code": "NIC-4662",
+      "industry_class": "trading",
+      "directors": [
+        "D367"
+      ],
+      "address": "30 Residency Road, Chennai 600002",
+      "registration_date": "2020-01-18"
+    },
+    {
+      "id": "E003",
+      "name": "Trueform Logistics Co",
+      "industry_code": "NIC-5210",
+      "industry_class": "distribution",
+      "directors": [
+        "D175"
+      ],
+      "address": "  36 MG Road ,  Chandigarh 160002",
+      "registration_date": "2023-03-23"
+    },
+    {
+      "id": "E004",
+      "name": "Silverline Industries Pvt Ltd",
+      "industry_code": "NIC-2610",
+      "industry_class": "manufacturing",
+      "directors": [
+        "D23"
+      ],
+      "address": "49 Anna Salai, Bengaluru 560066",
+      "registration_date": "2016-06-20"
+    },
+    {
+      "id": "E005",
+      "name": "Ashoka Freight Pvt Ltd",
+      "industry_code": "NIC-4690",
+      "industry_class": "distribution",
+      "directors": [
+        "D361"
+      ],
+      "address": "38 Industrial Area Phase II, Pune 411001",
+      "registration_date": "2020-06-19"
+    },
+    {
+      "id": "E006",
+      "name": "Redstone Industries Pvt Ltd",
+      "industry_code": "NIC-2610",
+      "industry_class": "manufacturing",
+      "directors": [
+        "D84"
+      ],
+      "address": "30 Anna Salai, Indore 452001",
+      "registration_date": "2017-05-15"
+    },
+    {
+      "id": "E007",
+      "name": "Silverline Commodities Pvt Ltd",
+      "industry_code": "NIC-4662",
+      "industry_class": "trading",
+      "directors": [
+        "D237"
+      ],
+      "address": "82 Marine Drive, Chandigarh 160002",
+      "registration_date": "2019-12-08"
+    },
+    {
+      "id": "E008",
+      "name": "Redstone Commodities Pvt Ltd",
+      "industry_code": "NIC-4662",
+      "industry_class": "trading",
+      "directors": [
+        "D291"
+      ],
+      "address": "5 Hinjewadi Phase I, Chennai 600002",
+      "registration_date": "2017-05-03"
+    },
+    {
+      "id": "E009",
+      "name": "Falcon Business Services Co",
+      "industry_code": "NIC-6202",
+      "industry_class": "services",
+      "directors": [
+        "D382"
+      ],
+      "address": "83 Sadar Bazaar, Mumbai 400070",
+      "registration_date": "2013-05-05"
+    },
+    {
+      "id": "E010",
+      "name": "Amber Impex Co",
+      "industry_code": "NIC-4662",
+      "industry_class": "trading",
+      "directors": [
+        "D57"
+      ],
+      "address": "29 Marine Drive, Mumbai 400021",
+      "registration_date": "2019-08-03"
+    },
+    {
+      "id": "E011",
+      "name": "Global Works Pvt Ltd",
+      "industry_code": "NIC-1392",
+      "industry_class": "manufacturing",
+      "directors": [
+        "D6"
+      ],
+      "address": "49 Nariman Point, Mumbai 400070",
+      "registration_date": "2018-09-09"
+    },
+    {
+      "id": "E012",
+      "name": "Ashoka Supply Chain LLP",
+      "industry_code": "NIC-5229",
+      "industry_class": "distribution",
+      "directors": [
+        "D369"
+      ],
+      "address": "38 Sector 18, Bengaluru 560066",
+      "registration_date": "2013-08-01"
+    },
+    {
+      "id": "E013",
+      "name": "Granite Components Pvt Ltd",
+      "industry_code": "NIC-1392",
+      "industry_class": "manufacturing",
+      "directors": [
+        "D102"
+      ],
+      "address": "81 Whitefield Main Road, Indore 452001",
+      "registration_date": "2024-11-17"
+    },
+    {
+      "id": "E014",
+      "name": "Global Fabricators Pvt Ltd",
+      "industry_code": "NIC-2610",
+      "industry_class": "manufacturing",
+      "directors": [
+        "D123"
+      ],
+      "address": "42 Sadar Bazaar, Chandigarh 160002",
+      "registration_date": "2011-02-12"
+    },
+    {
+      "id": "E015",
+      "name": "Suncrest Manufacturing Co",
+      "industry_code": "NIC-2013",
+      "industry_class": "manufacturing",
+      "directors": [
+        "D282"
+      ],
+      "address": "9 Residency Road, Indore 452001",
+      "registration_date": "2023-03-05"
+    },
+    {
+      "id": "E016",
+      "name": "Highbank Fabricators Co",
+      "industry_code": "NIC-2610",
+      "industry_class": "manufacturing",
+      "directors": [
+        "D205"
+      ],
+      "address": "70 Avinashi Road, Chennai 600002",
+      "registration_date": "2022-04-23"
+    },
+    {
+      "id": "E017",
+      "name": "Marigold Advisory Co",
+      "industry_code": "NIC-8299",
+      "industry_class": "services",
+      "directors": [
+        "D284"
+      ],
+      "address": "32 Electronic City, Bengaluru 560066",
+      "registration_date": "2012-06-01"
+    },
+    {
+      "id": "E018",
+      "name": "Redstone Manufacturing Pvt Ltd",
+      "industry_code": "NIC-2610",
+      "industry_class": "manufacturing",
+      "directors": [
+        "D37"
+      ],
+      "address": "81 MG Road, Coimbatore 641018",
+      "registration_date": "2014-02-02"
+    },
+    {
+      "id": "E019",
+      "name": "Ironclad Impex Ltd",
+      "industry_code": "NIC-4620",
+      "industry_class": "trading",
+      "directors": [
+        "D125"
+      ],
+      "address": "17 Avinashi Road, Pune 411001",
+      "registration_date": "2025-10-19"
+    },
+    {
+      "id": "E020",
+      "name": "Trueform Logistics Pvt Ltd",
+      "industry_code": "NIC-5210",
+      "industry_class": "distribution",
+      "directors": [
+        "D374"
+      ],
+      "address": "85 Sector 18, Bengaluru 560066",
+      "registration_date": "2016-07-14"
+    },
+    {
+      "id": "E021",
+      "name": "Kaveri Manufacturing Co",
+      "industry_code": "NIC-1392",
+      "industry_class": "manufacturing",
+      "directors": [
+        "D230"
+      ],
+      "address": "44 Anna Salai, Coimbatore 641018",
+      "registration_date": "2014-04-07"
+    },
+    {
+      "id": "E022",
+      "name": "Sapphire Industries Co",
+      "industry_code": "NIC-2410",
+      "industry_class": "manufacturing",
+      "directors": [
+        "D334"
+      ],
+      "address": "10 Sadar Bazaar, Chennai 600002",
+      "registration_date": "2023-09-04"
+    },
+    {
+      "id": "E023",
+      "name": "Vertex Consultants Ltd",
+      "industry_code": "NIC-7020",
+      "industry_class": "services",
+      "directors": [
+        "D31"
+      ],
+      "address": "53 Sadar Bazaar, Bengaluru 560100",
+      "registration_date": "2018-04-28"
+    },
+    {
+      "id": "E024",
+      "name": "Vertex Works LLP",
+      "industry_code": "NIC-1392",
+      "industry_class": "manufacturing",
+      "directors": [
+        "D339"
+      ],
+      "address": "59 Whitefield Main Road, Hyderabad 500081",
+      "registration_date": "2016-04-09"
+    },
+    {
+      "id": "E025",
+      "name": "Deccan Logistics LLP",
+      "industry_code": "NIC-5229",
+      "industry_class": "distribution",
+      "directors": [
+        "D161"
+      ],
+      "address": "8 Nariman Point, Chennai 600002",
+      "registration_date": "2022-09-02"
+    },
+    {
+      "id": "E026",
+      "name": "Brightline Fabricators Ltd",
+      "industry_code": "NIC-1392",
+      "industry_class": "manufacturing",
+      "directors": [
+        "D35"
+      ],
+      "address": "66 Anna Salai, Bengaluru 560001",
+      "registration_date": "2024-03-03"
+    },
+    {
+      "id": "E027",
+      "name": "Northgate Freight Pvt Ltd",
+      "industry_code": "NIC-5229",
+      "industry_class": "distribution",
+      "directors": [
+        "D42",
+        "D339"
+      ],
+      "address": "73 Electronic City, Hyderabad 500081",
+      "registration_date": "2020-10-02"
+    },
+    {
+      "id": "E028",
+      "name": "Highbank Commodities LLP",
+      "industry_code": "NIC-4620",
+      "industry_class": "trading",
+      "directors": [
+        "D68"
+      ],
+      "address": "86 Avinashi Road, Chennai 600002",
+      "registration_date": "2016-04-09"
+    },
+    {
+      "id": "E029",
+      "name": "Palmgrove Freight LLP",
+      "industry_code": "NIC-4690",
+      "industry_class": "distribution",
+      "directors": [
+        "D38"
+      ],
+      "address": "10 MG Road, Hyderabad 500081",
+      "registration_date": "2018-10-19"
+    },
+    {
+      "id": "E030",
+      "name": "Granite Commodities Ltd",
+      "industry_code": "NIC-4620",
+      "industry_class": "trading",
+      "directors": [
+        "D81"
+      ],
+      "address": "45 Anna Salai, Hyderabad 500081",
+      "registration_date": "2025-04-12"
+    },
+    {
+      "id": "E031",
+      "name": "Palmgrove Trading LLP",
+      "industry_code": "NIC-4662",
+      "industry_class": "trading",
+      "directors": [
+        "D55"
+      ],
+      "address": "85 Anna Salai, Hyderabad 500081",
+      "registration_date": "2025-03-09"
+    },
+    {
+      "id": "E032",
+      "name": "Deccan Supply Chain LLP",
+      "industry_code": "NIC-5229",
+      "industry_class": "distribution",
+      "directors": [
+        "D136"
+      ],
+      "address": "27 Avinashi Road, Chandigarh 160002",
+      "registration_date": "2016-04-22"
+    }
+  ]
+}
