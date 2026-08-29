@@ -367,7 +367,7 @@ def evaluate_jaccard(scored_rings: list, ground_truth_rings: list) -> dict:
     if operational_fpr > 0.15:
         eval_summary["diagnostic_note"] = (
             f"Operational FPR ({operational_fpr:.1%}) exceeds 15% threshold on top-k queue. "
-            "Evidence supports human calibration to capped exponents (0.30/0.25/0.25/0.20) in PARAMS."
+            "Evidence supports human calibration to capped exponents (0.35/0.30/0.25/0.10) in PARAMS."
         )
 
     return eval_summary
@@ -606,7 +606,7 @@ def main():
     parser.add_argument("--entities", type=str, help="Path to entities.json")
     parser.add_argument("--out", type=str, help="Output path for scored_rings.json")
     parser.add_argument("--eval", type=str, help="Path to ground_truth.json to evaluate recall and top-k precision/FPR")
-    parser.add_argument("--capped-exponents", action="store_true", help="Force capped exponents (0.30/0.25/0.25/0.20)")
+    parser.add_argument("--capped-exponents", action="store_true", help="Force capped exponents (0.35/0.30/0.25/0.10)")
     parser.add_argument("--benchmark-degradation", action="store_true", help="Run 3-mode degradation ablation study and export degradation_report.json")
 
     args = parser.parse_args()
