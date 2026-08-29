@@ -59,18 +59,23 @@ def inject(entities, invoices, params, rng, next_inv_n, next_eid_n):
     fraud_invoices = []
     injected_rings = []
 
+    used_in_fraud = set()
+
     for ring_idx, length in enumerate(_ring_lengths(params, rng), start=1):
-        sample_size = min(length, len(all_ids))
-        chosen = rng.sample(all_ids, sample_size)
-        while len(chosen) < length:
-            next_eid_n += 1
-            new_id = "E{:03d}".format(next_eid_n)
-            industry_class = rng.choice(list(params["sector_mix"].keys()))
-            shell = economy.make_entity(new_id, industry_class, rng)
-            entities.append(shell)
-            entity_by_id[new_id] = shell
-            all_ids.append(new_id)
-            chosen.append(new_id)
+        unused = [eid for eid in all_ids if eid not in used_in_fraud]
+        if len(unused) >= length:
+            chosen = rng.sample(unused, length)
+        else:
+            chosen = list(unused)
+            needed = length - len(chosen)
+            remaining_pool = [eid for eid in all_ids if eid not in chosen]
+            if len(remaining_pool) >= needed:
+                chosen += rng.sample(remaining_pool, needed)
+            else:
+                chosen += remaining_pool
+
+        for eid in chosen:
+            used_in_fraud.add(eid)
 
         corporate = rng.random() < corp_fraction
         if corporate:
