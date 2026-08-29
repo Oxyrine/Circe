@@ -40,11 +40,22 @@ pytest -q
 
 - [x] M0 — scaffold, five schemas, validator, CI, stub `run.py` emitting two
       fixture rings (one transaction-closed, one corporate-closed)
-- [ ] M1 — Tarjan SCC + depth-limited DFS (hours 1-8)
-- [ ] M2 — first real handoff to A (hour 16)
-- [ ] M3 — corporate-graph closure (hours 16-26)
+- [x] M1 — iterative Tarjan SCC + depth-limited DFS (`graph/scc.py`,
+      `graph/cycles.py`). Each cycle found exactly once (canonical-start
+      pruning), two independent budgets (found-cycle count + DFS step
+      count) so a dense SCC degrades loudly instead of hanging. 34 tests.
+- [x] M2 — first real handoff to A: `artifacts/candidate_rings.json`
+      generated from C's real dataset, 1,758 rings at `--max-depth 6`
+      (chosen over the spec's full 8 for file size — see commit `625e361`
+      for the recall data behind that call). Recall against
+      `ground_truth.json`: 6/6 at Jaccard≥0.5.
+- [ ] M3 — corporate-graph closure (hours 16-26). Note: current recall
+      hits on the two hidden-leg rings (T04, T06) come from a *different*
+      overlapping cycle, not the injected ring itself — worth checking
+      before M3 whether the demo needs a cleaner before/after case.
 - [ ] M3.5 — real entity canonicalization (hours 24-28, if M3 lands clean)
-- [ ] M4 — harden edge cases (hours 28-36)
+- [ ] M4 — harden edge cases: missing HS code, missing date, duplicate
+      invoices between the same pair (self-loops already filtered at M1)
 
 ## Running C's track
 
