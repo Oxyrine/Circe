@@ -185,12 +185,6 @@
     card.className = "ring-card";
     card.style.setProperty("--stagger", rank);
 
-    var rankTag = document.createElement("span");
-    rankTag.className = "ring-rank";
-    rankTag.textContent = "#" + rank;
-    rankTag.setAttribute("aria-hidden", "true");
-    card.appendChild(rankTag);
-
     var head = document.createElement("div");
     head.className = "ring-head";
 
@@ -231,6 +225,12 @@
 
     var body = document.createElement("div");
     body.className = "ring-body";
+
+    var rankTag = document.createElement("span");
+    rankTag.className = "ring-rank";
+    rankTag.textContent = "#" + rank;
+    rankTag.setAttribute("aria-hidden", "true");
+    body.appendChild(rankTag);
 
     var graphWrap = document.createElement("div");
     graphWrap.className = "ring-graph";
