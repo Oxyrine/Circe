@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "source_dataset": "fixture-h4",
+  "count": 13,
+  "entities": [
+    { "id": "E001", "name": "Vertex Steel Trading Pvt Ltd",       "industry_code": "NIC-4662", "industry_class": "trading",      "directors": ["D1", "D7"],  "address": "12 MG Road, Bengaluru 560001",           "registration_date": "2019-04-11" },
+    { "id": "E002", "name": "Meridian Alloys Manufacturing Ltd",  "industry_code": "NIC-2410", "industry_class": "manufacturing","directors": ["D2"],       "address": "44 Industrial Area, Phase II, Chandigarh 160002", "registration_date": "2015-06-22" },
+    { "id": "E003", "name": "Coastal Freight & Logistics Pvt Ltd","industry_code": "NIC-5210", "industry_class": "distribution", "directors": ["D3"],       "address": "9 Marine Drive, Kochi 682001",            "registration_date": "2017-09-30" },
+    { "id": "E004", "name": "Bluepeak Components Pvt Ltd",        "industry_code": "NIC-2599", "industry_class": "manufacturing","directors": ["D4"],       "address": "22 Electronic City, Bengaluru 560100",   "registration_date": "2020-01-15" },
+    { "id": "E005", "name": "Nilgiri Textiles Exports Ltd",       "industry_code": "NIC-1392", "industry_class": "manufacturing","directors": ["D5"],       "address": "3 Avinashi Road, Coimbatore 641018",     "registration_date": "2012-03-08" },
+    { "id": "E006", "name": "Suncrest Distribution Co",           "industry_code": "NIC-4690", "industry_class": "distribution", "directors": ["D6"],       "address": "78 Anna Salai, Chennai 600002",          "registration_date": "2016-11-02" },
+    { "id": "E007", "name": "Kaveri Business Services LLP",       "industry_code": "NIC-6202", "industry_class": "services",      "directors": ["D8"],       "address": "5 Residency Road, Bengaluru 560025",     "registration_date": "2021-07-19" },
+    { "id": "E008", "name": "Ashoka Ferro Trading Pvt Ltd",       "industry_code": "NIC-4662", "industry_class": "trading",      "directors": ["D7", "D9"], "address": "12 MG Road, Bengaluru 560001",           "registration_date": "2023-02-28" },
+    { "id": "E009", "name": "Wavelength Electronics Pvt Ltd",     "industry_code": "NIC-2610", "industry_class": "manufacturing","directors": ["D10"],      "address": "31 Whitefield Main Road, Bengaluru 560066","registration_date": "2018-05-04" },
+    { "id": "E010", "name": "Deccan Polymers Pvt Ltd",            "industry_code": "NIC-2013", "industry_class": "manufacturing","directors": ["D11"],      "address": "17 Hinjewadi Phase I, Pune 411057",      "registration_date": "2014-08-21" },
+    { "id": "E011", "name": "Global Reach Consultants Pvt Ltd",   "industry_code": "NIC-7020", "industry_class": "services",      "directors": ["D12"],      "address": "2 Nariman Point, Mumbai 400021",         "registration_date": "2019-10-10" },
+    { "id": "E012", "name": "Sapphire Metals Pvt Ltd",            "industry_code": "NIC-4662", "industry_class": "trading",      "directors": ["D13"],      "address": "58 Sector 18, Gurugram 122015",          "registration_date": "2020-12-01" },
+    { "id": "E013", "name": "Horizon Agro Traders Pvt Ltd",       "industry_code": "NIC-4620", "industry_class": "trading",      "directors": ["D14"],      "address": "10 Sadar Bazaar, Indore 452001",         "registration_date": "2013-06-17" }
+  ]
+}
