@@ -1,0 +1,38 @@
+{
+  "baseline": {
+    "ground_truth_count": 6,
+    "detected_count": 6,
+    "recall_at_0_5": 1.0,
+    "precision_at_k": 0.3333,
+    "operational_fpr": 0.6667,
+    "recommend_capped_exponents": true,
+    "diagnostic_note": "Operational FPR (66.7%) exceeds 15% threshold on top-k queue. Evidence supports human calibration to capped exponents (0.30/0.25/0.25/0.20) in PARAMS."
+  },
+  "drop_hs_codes": {
+    "ground_truth_count": 6,
+    "detected_count": 6,
+    "recall_at_0_5": 1.0,
+    "precision_at_k": 0.0,
+    "operational_fpr": 1.0,
+    "recommend_capped_exponents": true,
+    "diagnostic_note": "Operational FPR (100.0%) exceeds 15% threshold on top-k queue. Evidence supports human calibration to capped exponents (0.30/0.25/0.25/0.20) in PARAMS."
+  },
+  "drop_dates": {
+    "ground_truth_count": 6,
+    "detected_count": 6,
+    "recall_at_0_5": 1.0,
+    "precision_at_k": 0.1667,
+    "operational_fpr": 0.8333,
+    "recommend_capped_exponents": true,
+    "diagnostic_note": "Operational FPR (83.3%) exceeds 15% threshold on top-k queue. Evidence supports human calibration to capped exponents (0.30/0.25/0.25/0.20) in PARAMS."
+  },
+  "alias_entities": {
+    "ground_truth_count": 6,
+    "detected_count": 6,
+    "recall_at_0_5": 1.0,
+    "precision_at_k": 0.0,
+    "operational_fpr": 1.0,
+    "recommend_capped_exponents": true,
+    "diagnostic_note": "Operational FPR (100.0%) exceeds 15% threshold on top-k queue. Evidence supports human calibration to capped exponents (0.30/0.25/0.25/0.20) in PARAMS."
+  }
+}
