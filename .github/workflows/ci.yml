@@ -44,3 +44,15 @@ jobs:
 
       - name: pytest
         run: pytest -q
+
+      - name: candidate_rings.json is fresh (if present)
+        run: |
+          if [ -f artifacts/candidate_rings.json ] && [ -f data/entities.json ] && [ -f data/invoices.json ]; then
+            cp artifacts/candidate_rings.json /tmp/committed_candidates.json
+            python -m graph.run --entities data/entities.json --invoices data/invoices.json \
+              --out artifacts/candidate_rings.json --max-depth 6
+            diff -q /tmp/committed_candidates.json artifacts/candidate_rings.json || \
+              (echo "::error::committed candidate_rings.json is stale — graph/ changed but the artifact wasn't regenerated. Run: python -m graph.run --entities data/entities.json --invoices data/invoices.json --out artifacts/candidate_rings.json --max-depth 6" && exit 1)
+          else
+            echo "candidate_rings.json or data/*.json not present yet — skipping freshness check"
+          fi
