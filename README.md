@@ -145,6 +145,46 @@ C's status:
       regimes run clean). Caught a real bug during review: a hidden leg
       could coincidentally match a real invoice generated elsewhere in the
       same dataset, silently un-hiding it. Fixed and pinned down by a test.
+- [x] **Fixed the precision@k = 0% finding** (diagnosed against the real
+      pipeline: first true hit at position ~51/1832, 0% precision through
+      k=20). Root cause: fraud entities were sampled from the real economy's
+      32-firm pool, so every fraud entity also carried substantial genuine
+      trade (5–20 invoices, ₹182M–₹1.3B) — `S_externality` had no "outside
+      economy" left to contrast a sealed cluster against. Five of six fraud
+      rings now use freshly-minted shell entities that carry zero
+      legitimate trade by construction (never touch `economy.py`'s invoice
+      graph, never reused across rings); one ring is deliberately kept
+      drawing from the real economy as the adversarial hard case (spec
+      §8.5) rather than hiding the difficulty. New test:
+      `test_clean_rings_carry_no_trade_outside_their_own_entities`.
+
+      Measured on the real pipeline, at both depths given the team's
+      existing depth-6-vs-8 precision finding above (measured on the
+      *old* entity-reuse data — worth re-checking now the underlying
+      cause is fixed, since the two datasets behave oppositely):
+
+      | | `--max-depth 6` (documented) | `--max-depth 8` |
+      |---|---|---|
+      | candidates | 728 | 5,404 |
+      | recall | 4/6 (misses the corporate ring) | 6/6 |
+      | first true hit | position 1 | position 1 |
+      | precision@6 | 50% (was 0%) | 66.7% (was 0%) |
+      | precision@10 | 30% | 50% |
+
+      Depth 8 is *better* here on both axes, opposite of the depth-6-vs-8
+      finding above — plausible cause: that finding was measured against
+      data where fraud entities were embedded in the well-connected real
+      economy, so more depth mostly bought more noisy legitimate rings.
+      Isolated shell entities don't have that rich connectivity, so depth
+      8's extra candidates here are mostly real signal, not noise. Not
+      asserting which depth is right — just that the tradeoff looks
+      different on this data and the call should be re-examined with
+      that in mind, not carried over from the old measurement.
+
+      **Flagged for B, not changed here:** `--max-depth 6` finds 0
+      corporate-closed rings on the fixed dataset; depth 8 finds the one
+      real one. `graph/` is B's file per CODEOWNERS — this needs a joint
+      call, not a unilateral change.
 - [x] `viz/` — ring queue sorted by `expected_loss`, with a stats header
       (rings flagged, total expected loss, corporate-closed count, avg
       aggregate), each ring drawn at full fidelity over a dimmed backdrop of
