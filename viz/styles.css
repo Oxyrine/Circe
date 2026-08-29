@@ -27,13 +27,20 @@
 body {
   margin: 0;
   padding: 0 20px 80px;
-  background:
-    repeating-linear-gradient(0deg, rgba(57, 255, 140, .025) 0px, rgba(57, 255, 140, .025) 1px, transparent 1px, transparent 3px),
-    radial-gradient(1100px 360px at 50% -120px, rgba(57, 255, 140, .09), transparent 70%),
-    var(--bg);
+  background: var(--bg);
   color: var(--ink);
   font: 15px/1.6 "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
   -webkit-font-smoothing: antialiased;
+}
+
+#constellation-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  display: block;
+}
+@media (prefers-reduced-motion: reduce) {
+  #constellation-bg { opacity: .6; }
 }
 
 .topbar {
