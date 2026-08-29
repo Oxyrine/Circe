@@ -45,10 +45,23 @@ pytest -q
       pruning), two independent budgets (found-cycle count + DFS step
       count) so a dense SCC degrades loudly instead of hanging. 34 tests.
 - [x] M2 — first real handoff to A: `artifacts/candidate_rings.json`
-      generated from C's real dataset, 1,758 rings at `--max-depth 6`
-      (chosen over the spec's full 8 for file size — see commit `625e361`
-      for the recall data behind that call). Recall against
-      `ground_truth.json`: 6/6 at Jaccard≥0.5.
+      generated from C's real dataset. **`--max-depth` history, since this
+      has changed more than once and the reasoning matters more than the
+      number:** originally 6 over the spec's full 8, purely for file size
+      on the pre-fraud-isolation dataset (see `625e361`). After C's
+      fraud-isolation fix changed ring-length structure, depth 6 silently
+      became recall-breaking — two ground-truth rings need 7 entities and
+      are mathematically unfindable below depth 7 — while the old file-size
+      concern no longer applied (isolated shell entities don't blow up
+      transaction-cycle search the way entities embedded in the real
+      economy did). Measured across depths 6/7/8 on the current dataset:
+      depth 8 strictly dominates on every axis — recall 6/6 (vs 4/6 and
+      5/6), precision@k 66.7% (vs 50%/66.7%), file size 14MB (a `~24k`-ring
+      *unrelated* earlier regression once hit 59MB on the old dataset
+      shape — 14MB now is nowhere near that). **Current value: 8.**
+      Re-verify this table, don't just rerun the last command, if the
+      fraud injector's design changes again — see `.github/workflows/ci.yml`'s
+      freshness-check comment.
 - [x] M3 — corporate-graph closure (`graph/corporate.py`), the stated
       differentiator. Direct pairwise evidence only (shared director /
       address / registration date), never transitive through a cluster.
