@@ -10,6 +10,22 @@ Two closure types, matching contract/candidate_ring.schema.json:
                     ground_truth.json — it exists in reality, never on the
                     platform. That gap is exactly what graph/corporate.py
                     (B's job) has to close.
+
+Most rings ("clean") are built entirely from freshly-minted shell
+entities that never touch economy.py's legitimate invoice graph at all
+-- they exist only inside their own fraud ring. That's deliberate: real
+shell-company placement, and it's what gives S_externality (spec §7.4)
+something to actually contrast against. Sampling from the real economy's
+entity pool instead (the previous approach) meant fraud touched a large
+fraction of the whole dataset with heavy cross-ring reuse, which leaves
+no "outside economy" for a self-trading-cluster signal to detect against
+-- diagnosed on the real dataset as precision@k = 0% up to k=20, driven
+by S_externality reading 0.05-0.17 for every actual fraud ring.
+
+A small number of rings ("hard case") are deliberately left drawing from
+the real economy instead, reuse and all — a ring well-connected enough to
+the legitimate economy that it's genuinely difficult to catch is a
+stronger adversarial-pass finding (spec §8.5) than hiding the difficulty.
 """
 
 import random
@@ -42,9 +58,19 @@ def _apply_bridge(entity_by_id, frm, to, kind, rng):
         b["registration_date"] = a["registration_date"]
 
 
+def _new_shell(entities, entity_by_id, next_eid_n, params, rng):
+    next_eid_n += 1
+    new_id = "E{:03d}".format(next_eid_n)
+    industry_class = rng.choice(list(params["sector_mix"].keys()))
+    shell = economy.make_entity(new_id, industry_class, rng)
+    entities.append(shell)
+    entity_by_id[new_id] = shell
+    return new_id, next_eid_n
+
+
 def inject(entities, invoices, params, rng, next_inv_n, next_eid_n):
     entity_by_id = {e["id"]: e for e in entities}
-    all_ids = list(entity_by_id.keys())
+    all_ids = list(entity_by_id.keys())  # the real economy's pool -- reserved for hard-case rings only
     bridged_entities = set()  # an entity's bridge evidence must not be overwritten by a later ring
     existing_pairs = {(inv["from"], inv["to"]) for inv in invoices}  # a hidden leg must not coincide with a real invoice
 
@@ -55,27 +81,37 @@ def inject(entities, invoices, params, rng, next_inv_n, next_eid_n):
     gap_lo, gap_hi = params["fraud_timing_gap_days"]
     messy_hs_null_rate = params.get("messy_hs_null_rate", 0)
     corp_fraction = params["fraud_corporate_close_fraction"]
+    hard_case_count = params.get("fraud_hard_case_count", 1)
 
     fraud_invoices = []
     injected_rings = []
 
-    used_in_fraud = set()
+    lengths = _ring_lengths(params, rng)
+    hard_case_idx = set(rng.sample(range(len(lengths)), min(hard_case_count, len(lengths))))
 
-    for ring_idx, length in enumerate(_ring_lengths(params, rng), start=1):
-        unused = [eid for eid in all_ids if eid not in used_in_fraud]
-        if len(unused) >= length:
-            chosen = rng.sample(unused, length)
+    for ring_idx, length in enumerate(lengths, start=1):
+        is_hard_case = (ring_idx - 1) in hard_case_idx
+
+        if is_hard_case:
+            # Deliberately well-connected to the real economy -- reuse
+            # allowed, same as every ring used to be. The one case that's
+            # genuinely hard to catch, on purpose (spec §8.5).
+            sample_size = min(length, len(all_ids))
+            chosen = rng.sample(all_ids, sample_size)
+            while len(chosen) < length:
+                new_id, next_eid_n = _new_shell(entities, entity_by_id, next_eid_n, params, rng)
+                all_ids.append(new_id)
+                chosen.append(new_id)
         else:
-            chosen = list(unused)
-            needed = length - len(chosen)
-            remaining_pool = [eid for eid in all_ids if eid not in chosen]
-            if len(remaining_pool) >= needed:
-                chosen += rng.sample(remaining_pool, needed)
-            else:
-                chosen += remaining_pool
-
-        for eid in chosen:
-            used_in_fraud.add(eid)
+            # Clean ring: every entity is a fresh shell that never appears
+            # in economy.py's legitimate invoices and is never reused by
+            # another ring -- kept out of `all_ids` entirely so a later
+            # hard-case ring can't pull one back in and dilute the
+            # isolation S_externality depends on.
+            chosen = []
+            for _ in range(length):
+                new_id, next_eid_n = _new_shell(entities, entity_by_id, next_eid_n, params, rng)
+                chosen.append(new_id)
 
         corporate = rng.random() < corp_fraction
         if corporate:

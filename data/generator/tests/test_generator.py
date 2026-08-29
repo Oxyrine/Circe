@@ -123,9 +123,42 @@ def test_regime_a_and_b_both_generate_without_crashing():
     from data.generate import REGIMES
     for name, params in REGIMES.items():
         entities, invoices, ground_truth = _generate(params, seed=42)
-        assert len(entities) == params["num_firms"]
+        # >= not ==: clean fraud rings mint fresh shell entities on top of
+        # num_firms (see test_clean_rings_use_only_fresh_shell_entities).
+        assert len(entities) >= params["num_firms"]
         assert len(invoices) > 0
         assert len(ground_truth["injected_rings"]) == params["num_fraud_rings"]
+
+
+def test_clean_rings_carry_no_trade_outside_their_own_entities():
+    # The fix for precision@k = 0% on the real dataset: S_externality
+    # (spec §7.4) detects a cluster that mostly trades with itself. When
+    # fraud entities were sampled from the real economy's pool, they also
+    # carried substantial legitimate trade, leaving no "outside economy"
+    # for the signal to contrast against -- diagnosed as S_externality
+    # reading 0.05-0.17 for every real fraud ring. Clean rings now use
+    # fresh shell entities with zero legitimate trade by construction; this
+    # pins down that no invoice connects a clean ring's entities to
+    # anything outside that same ring.
+    params = _params(fraud_hard_case_count=1)
+    num_firms = params["num_firms"]
+    entities, invoices, ground_truth = _generate(params)
+
+    def touches_real_economy(ring):
+        return any(int(e[1:]) <= num_firms for e in ring["entities"])
+
+    rings_touching_real_economy = [r for r in ground_truth["injected_rings"] if touches_real_economy(r)]
+    assert len(rings_touching_real_economy) <= params["fraud_hard_case_count"]
+
+    clean_rings = [r for r in ground_truth["injected_rings"] if not touches_real_economy(r)]
+    assert clean_rings, "expected at least one clean ring with this many fraud rings"
+    for ring in clean_rings:
+        ring_entities = set(ring["entities"])
+        outside = [
+            inv for inv in invoices
+            if (inv["from"] in ring_entities) != (inv["to"] in ring_entities)
+        ]
+        assert not outside, "clean ring {} has a leg touching an entity outside itself".format(ring["truth_id"])
 
 
 def test_entity_ids_and_invoice_values_match_the_contract_shape():

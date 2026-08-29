@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "source_dataset": "seed42-regimeA",
-  "count": 171,
+  "count": 172,
   "invoices": [
     {
       "invoice_id": "I0001",
@@ -1265,282 +1265,291 @@
     },
     {
       "invoice_id": "I0141",
-      "from": "E005",
-      "to": "E019",
-      "value": 19192127,
+      "from": "E019",
+      "to": "E007",
+      "value": 23154815,
       "hs_code": null,
-      "invoice_date": "2026-02-07",
-      "discounting_date": "2026-02-15"
+      "invoice_date": "2025-12-14",
+      "discounting_date": "2025-12-22"
     },
     {
       "invoice_id": "I0142",
-      "from": "E019",
-      "to": "E007",
-      "value": 19035864,
+      "from": "E007",
+      "to": "E003",
+      "value": 22966287,
+      "hs_code": "39012000",
+      "invoice_date": "2025-12-16",
+      "discounting_date": "2025-12-24"
+    },
+    {
+      "invoice_id": "I0143",
+      "from": "E003",
+      "to": "E022",
+      "value": 23314076,
+      "hs_code": "39012000",
+      "invoice_date": "2025-12-20",
+      "discounting_date": "2025-12-24"
+    },
+    {
+      "invoice_id": "I0144",
+      "from": "E022",
+      "to": "E009",
+      "value": 23047551,
+      "hs_code": "39012000",
+      "invoice_date": "2025-12-24",
+      "discounting_date": "2025-12-28"
+    },
+    {
+      "invoice_id": "I0145",
+      "from": "E009",
+      "to": "E019",
+      "value": 23665866,
+      "hs_code": "39012000",
+      "invoice_date": "2025-12-28",
+      "discounting_date": "2026-01-05"
+    },
+    {
+      "invoice_id": "I0146",
+      "from": "E033",
+      "to": "E034",
+      "value": 58683548,
+      "hs_code": "74031100",
+      "invoice_date": "2025-11-05",
+      "discounting_date": "2025-11-08"
+    },
+    {
+      "invoice_id": "I0147",
+      "from": "E034",
+      "to": "E035",
+      "value": 57224489,
+      "hs_code": "74031100",
+      "invoice_date": "2025-11-08",
+      "discounting_date": "2025-11-10"
+    },
+    {
+      "invoice_id": "I0148",
+      "from": "E035",
+      "to": "E036",
+      "value": 57375843,
+      "hs_code": "74031100",
+      "invoice_date": "2025-11-09",
+      "discounting_date": "2025-11-16"
+    },
+    {
+      "invoice_id": "I0149",
+      "from": "E036",
+      "to": "E037",
+      "value": 55804437,
+      "hs_code": "74031100",
+      "invoice_date": "2025-11-13",
+      "discounting_date": "2025-11-19"
+    },
+    {
+      "invoice_id": "I0150",
+      "from": "E037",
+      "to": "E038",
+      "value": 54184687,
+      "hs_code": "74031100",
+      "invoice_date": "2025-11-14",
+      "discounting_date": "2025-11-20"
+    },
+    {
+      "invoice_id": "I0151",
+      "from": "E038",
+      "to": "E039",
+      "value": 54695446,
+      "hs_code": "74031100",
+      "invoice_date": "2025-11-15",
+      "discounting_date": "2025-11-21"
+    },
+    {
+      "invoice_id": "I0152",
+      "from": "E040",
+      "to": "E041",
+      "value": 58056130,
+      "hs_code": null,
+      "invoice_date": "2026-02-04",
+      "discounting_date": "2026-02-12"
+    },
+    {
+      "invoice_id": "I0153",
+      "from": "E041",
+      "to": "E042",
+      "value": 56548644,
+      "hs_code": "39012000",
+      "invoice_date": "2026-02-07",
+      "discounting_date": "2026-02-13"
+    },
+    {
+      "invoice_id": "I0154",
+      "from": "E042",
+      "to": "E043",
+      "value": 56776799,
       "hs_code": "39012000",
       "invoice_date": "2026-02-09",
       "discounting_date": "2026-02-17"
     },
     {
-      "invoice_id": "I0143",
-      "from": "E007",
-      "to": "E003",
-      "value": 19324133,
+      "invoice_id": "I0155",
+      "from": "E043",
+      "to": "E044",
+      "value": 56340798,
+      "hs_code": "39012000",
+      "invoice_date": "2026-02-10",
+      "discounting_date": "2026-02-13"
+    },
+    {
+      "invoice_id": "I0156",
+      "from": "E044",
+      "to": "E045",
+      "value": 55996107,
       "hs_code": "39012000",
       "invoice_date": "2026-02-13",
       "discounting_date": "2026-02-17"
     },
     {
-      "invoice_id": "I0144",
-      "from": "E003",
-      "to": "E022",
-      "value": 19103220,
-      "hs_code": "39012000",
-      "invoice_date": "2026-02-17",
-      "discounting_date": "2026-02-21"
-    },
-    {
-      "invoice_id": "I0145",
-      "from": "E022",
-      "to": "E005",
-      "value": 19615717,
-      "hs_code": "39012000",
-      "invoice_date": "2026-02-21",
-      "discounting_date": "2026-03-01"
-    },
-    {
-      "invoice_id": "I0146",
-      "from": "E025",
-      "to": "E017",
-      "value": 20749826,
-      "hs_code": "72081000",
-      "invoice_date": "2026-01-07",
-      "discounting_date": "2026-01-09"
-    },
-    {
-      "invoice_id": "I0147",
-      "from": "E017",
-      "to": "E031",
-      "value": 20769633,
-      "hs_code": "72081000",
-      "invoice_date": "2026-01-08",
-      "discounting_date": "2026-01-13"
-    },
-    {
-      "invoice_id": "I0148",
-      "from": "E031",
-      "to": "E014",
-      "value": 20346321,
-      "hs_code": "72081000",
-      "invoice_date": "2026-01-12",
-      "discounting_date": "2026-01-15"
-    },
-    {
-      "invoice_id": "I0149",
-      "from": "E014",
-      "to": "E006",
-      "value": 19847893,
-      "hs_code": "72081000",
-      "invoice_date": "2026-01-14",
-      "discounting_date": "2026-01-22"
-    },
-    {
-      "invoice_id": "I0150",
-      "from": "E006",
-      "to": "E027",
-      "value": 20360530,
-      "hs_code": "72081000",
-      "invoice_date": "2026-01-18",
-      "discounting_date": "2026-01-19"
-    },
-    {
-      "invoice_id": "I0151",
-      "from": "E027",
-      "to": "E007",
-      "value": 20206557,
-      "hs_code": "72081000",
-      "invoice_date": "2026-01-22",
-      "discounting_date": "2026-01-24"
-    },
-    {
-      "invoice_id": "I0152",
-      "from": "E007",
-      "to": "E025",
-      "value": 19634534,
-      "hs_code": "72081000",
-      "invoice_date": "2026-01-23",
-      "discounting_date": "2026-01-29"
-    },
-    {
-      "invoice_id": "I0153",
-      "from": "E009",
-      "to": "E002",
-      "value": 66544835,
-      "hs_code": "72081000",
-      "invoice_date": "2026-02-24",
-      "discounting_date": "2026-03-01"
-    },
-    {
-      "invoice_id": "I0154",
-      "from": "E002",
-      "to": "E010",
-      "value": 65145475,
-      "hs_code": "72081000",
-      "invoice_date": "2026-02-28",
-      "discounting_date": "2026-03-02"
-    },
-    {
-      "invoice_id": "I0155",
-      "from": "E010",
-      "to": "E027",
-      "value": 64119981,
-      "hs_code": "72081000",
-      "invoice_date": "2026-03-01",
-      "discounting_date": "2026-03-02"
-    },
-    {
-      "invoice_id": "I0156",
-      "from": "E027",
-      "to": "E016",
-      "value": 64654555,
-      "hs_code": "72081000",
-      "invoice_date": "2026-03-05",
-      "discounting_date": "2026-03-07"
-    },
-    {
       "invoice_id": "I0157",
-      "from": "E016",
-      "to": "E023",
-      "value": 66226230,
-      "hs_code": "72081000",
-      "invoice_date": "2026-03-06",
-      "discounting_date": "2026-03-10"
+      "from": "E045",
+      "to": "E040",
+      "value": 54403286,
+      "hs_code": "39012000",
+      "invoice_date": "2026-02-15",
+      "discounting_date": "2026-02-23"
     },
     {
       "invoice_id": "I0158",
-      "from": "E023",
-      "to": "E009",
-      "value": 65396833,
-      "hs_code": "72081000",
+      "from": "E046",
+      "to": "E047",
+      "value": 67315196,
+      "hs_code": "10063000",
+      "invoice_date": "2026-03-16",
+      "discounting_date": "2026-03-19"
+    },
+    {
+      "invoice_id": "I0159",
+      "from": "E047",
+      "to": "E048",
+      "value": 67890089,
+      "hs_code": "10063000",
+      "invoice_date": "2026-03-20",
+      "discounting_date": "2026-03-28"
+    },
+    {
+      "invoice_id": "I0160",
+      "from": "E048",
+      "to": "E049",
+      "value": 67256734,
+      "hs_code": "10063000",
+      "invoice_date": "2026-03-22",
+      "discounting_date": "2026-03-25"
+    },
+    {
+      "invoice_id": "I0161",
+      "from": "E049",
+      "to": "E046",
+      "value": 68914123,
+      "hs_code": "10063000",
+      "invoice_date": "2026-03-23",
+      "discounting_date": "2026-03-25"
+    },
+    {
+      "invoice_id": "I0162",
+      "from": "E050",
+      "to": "E051",
+      "value": 59214275,
+      "hs_code": "39012000",
+      "invoice_date": "2026-01-06",
+      "discounting_date": "2026-01-10"
+    },
+    {
+      "invoice_id": "I0163",
+      "from": "E051",
+      "to": "E052",
+      "value": 59208112,
+      "hs_code": "39012000",
+      "invoice_date": "2026-01-10",
+      "discounting_date": "2026-01-18"
+    },
+    {
+      "invoice_id": "I0164",
+      "from": "E052",
+      "to": "E053",
+      "value": 59198769,
+      "hs_code": "39012000",
+      "invoice_date": "2026-01-11",
+      "discounting_date": "2026-01-18"
+    },
+    {
+      "invoice_id": "I0165",
+      "from": "E053",
+      "to": "E054",
+      "value": 60856405,
+      "hs_code": null,
+      "invoice_date": "2026-01-13",
+      "discounting_date": "2026-01-19"
+    },
+    {
+      "invoice_id": "I0166",
+      "from": "E054",
+      "to": "E055",
+      "value": 60058052,
+      "hs_code": "39012000",
+      "invoice_date": "2026-01-17",
+      "discounting_date": "2026-01-22"
+    },
+    {
+      "invoice_id": "I0167",
+      "from": "E055",
+      "to": "E056",
+      "value": 61309081,
+      "hs_code": "39012000",
+      "invoice_date": "2026-01-21",
+      "discounting_date": "2026-01-24"
+    },
+    {
+      "invoice_id": "I0168",
+      "from": "E056",
+      "to": "E050",
+      "value": 62145979,
+      "hs_code": null,
+      "invoice_date": "2026-01-25",
+      "discounting_date": "2026-01-31"
+    },
+    {
+      "invoice_id": "I0169",
+      "from": "E057",
+      "to": "E058",
+      "value": 73338794,
+      "hs_code": "74031100",
       "invoice_date": "2026-03-07",
       "discounting_date": "2026-03-13"
     },
     {
-      "invoice_id": "I0159",
-      "from": "E027",
-      "to": "E012",
-      "value": 72129276,
-      "hs_code": "72081000",
-      "invoice_date": "2026-03-24",
-      "discounting_date": "2026-03-25"
-    },
-    {
-      "invoice_id": "I0160",
-      "from": "E012",
-      "to": "E006",
-      "value": 74211097,
-      "hs_code": "72081000",
-      "invoice_date": "2026-03-27",
-      "discounting_date": "2026-03-28"
-    },
-    {
-      "invoice_id": "I0161",
-      "from": "E006",
-      "to": "E024",
-      "value": 72285584,
-      "hs_code": "72081000",
-      "invoice_date": "2026-03-29",
-      "discounting_date": "2026-03-31"
-    },
-    {
-      "invoice_id": "I0162",
-      "from": "E023",
-      "to": "E018",
-      "value": 64491283,
-      "hs_code": "39012000",
-      "invoice_date": "2025-12-21",
-      "discounting_date": "2025-12-22"
-    },
-    {
-      "invoice_id": "I0163",
-      "from": "E018",
-      "to": "E011",
-      "value": 62726051,
-      "hs_code": "39012000",
-      "invoice_date": "2025-12-23",
-      "discounting_date": "2025-12-24"
-    },
-    {
-      "invoice_id": "I0164",
-      "from": "E011",
-      "to": "E027",
-      "value": 62011259,
-      "hs_code": "39012000",
-      "invoice_date": "2025-12-27",
-      "discounting_date": "2026-01-04"
-    },
-    {
-      "invoice_id": "I0165",
-      "from": "E027",
-      "to": "E021",
-      "value": 62953672,
-      "hs_code": "39012000",
-      "invoice_date": "2025-12-29",
-      "discounting_date": "2026-01-03"
-    },
-    {
-      "invoice_id": "I0166",
-      "from": "E021",
-      "to": "E006",
-      "value": 64014472,
-      "hs_code": "39012000",
-      "invoice_date": "2026-01-01",
-      "discounting_date": "2026-01-06"
-    },
-    {
-      "invoice_id": "I0167",
-      "from": "E006",
-      "to": "E025",
-      "value": 63507551,
-      "hs_code": "39012000",
-      "invoice_date": "2026-01-05",
-      "discounting_date": "2026-01-13"
-    },
-    {
-      "invoice_id": "I0168",
-      "from": "E025",
-      "to": "E023",
-      "value": 63075616,
-      "hs_code": "39012000",
-      "invoice_date": "2026-01-07",
-      "discounting_date": "2026-01-15"
-    },
-    {
-      "invoice_id": "I0169",
-      "from": "E024",
-      "to": "E018",
-      "value": 25939183,
-      "hs_code": "74031100",
-      "invoice_date": "2026-03-21",
-      "discounting_date": "2026-03-27"
-    },
-    {
       "invoice_id": "I0170",
-      "from": "E018",
-      "to": "E006",
-      "value": 25638022,
+      "from": "E058",
+      "to": "E059",
+      "value": 71620926,
       "hs_code": "74031100",
-      "invoice_date": "2026-03-25",
-      "discounting_date": "2026-03-28"
+      "invoice_date": "2026-03-11",
+      "discounting_date": "2026-03-16"
     },
     {
       "invoice_id": "I0171",
-      "from": "E006",
-      "to": "E028",
-      "value": 25409659,
+      "from": "E059",
+      "to": "E060",
+      "value": 72589201,
       "hs_code": "74031100",
-      "invoice_date": "2026-03-26",
-      "discounting_date": "2026-04-01"
+      "invoice_date": "2026-03-12",
+      "discounting_date": "2026-03-20"
+    },
+    {
+      "invoice_id": "I0172",
+      "from": "E060",
+      "to": "E057",
+      "value": 73266854,
+      "hs_code": "74031100",
+      "invoice_date": "2026-03-14",
+      "discounting_date": "2026-03-15"
     }
   ]
 }
