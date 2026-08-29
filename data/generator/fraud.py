@@ -46,6 +46,7 @@ def inject(entities, invoices, params, rng, next_inv_n, next_eid_n):
     entity_by_id = {e["id"]: e for e in entities}
     all_ids = list(entity_by_id.keys())
     bridged_entities = set()  # an entity's bridge evidence must not be overwritten by a later ring
+    existing_pairs = {(inv["from"], inv["to"]) for inv in invoices}  # a hidden leg must not coincide with a real invoice
 
     start = date.fromisoformat(params["date_start"])
     span = params["date_span_days"]
@@ -73,12 +74,16 @@ def inject(entities, invoices, params, rng, next_inv_n, next_eid_n):
 
         corporate = rng.random() < corp_fraction
         if corporate:
-            # The closing ("to") entity is whichever one sits at chosen[0].
-            # Rotate until that entity hasn't already had its bridge
-            # evidence set by an earlier ring, so we never overwrite it.
+            # The closing leg runs chosen[-1] -> chosen[0]. Rotate until
+            # that pair is clean: chosen[0] hasn't already had its bridge
+            # evidence set by an earlier ring (would overwrite it), and the
+            # pair itself isn't already a real invoice from somewhere else
+            # in the dataset (would make the "hidden" leg not actually
+            # hidden — visible in invoices.json by coincidence).
             corporate = False
             for _ in range(length):
-                if chosen[0] not in bridged_entities:
+                closing_pair = (chosen[-1], chosen[0])
+                if chosen[0] not in bridged_entities and closing_pair not in existing_pairs:
                     corporate = True
                     break
                 chosen = chosen[1:] + chosen[:1]
@@ -104,6 +109,7 @@ def inject(entities, invoices, params, rng, next_inv_n, next_eid_n):
 
             next_inv_n += 1
             leg_hs = None if rng.random() < messy_hs_null_rate else hs
+            existing_pairs.add((frm, to))
             fraud_invoices.append({
                 "invoice_id": "I{:04d}".format(next_inv_n),
                 "from": frm,
