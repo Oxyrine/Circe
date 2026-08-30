@@ -69,3 +69,22 @@ jobs:
           else
             echo "candidate_rings.json or data/*.json not present yet — skipping freshness check"
           fi
+
+      - name: demo/data.js is fresh (if present)
+        # demo/data.js is a mechanical, deterministic compile of
+        # artifacts/scored_rings.json (+ data/entities.json and
+        # data/invoices.json for the dimmed backdrop) via
+        # demo/build_data.py — unlike the candidate_rings.json check
+        # above, there's no tunable like MAX_DEPTH here: if this
+        # fails, regenerating with the command below is always the
+        # right fix, no judgment call needed.
+        run: |
+          if [ -f demo/data.js ] && [ -f artifacts/scored_rings.json ] && [ -f data/entities.json ] && [ -f data/invoices.json ]; then
+            cp demo/data.js /tmp/committed_demo_data.js
+            python demo/build_data.py --scored artifacts/scored_rings.json \
+              --entities data/entities.json --invoices data/invoices.json --out demo/data.js
+            diff -q /tmp/committed_demo_data.js demo/data.js || \
+              (echo "::error::committed demo/data.js is stale. Regen command: python demo/build_data.py --scored artifacts/scored_rings.json --entities data/entities.json --invoices data/invoices.json --out demo/data.js" && exit 1)
+          else
+            echo "demo/data.js or its inputs not present yet — skipping freshness check"
+          fi
