@@ -235,13 +235,12 @@ window.removeInvestigatorInvoice = function(id) {
 
   // Deterministic scatter for the "rest of the platform" — same entity
   // always lands in the same spot, placed outside a keep-out disc reserved
-  // for the ring's own clean layout.
-  function backdropPosition(id, size, keepOutR) {
-    var cx = size / 2, cy = size / 2;
+  // for the ring's own clean layout, strictly bounded within the safe inner viewBox.
+  function backdropPosition(id, cx, cy, keepOutR) {
     var angle = (hashId(id + "#a") % 3600) / 3600 * Math.PI * 2;
     var t = (hashId(id + "#r") % 1000) / 1000;
-    var maxR = size / 2 - 10;
-    var r = keepOutR + t * Math.max(maxR - keepOutR, 1);
+    var maxR = Math.min(cx - 35, cy - 35);
+    var r = keepOutR + t * Math.max(maxR - keepOutR, 0);
     return { x: cx + r * Math.cos(angle), y: cy + r * Math.sin(angle) };
   }
 
@@ -297,18 +296,25 @@ window.removeInvestigatorInvoice = function(id) {
     var filter = svgEl("filter", { id: "node-shadow-" + ring.ring_id, x: "-20%", y: "-20%", width: "140%", height: "140%" });
     filter.appendChild(svgEl("feDropShadow", { dx: "0", dy: "2", stdDeviation: "3", "flood-color": "#000", "flood-opacity": "0.6" }));
     defs.appendChild(filter);
+
+    // Clip path for backdrop to strictly prevent any element from bleeding outside box or over legend
+    var clip = svgEl("clipPath", { id: "backdrop-clip-" + ring.ring_id });
+    clip.appendChild(svgEl("rect", {
+      x: "16", y: "16", width: "288", height: "250", rx: "4"
+    }));
+    defs.appendChild(clip);
     
     svg.appendChild(defs);
 
     // --- dimmed backdrop ---
-    var backdropGroup = svgEl("g", { class: "backdrop" });
+    var backdropGroup = svgEl("g", { class: "backdrop", "clip-path": "url(#backdrop-clip-" + ring.ring_id + ")" });
     if (backdrop && backdrop.nodes && backdrop.nodes.length) {
       var ringIds = {};
       ring.entities.forEach(function (id) { ringIds[id] = true; });
       var bpos = {};
       backdrop.nodes.forEach(function (node) {
         if (ringIds[node.id]) return;
-        bpos[node.id] = backdropPosition(node.id, size, keepOutR);
+        bpos[node.id] = backdropPosition(node.id, cx, cy, keepOutR);
       });
       var edgeCount = 0;
       (backdrop.edges || []).forEach(function (edge) {
