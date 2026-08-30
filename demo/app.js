@@ -239,7 +239,7 @@ window.removeInvestigatorInvoice = function(id) {
   function backdropPosition(id, cx, cy, keepOutR) {
     var angle = (hashId(id + "#a") % 3600) / 3600 * Math.PI * 2;
     var t = (hashId(id + "#r") % 1000) / 1000;
-    var maxR = Math.min(cx - 35, cy - 35);
+    var maxR = Math.min(cx - 32, cy - 25);
     var r = keepOutR + t * Math.max(maxR - keepOutR, 0);
     return { x: cx + r * Math.cos(angle), y: cy + r * Math.sin(angle) };
   }
@@ -255,14 +255,13 @@ window.removeInvestigatorInvoice = function(id) {
   function buildRingSVG(ring, backdrop) {
     var wrapper = document.createElement("div");
     wrapper.className = "graph-wrapper";
-    wrapper.style.position = "relative";
     wrapper.style.width = "100%";
-    wrapper.style.height = "320px";
+    wrapper.style.height = "100%";
 
     var n = ring.entities.length;
-    var size = 320;
-    var cx = size / 2, cy = (size / 2) - 15;
-    var ringR = Math.min(68, 22 + n * 5.5);
+    var svgWidth = 320, svgHeight = 265;
+    var cx = svgWidth / 2, cy = svgHeight / 2;
+    var ringR = Math.min(60, 20 + n * 5.5);
     var nodeR = 15;
     var keepOutR = ringR + nodeR + 14;
 
@@ -273,7 +272,7 @@ window.removeInvestigatorInvoice = function(id) {
     });
 
     var svg = svgEl("svg", {
-      viewBox: "0 0 " + size + " " + size,
+      viewBox: "0 0 " + svgWidth + " " + svgHeight,
       width: "100%",
       height: "100%",
       role: "img",
@@ -297,10 +296,10 @@ window.removeInvestigatorInvoice = function(id) {
     filter.appendChild(svgEl("feDropShadow", { dx: "0", dy: "2", stdDeviation: "3", "flood-color": "#000", "flood-opacity": "0.6" }));
     defs.appendChild(filter);
 
-    // Clip path for backdrop to strictly prevent any element from bleeding outside box or over legend
+    // Clip path for backdrop to strictly prevent any element from bleeding outside box
     var clip = svgEl("clipPath", { id: "backdrop-clip-" + ring.ring_id });
     clip.appendChild(svgEl("rect", {
-      x: "16", y: "16", width: "288", height: "250", rx: "4"
+      x: "12", y: "12", width: (svgWidth - 24).toString(), height: (svgHeight - 24).toString(), rx: "4"
     }));
     defs.appendChild(clip);
     
