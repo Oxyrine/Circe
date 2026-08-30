@@ -5473,362 +5473,362 @@ const BACKDROP = {
     {
       "id": "E001",
       "industry_class": "distribution",
-      "x": 451.0,
-      "y": 1025.3
+      "x": 546.5,
+      "y": 113.4
     },
     {
       "id": "E002",
       "industry_class": "trading",
-      "x": 424.2,
-      "y": 518.8
+      "x": 660.5,
+      "y": 479.7
     },
     {
       "id": "E003",
       "industry_class": "distribution",
-      "x": 627.0,
-      "y": 830.2
+      "x": 1008.0,
+      "y": 260.2
     },
     {
       "id": "E004",
       "industry_class": "manufacturing",
-      "x": 783.7,
-      "y": 864.2
+      "x": 806.1,
+      "y": 117.1
     },
     {
       "id": "E005",
       "industry_class": "distribution",
-      "x": 367.0,
-      "y": 845.7
+      "x": 645.8,
+      "y": 211.9
     },
     {
       "id": "E006",
       "industry_class": "manufacturing",
-      "x": 234.6,
-      "y": 791.2
+      "x": 472.3,
+      "y": 280.3
     },
     {
       "id": "E007",
       "industry_class": "trading",
-      "x": 715.7,
-      "y": 804.3
+      "x": 825.2,
+      "y": 215.0
     },
     {
       "id": "E008",
       "industry_class": "trading",
-      "x": 654.4,
-      "y": 918.5
+      "x": 984.6,
+      "y": 170.5
     },
     {
       "id": "E009",
       "industry_class": "services",
-      "x": 458.0,
-      "y": 861.8
+      "x": 891.6,
+      "y": 150.8
     },
     {
       "id": "E010",
       "industry_class": "trading",
-      "x": 489.0,
-      "y": 945.0
+      "x": 554.6,
+      "y": 201.8
     },
     {
       "id": "E011",
       "industry_class": "manufacturing",
-      "x": 234.5,
-      "y": 911.5
+      "x": 455.4,
+      "y": 198.6
     },
     {
       "id": "E012",
       "industry_class": "distribution",
-      "x": 548.1,
-      "y": 777.6
+      "x": 917.9,
+      "y": 239.6
     },
     {
       "id": "E013",
       "industry_class": "manufacturing",
-      "x": 322.0,
-      "y": 628.8
+      "x": 570.3,
+      "y": 471.4
     },
     {
       "id": "E014",
       "industry_class": "manufacturing",
-      "x": 534.0,
-      "y": 500.2
+      "x": 809.6,
+      "y": 536.9
     },
     {
       "id": "E015",
       "industry_class": "manufacturing",
-      "x": 760.7,
-      "y": 612.3
+      "x": 498.3,
+      "y": 363.6
     },
     {
       "id": "E016",
       "industry_class": "manufacturing",
-      "x": 318.2,
-      "y": 767.3
+      "x": 558.7,
+      "y": 290.5
     },
     {
       "id": "E017",
       "industry_class": "services",
-      "x": 692.4,
-      "y": 555.5
+      "x": 833.3,
+      "y": 421.4
     },
     {
       "id": "E018",
       "industry_class": "manufacturing",
-      "x": 675.6,
-      "y": 663.4
+      "x": 651.8,
+      "y": 305.1
     },
     {
       "id": "E019",
       "industry_class": "trading",
-      "x": 548.7,
-      "y": 879.3
+      "x": 724.8,
+      "y": 157.0
     },
     {
       "id": "E020",
       "industry_class": "distribution",
-      "x": 612.2,
-      "y": 593.7
+      "x": 588.7,
+      "y": 382.7
     },
     {
       "id": "E021",
       "industry_class": "manufacturing",
-      "x": 741.0,
-      "y": 942.0
+      "x": 780.4,
+      "y": 32.1
     },
     {
       "id": "E022",
       "industry_class": "manufacturing",
-      "x": 580.5,
-      "y": 967.7
+      "x": 936.5,
+      "y": 74.1
     },
     {
       "id": "E023",
       "industry_class": "services",
-      "x": 397.3,
-      "y": 936.3
+      "x": 698.6,
+      "y": 66.5
     },
     {
       "id": "E024",
       "industry_class": "manufacturing",
-      "x": 646.7,
-      "y": 745.5
+      "x": 946.6,
+      "y": 321.7
     },
     {
       "id": "E025",
       "industry_class": "distribution",
-      "x": 583.1,
-      "y": 686.1
+      "x": 770.5,
+      "y": 346.6
     },
     {
       "id": "E026",
       "industry_class": "manufacturing",
-      "x": 842.9,
-      "y": 800.5
+      "x": 633.2,
+      "y": 125.8
     },
     {
       "id": "E027",
       "industry_class": "distribution",
-      "x": 387.5,
-      "y": 700.8
+      "x": 686.1,
+      "y": 392.8
     },
     {
       "id": "E028",
       "industry_class": "trading",
-      "x": 451.8,
-      "y": 769.7
+      "x": 859.3,
+      "y": 315.2
     },
     {
       "id": "E029",
       "industry_class": "distribution",
-      "x": 756.6,
-      "y": 711.5
+      "x": 733.4,
+      "y": 258.1
     },
     {
       "id": "E030",
       "industry_class": "trading",
-      "x": 422.1,
-      "y": 609.3
+      "x": 754.6,
+      "y": 462.7
     },
     {
       "id": "E031",
       "industry_class": "trading",
-      "x": 487.2,
-      "y": 682.3
+      "x": 920.5,
+      "y": 404.7
     },
     {
       "id": "E032",
       "industry_class": "distribution",
-      "x": 516.3,
-      "y": 590.9
+      "x": 900.2,
+      "y": 498.6
     },
     {
       "id": "E033",
       "industry_class": "services",
-      "x": 105.0,
-      "y": 330.7
+      "x": 547.0,
+      "y": 733.3
     },
     {
       "id": "E034",
       "industry_class": "distribution",
-      "x": 223.1,
-      "y": 362.8
+      "x": 608.8,
+      "y": 680.3
     },
     {
       "id": "E035",
       "industry_class": "trading",
-      "x": 464.0,
-      "y": 423.0
+      "x": 699.7,
+      "y": 590.8
     },
     {
       "id": "E036",
       "industry_class": "distribution",
-      "x": 746.9,
-      "y": 333.3
+      "x": 716.6,
+      "y": 741.8
     },
     {
       "id": "E037",
       "industry_class": "manufacturing",
-      "x": 1006.9,
-      "y": 322.4
+      "x": 715.8,
+      "y": 847.7
     },
     {
       "id": "E038",
       "industry_class": "trading",
-      "x": 1170.8,
-      "y": 297.1
+      "x": 711.8,
+      "y": 929.3
     },
     {
       "id": "E039",
       "industry_class": "services",
-      "x": 1275.0,
-      "y": 276.8
+      "x": 706.1,
+      "y": 1008.9
     },
     {
       "id": "E040",
       "industry_class": "services",
-      "x": 1695.0,
-      "y": 383.7
+      "x": 1445.0,
+      "y": 152.9
     },
     {
       "id": "E041",
       "industry_class": "distribution",
-      "x": 1566.7,
-      "y": 460.0
+      "x": 1552.2,
+      "y": 100.0
     },
     {
       "id": "E042",
       "industry_class": "distribution",
-      "x": 1485.2,
-      "y": 315.8
+      "x": 1517.6,
+      "y": 305.9
     },
     {
       "id": "E043",
       "industry_class": "services",
-      "x": 1534.5,
-      "y": 100.0
+      "x": 1695.0,
+      "y": 407.1
     },
     {
       "id": "E044",
       "industry_class": "distribution",
-      "x": 1445.0,
-      "y": 153.3
+      "x": 1587.8,
+      "y": 460.0
     },
     {
       "id": "E045",
       "industry_class": "trading",
-      "x": 1633.1,
-      "y": 227.8
+      "x": 1622.4,
+      "y": 254.1
     },
     {
       "id": "E046",
       "industry_class": "manufacturing",
-      "x": 914.6,
-      "y": 217.7
+      "x": 168.2,
+      "y": 375.5
     },
     {
       "id": "E047",
       "industry_class": "manufacturing",
-      "x": 905.8,
-      "y": 358.1
+      "x": 295.0,
+      "y": 394.0
     },
     {
       "id": "E048",
       "industry_class": "distribution",
-      "x": 1009.7,
-      "y": 233.9
+      "x": 191.9,
+      "y": 454.7
     },
     {
       "id": "E049",
       "industry_class": "services",
-      "x": 993.6,
-      "y": 148.1
+      "x": 105.0,
+      "y": 428.9
     },
     {
       "id": "E050",
       "industry_class": "distribution",
-      "x": 282.3,
-      "y": 100.0
+      "x": 1275.1,
+      "y": 617.1
     },
     {
       "id": "E051",
       "industry_class": "trading",
-      "x": 398.1,
-      "y": 130.5
+      "x": 1175.2,
+      "y": 628.2
     },
     {
       "id": "E052",
       "industry_class": "trading",
-      "x": 488.6,
-      "y": 290.0
+      "x": 1067.2,
+      "y": 552.9
     },
     {
       "id": "E053",
       "industry_class": "trading",
-      "x": 469.8,
-      "y": 199.2
+      "x": 1165.5,
+      "y": 539.0
     },
     {
       "id": "E054",
       "industry_class": "services",
-      "x": 366.6,
-      "y": 241.8
+      "x": 1214.7,
+      "y": 473.4
     },
     {
       "id": "E055",
       "industry_class": "distribution",
-      "x": 339.3,
-      "y": 355.1
+      "x": 1130.3,
+      "y": 447.9
     },
     {
       "id": "E056",
       "industry_class": "distribution",
-      "x": 248.5,
-      "y": 201.3
+      "x": 1267.3,
+      "y": 535.8
     },
     {
       "id": "E057",
       "industry_class": "manufacturing",
-      "x": 1695.0,
-      "y": 834.0
+      "x": 1466.2,
+      "y": 625.0
     },
     {
       "id": "E058",
       "industry_class": "manufacturing",
-      "x": 1587.1,
-      "y": 1000.0
+      "x": 1695.0,
+      "y": 656.8
     },
     {
       "id": "E059",
       "industry_class": "services",
-      "x": 1552.9,
-      "y": 625.0
+      "x": 1673.8,
+      "y": 1000.0
     },
     {
       "id": "E060",
       "industry_class": "trading",
       "x": 1445.0,
-      "y": 790.9
+      "y": 968.2
     }
   ],
   "edges": [

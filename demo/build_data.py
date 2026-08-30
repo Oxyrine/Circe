@@ -45,13 +45,29 @@ def _layout_component(nodes, comp_edges, degrees_dict, width, height, pad=70.0, 
 
     rng = random.Random(42 + n)
     pos = {}
-    angle_step = 2 * math.pi / n
+    # Grid scatter, not a circle: math.cos/sin are NOT required by IEEE 754 to be
+    # correctly rounded (unlike sqrt, used everywhere else here), so glibc (CI's
+    # Ubuntu runner) and a different platform's libm can return a different last
+    # bit for the same input. That's an initial condition feeding 1000 iterations
+    # of a nonlinear repulsion/spring relaxation -- sensitive enough to initial
+    # conditions that a single-ULP difference cascaded into a completely
+    # different converged layout, which is what made demo/data.js non-reproducible
+    # across platforms even after the RNG/traversal order was seeded and sorted.
+    # This only sets the starting scatter the physics loop relaxes from, so an
+    # exact circle isn't required -- only every remaining op here is sqrt/+/-/*//,
+    # all bit-identical on any IEEE-754-conforming platform.
+    cols = max(1, math.ceil(math.sqrt(n)))
+    rows = max(1, math.ceil(n / cols))
     for i, u in enumerate(nodes):
         deg = degrees_dict.get(u, 1)
         r_init = (width * 0.42) * (0.4 + 0.6 * (1.0 / math.sqrt(deg + 0.5)))
+        col = i % cols
+        row = i // cols
+        gx = (2.0 * (col + 0.5) / cols) - 1.0
+        gy = (2.0 * (row + 0.5) / rows) - 1.0
         pos[u] = [
-            width / 2.0 + r_init * math.cos(i * angle_step) + rng.uniform(-15, 15),
-            height / 2.0 + r_init * math.sin(i * angle_step) + rng.uniform(-15, 15),
+            width / 2.0 + r_init * gx + rng.uniform(-15, 15),
+            height / 2.0 + r_init * gy + rng.uniform(-15, 15),
         ]
 
     base_k = math.sqrt((width * height) / n) * 1.5
