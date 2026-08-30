@@ -5464,243 +5464,245 @@ const SCORED = {
         "industry": "All trades consistent with declared industry codes."
       }
     }
-  ]
+  ],
+  "total_candidate_count": 5542,
+  "high_risk_count": 5
 };
 const BACKDROP = {
   "nodes": [
     {
       "id": "E001",
       "industry_class": "distribution",
-      "x": 694.9,
-      "y": 1001.6
+      "x": 451.0,
+      "y": 1025.3
     },
     {
       "id": "E002",
       "industry_class": "trading",
-      "x": 675.1,
-      "y": 471.4
+      "x": 424.2,
+      "y": 518.8
     },
     {
       "id": "E003",
       "industry_class": "distribution",
-      "x": 508.5,
-      "y": 952.4
+      "x": 627.0,
+      "y": 830.2
     },
     {
       "id": "E004",
       "industry_class": "manufacturing",
-      "x": 362.7,
-      "y": 858.6
+      "x": 783.7,
+      "y": 864.2
     },
     {
       "id": "E005",
       "industry_class": "distribution",
-      "x": 656.9,
-      "y": 858.0
+      "x": 367.0,
+      "y": 845.7
     },
     {
       "id": "E006",
       "industry_class": "manufacturing",
-      "x": 800.3,
-      "y": 762.8
+      "x": 234.6,
+      "y": 791.2
     },
     {
       "id": "E007",
       "industry_class": "trading",
-      "x": 421.5,
-      "y": 788.9
+      "x": 715.7,
+      "y": 804.3
     },
     {
       "id": "E008",
       "industry_class": "trading",
-      "x": 450.6,
-      "y": 880.4
+      "x": 654.4,
+      "y": 918.5
     },
     {
       "id": "E009",
       "industry_class": "services",
-      "x": 597.9,
-      "y": 929.1
+      "x": 458.0,
+      "y": 861.8
     },
     {
       "id": "E010",
       "industry_class": "trading",
-      "x": 723.0,
-      "y": 917.3
+      "x": 489.0,
+      "y": 945.0
     },
     {
       "id": "E011",
       "industry_class": "manufacturing",
-      "x": 803.6,
-      "y": 896.0
+      "x": 234.5,
+      "y": 911.5
     },
     {
       "id": "E012",
       "industry_class": "distribution",
-      "x": 605.3,
-      "y": 781.3
+      "x": 548.1,
+      "y": 777.6
     },
     {
       "id": "E013",
       "industry_class": "manufacturing",
-      "x": 727.6,
-      "y": 659.1
+      "x": 322.0,
+      "y": 628.8
     },
     {
       "id": "E014",
       "industry_class": "manufacturing",
-      "x": 768.3,
-      "y": 549.1
+      "x": 534.0,
+      "y": 500.2
     },
     {
       "id": "E015",
       "industry_class": "manufacturing",
-      "x": 355.0,
-      "y": 574.9
+      "x": 760.7,
+      "y": 612.3
     },
     {
       "id": "E016",
       "industry_class": "manufacturing",
-      "x": 699.4,
-      "y": 745.5
+      "x": 318.2,
+      "y": 767.3
     },
     {
       "id": "E017",
       "industry_class": "services",
-      "x": 443.4,
-      "y": 502.9
+      "x": 692.4,
+      "y": 555.5
     },
     {
       "id": "E018",
       "industry_class": "manufacturing",
-      "x": 515.1,
-      "y": 670.7
+      "x": 675.6,
+      "y": 663.4
     },
     {
       "id": "E019",
       "industry_class": "trading",
-      "x": 543.0,
-      "y": 854.3
+      "x": 548.7,
+      "y": 879.3
     },
     {
       "id": "E020",
       "industry_class": "distribution",
-      "x": 509.7,
-      "y": 562.1
+      "x": 612.2,
+      "y": 593.7
     },
     {
       "id": "E021",
       "industry_class": "manufacturing",
-      "x": 397.6,
-      "y": 951.6
+      "x": 741.0,
+      "y": 942.0
     },
     {
       "id": "E022",
       "industry_class": "manufacturing",
-      "x": 519.7,
-      "y": 1040.5
+      "x": 580.5,
+      "y": 967.7
     },
     {
       "id": "E023",
       "industry_class": "services",
-      "x": 606.4,
-      "y": 1021.1
+      "x": 397.3,
+      "y": 936.3
     },
     {
       "id": "E024",
       "industry_class": "manufacturing",
-      "x": 627.1,
-      "y": 697.1
+      "x": 646.7,
+      "y": 745.5
     },
     {
       "id": "E025",
       "industry_class": "distribution",
-      "x": 434.6,
-      "y": 621.8
+      "x": 583.1,
+      "y": 686.1
     },
     {
       "id": "E026",
       "industry_class": "manufacturing",
-      "x": 335.6,
-      "y": 775.5
+      "x": 842.9,
+      "y": 800.5
     },
     {
       "id": "E027",
       "industry_class": "distribution",
-      "x": 745.0,
-      "y": 830.0
+      "x": 387.5,
+      "y": 700.8
     },
     {
       "id": "E028",
       "industry_class": "trading",
-      "x": 512.6,
-      "y": 764.8
+      "x": 451.8,
+      "y": 769.7
     },
     {
       "id": "E029",
       "industry_class": "distribution",
-      "x": 376.3,
-      "y": 698.1
+      "x": 756.6,
+      "y": 711.5
     },
     {
       "id": "E030",
       "industry_class": "trading",
-      "x": 598.3,
-      "y": 519.5
+      "x": 422.1,
+      "y": 609.3
     },
     {
       "id": "E031",
       "industry_class": "trading",
-      "x": 592.7,
-      "y": 617.2
+      "x": 487.2,
+      "y": 682.3
     },
     {
       "id": "E032",
       "industry_class": "distribution",
-      "x": 681.6,
-      "y": 581.1
+      "x": 516.3,
+      "y": 590.9
     },
     {
       "id": "E033",
       "industry_class": "services",
-      "x": 1016.3,
-      "y": 507.7
+      "x": 105.0,
+      "y": 330.7
     },
     {
       "id": "E034",
       "industry_class": "distribution",
-      "x": 962.2,
-      "y": 568.2
+      "x": 223.1,
+      "y": 362.8
     },
     {
       "id": "E035",
       "industry_class": "trading",
-      "x": 874.2,
-      "y": 655.1
+      "x": 464.0,
+      "y": 423.0
     },
     {
       "id": "E036",
       "industry_class": "distribution",
-      "x": 1020.9,
-      "y": 683.1
+      "x": 746.9,
+      "y": 333.3
     },
     {
       "id": "E037",
       "industry_class": "manufacturing",
-      "x": 1123.7,
-      "y": 687.8
+      "x": 1006.9,
+      "y": 322.4
     },
     {
       "id": "E038",
       "industry_class": "trading",
-      "x": 1205.3,
-      "y": 685.4
+      "x": 1170.8,
+      "y": 297.1
     },
     {
       "id": "E039",
       "industry_class": "services",
-      "x": 1284.6,
-      "y": 676.4
+      "x": 1275.0,
+      "y": 276.8
     },
     {
       "id": "E040",
@@ -5741,68 +5743,68 @@ const BACKDROP = {
     {
       "id": "E046",
       "industry_class": "manufacturing",
-      "x": 141.2,
-      "y": 458.7
+      "x": 914.6,
+      "y": 217.7
     },
     {
       "id": "E047",
       "industry_class": "manufacturing",
-      "x": 236.6,
-      "y": 474.3
+      "x": 905.8,
+      "y": 358.1
     },
     {
       "id": "E048",
       "industry_class": "distribution",
-      "x": 180.9,
-      "y": 376.8
+      "x": 1009.7,
+      "y": 233.9
     },
     {
       "id": "E049",
       "industry_class": "services",
-      "x": 98.2,
-      "y": 380.7
+      "x": 993.6,
+      "y": 148.1
     },
     {
       "id": "E050",
       "industry_class": "distribution",
-      "x": 738.8,
+      "x": 282.3,
       "y": 100.0
     },
     {
       "id": "E051",
       "industry_class": "trading",
-      "x": 775.3,
-      "y": 195.7
+      "x": 398.1,
+      "y": 130.5
     },
     {
       "id": "E052",
       "industry_class": "trading",
-      "x": 730.1,
-      "y": 341.5
+      "x": 488.6,
+      "y": 290.0
     },
     {
       "id": "E053",
       "industry_class": "trading",
-      "x": 700.4,
-      "y": 244.4
+      "x": 469.8,
+      "y": 199.2
     },
     {
       "id": "E054",
       "industry_class": "services",
-      "x": 621.9,
-      "y": 220.2
+      "x": 366.6,
+      "y": 241.8
     },
     {
       "id": "E055",
       "industry_class": "distribution",
-      "x": 614.5,
-      "y": 319.0
+      "x": 339.3,
+      "y": 355.1
     },
     {
       "id": "E056",
       "industry_class": "distribution",
-      "x": 664.1,
-      "y": 143.1
+      "x": 248.5,
+      "y": 201.3
     },
     {
       "id": "E057",
