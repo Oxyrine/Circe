@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>OUROBOROS - FINANCIAL RING INTELLIGENCE</title>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=1788075000">
+<link rel="stylesheet" href="styles.css?v=1788084218">
 </head>
 <body>
 
@@ -280,8 +280,6 @@
             <option value="investigator">INVESTIGATOR ADDED</option>
             <option value="has-hs">HAS HS CODE</option>
             <option value="missing-hs">MISSING HS CODE</option>
-            <option value="discounted">DISCOUNTED</option>
-            <option value="not-discounted">NOT DISCOUNTED</option>
           </select>
         </div>
         <div class="ledger-actions">
@@ -361,22 +359,23 @@
 
         <div class="form-group">
           <label>SELLER ENTITY ID <span class="req">*</span></label>
-          <input type="text" id="add-inv-seller" placeholder="e.g. E040" class="form-input" />
+          <input type="text" id="add-inv-seller" list="entity-ids" placeholder="e.g. E040" class="form-input" />
         </div>
-        
+
         <div class="form-group">
           <label>BUYER ENTITY ID <span class="req">*</span></label>
-          <input type="text" id="add-inv-buyer" placeholder="e.g. E041" class="form-input" />
+          <input type="text" id="add-inv-buyer" list="entity-ids" placeholder="e.g. E041" class="form-input" />
         </div>
-        
+
         <div class="form-group">
           <label>INVOICE DATE <span class="req">*</span></label>
           <input type="date" id="add-inv-date" class="form-input" />
         </div>
 
         <div class="form-group">
-          <label>HS CODE</label>
-          <input type="text" id="add-inv-hs" placeholder="Optional" class="form-input" />
+          <label>HS CODE <span class="req">*</span></label>
+          <input type="text" id="add-inv-hs" list="hs-datalist" placeholder="6-8 digit HS code" class="form-input" />
+          <div id="add-inv-hs-hint" class="form-hint"></div>
         </div>
 
         <div class="form-group">
@@ -384,7 +383,15 @@
           <input type="date" id="add-inv-discounting" class="form-input" />
         </div>
       </div>
-      
+
+      <datalist id="entity-ids"></datalist>
+      <datalist id="hs-datalist"></datalist>
+
+      <div class="form-scope-note">
+        Adding an invoice updates the ledger and entity views only — it does not re-run ring
+        detection or scoring. Rescoring requires a pipeline run.
+      </div>
+
       <div class="modal-actions">
         <button class="btn secondary-btn" onclick="window.closeAllModals();">CANCEL</button>
         <button class="btn primary-action" onclick="window.submitAddInvoice()">ADD INVOICE</button>
@@ -393,9 +400,9 @@
   </div>
 </div>
 
-<script src="data.js?v=1788075000"></script>
-<script src="app.js?v=1788075000"></script>
-<script src="constellation.js?v=1788075000"></script>
+<script src="data.js?v=1788084218"></script>
+<script src="app.js?v=1788084218"></script>
+<script src="constellation.js?v=1788084218"></script>
 <script>
   // Global stats populator
   document.addEventListener("DOMContentLoaded", function() {
