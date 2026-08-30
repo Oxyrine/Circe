@@ -91,7 +91,7 @@ def s_value(ring: dict) -> float | None:
 def s_product(ring: dict, entities: dict) -> float | None:
     """Computes S_product (mean HS code transformation similarity across adjacent invoice hops).
 
-    Skips pairs where either HS code is null or where either party has industry_class trading/distribution.
+    Skips pairs where either HS code is null.
     Returns None if zero comparable pairs remain.
     """
     invoice_hops = get_invoice_hops(ring)
@@ -103,18 +103,6 @@ def s_product(ring: dict, entities: dict) -> float | None:
     for i in range(len(invoice_hops) - 1):
         hop_a = invoice_hops[i]
         hop_b = invoice_hops[i + 1]
-
-        src_a, tgt_a = get_hop_endpoints(hop_a)
-        src_b, tgt_b = get_hop_endpoints(hop_b)
-
-        # Check commodity suppression
-        party_entities = [src_a, tgt_a, src_b, tgt_b]
-        suppress = any(
-            entities.get(e, {}).get("industry_class") in ("trading", "distribution")
-            for e in party_entities
-        )
-        if suppress:
-            continue
 
         code_a = hop_a.get("hs_code")
         code_b = hop_b.get("hs_code")
@@ -238,7 +226,7 @@ def evidence(ring: dict, scores: dict, entities: dict) -> dict[str, str]:
     if scores.get("product") is not None:
         ev["product"] = f"HS code consistency: {scores['product']:.2f}"
     else:
-        ev["product"] = "Abstained (insufficient HS codes or suppressed by commodity classification)"
+        ev["product"] = "Abstained (insufficient HS codes across hops)"
 
     if scores.get("timing") is not None:
         ev["timing"] = f"Regularity score: {scores['timing']:.2f}"
@@ -250,29 +238,41 @@ def evidence(ring: dict, scores: dict, entities: dict) -> dict[str, str]:
     else:
         ev["externality"] = "Abstained (no counterparty activity found in invoice registry)"
 
-    # Industry consistency check (evidence string only, not folded into score).
-    # HS codes (trade-tariff chapters) and industry_code (NIC economic-activity codes,
-    # e.g. "NIC-4662" per Wire Protocol §3) are different taxonomies with no available
-    # concordance table -- comparing their prefixes is only ever valid when industry_code
-    # happens to itself be a bare numeric/HS-shaped string. Guard with isdigit() on both
-    # sides so a NIC-prefixed code produces no claim instead of a guaranteed-false one;
-    # asserting a mismatch the data can't support is worse than staying silent.
+    # Industry consistency & sector composition check
     invoice_hops = get_invoice_hops(ring)
+    entities_in_ring = [entities[eid] for eid in ring.get("entities", []) if eid in entities]
+    classes = [e.get("industry_class", "unknown") for e in entities_in_ring]
+
     inconsistencies = []
     for hop in invoice_hops:
-        hs_code = str(hop.get("hs_code") or "")
-        _, target_entity = get_hop_endpoints(hop)
-        if hs_code and target_entity in entities:
-            target_ind = str(entities[target_entity].get("industry_code") or "")
-            if (target_ind and hs_code.isdigit() and target_ind.isdigit()
-                    and len(hs_code) >= 2 and len(target_ind) >= 2
-                    and hs_code[:2] != target_ind[:2]):
-                inconsistencies.append(f"Entity {target_entity} ({target_ind}) received HS {hs_code}")
+        hs = str(hop.get("hs_code") or "")
+        src_id, tgt_id = get_hop_endpoints(hop)
+        seller = entities.get(src_id, {})
+        buyer = entities.get(tgt_id, {})
+        if not hs or hs == "None":
+            continue
+
+        # Only the seller branch is forensically valid:
+        # HS_BY_CLASS['services'] = [None], so a legitimate services seller never carries an HS code.
+        # Only fraud.py stamps a commodity code on a services entity via ring injection.
+        # Buyer branch dropped: FLOW routes distribution→services at 0.30 — normal behaviour.
+        # NIC-2610 branch dropped: those entities legitimately trade HS 72/74/10 in this generator.
+        if seller.get("industry_class") == "services":
+            inconsistencies.append(f"{src_id} ({seller.get('industry_code', 'Services')}) sold physical HS {hs}")
+
+    sector_counts = {}
+    for c in classes:
+        sector_counts[c] = sector_counts.get(c, 0) + 1
+    sector_summary = ", ".join([f"{k.capitalize()} ({v})" for k, v in sorted(sector_counts.items())])
 
     if inconsistencies:
-        ev["industry"] = "Flagged cross-industry trades: " + "; ".join(inconsistencies)
+        ev["industry"] = f"Flagged Mismatch: {'; '.join(inconsistencies[:2])} | Sectors: {sector_summary}"
+    elif len(set(classes)) > 2:
+        ev["industry"] = f"Cross-Sectoral Supply Chain: {sector_summary} ({len(set(classes))} sectors)"
+    elif len(set(classes)) == 1 and classes:
+        ev["industry"] = f"Homogeneous Sector Loop: {classes[0].capitalize()} ({len(entities_in_ring)} entities, uniform intra-sector trade)"
     else:
-        ev["industry"] = "All trades consistent with declared industry codes."
+        ev["industry"] = f"Sector Mix: {sector_summary} (consistent with declared NIC codes)"
 
     return ev
 
@@ -622,11 +622,14 @@ def run_checks():
         "value": s_value(r11), "product": s_product(r11, nic_entities), "timing": s_timing(r11), "externality": s_externality(r11, [])
     }
     ev11a = evidence(r11, scores11a, nic_entities)
-    assert ev11a["industry"] == "All trades consistent with declared industry codes.", f"Test 11a failed: {ev11a['industry']}"
+    # NIC-XXXX codes must NOT produce a Flagged Mismatch — they are not comparable to bare HS codes
+    assert not ev11a["industry"].startswith("Flagged"), f"Test 11a failed: {ev11a['industry']}"
 
-    numeric_entities = {
-        "N1": {"id": "N1", "industry_code": "72", "industry_class": "manufacturing"},
-        "N2": {"id": "N2", "industry_code": "72", "industry_class": "manufacturing"},
+    # 11b: a genuine mismatch — services entity SELLING goods. Must flag.
+    # Uses industry_class="services" because that is the only branch that remains after C1.
+    services_seller_entities = {
+        "N1": {"id": "N1", "industry_code": "NIC-9900", "industry_class": "services"},
+        "N2": {"id": "N2", "industry_code": "NIC-2410", "industry_class": "manufacturing"},
     }
     r11b = {
         "ring_id": "R11b",
@@ -636,11 +639,39 @@ def run_checks():
         ],
     }
     ev11b = evidence(r11b, {
-        "value": s_value(r11b), "product": s_product(r11b, numeric_entities), "timing": s_timing(r11b), "externality": s_externality(r11b, [])
-    }, numeric_entities)
+        "value": s_value(r11b), "product": s_product(r11b, services_seller_entities), "timing": s_timing(r11b), "externality": s_externality(r11b, [])
+    }, services_seller_entities)
     assert ev11b["industry"].startswith("Flagged"), f"Test 11b failed: {ev11b['industry']}"
 
-    print("All 11 checks and adversarial benchmark passed successfully.")
+    # Test 12 (C1 regression — ADR-0009): Only the services-seller branch should fire.
+    # A services entity buying goods is designed normal behaviour (FLOW routes distribution→services
+    # at 0.30). Only a services entity SELLING goods with an HS code is a reliable fraud signal
+    # (HS_BY_CLASS['services'] = [None] — legitimate sellers never carry an HS code in this generator).
+    services_entities_12 = {
+        "SB": {"id": "SB", "industry_class": "services", "industry_code": "NIC-9900"},
+        "MFG": {"id": "MFG", "industry_class": "manufacturing", "industry_code": "NIC-2410"},
+    }
+    # 12a: services entity BUYING goods — must NOT produce a Flagged Mismatch
+    r12a = {
+        "entities": ["MFG", "SB"],
+        "hops": [{"from": "MFG", "to": "SB", "hop_type": "invoice", "hs_code": "72081000", "value": 1000}],
+    }
+    ev12a = evidence(r12a, {}, services_entities_12)
+    assert "Flagged" not in ev12a["industry"], (
+        f"Test 12a failed — services buyer should NOT flag: {ev12a['industry']}"
+    )
+
+    # 12b: services entity SELLING goods (HS code present) — MUST produce a Flagged Mismatch
+    r12b = {
+        "entities": ["SB", "MFG"],
+        "hops": [{"from": "SB", "to": "MFG", "hop_type": "invoice", "hs_code": "72081000", "value": 1000}],
+    }
+    ev12b = evidence(r12b, {}, services_entities_12)
+    assert ev12b["industry"].startswith("Flagged"), (
+        f"Test 12b failed — services seller with HS code MUST flag: {ev12b['industry']}"
+    )
+
+    print("All 12 checks and adversarial benchmark passed successfully.")
 
 
 def main():
