@@ -4,7 +4,111 @@ const SCORED = {
   "count": 50,
   "rings": [
     {
-      "ring_id": "R736",
+      "ring_id": "R5541",
+      "canonical_key": "E050|E051|E052|E053|E054|E055|E056",
+      "closure_type": "transaction",
+      "entities": [
+        "E050",
+        "E051",
+        "E052",
+        "E053",
+        "E054",
+        "E055",
+        "E056"
+      ],
+      "hops": [
+        {
+          "hop_type": "invoice",
+          "from": "E050",
+          "to": "E051",
+          "invoice_id": "I0162",
+          "value": 59214275,
+          "hs_code": "39012000",
+          "invoice_date": "2026-01-06",
+          "discounting_date": "2026-01-10"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E051",
+          "to": "E052",
+          "invoice_id": "I0163",
+          "value": 59208112,
+          "hs_code": "39012000",
+          "invoice_date": "2026-01-10",
+          "discounting_date": "2026-01-18"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E052",
+          "to": "E053",
+          "invoice_id": "I0164",
+          "value": 59198769,
+          "hs_code": "39012000",
+          "invoice_date": "2026-01-11",
+          "discounting_date": "2026-01-18"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E053",
+          "to": "E054",
+          "invoice_id": "I0165",
+          "value": 60856405,
+          "hs_code": null,
+          "invoice_date": "2026-01-13",
+          "discounting_date": "2026-01-19"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E054",
+          "to": "E055",
+          "invoice_id": "I0166",
+          "value": 60058052,
+          "hs_code": "39012000",
+          "invoice_date": "2026-01-17",
+          "discounting_date": "2026-01-22"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E055",
+          "to": "E056",
+          "invoice_id": "I0167",
+          "value": 61309081,
+          "hs_code": "39012000",
+          "invoice_date": "2026-01-21",
+          "discounting_date": "2026-01-24"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E056",
+          "to": "E050",
+          "invoice_id": "I0168",
+          "value": 62145979,
+          "hs_code": null,
+          "invoice_date": "2026-01-25",
+          "discounting_date": "2026-01-31"
+        }
+      ],
+      "scores": {
+        "value": 0.89,
+        "product": null,
+        "timing": 0.6,
+        "externality": 1.0
+      },
+      "abstained": [
+        "product"
+      ],
+      "aggregate": 0.81,
+      "expected_loss": 342178803,
+      "evidence": {
+        "value": "Net position score: 0.89",
+        "product": "Abstained (insufficient HS codes or suppressed by commodity classification)",
+        "timing": "Regularity score: 0.60",
+        "externality": "Externality score: 1.00",
+        "industry": "All trades consistent with declared industry codes."
+      }
+    },
+    {
+      "ring_id": "R5539",
       "canonical_key": "E040|E041|E042|E043|E044|E045",
       "closure_type": "transaction",
       "entities": [
@@ -86,18 +190,133 @@ const SCORED = {
       "abstained": [
         "product"
       ],
-      "aggregate": 0.79,
-      "expected_loss": 268213745,
+      "aggregate": 0.82,
+      "expected_loss": 278002806,
       "evidence": {
         "value": "Net position score: 0.86",
         "product": "Abstained (insufficient HS codes or suppressed by commodity classification)",
         "timing": "Regularity score: 0.65",
         "externality": "Externality score: 1.00",
-        "industry": "Flagged cross-industry trades: Entity E042 (NIC-4690) received HS 39012000; Entity E043 (NIC-6202) received HS 39012000; Entity E044 (NIC-5229) received HS 39012000; Entity E045 (NIC-4662) received HS 39012000; Entity E040 (NIC-6202) received HS 39012000"
+        "industry": "All trades consistent with declared industry codes."
       }
     },
     {
-      "ring_id": "R738",
+      "ring_id": "R3415",
+      "canonical_key": "E005|E023|E019|E008|E028|E030|E020|E029",
+      "closure_type": "transaction",
+      "entities": [
+        "E005",
+        "E023",
+        "E019",
+        "E008",
+        "E028",
+        "E030",
+        "E020",
+        "E029"
+      ],
+      "hops": [
+        {
+          "hop_type": "invoice",
+          "from": "E005",
+          "to": "E023",
+          "invoice_id": "I0081",
+          "value": 98077236,
+          "hs_code": "49011000",
+          "invoice_date": "2025-11-24",
+          "discounting_date": "2025-12-24"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E023",
+          "to": "E019",
+          "invoice_id": "I0124",
+          "value": 113317145,
+          "hs_code": null,
+          "invoice_date": "2026-01-18",
+          "discounting_date": "2026-01-23"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E019",
+          "to": "E008",
+          "invoice_id": "I0088",
+          "value": 114847359,
+          "hs_code": "72081000",
+          "invoice_date": "2026-02-10",
+          "discounting_date": "2026-03-02"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E008",
+          "to": "E028",
+          "invoice_id": "I0118",
+          "value": 118095206,
+          "hs_code": "72081000",
+          "invoice_date": "2026-03-24",
+          "discounting_date": "2026-05-05"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E028",
+          "to": "E030",
+          "invoice_id": "I0116",
+          "value": 104796883,
+          "hs_code": "72081000",
+          "invoice_date": "2026-01-19",
+          "discounting_date": "2026-02-13"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E030",
+          "to": "E020",
+          "invoice_id": "I0048",
+          "value": 84274070,
+          "hs_code": "72081000",
+          "invoice_date": "2025-12-20",
+          "discounting_date": "2026-01-12"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E020",
+          "to": "E029",
+          "invoice_id": "I0056",
+          "value": 98071917,
+          "hs_code": "84571000",
+          "invoice_date": "2025-11-16",
+          "discounting_date": "2025-12-28"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E029",
+          "to": "E005",
+          "invoice_id": "I0140",
+          "value": 88392555,
+          "hs_code": "39012000",
+          "invoice_date": "2026-01-12",
+          "discounting_date": "2026-02-08"
+        }
+      ],
+      "scores": {
+        "value": 0.49,
+        "product": null,
+        "timing": 0.32,
+        "externality": 0.21
+      },
+      "abstained": [
+        "product"
+      ],
+      "aggregate": 0.32,
+      "expected_loss": 262468562,
+      "evidence": {
+        "value": "Net position score: 0.49",
+        "product": "Abstained (insufficient HS codes or suppressed by commodity classification)",
+        "timing": "Regularity score: 0.32",
+        "externality": "Externality score: 0.21",
+        "industry": "All trades consistent with declared industry codes."
+      }
+    },
+    {
+      "ring_id": "R5542",
       "canonical_key": "E057|E058|E059|E060",
       "closure_type": "transaction",
       "entities": [
@@ -156,17 +375,235 @@ const SCORED = {
       },
       "abstained": [],
       "aggregate": 0.89,
-      "expected_loss": 258206259,
+      "expected_loss": 260247944,
       "evidence": {
         "value": "Net position score: 0.92",
         "product": "HS code consistency: 1.00",
         "timing": "Regularity score: 0.69",
         "externality": "Externality score: 1.00",
-        "industry": "Flagged cross-industry trades: Entity E058 (NIC-1392) received HS 74031100; Entity E059 (NIC-7020) received HS 74031100; Entity E060 (NIC-4620) received HS 74031100; Entity E057 (NIC-1392) received HS 74031100"
+        "industry": "All trades consistent with declared industry codes."
       }
     },
     {
-      "ring_id": "R737",
+      "ring_id": "R5538",
+      "canonical_key": "E033|E034|E035|E036|E037|E038|E039",
+      "closure_type": "corporate",
+      "entities": [
+        "E033",
+        "E034",
+        "E035",
+        "E036",
+        "E037",
+        "E038",
+        "E039"
+      ],
+      "hops": [
+        {
+          "hop_type": "invoice",
+          "from": "E033",
+          "to": "E034",
+          "invoice_id": "I0146",
+          "value": 58683548,
+          "hs_code": "74031100",
+          "invoice_date": "2025-11-05",
+          "discounting_date": "2025-11-08"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E034",
+          "to": "E035",
+          "invoice_id": "I0147",
+          "value": 57224489,
+          "hs_code": "74031100",
+          "invoice_date": "2025-11-08",
+          "discounting_date": "2025-11-10"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E035",
+          "to": "E036",
+          "invoice_id": "I0148",
+          "value": 57375843,
+          "hs_code": "74031100",
+          "invoice_date": "2025-11-09",
+          "discounting_date": "2025-11-16"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E036",
+          "to": "E037",
+          "invoice_id": "I0149",
+          "value": 55804437,
+          "hs_code": "74031100",
+          "invoice_date": "2025-11-13",
+          "discounting_date": "2025-11-19"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E037",
+          "to": "E038",
+          "invoice_id": "I0150",
+          "value": 54184687,
+          "hs_code": "74031100",
+          "invoice_date": "2025-11-14",
+          "discounting_date": "2025-11-20"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E038",
+          "to": "E039",
+          "invoice_id": "I0151",
+          "value": 54695446,
+          "hs_code": "74031100",
+          "invoice_date": "2025-11-15",
+          "discounting_date": "2025-11-21"
+        },
+        {
+          "hop_type": "corporate_bridge",
+          "from": "E039",
+          "to": "E033",
+          "bridge_kind": "registration_cohort",
+          "bridge_evidence": {
+            "registration_date": "2021-09-19"
+          }
+        }
+      ],
+      "scores": {
+        "value": 0.9,
+        "product": null,
+        "timing": 0.47,
+        "externality": 1.0
+      },
+      "abstained": [
+        "product"
+      ],
+      "aggregate": 0.75,
+      "expected_loss": 253344813,
+      "evidence": {
+        "value": "Net position score: 0.90",
+        "product": "Abstained (insufficient HS codes or suppressed by commodity classification)",
+        "timing": "Regularity score: 0.47",
+        "externality": "Externality score: 1.00",
+        "industry": "All trades consistent with declared industry codes."
+      }
+    },
+    {
+      "ring_id": "R3414",
+      "canonical_key": "E005|E023|E019|E008|E028|E030|E017|E029",
+      "closure_type": "transaction",
+      "entities": [
+        "E005",
+        "E023",
+        "E019",
+        "E008",
+        "E028",
+        "E030",
+        "E017",
+        "E029"
+      ],
+      "hops": [
+        {
+          "hop_type": "invoice",
+          "from": "E005",
+          "to": "E023",
+          "invoice_id": "I0081",
+          "value": 98077236,
+          "hs_code": "49011000",
+          "invoice_date": "2025-11-24",
+          "discounting_date": "2025-12-24"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E023",
+          "to": "E019",
+          "invoice_id": "I0124",
+          "value": 113317145,
+          "hs_code": null,
+          "invoice_date": "2026-01-18",
+          "discounting_date": "2026-01-23"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E019",
+          "to": "E008",
+          "invoice_id": "I0088",
+          "value": 114847359,
+          "hs_code": "72081000",
+          "invoice_date": "2026-02-10",
+          "discounting_date": "2026-03-02"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E008",
+          "to": "E028",
+          "invoice_id": "I0118",
+          "value": 118095206,
+          "hs_code": "72081000",
+          "invoice_date": "2026-03-24",
+          "discounting_date": "2026-05-05"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E028",
+          "to": "E030",
+          "invoice_id": "I0116",
+          "value": 104796883,
+          "hs_code": "72081000",
+          "invoice_date": "2026-01-19",
+          "discounting_date": "2026-02-13"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E030",
+          "to": "E017",
+          "invoice_id": "I0085",
+          "value": 100627925,
+          "hs_code": "74031100",
+          "invoice_date": "2026-02-28",
+          "discounting_date": "2026-03-21"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E017",
+          "to": "E029",
+          "invoice_id": "I0034",
+          "value": 85103166,
+          "hs_code": null,
+          "invoice_date": "2025-11-14",
+          "discounting_date": "2025-12-09"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E029",
+          "to": "E005",
+          "invoice_id": "I0140",
+          "value": 88392555,
+          "hs_code": "39012000",
+          "invoice_date": "2026-01-12",
+          "discounting_date": "2026-02-08"
+        }
+      ],
+      "scores": {
+        "value": 0.59,
+        "product": null,
+        "timing": 0.19,
+        "externality": 0.22
+      },
+      "abstained": [
+        "product"
+      ],
+      "aggregate": 0.29,
+      "expected_loss": 235740468,
+      "evidence": {
+        "value": "Net position score: 0.59",
+        "product": "Abstained (insufficient HS codes or suppressed by commodity classification)",
+        "timing": "Regularity score: 0.19",
+        "externality": "Externality score: 0.22",
+        "industry": "All trades consistent with declared industry codes."
+      }
+    },
+    {
+      "ring_id": "R5540",
       "canonical_key": "E046|E047|E048|E049",
       "closure_type": "transaction",
       "entities": [
@@ -226,37 +663,363 @@ const SCORED = {
       "abstained": [
         "product"
       ],
-      "aggregate": 0.83,
-      "expected_loss": 225460706,
+      "aggregate": 0.85,
+      "expected_loss": 231626657,
       "evidence": {
         "value": "Net position score: 0.90",
         "product": "Abstained (insufficient HS codes or suppressed by commodity classification)",
         "timing": "Regularity score: 0.69",
         "externality": "Externality score: 1.00",
-        "industry": "Flagged cross-industry trades: Entity E047 (NIC-2410) received HS 10063000; Entity E048 (NIC-4690) received HS 10063000; Entity E049 (NIC-7020) received HS 10063000; Entity E046 (NIC-2410) received HS 10063000"
+        "industry": "All trades consistent with declared industry codes."
       }
     },
     {
-      "ring_id": "R222",
-      "canonical_key": "E003|E028|E030|E020|E029",
+      "ring_id": "R3416",
+      "canonical_key": "E005|E023|E019|E008|E028|E030|E031",
       "closure_type": "transaction",
       "entities": [
-        "E003",
+        "E005",
+        "E023",
+        "E019",
+        "E008",
         "E028",
         "E030",
-        "E020",
-        "E029"
+        "E031"
       ],
       "hops": [
         {
           "hop_type": "invoice",
-          "from": "E003",
-          "to": "E028",
-          "invoice_id": "I0067",
-          "value": 103807836,
+          "from": "E005",
+          "to": "E023",
+          "invoice_id": "I0081",
+          "value": 98077236,
           "hs_code": "49011000",
-          "invoice_date": "2026-02-12",
-          "discounting_date": "2026-03-19"
+          "invoice_date": "2025-11-24",
+          "discounting_date": "2025-12-24"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E023",
+          "to": "E019",
+          "invoice_id": "I0124",
+          "value": 113317145,
+          "hs_code": null,
+          "invoice_date": "2026-01-18",
+          "discounting_date": "2026-01-23"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E019",
+          "to": "E008",
+          "invoice_id": "I0088",
+          "value": 114847359,
+          "hs_code": "72081000",
+          "invoice_date": "2026-02-10",
+          "discounting_date": "2026-03-02"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E008",
+          "to": "E028",
+          "invoice_id": "I0118",
+          "value": 118095206,
+          "hs_code": "72081000",
+          "invoice_date": "2026-03-24",
+          "discounting_date": "2026-05-05"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E028",
+          "to": "E030",
+          "invoice_id": "I0116",
+          "value": 104796883,
+          "hs_code": "72081000",
+          "invoice_date": "2026-01-19",
+          "discounting_date": "2026-02-13"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E030",
+          "to": "E031",
+          "invoice_id": "I0134",
+          "value": 119445501,
+          "hs_code": "10063000",
+          "invoice_date": "2026-03-25",
+          "discounting_date": "2026-05-08"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E031",
+          "to": "E005",
+          "invoice_id": "I0053",
+          "value": 78494117,
+          "hs_code": "72081000",
+          "invoice_date": "2026-03-03",
+          "discounting_date": "2026-03-13"
+        }
+      ],
+      "scores": {
+        "value": 0.38,
+        "product": null,
+        "timing": 0.25,
+        "externality": 0.27
+      },
+      "abstained": [
+        "product"
+      ],
+      "aggregate": 0.29,
+      "expected_loss": 220185265,
+      "evidence": {
+        "value": "Net position score: 0.38",
+        "product": "Abstained (insufficient HS codes or suppressed by commodity classification)",
+        "timing": "Regularity score: 0.25",
+        "externality": "Externality score: 0.27",
+        "industry": "All trades consistent with declared industry codes."
+      }
+    },
+    {
+      "ring_id": "R5211",
+      "canonical_key": "E009|E029|E018|E030|E020|E013|E028",
+      "closure_type": "transaction",
+      "entities": [
+        "E009",
+        "E029",
+        "E018",
+        "E030",
+        "E020",
+        "E013",
+        "E028"
+      ],
+      "hops": [
+        {
+          "hop_type": "invoice",
+          "from": "E009",
+          "to": "E029",
+          "invoice_id": "I0052",
+          "value": 100973640,
+          "hs_code": null,
+          "invoice_date": "2026-03-27",
+          "discounting_date": "2026-04-17"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E029",
+          "to": "E018",
+          "invoice_id": "I0123",
+          "value": 89042300,
+          "hs_code": "49011000",
+          "invoice_date": "2025-12-26",
+          "discounting_date": "2026-01-30"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E018",
+          "to": "E030",
+          "invoice_id": "I0065",
+          "value": 85035182,
+          "hs_code": "26011100",
+          "invoice_date": "2026-03-01",
+          "discounting_date": "2026-03-26"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E030",
+          "to": "E020",
+          "invoice_id": "I0048",
+          "value": 84274070,
+          "hs_code": "72081000",
+          "invoice_date": "2025-12-20",
+          "discounting_date": "2026-01-12"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E020",
+          "to": "E013",
+          "invoice_id": "I0131",
+          "value": 94441896,
+          "hs_code": "84571000",
+          "invoice_date": "2025-11-20",
+          "discounting_date": "2025-12-25"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E013",
+          "to": "E028",
+          "invoice_id": "I0092",
+          "value": 84263562,
+          "hs_code": "85176200",
+          "invoice_date": "2026-01-09",
+          "discounting_date": "2026-01-22"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E028",
+          "to": "E009",
+          "invoice_id": "I0040",
+          "value": 82458160,
+          "hs_code": "27101990",
+          "invoice_date": "2025-11-04",
+          "discounting_date": "2025-12-03"
+        }
+      ],
+      "scores": {
+        "value": 0.54,
+        "product": null,
+        "timing": 0.29,
+        "externality": 0.26
+      },
+      "abstained": [
+        "product"
+      ],
+      "aggregate": 0.34,
+      "expected_loss": 212554891,
+      "evidence": {
+        "value": "Net position score: 0.54",
+        "product": "Abstained (insufficient HS codes or suppressed by commodity classification)",
+        "timing": "Regularity score: 0.29",
+        "externality": "Externality score: 0.26",
+        "industry": "All trades consistent with declared industry codes."
+      }
+    },
+    {
+      "ring_id": "R120",
+      "canonical_key": "E001|E010|E018|E020|E029|E005|E023|E019",
+      "closure_type": "transaction",
+      "entities": [
+        "E001",
+        "E010",
+        "E018",
+        "E020",
+        "E029",
+        "E005",
+        "E023",
+        "E019"
+      ],
+      "hops": [
+        {
+          "hop_type": "invoice",
+          "from": "E001",
+          "to": "E010",
+          "invoice_id": "I0016",
+          "value": 58795148,
+          "hs_code": "39012000",
+          "invoice_date": "2026-01-22",
+          "discounting_date": "2026-02-23"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E010",
+          "to": "E018",
+          "invoice_id": "I0036",
+          "value": 68366640,
+          "hs_code": "10063000",
+          "invoice_date": "2025-12-26",
+          "discounting_date": "2026-01-27"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E018",
+          "to": "E020",
+          "invoice_id": "I0025",
+          "value": 99283231,
+          "hs_code": "72081000",
+          "invoice_date": "2026-01-21",
+          "discounting_date": "2026-02-27"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E020",
+          "to": "E029",
+          "invoice_id": "I0056",
+          "value": 98071917,
+          "hs_code": "84571000",
+          "invoice_date": "2025-11-16",
+          "discounting_date": "2025-12-28"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E029",
+          "to": "E005",
+          "invoice_id": "I0140",
+          "value": 88392555,
+          "hs_code": "39012000",
+          "invoice_date": "2026-01-12",
+          "discounting_date": "2026-02-08"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E005",
+          "to": "E023",
+          "invoice_id": "I0081",
+          "value": 98077236,
+          "hs_code": "49011000",
+          "invoice_date": "2025-11-24",
+          "discounting_date": "2025-12-24"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E023",
+          "to": "E019",
+          "invoice_id": "I0124",
+          "value": 113317145,
+          "hs_code": null,
+          "invoice_date": "2026-01-18",
+          "discounting_date": "2026-01-23"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E019",
+          "to": "E001",
+          "invoice_id": "I0126",
+          "value": 135912903,
+          "hs_code": "27101990",
+          "invoice_date": "2025-12-15",
+          "discounting_date": "2025-12-26"
+        }
+      ],
+      "scores": {
+        "value": 0.21,
+        "product": null,
+        "timing": 0.32,
+        "externality": 0.29
+      },
+      "abstained": [
+        "product"
+      ],
+      "aggregate": 0.27,
+      "expected_loss": 204583553,
+      "evidence": {
+        "value": "Net position score: 0.21",
+        "product": "Abstained (insufficient HS codes or suppressed by commodity classification)",
+        "timing": "Regularity score: 0.32",
+        "externality": "Externality score: 0.29",
+        "industry": "All trades consistent with declared industry codes."
+      }
+    },
+    {
+      "ring_id": "R3882",
+      "canonical_key": "E005|E028|E030|E020|E029|E018|E019|E031",
+      "closure_type": "transaction",
+      "entities": [
+        "E005",
+        "E028",
+        "E030",
+        "E020",
+        "E029",
+        "E018",
+        "E019",
+        "E031"
+      ],
+      "hops": [
+        {
+          "hop_type": "invoice",
+          "from": "E005",
+          "to": "E028",
+          "invoice_id": "I0086",
+          "value": 92449408,
+          "hs_code": "39012000",
+          "invoice_date": "2026-02-17",
+          "discounting_date": "2026-03-08"
         },
         {
           "hop_type": "invoice",
@@ -291,35 +1054,1171 @@ const SCORED = {
         {
           "hop_type": "invoice",
           "from": "E029",
-          "to": "E003",
-          "invoice_id": "I0046",
-          "value": 93130035,
-          "hs_code": "84571000",
-          "invoice_date": "2026-01-02",
-          "discounting_date": "2026-01-24"
+          "to": "E018",
+          "invoice_id": "I0123",
+          "value": 89042300,
+          "hs_code": "49011000",
+          "invoice_date": "2025-12-26",
+          "discounting_date": "2026-01-30"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E018",
+          "to": "E019",
+          "invoice_id": "I0119",
+          "value": 60906538,
+          "hs_code": "39012000",
+          "invoice_date": "2026-01-29",
+          "discounting_date": "2026-02-01"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E019",
+          "to": "E031",
+          "invoice_id": "I0050",
+          "value": 71326148,
+          "hs_code": "10063000",
+          "invoice_date": "2026-02-01",
+          "discounting_date": "2026-02-15"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E031",
+          "to": "E005",
+          "invoice_id": "I0053",
+          "value": 78494117,
+          "hs_code": "72081000",
+          "invoice_date": "2026-03-03",
+          "discounting_date": "2026-03-13"
         }
       ],
       "scores": {
-        "value": 0.5,
+        "value": 0.32,
         "product": null,
-        "timing": 0.4,
-        "externality": 0.16
+        "timing": 0.35,
+        "externality": 0.24
       },
       "abstained": [
         "product"
       ],
-      "aggregate": 0.39,
-      "expected_loss": 189426459,
+      "aggregate": 0.3,
+      "expected_loss": 203765489,
       "evidence": {
-        "value": "Net position score: 0.50",
+        "value": "Net position score: 0.32",
         "product": "Abstained (insufficient HS codes or suppressed by commodity classification)",
-        "timing": "Regularity score: 0.40",
-        "externality": "Externality score: 0.16",
-        "industry": "Flagged cross-industry trades: Entity E028 (NIC-4620) received HS 49011000; Entity E030 (NIC-4620) received HS 72081000; Entity E020 (NIC-5210) received HS 72081000; Entity E029 (NIC-4690) received HS 84571000; Entity E003 (NIC-5210) received HS 84571000"
+        "timing": "Regularity score: 0.35",
+        "externality": "Externality score: 0.24",
+        "industry": "All trades consistent with declared industry codes."
       }
     },
     {
-      "ring_id": "R425",
+      "ring_id": "R5327",
+      "canonical_key": "E013|E028|E030|E032|E017|E029|E018|E020",
+      "closure_type": "transaction",
+      "entities": [
+        "E013",
+        "E028",
+        "E030",
+        "E032",
+        "E017",
+        "E029",
+        "E018",
+        "E020"
+      ],
+      "hops": [
+        {
+          "hop_type": "invoice",
+          "from": "E013",
+          "to": "E028",
+          "invoice_id": "I0092",
+          "value": 84263562,
+          "hs_code": "85176200",
+          "invoice_date": "2026-01-09",
+          "discounting_date": "2026-01-22"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E028",
+          "to": "E030",
+          "invoice_id": "I0116",
+          "value": 104796883,
+          "hs_code": "72081000",
+          "invoice_date": "2026-01-19",
+          "discounting_date": "2026-02-13"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E030",
+          "to": "E032",
+          "invoice_id": "I0099",
+          "value": 99275859,
+          "hs_code": "72081000",
+          "invoice_date": "2025-12-10",
+          "discounting_date": "2026-01-08"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E032",
+          "to": "E017",
+          "invoice_id": "I0044",
+          "value": 52730277,
+          "hs_code": "49011000",
+          "invoice_date": "2026-01-10",
+          "discounting_date": "2026-02-17"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E017",
+          "to": "E029",
+          "invoice_id": "I0034",
+          "value": 85103166,
+          "hs_code": null,
+          "invoice_date": "2025-11-14",
+          "discounting_date": "2025-12-09"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E029",
+          "to": "E018",
+          "invoice_id": "I0123",
+          "value": 89042300,
+          "hs_code": "49011000",
+          "invoice_date": "2025-12-26",
+          "discounting_date": "2026-01-30"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E018",
+          "to": "E020",
+          "invoice_id": "I0025",
+          "value": 99283231,
+          "hs_code": "72081000",
+          "invoice_date": "2026-01-21",
+          "discounting_date": "2026-02-27"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E020",
+          "to": "E013",
+          "invoice_id": "I0131",
+          "value": 94441896,
+          "hs_code": "84571000",
+          "invoice_date": "2025-11-20",
+          "discounting_date": "2025-12-25"
+        }
+      ],
+      "scores": {
+        "value": 0.28,
+        "product": null,
+        "timing": 0.25,
+        "externality": 0.32
+      },
+      "abstained": [
+        "product"
+      ],
+      "aggregate": 0.28,
+      "expected_loss": 200482367,
+      "evidence": {
+        "value": "Net position score: 0.28",
+        "product": "Abstained (insufficient HS codes or suppressed by commodity classification)",
+        "timing": "Regularity score: 0.25",
+        "externality": "Externality score: 0.32",
+        "industry": "All trades consistent with declared industry codes."
+      }
+    },
+    {
+      "ring_id": "R3268",
+      "canonical_key": "E005|E019|E008|E028|E030|E032|E014|E031",
+      "closure_type": "transaction",
+      "entities": [
+        "E005",
+        "E019",
+        "E008",
+        "E028",
+        "E030",
+        "E032",
+        "E014",
+        "E031"
+      ],
+      "hops": [
+        {
+          "hop_type": "invoice",
+          "from": "E005",
+          "to": "E019",
+          "invoice_id": "I0079",
+          "value": 92203262,
+          "hs_code": "49011000",
+          "invoice_date": "2026-02-10",
+          "discounting_date": "2026-03-26"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E019",
+          "to": "E008",
+          "invoice_id": "I0088",
+          "value": 114847359,
+          "hs_code": "72081000",
+          "invoice_date": "2026-02-10",
+          "discounting_date": "2026-03-02"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E008",
+          "to": "E028",
+          "invoice_id": "I0118",
+          "value": 118095206,
+          "hs_code": "72081000",
+          "invoice_date": "2026-03-24",
+          "discounting_date": "2026-05-05"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E028",
+          "to": "E030",
+          "invoice_id": "I0116",
+          "value": 104796883,
+          "hs_code": "72081000",
+          "invoice_date": "2026-01-19",
+          "discounting_date": "2026-02-13"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E030",
+          "to": "E032",
+          "invoice_id": "I0099",
+          "value": 99275859,
+          "hs_code": "72081000",
+          "invoice_date": "2025-12-10",
+          "discounting_date": "2026-01-08"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E032",
+          "to": "E014",
+          "invoice_id": "I0100",
+          "value": 117945293,
+          "hs_code": "39012000",
+          "invoice_date": "2025-12-26",
+          "discounting_date": "2026-01-26"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E014",
+          "to": "E031",
+          "invoice_id": "I0117",
+          "value": 143828973,
+          "hs_code": "85176200",
+          "invoice_date": "2026-01-29",
+          "discounting_date": "2026-03-08"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E031",
+          "to": "E005",
+          "invoice_id": "I0053",
+          "value": 78494117,
+          "hs_code": "72081000",
+          "invoice_date": "2026-03-03",
+          "discounting_date": "2026-03-13"
+        }
+      ],
+      "scores": {
+        "value": 0.28,
+        "product": null,
+        "timing": 0.17,
+        "externality": 0.26
+      },
+      "abstained": [
+        "product"
+      ],
+      "aggregate": 0.23,
+      "expected_loss": 198092481,
+      "evidence": {
+        "value": "Net position score: 0.28",
+        "product": "Abstained (insufficient HS codes or suppressed by commodity classification)",
+        "timing": "Regularity score: 0.17",
+        "externality": "Externality score: 0.26",
+        "industry": "All trades consistent with declared industry codes."
+      }
+    },
+    {
+      "ring_id": "R5214",
+      "canonical_key": "E009|E029|E018|E030|E020|E015|E025|E028",
+      "closure_type": "transaction",
+      "entities": [
+        "E009",
+        "E029",
+        "E018",
+        "E030",
+        "E020",
+        "E015",
+        "E025",
+        "E028"
+      ],
+      "hops": [
+        {
+          "hop_type": "invoice",
+          "from": "E009",
+          "to": "E029",
+          "invoice_id": "I0052",
+          "value": 100973640,
+          "hs_code": null,
+          "invoice_date": "2026-03-27",
+          "discounting_date": "2026-04-17"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E029",
+          "to": "E018",
+          "invoice_id": "I0123",
+          "value": 89042300,
+          "hs_code": "49011000",
+          "invoice_date": "2025-12-26",
+          "discounting_date": "2026-01-30"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E018",
+          "to": "E030",
+          "invoice_id": "I0065",
+          "value": 85035182,
+          "hs_code": "26011100",
+          "invoice_date": "2026-03-01",
+          "discounting_date": "2026-03-26"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E030",
+          "to": "E020",
+          "invoice_id": "I0048",
+          "value": 84274070,
+          "hs_code": "72081000",
+          "invoice_date": "2025-12-20",
+          "discounting_date": "2026-01-12"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E020",
+          "to": "E015",
+          "invoice_id": "I0014",
+          "value": 66619754,
+          "hs_code": "49011000",
+          "invoice_date": "2026-03-22",
+          "discounting_date": "2026-04-02"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E015",
+          "to": "E025",
+          "invoice_id": "I0127",
+          "value": 61253795,
+          "hs_code": "72081000",
+          "invoice_date": "2025-11-11",
+          "discounting_date": "2025-12-11"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E025",
+          "to": "E028",
+          "invoice_id": "I0121",
+          "value": 53050466,
+          "hs_code": "84571000",
+          "invoice_date": "2026-01-23",
+          "discounting_date": "2026-03-03"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E028",
+          "to": "E009",
+          "invoice_id": "I0040",
+          "value": 82458160,
+          "hs_code": "27101990",
+          "invoice_date": "2025-11-04",
+          "discounting_date": "2025-12-03"
+        }
+      ],
+      "scores": {
+        "value": 0.36,
+        "product": null,
+        "timing": 0.31,
+        "externality": 0.28
+      },
+      "abstained": [
+        "product"
+      ],
+      "aggregate": 0.31,
+      "expected_loss": 195772490,
+      "evidence": {
+        "value": "Net position score: 0.36",
+        "product": "Abstained (insufficient HS codes or suppressed by commodity classification)",
+        "timing": "Regularity score: 0.31",
+        "externality": "Externality score: 0.28",
+        "industry": "All trades consistent with declared industry codes."
+      }
+    },
+    {
+      "ring_id": "R3117",
+      "canonical_key": "E004|E032|E017|E029|E005|E023|E019",
+      "closure_type": "transaction",
+      "entities": [
+        "E004",
+        "E032",
+        "E017",
+        "E029",
+        "E005",
+        "E023",
+        "E019"
+      ],
+      "hops": [
+        {
+          "hop_type": "invoice",
+          "from": "E004",
+          "to": "E032",
+          "invoice_id": "I0115",
+          "value": 86359380,
+          "hs_code": "85176200",
+          "invoice_date": "2025-12-02",
+          "discounting_date": "2025-12-31"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E032",
+          "to": "E017",
+          "invoice_id": "I0044",
+          "value": 52730277,
+          "hs_code": "49011000",
+          "invoice_date": "2026-01-10",
+          "discounting_date": "2026-02-17"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E017",
+          "to": "E029",
+          "invoice_id": "I0034",
+          "value": 85103166,
+          "hs_code": null,
+          "invoice_date": "2025-11-14",
+          "discounting_date": "2025-12-09"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E029",
+          "to": "E005",
+          "invoice_id": "I0140",
+          "value": 88392555,
+          "hs_code": "39012000",
+          "invoice_date": "2026-01-12",
+          "discounting_date": "2026-02-08"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E005",
+          "to": "E023",
+          "invoice_id": "I0081",
+          "value": 98077236,
+          "hs_code": "49011000",
+          "invoice_date": "2025-11-24",
+          "discounting_date": "2025-12-24"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E023",
+          "to": "E019",
+          "invoice_id": "I0124",
+          "value": 113317145,
+          "hs_code": null,
+          "invoice_date": "2026-01-18",
+          "discounting_date": "2026-01-23"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E019",
+          "to": "E004",
+          "invoice_id": "I0129",
+          "value": 122878237,
+          "hs_code": "72081000",
+          "invoice_date": "2026-02-26",
+          "discounting_date": "2026-03-24"
+        }
+      ],
+      "scores": {
+        "value": 0.24,
+        "product": null,
+        "timing": 0.45,
+        "externality": 0.26
+      },
+      "abstained": [
+        "product"
+      ],
+      "aggregate": 0.3,
+      "expected_loss": 194429712,
+      "evidence": {
+        "value": "Net position score: 0.24",
+        "product": "Abstained (insufficient HS codes or suppressed by commodity classification)",
+        "timing": "Regularity score: 0.45",
+        "externality": "Externality score: 0.26",
+        "industry": "All trades consistent with declared industry codes."
+      }
+    },
+    {
+      "ring_id": "R2281",
+      "canonical_key": "E003|E028|E030|E032|E014|E031|E012|E008",
+      "closure_type": "transaction",
+      "entities": [
+        "E003",
+        "E028",
+        "E030",
+        "E032",
+        "E014",
+        "E031",
+        "E012",
+        "E008"
+      ],
+      "hops": [
+        {
+          "hop_type": "invoice",
+          "from": "E003",
+          "to": "E028",
+          "invoice_id": "I0067",
+          "value": 103807836,
+          "hs_code": "49011000",
+          "invoice_date": "2026-02-12",
+          "discounting_date": "2026-03-19"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E028",
+          "to": "E030",
+          "invoice_id": "I0116",
+          "value": 104796883,
+          "hs_code": "72081000",
+          "invoice_date": "2026-01-19",
+          "discounting_date": "2026-02-13"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E030",
+          "to": "E032",
+          "invoice_id": "I0099",
+          "value": 99275859,
+          "hs_code": "72081000",
+          "invoice_date": "2025-12-10",
+          "discounting_date": "2026-01-08"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E032",
+          "to": "E014",
+          "invoice_id": "I0100",
+          "value": 117945293,
+          "hs_code": "39012000",
+          "invoice_date": "2025-12-26",
+          "discounting_date": "2026-01-26"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E014",
+          "to": "E031",
+          "invoice_id": "I0117",
+          "value": 143828973,
+          "hs_code": "85176200",
+          "invoice_date": "2026-01-29",
+          "discounting_date": "2026-03-08"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E031",
+          "to": "E012",
+          "invoice_id": "I0024",
+          "value": 47188161,
+          "hs_code": "74031100",
+          "invoice_date": "2026-03-14",
+          "discounting_date": "2026-04-17"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E012",
+          "to": "E008",
+          "invoice_id": "I0058",
+          "value": 53403007,
+          "hs_code": "49011000",
+          "invoice_date": "2026-03-01",
+          "discounting_date": "2026-03-22"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E008",
+          "to": "E003",
+          "invoice_id": "I0071",
+          "value": 53177285,
+          "hs_code": "10063000",
+          "invoice_date": "2026-01-14",
+          "discounting_date": "2026-02-18"
+        }
+      ],
+      "scores": {
+        "value": 0.15,
+        "product": null,
+        "timing": 0.32,
+        "externality": 0.4
+      },
+      "abstained": [
+        "product"
+      ],
+      "aggregate": 0.27,
+      "expected_loss": 192973088,
+      "evidence": {
+        "value": "Net position score: 0.15",
+        "product": "Abstained (insufficient HS codes or suppressed by commodity classification)",
+        "timing": "Regularity score: 0.32",
+        "externality": "Externality score: 0.40",
+        "industry": "All trades consistent with declared industry codes."
+      }
+    },
+    {
+      "ring_id": "R5225",
+      "canonical_key": "E009|E029|E021|E018|E020|E013|E028",
+      "closure_type": "transaction",
+      "entities": [
+        "E009",
+        "E029",
+        "E021",
+        "E018",
+        "E020",
+        "E013",
+        "E028"
+      ],
+      "hops": [
+        {
+          "hop_type": "invoice",
+          "from": "E009",
+          "to": "E029",
+          "invoice_id": "I0052",
+          "value": 100973640,
+          "hs_code": null,
+          "invoice_date": "2026-03-27",
+          "discounting_date": "2026-04-17"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E029",
+          "to": "E021",
+          "invoice_id": "I0017",
+          "value": 79184989,
+          "hs_code": "49011000",
+          "invoice_date": "2025-12-14",
+          "discounting_date": "2026-01-28"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E021",
+          "to": "E018",
+          "invoice_id": "I0023",
+          "value": 89902530,
+          "hs_code": "39012000",
+          "invoice_date": "2026-03-21",
+          "discounting_date": "2026-04-21"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E018",
+          "to": "E020",
+          "invoice_id": "I0025",
+          "value": 99283231,
+          "hs_code": "72081000",
+          "invoice_date": "2026-01-21",
+          "discounting_date": "2026-02-27"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E020",
+          "to": "E013",
+          "invoice_id": "I0131",
+          "value": 94441896,
+          "hs_code": "84571000",
+          "invoice_date": "2025-11-20",
+          "discounting_date": "2025-12-25"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E013",
+          "to": "E028",
+          "invoice_id": "I0092",
+          "value": 84263562,
+          "hs_code": "85176200",
+          "invoice_date": "2026-01-09",
+          "discounting_date": "2026-01-22"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E028",
+          "to": "E009",
+          "invoice_id": "I0040",
+          "value": 82458160,
+          "hs_code": "27101990",
+          "invoice_date": "2025-11-04",
+          "discounting_date": "2025-12-03"
+        }
+      ],
+      "scores": {
+        "value": 0.44,
+        "product": null,
+        "timing": 0.29,
+        "externality": 0.21
+      },
+      "abstained": [
+        "product"
+      ],
+      "aggregate": 0.3,
+      "expected_loss": 190123590,
+      "evidence": {
+        "value": "Net position score: 0.44",
+        "product": "Abstained (insufficient HS codes or suppressed by commodity classification)",
+        "timing": "Regularity score: 0.29",
+        "externality": "Externality score: 0.21",
+        "industry": "All trades consistent with declared industry codes."
+      }
+    },
+    {
+      "ring_id": "R2280",
+      "canonical_key": "E003|E028|E030|E032|E014|E031|E008",
+      "closure_type": "transaction",
+      "entities": [
+        "E003",
+        "E028",
+        "E030",
+        "E032",
+        "E014",
+        "E031",
+        "E008"
+      ],
+      "hops": [
+        {
+          "hop_type": "invoice",
+          "from": "E003",
+          "to": "E028",
+          "invoice_id": "I0067",
+          "value": 103807836,
+          "hs_code": "49011000",
+          "invoice_date": "2026-02-12",
+          "discounting_date": "2026-03-19"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E028",
+          "to": "E030",
+          "invoice_id": "I0116",
+          "value": 104796883,
+          "hs_code": "72081000",
+          "invoice_date": "2026-01-19",
+          "discounting_date": "2026-02-13"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E030",
+          "to": "E032",
+          "invoice_id": "I0099",
+          "value": 99275859,
+          "hs_code": "72081000",
+          "invoice_date": "2025-12-10",
+          "discounting_date": "2026-01-08"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E032",
+          "to": "E014",
+          "invoice_id": "I0100",
+          "value": 117945293,
+          "hs_code": "39012000",
+          "invoice_date": "2025-12-26",
+          "discounting_date": "2026-01-26"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E014",
+          "to": "E031",
+          "invoice_id": "I0117",
+          "value": 143828973,
+          "hs_code": "85176200",
+          "invoice_date": "2026-01-29",
+          "discounting_date": "2026-03-08"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E031",
+          "to": "E008",
+          "invoice_id": "I0093",
+          "value": 86365017,
+          "hs_code": "74031100",
+          "invoice_date": "2026-02-28",
+          "discounting_date": "2026-03-07"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E008",
+          "to": "E003",
+          "invoice_id": "I0071",
+          "value": 53177285,
+          "hs_code": "10063000",
+          "invoice_date": "2026-01-14",
+          "discounting_date": "2026-02-18"
+        }
+      ],
+      "scores": {
+        "value": 0.16,
+        "product": null,
+        "timing": 0.4,
+        "externality": 0.29
+      },
+      "abstained": [
+        "product"
+      ],
+      "aggregate": 0.27,
+      "expected_loss": 188508799,
+      "evidence": {
+        "value": "Net position score: 0.16",
+        "product": "Abstained (insufficient HS codes or suppressed by commodity classification)",
+        "timing": "Regularity score: 0.40",
+        "externality": "Externality score: 0.29",
+        "industry": "All trades consistent with declared industry codes."
+      }
+    },
+    {
+      "ring_id": "R5331",
+      "canonical_key": "E013|E030|E017|E029|E021|E018|E020",
+      "closure_type": "transaction",
+      "entities": [
+        "E013",
+        "E030",
+        "E017",
+        "E029",
+        "E021",
+        "E018",
+        "E020"
+      ],
+      "hops": [
+        {
+          "hop_type": "invoice",
+          "from": "E013",
+          "to": "E030",
+          "invoice_id": "I0045",
+          "value": 78457894,
+          "hs_code": "26011100",
+          "invoice_date": "2026-01-01",
+          "discounting_date": "2026-02-03"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E030",
+          "to": "E017",
+          "invoice_id": "I0085",
+          "value": 100627925,
+          "hs_code": "74031100",
+          "invoice_date": "2026-02-28",
+          "discounting_date": "2026-03-21"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E017",
+          "to": "E029",
+          "invoice_id": "I0034",
+          "value": 85103166,
+          "hs_code": null,
+          "invoice_date": "2025-11-14",
+          "discounting_date": "2025-12-09"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E029",
+          "to": "E021",
+          "invoice_id": "I0017",
+          "value": 79184989,
+          "hs_code": "49011000",
+          "invoice_date": "2025-12-14",
+          "discounting_date": "2026-01-28"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E021",
+          "to": "E018",
+          "invoice_id": "I0023",
+          "value": 89902530,
+          "hs_code": "39012000",
+          "invoice_date": "2026-03-21",
+          "discounting_date": "2026-04-21"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E018",
+          "to": "E020",
+          "invoice_id": "I0025",
+          "value": 99283231,
+          "hs_code": "72081000",
+          "invoice_date": "2026-01-21",
+          "discounting_date": "2026-02-27"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E020",
+          "to": "E013",
+          "invoice_id": "I0131",
+          "value": 94441896,
+          "hs_code": "84571000",
+          "invoice_date": "2025-11-20",
+          "discounting_date": "2025-12-25"
+        }
+      ],
+      "scores": {
+        "value": 0.41,
+        "product": null,
+        "timing": 0.21,
+        "externality": 0.32
+      },
+      "abstained": [
+        "product"
+      ],
+      "aggregate": 0.3,
+      "expected_loss": 188256120,
+      "evidence": {
+        "value": "Net position score: 0.41",
+        "product": "Abstained (insufficient HS codes or suppressed by commodity classification)",
+        "timing": "Regularity score: 0.21",
+        "externality": "Externality score: 0.32",
+        "industry": "All trades consistent with declared industry codes."
+      }
+    },
+    {
+      "ring_id": "R5232",
+      "canonical_key": "E009|E029|E021|E018|E030|E020|E013|E028",
+      "closure_type": "transaction",
+      "entities": [
+        "E009",
+        "E029",
+        "E021",
+        "E018",
+        "E030",
+        "E020",
+        "E013",
+        "E028"
+      ],
+      "hops": [
+        {
+          "hop_type": "invoice",
+          "from": "E009",
+          "to": "E029",
+          "invoice_id": "I0052",
+          "value": 100973640,
+          "hs_code": null,
+          "invoice_date": "2026-03-27",
+          "discounting_date": "2026-04-17"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E029",
+          "to": "E021",
+          "invoice_id": "I0017",
+          "value": 79184989,
+          "hs_code": "49011000",
+          "invoice_date": "2025-12-14",
+          "discounting_date": "2026-01-28"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E021",
+          "to": "E018",
+          "invoice_id": "I0023",
+          "value": 89902530,
+          "hs_code": "39012000",
+          "invoice_date": "2026-03-21",
+          "discounting_date": "2026-04-21"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E018",
+          "to": "E030",
+          "invoice_id": "I0065",
+          "value": 85035182,
+          "hs_code": "26011100",
+          "invoice_date": "2026-03-01",
+          "discounting_date": "2026-03-26"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E030",
+          "to": "E020",
+          "invoice_id": "I0048",
+          "value": 84274070,
+          "hs_code": "72081000",
+          "invoice_date": "2025-12-20",
+          "discounting_date": "2026-01-12"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E020",
+          "to": "E013",
+          "invoice_id": "I0131",
+          "value": 94441896,
+          "hs_code": "84571000",
+          "invoice_date": "2025-11-20",
+          "discounting_date": "2025-12-25"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E013",
+          "to": "E028",
+          "invoice_id": "I0092",
+          "value": 84263562,
+          "hs_code": "85176200",
+          "invoice_date": "2026-01-09",
+          "discounting_date": "2026-01-22"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E028",
+          "to": "E009",
+          "invoice_id": "I0040",
+          "value": 82458160,
+          "hs_code": "27101990",
+          "invoice_date": "2025-11-04",
+          "discounting_date": "2025-12-03"
+        }
+      ],
+      "scores": {
+        "value": 0.47,
+        "product": null,
+        "timing": 0.14,
+        "externality": 0.28
+      },
+      "abstained": [
+        "product"
+      ],
+      "aggregate": 0.27,
+      "expected_loss": 187229311,
+      "evidence": {
+        "value": "Net position score: 0.47",
+        "product": "Abstained (insufficient HS codes or suppressed by commodity classification)",
+        "timing": "Regularity score: 0.14",
+        "externality": "Externality score: 0.28",
+        "industry": "All trades consistent with declared industry codes."
+      }
+    },
+    {
+      "ring_id": "R3357",
+      "canonical_key": "E005|E023|E012|E008|E028|E030|E020|E029",
+      "closure_type": "transaction",
+      "entities": [
+        "E005",
+        "E023",
+        "E012",
+        "E008",
+        "E028",
+        "E030",
+        "E020",
+        "E029"
+      ],
+      "hops": [
+        {
+          "hop_type": "invoice",
+          "from": "E005",
+          "to": "E023",
+          "invoice_id": "I0081",
+          "value": 98077236,
+          "hs_code": "49011000",
+          "invoice_date": "2025-11-24",
+          "discounting_date": "2025-12-24"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E023",
+          "to": "E012",
+          "invoice_id": "I0106",
+          "value": 103290650,
+          "hs_code": null,
+          "invoice_date": "2026-01-07",
+          "discounting_date": "2026-01-13"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E012",
+          "to": "E008",
+          "invoice_id": "I0058",
+          "value": 53403007,
+          "hs_code": "49011000",
+          "invoice_date": "2026-03-01",
+          "discounting_date": "2026-03-22"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E008",
+          "to": "E028",
+          "invoice_id": "I0118",
+          "value": 118095206,
+          "hs_code": "72081000",
+          "invoice_date": "2026-03-24",
+          "discounting_date": "2026-05-05"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E028",
+          "to": "E030",
+          "invoice_id": "I0116",
+          "value": 104796883,
+          "hs_code": "72081000",
+          "invoice_date": "2026-01-19",
+          "discounting_date": "2026-02-13"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E030",
+          "to": "E020",
+          "invoice_id": "I0048",
+          "value": 84274070,
+          "hs_code": "72081000",
+          "invoice_date": "2025-12-20",
+          "discounting_date": "2026-01-12"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E020",
+          "to": "E029",
+          "invoice_id": "I0056",
+          "value": 98071917,
+          "hs_code": "84571000",
+          "invoice_date": "2025-11-16",
+          "discounting_date": "2025-12-28"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E029",
+          "to": "E005",
+          "invoice_id": "I0140",
+          "value": 88392555,
+          "hs_code": "39012000",
+          "invoice_date": "2026-01-12",
+          "discounting_date": "2026-02-08"
+        }
+      ],
+      "scores": {
+        "value": 0.19,
+        "product": null,
+        "timing": 0.33,
+        "externality": 0.24
+      },
+      "abstained": [
+        "product"
+      ],
+      "aggregate": 0.25,
+      "expected_loss": 183805664,
+      "evidence": {
+        "value": "Net position score: 0.19",
+        "product": "Abstained (insufficient HS codes or suppressed by commodity classification)",
+        "timing": "Regularity score: 0.33",
+        "externality": "Externality score: 0.24",
+        "industry": "All trades consistent with declared industry codes."
+      }
+    },
+    {
+      "ring_id": "R3902",
       "canonical_key": "E005|E028|E030|E032|E014|E031",
       "closure_type": "transaction",
       "entities": [
@@ -402,67 +2301,69 @@ const SCORED = {
         "product"
       ],
       "aggregate": 0.29,
-      "expected_loss": 184158384,
+      "expected_loss": 183672774,
       "evidence": {
         "value": "Net position score: 0.23",
         "product": "Abstained (insufficient HS codes or suppressed by commodity classification)",
         "timing": "Regularity score: 0.44",
         "externality": "Externality score: 0.24",
-        "industry": "Flagged cross-industry trades: Entity E028 (NIC-4620) received HS 39012000; Entity E030 (NIC-4620) received HS 72081000; Entity E032 (NIC-5229) received HS 72081000; Entity E014 (NIC-2610) received HS 39012000; Entity E031 (NIC-4662) received HS 85176200; Entity E005 (NIC-4690) received HS 72081000"
+        "industry": "All trades consistent with declared industry codes."
       }
     },
     {
-      "ring_id": "R634",
-      "canonical_key": "E009|E029|E018|E020|E013|E028",
+      "ring_id": "R3361",
+      "canonical_key": "E005|E023|E019|E006|E013|E028|E009|E029",
       "closure_type": "transaction",
       "entities": [
-        "E009",
-        "E029",
-        "E018",
-        "E020",
+        "E005",
+        "E023",
+        "E019",
+        "E006",
         "E013",
-        "E028"
+        "E028",
+        "E009",
+        "E029"
       ],
       "hops": [
         {
           "hop_type": "invoice",
-          "from": "E009",
-          "to": "E029",
-          "invoice_id": "I0052",
-          "value": 100973640,
-          "hs_code": null,
-          "invoice_date": "2026-03-27",
-          "discounting_date": "2026-04-17"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E029",
-          "to": "E018",
-          "invoice_id": "I0123",
-          "value": 89042300,
+          "from": "E005",
+          "to": "E023",
+          "invoice_id": "I0081",
+          "value": 98077236,
           "hs_code": "49011000",
-          "invoice_date": "2025-12-26",
-          "discounting_date": "2026-01-30"
+          "invoice_date": "2025-11-24",
+          "discounting_date": "2025-12-24"
         },
         {
           "hop_type": "invoice",
-          "from": "E018",
-          "to": "E020",
-          "invoice_id": "I0025",
-          "value": 99283231,
+          "from": "E023",
+          "to": "E019",
+          "invoice_id": "I0124",
+          "value": 113317145,
+          "hs_code": null,
+          "invoice_date": "2026-01-18",
+          "discounting_date": "2026-01-23"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E019",
+          "to": "E006",
+          "invoice_id": "I0137",
+          "value": 127696693,
           "hs_code": "72081000",
-          "invoice_date": "2026-01-21",
-          "discounting_date": "2026-02-27"
+          "invoice_date": "2026-03-29",
+          "discounting_date": "2026-05-06"
         },
         {
           "hop_type": "invoice",
-          "from": "E020",
+          "from": "E006",
           "to": "E013",
-          "invoice_id": "I0131",
-          "value": 94441896,
-          "hs_code": "84571000",
-          "invoice_date": "2025-11-20",
-          "discounting_date": "2025-12-25"
+          "invoice_id": "I0122",
+          "value": 74003244,
+          "hs_code": "85176200",
+          "invoice_date": "2025-11-13",
+          "discounting_date": "2025-11-21"
         },
         {
           "hop_type": "invoice",
@@ -483,37 +2384,405 @@ const SCORED = {
           "hs_code": "27101990",
           "invoice_date": "2025-11-04",
           "discounting_date": "2025-12-03"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E009",
+          "to": "E029",
+          "invoice_id": "I0052",
+          "value": 100973640,
+          "hs_code": null,
+          "invoice_date": "2026-03-27",
+          "discounting_date": "2026-04-17"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E029",
+          "to": "E005",
+          "invoice_id": "I0140",
+          "value": 88392555,
+          "hs_code": "39012000",
+          "invoice_date": "2026-01-12",
+          "discounting_date": "2026-02-08"
         }
       ],
       "scores": {
-        "value": 0.5,
+        "value": 0.31,
         "product": null,
-        "timing": 0.23,
-        "externality": 0.18
+        "timing": 0.17,
+        "externality": 0.26
       },
       "abstained": [
         "product"
       ],
-      "aggregate": 0.33,
-      "expected_loss": 180864548,
+      "aggregate": 0.24,
+      "expected_loss": 182744030,
       "evidence": {
-        "value": "Net position score: 0.50",
+        "value": "Net position score: 0.31",
         "product": "Abstained (insufficient HS codes or suppressed by commodity classification)",
-        "timing": "Regularity score: 0.23",
-        "externality": "Externality score: 0.18",
-        "industry": "Flagged cross-industry trades: Entity E018 (NIC-2610) received HS 49011000; Entity E020 (NIC-5210) received HS 72081000; Entity E013 (NIC-1392) received HS 84571000; Entity E028 (NIC-4620) received HS 85176200; Entity E009 (NIC-6202) received HS 27101990"
+        "timing": "Regularity score: 0.17",
+        "externality": "Externality score: 0.26",
+        "industry": "All trades consistent with declared industry codes."
       }
     },
     {
-      "ring_id": "R421",
-      "canonical_key": "E005|E028|E030|E020|E029",
+      "ring_id": "R3322",
+      "canonical_key": "E005|E019|E031|E008|E028|E030|E020|E029",
+      "closure_type": "transaction",
+      "entities": [
+        "E005",
+        "E019",
+        "E031",
+        "E008",
+        "E028",
+        "E030",
+        "E020",
+        "E029"
+      ],
+      "hops": [
+        {
+          "hop_type": "invoice",
+          "from": "E005",
+          "to": "E019",
+          "invoice_id": "I0079",
+          "value": 92203262,
+          "hs_code": "49011000",
+          "invoice_date": "2026-02-10",
+          "discounting_date": "2026-03-26"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E019",
+          "to": "E031",
+          "invoice_id": "I0050",
+          "value": 71326148,
+          "hs_code": "10063000",
+          "invoice_date": "2026-02-01",
+          "discounting_date": "2026-02-15"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E031",
+          "to": "E008",
+          "invoice_id": "I0093",
+          "value": 86365017,
+          "hs_code": "74031100",
+          "invoice_date": "2026-02-28",
+          "discounting_date": "2026-03-07"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E008",
+          "to": "E028",
+          "invoice_id": "I0118",
+          "value": 118095206,
+          "hs_code": "72081000",
+          "invoice_date": "2026-03-24",
+          "discounting_date": "2026-05-05"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E028",
+          "to": "E030",
+          "invoice_id": "I0116",
+          "value": 104796883,
+          "hs_code": "72081000",
+          "invoice_date": "2026-01-19",
+          "discounting_date": "2026-02-13"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E030",
+          "to": "E020",
+          "invoice_id": "I0048",
+          "value": 84274070,
+          "hs_code": "72081000",
+          "invoice_date": "2025-12-20",
+          "discounting_date": "2026-01-12"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E020",
+          "to": "E029",
+          "invoice_id": "I0056",
+          "value": 98071917,
+          "hs_code": "84571000",
+          "invoice_date": "2025-11-16",
+          "discounting_date": "2025-12-28"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E029",
+          "to": "E005",
+          "invoice_id": "I0140",
+          "value": 88392555,
+          "hs_code": "39012000",
+          "invoice_date": "2026-01-12",
+          "discounting_date": "2026-02-08"
+        }
+      ],
+      "scores": {
+        "value": 0.32,
+        "product": null,
+        "timing": 0.2,
+        "externality": 0.23
+      },
+      "abstained": [
+        "product"
+      ],
+      "aggregate": 0.24,
+      "expected_loss": 181914088,
+      "evidence": {
+        "value": "Net position score: 0.32",
+        "product": "Abstained (insufficient HS codes or suppressed by commodity classification)",
+        "timing": "Regularity score: 0.20",
+        "externality": "Externality score: 0.23",
+        "industry": "All trades consistent with declared industry codes."
+      }
+    },
+    {
+      "ring_id": "R3365",
+      "canonical_key": "E005|E023|E019|E006|E013|E030|E017|E029",
+      "closure_type": "transaction",
+      "entities": [
+        "E005",
+        "E023",
+        "E019",
+        "E006",
+        "E013",
+        "E030",
+        "E017",
+        "E029"
+      ],
+      "hops": [
+        {
+          "hop_type": "invoice",
+          "from": "E005",
+          "to": "E023",
+          "invoice_id": "I0081",
+          "value": 98077236,
+          "hs_code": "49011000",
+          "invoice_date": "2025-11-24",
+          "discounting_date": "2025-12-24"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E023",
+          "to": "E019",
+          "invoice_id": "I0124",
+          "value": 113317145,
+          "hs_code": null,
+          "invoice_date": "2026-01-18",
+          "discounting_date": "2026-01-23"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E019",
+          "to": "E006",
+          "invoice_id": "I0137",
+          "value": 127696693,
+          "hs_code": "72081000",
+          "invoice_date": "2026-03-29",
+          "discounting_date": "2026-05-06"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E006",
+          "to": "E013",
+          "invoice_id": "I0122",
+          "value": 74003244,
+          "hs_code": "85176200",
+          "invoice_date": "2025-11-13",
+          "discounting_date": "2025-11-21"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E013",
+          "to": "E030",
+          "invoice_id": "I0045",
+          "value": 78457894,
+          "hs_code": "26011100",
+          "invoice_date": "2026-01-01",
+          "discounting_date": "2026-02-03"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E030",
+          "to": "E017",
+          "invoice_id": "I0085",
+          "value": 100627925,
+          "hs_code": "74031100",
+          "invoice_date": "2026-02-28",
+          "discounting_date": "2026-03-21"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E017",
+          "to": "E029",
+          "invoice_id": "I0034",
+          "value": 85103166,
+          "hs_code": null,
+          "invoice_date": "2025-11-14",
+          "discounting_date": "2025-12-09"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E029",
+          "to": "E005",
+          "invoice_id": "I0140",
+          "value": 88392555,
+          "hs_code": "39012000",
+          "invoice_date": "2026-01-12",
+          "discounting_date": "2026-02-08"
+        }
+      ],
+      "scores": {
+        "value": 0.3,
+        "product": null,
+        "timing": 0.18,
+        "externality": 0.21
+      },
+      "abstained": [
+        "product"
+      ],
+      "aggregate": 0.23,
+      "expected_loss": 173771316,
+      "evidence": {
+        "value": "Net position score: 0.30",
+        "product": "Abstained (insufficient HS codes or suppressed by commodity classification)",
+        "timing": "Regularity score: 0.18",
+        "externality": "Externality score: 0.21",
+        "industry": "All trades consistent with declared industry codes."
+      }
+    },
+    {
+      "ring_id": "R1787",
+      "canonical_key": "E003|E027|E032|E014|E031|E005|E019|E008",
+      "closure_type": "transaction",
+      "entities": [
+        "E003",
+        "E027",
+        "E032",
+        "E014",
+        "E031",
+        "E005",
+        "E019",
+        "E008"
+      ],
+      "hops": [
+        {
+          "hop_type": "invoice",
+          "from": "E003",
+          "to": "E027",
+          "invoice_id": "I0063",
+          "value": 98268296,
+          "hs_code": "84571000",
+          "invoice_date": "2025-12-29",
+          "discounting_date": "2026-02-06"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E027",
+          "to": "E032",
+          "invoice_id": "I0072",
+          "value": 112159236,
+          "hs_code": "49011000",
+          "invoice_date": "2025-12-08",
+          "discounting_date": "2026-01-04"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E032",
+          "to": "E014",
+          "invoice_id": "I0100",
+          "value": 117945293,
+          "hs_code": "39012000",
+          "invoice_date": "2025-12-26",
+          "discounting_date": "2026-01-26"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E014",
+          "to": "E031",
+          "invoice_id": "I0117",
+          "value": 143828973,
+          "hs_code": "85176200",
+          "invoice_date": "2026-01-29",
+          "discounting_date": "2026-03-08"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E031",
+          "to": "E005",
+          "invoice_id": "I0053",
+          "value": 78494117,
+          "hs_code": "72081000",
+          "invoice_date": "2026-03-03",
+          "discounting_date": "2026-03-13"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E005",
+          "to": "E019",
+          "invoice_id": "I0079",
+          "value": 92203262,
+          "hs_code": "49011000",
+          "invoice_date": "2026-02-10",
+          "discounting_date": "2026-03-26"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E019",
+          "to": "E008",
+          "invoice_id": "I0088",
+          "value": 114847359,
+          "hs_code": "72081000",
+          "invoice_date": "2026-02-10",
+          "discounting_date": "2026-03-02"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E008",
+          "to": "E003",
+          "invoice_id": "I0071",
+          "value": 53177285,
+          "hs_code": "10063000",
+          "invoice_date": "2026-01-14",
+          "discounting_date": "2026-02-18"
+        }
+      ],
+      "scores": {
+        "value": 0.12,
+        "product": null,
+        "timing": 0.3,
+        "externality": 0.25
+      },
+      "abstained": [
+        "product"
+      ],
+      "aggregate": 0.21,
+      "expected_loss": 171993890,
+      "evidence": {
+        "value": "Net position score: 0.12",
+        "product": "Abstained (insufficient HS codes or suppressed by commodity classification)",
+        "timing": "Regularity score: 0.30",
+        "externality": "Externality score: 0.25",
+        "industry": "All trades consistent with declared industry codes."
+      }
+    },
+    {
+      "ring_id": "R3881",
+      "canonical_key": "E005|E028|E030|E020|E029|E018|E014|E031",
       "closure_type": "transaction",
       "entities": [
         "E005",
         "E028",
         "E030",
         "E020",
-        "E029"
+        "E029",
+        "E018",
+        "E014",
+        "E031"
       ],
       "hops": [
         {
@@ -559,6 +2828,600 @@ const SCORED = {
         {
           "hop_type": "invoice",
           "from": "E029",
+          "to": "E018",
+          "invoice_id": "I0123",
+          "value": 89042300,
+          "hs_code": "49011000",
+          "invoice_date": "2025-12-26",
+          "discounting_date": "2026-01-30"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E018",
+          "to": "E014",
+          "invoice_id": "I0009",
+          "value": 57889740,
+          "hs_code": "85176200",
+          "invoice_date": "2026-02-11",
+          "discounting_date": "2026-03-20"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E014",
+          "to": "E031",
+          "invoice_id": "I0117",
+          "value": 143828973,
+          "hs_code": "85176200",
+          "invoice_date": "2026-01-29",
+          "discounting_date": "2026-03-08"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E031",
+          "to": "E005",
+          "invoice_id": "I0053",
+          "value": 78494117,
+          "hs_code": "72081000",
+          "invoice_date": "2026-03-03",
+          "discounting_date": "2026-03-13"
+        }
+      ],
+      "scores": {
+        "value": 0.11,
+        "product": null,
+        "timing": 0.4,
+        "externality": 0.29
+      },
+      "abstained": [
+        "product"
+      ],
+      "aggregate": 0.23,
+      "expected_loss": 171923336,
+      "evidence": {
+        "value": "Net position score: 0.11",
+        "product": "Abstained (insufficient HS codes or suppressed by commodity classification)",
+        "timing": "Regularity score: 0.40",
+        "externality": "Externality score: 0.29",
+        "industry": "All trades consistent with declared industry codes."
+      }
+    },
+    {
+      "ring_id": "R3883",
+      "canonical_key": "E005|E028|E030|E020|E029|E021|E019|E031",
+      "closure_type": "transaction",
+      "entities": [
+        "E005",
+        "E028",
+        "E030",
+        "E020",
+        "E029",
+        "E021",
+        "E019",
+        "E031"
+      ],
+      "hops": [
+        {
+          "hop_type": "invoice",
+          "from": "E005",
+          "to": "E028",
+          "invoice_id": "I0086",
+          "value": 92449408,
+          "hs_code": "39012000",
+          "invoice_date": "2026-02-17",
+          "discounting_date": "2026-03-08"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E028",
+          "to": "E030",
+          "invoice_id": "I0116",
+          "value": 104796883,
+          "hs_code": "72081000",
+          "invoice_date": "2026-01-19",
+          "discounting_date": "2026-02-13"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E030",
+          "to": "E020",
+          "invoice_id": "I0048",
+          "value": 84274070,
+          "hs_code": "72081000",
+          "invoice_date": "2025-12-20",
+          "discounting_date": "2026-01-12"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E020",
+          "to": "E029",
+          "invoice_id": "I0056",
+          "value": 98071917,
+          "hs_code": "84571000",
+          "invoice_date": "2025-11-16",
+          "discounting_date": "2025-12-28"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E029",
+          "to": "E021",
+          "invoice_id": "I0017",
+          "value": 79184989,
+          "hs_code": "49011000",
+          "invoice_date": "2025-12-14",
+          "discounting_date": "2026-01-28"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E021",
+          "to": "E019",
+          "invoice_id": "I0111",
+          "value": 56062341,
+          "hs_code": "72081000",
+          "invoice_date": "2026-02-19",
+          "discounting_date": "2026-02-28"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E019",
+          "to": "E031",
+          "invoice_id": "I0050",
+          "value": 71326148,
+          "hs_code": "10063000",
+          "invoice_date": "2026-02-01",
+          "discounting_date": "2026-02-15"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E031",
+          "to": "E005",
+          "invoice_id": "I0053",
+          "value": 78494117,
+          "hs_code": "72081000",
+          "invoice_date": "2026-03-03",
+          "discounting_date": "2026-03-13"
+        }
+      ],
+      "scores": {
+        "value": 0.29,
+        "product": null,
+        "timing": 0.28,
+        "externality": 0.21
+      },
+      "abstained": [
+        "product"
+      ],
+      "aggregate": 0.26,
+      "expected_loss": 171034923,
+      "evidence": {
+        "value": "Net position score: 0.29",
+        "product": "Abstained (insufficient HS codes or suppressed by commodity classification)",
+        "timing": "Regularity score: 0.28",
+        "externality": "Externality score: 0.21",
+        "industry": "All trades consistent with declared industry codes."
+      }
+    },
+    {
+      "ring_id": "R3274",
+      "canonical_key": "E005|E019|E023|E012|E008|E028|E030|E031",
+      "closure_type": "transaction",
+      "entities": [
+        "E005",
+        "E019",
+        "E023",
+        "E012",
+        "E008",
+        "E028",
+        "E030",
+        "E031"
+      ],
+      "hops": [
+        {
+          "hop_type": "invoice",
+          "from": "E005",
+          "to": "E019",
+          "invoice_id": "I0079",
+          "value": 92203262,
+          "hs_code": "49011000",
+          "invoice_date": "2026-02-10",
+          "discounting_date": "2026-03-26"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E019",
+          "to": "E023",
+          "invoice_id": "I0074",
+          "value": 120930545,
+          "hs_code": "27101990",
+          "invoice_date": "2026-03-06",
+          "discounting_date": "2026-03-18"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E023",
+          "to": "E012",
+          "invoice_id": "I0106",
+          "value": 103290650,
+          "hs_code": null,
+          "invoice_date": "2026-01-07",
+          "discounting_date": "2026-01-13"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E012",
+          "to": "E008",
+          "invoice_id": "I0058",
+          "value": 53403007,
+          "hs_code": "49011000",
+          "invoice_date": "2026-03-01",
+          "discounting_date": "2026-03-22"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E008",
+          "to": "E028",
+          "invoice_id": "I0118",
+          "value": 118095206,
+          "hs_code": "72081000",
+          "invoice_date": "2026-03-24",
+          "discounting_date": "2026-05-05"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E028",
+          "to": "E030",
+          "invoice_id": "I0116",
+          "value": 104796883,
+          "hs_code": "72081000",
+          "invoice_date": "2026-01-19",
+          "discounting_date": "2026-02-13"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E030",
+          "to": "E031",
+          "invoice_id": "I0134",
+          "value": 119445501,
+          "hs_code": "10063000",
+          "invoice_date": "2026-03-25",
+          "discounting_date": "2026-05-08"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E031",
+          "to": "E005",
+          "invoice_id": "I0053",
+          "value": 78494117,
+          "hs_code": "72081000",
+          "invoice_date": "2026-03-03",
+          "discounting_date": "2026-03-13"
+        }
+      ],
+      "scores": {
+        "value": 0.13,
+        "product": null,
+        "timing": 0.23,
+        "externality": 0.33
+      },
+      "abstained": [
+        "product"
+      ],
+      "aggregate": 0.22,
+      "expected_loss": 170162437,
+      "evidence": {
+        "value": "Net position score: 0.13",
+        "product": "Abstained (insufficient HS codes or suppressed by commodity classification)",
+        "timing": "Regularity score: 0.23",
+        "externality": "Externality score: 0.33",
+        "industry": "All trades consistent with declared industry codes."
+      }
+    },
+    {
+      "ring_id": "R138",
+      "canonical_key": "E001|E010|E018|E030|E020|E029|E005|E019",
+      "closure_type": "transaction",
+      "entities": [
+        "E001",
+        "E010",
+        "E018",
+        "E030",
+        "E020",
+        "E029",
+        "E005",
+        "E019"
+      ],
+      "hops": [
+        {
+          "hop_type": "invoice",
+          "from": "E001",
+          "to": "E010",
+          "invoice_id": "I0016",
+          "value": 58795148,
+          "hs_code": "39012000",
+          "invoice_date": "2026-01-22",
+          "discounting_date": "2026-02-23"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E010",
+          "to": "E018",
+          "invoice_id": "I0036",
+          "value": 68366640,
+          "hs_code": "10063000",
+          "invoice_date": "2025-12-26",
+          "discounting_date": "2026-01-27"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E018",
+          "to": "E030",
+          "invoice_id": "I0065",
+          "value": 85035182,
+          "hs_code": "26011100",
+          "invoice_date": "2026-03-01",
+          "discounting_date": "2026-03-26"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E030",
+          "to": "E020",
+          "invoice_id": "I0048",
+          "value": 84274070,
+          "hs_code": "72081000",
+          "invoice_date": "2025-12-20",
+          "discounting_date": "2026-01-12"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E020",
+          "to": "E029",
+          "invoice_id": "I0056",
+          "value": 98071917,
+          "hs_code": "84571000",
+          "invoice_date": "2025-11-16",
+          "discounting_date": "2025-12-28"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E029",
+          "to": "E005",
+          "invoice_id": "I0140",
+          "value": 88392555,
+          "hs_code": "39012000",
+          "invoice_date": "2026-01-12",
+          "discounting_date": "2026-02-08"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E005",
+          "to": "E019",
+          "invoice_id": "I0079",
+          "value": 92203262,
+          "hs_code": "49011000",
+          "invoice_date": "2026-02-10",
+          "discounting_date": "2026-03-26"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E019",
+          "to": "E001",
+          "invoice_id": "I0126",
+          "value": 135912903,
+          "hs_code": "27101990",
+          "invoice_date": "2025-12-15",
+          "discounting_date": "2025-12-26"
+        }
+      ],
+      "scores": {
+        "value": 0.19,
+        "product": null,
+        "timing": 0.29,
+        "externality": 0.25
+      },
+      "abstained": [
+        "product"
+      ],
+      "aggregate": 0.24,
+      "expected_loss": 170154218,
+      "evidence": {
+        "value": "Net position score: 0.19",
+        "product": "Abstained (insufficient HS codes or suppressed by commodity classification)",
+        "timing": "Regularity score: 0.29",
+        "externality": "Externality score: 0.25",
+        "industry": "All trades consistent with declared industry codes."
+      }
+    },
+    {
+      "ring_id": "R2426",
+      "canonical_key": "E003|E031|E005|E028|E030|E020|E029",
+      "closure_type": "transaction",
+      "entities": [
+        "E003",
+        "E031",
+        "E005",
+        "E028",
+        "E030",
+        "E020",
+        "E029"
+      ],
+      "hops": [
+        {
+          "hop_type": "invoice",
+          "from": "E003",
+          "to": "E031",
+          "invoice_id": "I0098",
+          "value": 56869830,
+          "hs_code": "39012000",
+          "invoice_date": "2026-03-18",
+          "discounting_date": "2026-03-29"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E031",
+          "to": "E005",
+          "invoice_id": "I0053",
+          "value": 78494117,
+          "hs_code": "72081000",
+          "invoice_date": "2026-03-03",
+          "discounting_date": "2026-03-13"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E005",
+          "to": "E028",
+          "invoice_id": "I0086",
+          "value": 92449408,
+          "hs_code": "39012000",
+          "invoice_date": "2026-02-17",
+          "discounting_date": "2026-03-08"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E028",
+          "to": "E030",
+          "invoice_id": "I0116",
+          "value": 104796883,
+          "hs_code": "72081000",
+          "invoice_date": "2026-01-19",
+          "discounting_date": "2026-02-13"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E030",
+          "to": "E020",
+          "invoice_id": "I0048",
+          "value": 84274070,
+          "hs_code": "72081000",
+          "invoice_date": "2025-12-20",
+          "discounting_date": "2026-01-12"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E020",
+          "to": "E029",
+          "invoice_id": "I0056",
+          "value": 98071917,
+          "hs_code": "84571000",
+          "invoice_date": "2025-11-16",
+          "discounting_date": "2025-12-28"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E029",
+          "to": "E003",
+          "invoice_id": "I0046",
+          "value": 93130035,
+          "hs_code": "84571000",
+          "invoice_date": "2026-01-02",
+          "discounting_date": "2026-01-24"
+        }
+      ],
+      "scores": {
+        "value": 0.26,
+        "product": null,
+        "timing": 0.33,
+        "externality": 0.26
+      },
+      "abstained": [
+        "product"
+      ],
+      "aggregate": 0.28,
+      "expected_loss": 169881742,
+      "evidence": {
+        "value": "Net position score: 0.26",
+        "product": "Abstained (insufficient HS codes or suppressed by commodity classification)",
+        "timing": "Regularity score: 0.33",
+        "externality": "Externality score: 0.26",
+        "industry": "All trades consistent with declared industry codes."
+      }
+    },
+    {
+      "ring_id": "R3269",
+      "canonical_key": "E005|E019|E008|E028|E030|E032|E017|E029",
+      "closure_type": "transaction",
+      "entities": [
+        "E005",
+        "E019",
+        "E008",
+        "E028",
+        "E030",
+        "E032",
+        "E017",
+        "E029"
+      ],
+      "hops": [
+        {
+          "hop_type": "invoice",
+          "from": "E005",
+          "to": "E019",
+          "invoice_id": "I0079",
+          "value": 92203262,
+          "hs_code": "49011000",
+          "invoice_date": "2026-02-10",
+          "discounting_date": "2026-03-26"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E019",
+          "to": "E008",
+          "invoice_id": "I0088",
+          "value": 114847359,
+          "hs_code": "72081000",
+          "invoice_date": "2026-02-10",
+          "discounting_date": "2026-03-02"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E008",
+          "to": "E028",
+          "invoice_id": "I0118",
+          "value": 118095206,
+          "hs_code": "72081000",
+          "invoice_date": "2026-03-24",
+          "discounting_date": "2026-05-05"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E028",
+          "to": "E030",
+          "invoice_id": "I0116",
+          "value": 104796883,
+          "hs_code": "72081000",
+          "invoice_date": "2026-01-19",
+          "discounting_date": "2026-02-13"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E030",
+          "to": "E032",
+          "invoice_id": "I0099",
+          "value": 99275859,
+          "hs_code": "72081000",
+          "invoice_date": "2025-12-10",
+          "discounting_date": "2026-01-08"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E032",
+          "to": "E017",
+          "invoice_id": "I0044",
+          "value": 52730277,
+          "hs_code": "49011000",
+          "invoice_date": "2026-01-10",
+          "discounting_date": "2026-02-17"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E017",
+          "to": "E029",
+          "invoice_id": "I0034",
+          "value": 85103166,
+          "hs_code": null,
+          "invoice_date": "2025-11-14",
+          "discounting_date": "2025-12-09"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E029",
           "to": "E005",
           "invoice_id": "I0140",
           "value": 88392555,
@@ -568,30 +3431,1275 @@ const SCORED = {
         }
       ],
       "scores": {
-        "value": 0.42,
+        "value": 0.32,
         "product": null,
-        "timing": 0.33,
-        "externality": 0.15
+        "timing": 0.19,
+        "externality": 0.19
       },
       "abstained": [
         "product"
       ],
-      "aggregate": 0.34,
-      "expected_loss": 157659830,
+      "aggregate": 0.22,
+      "expected_loss": 169647886,
       "evidence": {
-        "value": "Net position score: 0.42",
+        "value": "Net position score: 0.32",
         "product": "Abstained (insufficient HS codes or suppressed by commodity classification)",
-        "timing": "Regularity score: 0.33",
-        "externality": "Externality score: 0.15",
-        "industry": "Flagged cross-industry trades: Entity E028 (NIC-4620) received HS 39012000; Entity E030 (NIC-4620) received HS 72081000; Entity E020 (NIC-5210) received HS 72081000; Entity E029 (NIC-4690) received HS 84571000; Entity E005 (NIC-4690) received HS 39012000"
+        "timing": "Regularity score: 0.19",
+        "externality": "Externality score: 0.19",
+        "industry": "All trades consistent with declared industry codes."
       }
     },
     {
-      "ring_id": "R228",
-      "canonical_key": "E003|E028|E030|E032|E017|E029",
+      "ring_id": "R3866",
+      "canonical_key": "E005|E028|E030|E020|E013|E032|E014|E031",
+      "closure_type": "transaction",
+      "entities": [
+        "E005",
+        "E028",
+        "E030",
+        "E020",
+        "E013",
+        "E032",
+        "E014",
+        "E031"
+      ],
+      "hops": [
+        {
+          "hop_type": "invoice",
+          "from": "E005",
+          "to": "E028",
+          "invoice_id": "I0086",
+          "value": 92449408,
+          "hs_code": "39012000",
+          "invoice_date": "2026-02-17",
+          "discounting_date": "2026-03-08"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E028",
+          "to": "E030",
+          "invoice_id": "I0116",
+          "value": 104796883,
+          "hs_code": "72081000",
+          "invoice_date": "2026-01-19",
+          "discounting_date": "2026-02-13"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E030",
+          "to": "E020",
+          "invoice_id": "I0048",
+          "value": 84274070,
+          "hs_code": "72081000",
+          "invoice_date": "2025-12-20",
+          "discounting_date": "2026-01-12"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E020",
+          "to": "E013",
+          "invoice_id": "I0131",
+          "value": 94441896,
+          "hs_code": "84571000",
+          "invoice_date": "2025-11-20",
+          "discounting_date": "2025-12-25"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E013",
+          "to": "E032",
+          "invoice_id": "I0060",
+          "value": 37949407,
+          "hs_code": "72081000",
+          "invoice_date": "2026-01-08",
+          "discounting_date": "2026-01-20"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E032",
+          "to": "E014",
+          "invoice_id": "I0100",
+          "value": 117945293,
+          "hs_code": "39012000",
+          "invoice_date": "2025-12-26",
+          "discounting_date": "2026-01-26"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E014",
+          "to": "E031",
+          "invoice_id": "I0117",
+          "value": 143828973,
+          "hs_code": "85176200",
+          "invoice_date": "2026-01-29",
+          "discounting_date": "2026-03-08"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E031",
+          "to": "E005",
+          "invoice_id": "I0053",
+          "value": 78494117,
+          "hs_code": "72081000",
+          "invoice_date": "2026-03-03",
+          "discounting_date": "2026-03-13"
+        }
+      ],
+      "scores": {
+        "value": 0.08,
+        "product": null,
+        "timing": 0.39,
+        "externality": 0.34
+      },
+      "abstained": [
+        "product"
+      ],
+      "aggregate": 0.22,
+      "expected_loss": 166533012,
+      "evidence": {
+        "value": "Net position score: 0.08",
+        "product": "Abstained (insufficient HS codes or suppressed by commodity classification)",
+        "timing": "Regularity score: 0.39",
+        "externality": "Externality score: 0.34",
+        "industry": "All trades consistent with declared industry codes."
+      }
+    },
+    {
+      "ring_id": "R3356",
+      "canonical_key": "E005|E023|E012|E008|E028|E030|E017|E029",
+      "closure_type": "transaction",
+      "entities": [
+        "E005",
+        "E023",
+        "E012",
+        "E008",
+        "E028",
+        "E030",
+        "E017",
+        "E029"
+      ],
+      "hops": [
+        {
+          "hop_type": "invoice",
+          "from": "E005",
+          "to": "E023",
+          "invoice_id": "I0081",
+          "value": 98077236,
+          "hs_code": "49011000",
+          "invoice_date": "2025-11-24",
+          "discounting_date": "2025-12-24"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E023",
+          "to": "E012",
+          "invoice_id": "I0106",
+          "value": 103290650,
+          "hs_code": null,
+          "invoice_date": "2026-01-07",
+          "discounting_date": "2026-01-13"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E012",
+          "to": "E008",
+          "invoice_id": "I0058",
+          "value": 53403007,
+          "hs_code": "49011000",
+          "invoice_date": "2026-03-01",
+          "discounting_date": "2026-03-22"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E008",
+          "to": "E028",
+          "invoice_id": "I0118",
+          "value": 118095206,
+          "hs_code": "72081000",
+          "invoice_date": "2026-03-24",
+          "discounting_date": "2026-05-05"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E028",
+          "to": "E030",
+          "invoice_id": "I0116",
+          "value": 104796883,
+          "hs_code": "72081000",
+          "invoice_date": "2026-01-19",
+          "discounting_date": "2026-02-13"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E030",
+          "to": "E017",
+          "invoice_id": "I0085",
+          "value": 100627925,
+          "hs_code": "74031100",
+          "invoice_date": "2026-02-28",
+          "discounting_date": "2026-03-21"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E017",
+          "to": "E029",
+          "invoice_id": "I0034",
+          "value": 85103166,
+          "hs_code": null,
+          "invoice_date": "2025-11-14",
+          "discounting_date": "2025-12-09"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E029",
+          "to": "E005",
+          "invoice_id": "I0140",
+          "value": 88392555,
+          "hs_code": "39012000",
+          "invoice_date": "2026-01-12",
+          "discounting_date": "2026-02-08"
+        }
+      ],
+      "scores": {
+        "value": 0.23,
+        "product": null,
+        "timing": 0.19,
+        "externality": 0.25
+      },
+      "abstained": [
+        "product"
+      ],
+      "aggregate": 0.22,
+      "expected_loss": 166515527,
+      "evidence": {
+        "value": "Net position score: 0.23",
+        "product": "Abstained (insufficient HS codes or suppressed by commodity classification)",
+        "timing": "Regularity score: 0.19",
+        "externality": "Externality score: 0.25",
+        "industry": "All trades consistent with declared industry codes."
+      }
+    },
+    {
+      "ring_id": "R5004",
+      "canonical_key": "E008|E028|E030|E020|E029|E018|E019|E031",
+      "closure_type": "transaction",
+      "entities": [
+        "E008",
+        "E028",
+        "E030",
+        "E020",
+        "E029",
+        "E018",
+        "E019",
+        "E031"
+      ],
+      "hops": [
+        {
+          "hop_type": "invoice",
+          "from": "E008",
+          "to": "E028",
+          "invoice_id": "I0118",
+          "value": 118095206,
+          "hs_code": "72081000",
+          "invoice_date": "2026-03-24",
+          "discounting_date": "2026-05-05"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E028",
+          "to": "E030",
+          "invoice_id": "I0116",
+          "value": 104796883,
+          "hs_code": "72081000",
+          "invoice_date": "2026-01-19",
+          "discounting_date": "2026-02-13"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E030",
+          "to": "E020",
+          "invoice_id": "I0048",
+          "value": 84274070,
+          "hs_code": "72081000",
+          "invoice_date": "2025-12-20",
+          "discounting_date": "2026-01-12"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E020",
+          "to": "E029",
+          "invoice_id": "I0056",
+          "value": 98071917,
+          "hs_code": "84571000",
+          "invoice_date": "2025-11-16",
+          "discounting_date": "2025-12-28"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E029",
+          "to": "E018",
+          "invoice_id": "I0123",
+          "value": 89042300,
+          "hs_code": "49011000",
+          "invoice_date": "2025-12-26",
+          "discounting_date": "2026-01-30"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E018",
+          "to": "E019",
+          "invoice_id": "I0119",
+          "value": 60906538,
+          "hs_code": "39012000",
+          "invoice_date": "2026-01-29",
+          "discounting_date": "2026-02-01"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E019",
+          "to": "E031",
+          "invoice_id": "I0050",
+          "value": 71326148,
+          "hs_code": "10063000",
+          "invoice_date": "2026-02-01",
+          "discounting_date": "2026-02-15"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E031",
+          "to": "E008",
+          "invoice_id": "I0093",
+          "value": 86365017,
+          "hs_code": "74031100",
+          "invoice_date": "2026-02-28",
+          "discounting_date": "2026-03-07"
+        }
+      ],
+      "scores": {
+        "value": 0.27,
+        "product": null,
+        "timing": 0.21,
+        "externality": 0.23
+      },
+      "abstained": [
+        "product"
+      ],
+      "aggregate": 0.23,
+      "expected_loss": 166269095,
+      "evidence": {
+        "value": "Net position score: 0.27",
+        "product": "Abstained (insufficient HS codes or suppressed by commodity classification)",
+        "timing": "Regularity score: 0.21",
+        "externality": "Externality score: 0.23",
+        "industry": "All trades consistent with declared industry codes."
+      }
+    },
+    {
+      "ring_id": "R3261",
+      "canonical_key": "E005|E019|E008|E028|E030|E020|E014|E031",
+      "closure_type": "transaction",
+      "entities": [
+        "E005",
+        "E019",
+        "E008",
+        "E028",
+        "E030",
+        "E020",
+        "E014",
+        "E031"
+      ],
+      "hops": [
+        {
+          "hop_type": "invoice",
+          "from": "E005",
+          "to": "E019",
+          "invoice_id": "I0079",
+          "value": 92203262,
+          "hs_code": "49011000",
+          "invoice_date": "2026-02-10",
+          "discounting_date": "2026-03-26"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E019",
+          "to": "E008",
+          "invoice_id": "I0088",
+          "value": 114847359,
+          "hs_code": "72081000",
+          "invoice_date": "2026-02-10",
+          "discounting_date": "2026-03-02"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E008",
+          "to": "E028",
+          "invoice_id": "I0118",
+          "value": 118095206,
+          "hs_code": "72081000",
+          "invoice_date": "2026-03-24",
+          "discounting_date": "2026-05-05"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E028",
+          "to": "E030",
+          "invoice_id": "I0116",
+          "value": 104796883,
+          "hs_code": "72081000",
+          "invoice_date": "2026-01-19",
+          "discounting_date": "2026-02-13"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E030",
+          "to": "E020",
+          "invoice_id": "I0048",
+          "value": 84274070,
+          "hs_code": "72081000",
+          "invoice_date": "2025-12-20",
+          "discounting_date": "2026-01-12"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E020",
+          "to": "E014",
+          "invoice_id": "I0062",
+          "value": 97589062,
+          "hs_code": "84571000",
+          "invoice_date": "2026-02-21",
+          "discounting_date": "2026-03-01"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E014",
+          "to": "E031",
+          "invoice_id": "I0117",
+          "value": 143828973,
+          "hs_code": "85176200",
+          "invoice_date": "2026-01-29",
+          "discounting_date": "2026-03-08"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E031",
+          "to": "E005",
+          "invoice_id": "I0053",
+          "value": 78494117,
+          "hs_code": "72081000",
+          "invoice_date": "2026-03-03",
+          "discounting_date": "2026-03-13"
+        }
+      ],
+      "scores": {
+        "value": 0.2,
+        "product": null,
+        "timing": 0.15,
+        "externality": 0.26
+      },
+      "abstained": [
+        "product"
+      ],
+      "aggregate": 0.2,
+      "expected_loss": 165340243,
+      "evidence": {
+        "value": "Net position score: 0.20",
+        "product": "Abstained (insufficient HS codes or suppressed by commodity classification)",
+        "timing": "Regularity score: 0.15",
+        "externality": "Externality score: 0.26",
+        "industry": "All trades consistent with declared industry codes."
+      }
+    },
+    {
+      "ring_id": "R711",
+      "canonical_key": "E003|E008|E028|E030|E031|E032|E017|E029",
       "closure_type": "transaction",
       "entities": [
         "E003",
+        "E008",
+        "E028",
+        "E030",
+        "E031",
+        "E032",
+        "E017",
+        "E029"
+      ],
+      "hops": [
+        {
+          "hop_type": "invoice",
+          "from": "E003",
+          "to": "E008",
+          "invoice_id": "I0091",
+          "value": 65510456,
+          "hs_code": "49011000",
+          "invoice_date": "2026-01-23",
+          "discounting_date": "2026-02-21"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E008",
+          "to": "E028",
+          "invoice_id": "I0118",
+          "value": 118095206,
+          "hs_code": "72081000",
+          "invoice_date": "2026-03-24",
+          "discounting_date": "2026-05-05"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E028",
+          "to": "E030",
+          "invoice_id": "I0116",
+          "value": 104796883,
+          "hs_code": "72081000",
+          "invoice_date": "2026-01-19",
+          "discounting_date": "2026-02-13"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E030",
+          "to": "E031",
+          "invoice_id": "I0134",
+          "value": 119445501,
+          "hs_code": "10063000",
+          "invoice_date": "2026-03-25",
+          "discounting_date": "2026-05-08"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E031",
+          "to": "E032",
+          "invoice_id": "I0075",
+          "value": 80273443,
+          "hs_code": "74031100",
+          "invoice_date": "2026-01-22",
+          "discounting_date": "2026-02-06"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E032",
+          "to": "E017",
+          "invoice_id": "I0044",
+          "value": 52730277,
+          "hs_code": "49011000",
+          "invoice_date": "2026-01-10",
+          "discounting_date": "2026-02-17"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E017",
+          "to": "E029",
+          "invoice_id": "I0034",
+          "value": 85103166,
+          "hs_code": null,
+          "invoice_date": "2025-11-14",
+          "discounting_date": "2025-12-09"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E029",
+          "to": "E003",
+          "invoice_id": "I0046",
+          "value": 93130035,
+          "hs_code": "84571000",
+          "invoice_date": "2026-01-02",
+          "discounting_date": "2026-01-24"
+        }
+      ],
+      "scores": {
+        "value": 0.14,
+        "product": null,
+        "timing": 0.29,
+        "externality": 0.31
+      },
+      "abstained": [
+        "product"
+      ],
+      "aggregate": 0.23,
+      "expected_loss": 165316833,
+      "evidence": {
+        "value": "Net position score: 0.14",
+        "product": "Abstained (insufficient HS codes or suppressed by commodity classification)",
+        "timing": "Regularity score: 0.29",
+        "externality": "Externality score: 0.31",
+        "industry": "All trades consistent with declared industry codes."
+      }
+    },
+    {
+      "ring_id": "R5323",
+      "canonical_key": "E013|E028|E030|E017|E029|E021|E018|E020",
+      "closure_type": "transaction",
+      "entities": [
+        "E013",
+        "E028",
+        "E030",
+        "E017",
+        "E029",
+        "E021",
+        "E018",
+        "E020"
+      ],
+      "hops": [
+        {
+          "hop_type": "invoice",
+          "from": "E013",
+          "to": "E028",
+          "invoice_id": "I0092",
+          "value": 84263562,
+          "hs_code": "85176200",
+          "invoice_date": "2026-01-09",
+          "discounting_date": "2026-01-22"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E028",
+          "to": "E030",
+          "invoice_id": "I0116",
+          "value": 104796883,
+          "hs_code": "72081000",
+          "invoice_date": "2026-01-19",
+          "discounting_date": "2026-02-13"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E030",
+          "to": "E017",
+          "invoice_id": "I0085",
+          "value": 100627925,
+          "hs_code": "74031100",
+          "invoice_date": "2026-02-28",
+          "discounting_date": "2026-03-21"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E017",
+          "to": "E029",
+          "invoice_id": "I0034",
+          "value": 85103166,
+          "hs_code": null,
+          "invoice_date": "2025-11-14",
+          "discounting_date": "2025-12-09"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E029",
+          "to": "E021",
+          "invoice_id": "I0017",
+          "value": 79184989,
+          "hs_code": "49011000",
+          "invoice_date": "2025-12-14",
+          "discounting_date": "2026-01-28"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E021",
+          "to": "E018",
+          "invoice_id": "I0023",
+          "value": 89902530,
+          "hs_code": "39012000",
+          "invoice_date": "2026-03-21",
+          "discounting_date": "2026-04-21"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E018",
+          "to": "E020",
+          "invoice_id": "I0025",
+          "value": 99283231,
+          "hs_code": "72081000",
+          "invoice_date": "2026-01-21",
+          "discounting_date": "2026-02-27"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E020",
+          "to": "E013",
+          "invoice_id": "I0131",
+          "value": 94441896,
+          "hs_code": "84571000",
+          "invoice_date": "2025-11-20",
+          "discounting_date": "2025-12-25"
+        }
+      ],
+      "scores": {
+        "value": 0.48,
+        "product": null,
+        "timing": 0.07,
+        "externality": 0.32
+      },
+      "abstained": [
+        "product"
+      ],
+      "aggregate": 0.22,
+      "expected_loss": 164710175,
+      "evidence": {
+        "value": "Net position score: 0.48",
+        "product": "Abstained (insufficient HS codes or suppressed by commodity classification)",
+        "timing": "Regularity score: 0.07",
+        "externality": "Externality score: 0.32",
+        "industry": "All trades consistent with declared industry codes."
+      }
+    },
+    {
+      "ring_id": "R5338",
+      "canonical_key": "E013|E030|E032|E017|E029|E018|E020",
+      "closure_type": "transaction",
+      "entities": [
+        "E013",
+        "E030",
+        "E032",
+        "E017",
+        "E029",
+        "E018",
+        "E020"
+      ],
+      "hops": [
+        {
+          "hop_type": "invoice",
+          "from": "E013",
+          "to": "E030",
+          "invoice_id": "I0045",
+          "value": 78457894,
+          "hs_code": "26011100",
+          "invoice_date": "2026-01-01",
+          "discounting_date": "2026-02-03"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E030",
+          "to": "E032",
+          "invoice_id": "I0099",
+          "value": 99275859,
+          "hs_code": "72081000",
+          "invoice_date": "2025-12-10",
+          "discounting_date": "2026-01-08"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E032",
+          "to": "E017",
+          "invoice_id": "I0044",
+          "value": 52730277,
+          "hs_code": "49011000",
+          "invoice_date": "2026-01-10",
+          "discounting_date": "2026-02-17"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E017",
+          "to": "E029",
+          "invoice_id": "I0034",
+          "value": 85103166,
+          "hs_code": null,
+          "invoice_date": "2025-11-14",
+          "discounting_date": "2025-12-09"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E029",
+          "to": "E018",
+          "invoice_id": "I0123",
+          "value": 89042300,
+          "hs_code": "49011000",
+          "invoice_date": "2025-12-26",
+          "discounting_date": "2026-01-30"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E018",
+          "to": "E020",
+          "invoice_id": "I0025",
+          "value": 99283231,
+          "hs_code": "72081000",
+          "invoice_date": "2026-01-21",
+          "discounting_date": "2026-02-27"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E020",
+          "to": "E013",
+          "invoice_id": "I0131",
+          "value": 94441896,
+          "hs_code": "84571000",
+          "invoice_date": "2025-11-20",
+          "discounting_date": "2025-12-25"
+        }
+      ],
+      "scores": {
+        "value": 0.22,
+        "product": null,
+        "timing": 0.29,
+        "externality": 0.32
+      },
+      "abstained": [
+        "product"
+      ],
+      "aggregate": 0.27,
+      "expected_loss": 163545156,
+      "evidence": {
+        "value": "Net position score: 0.22",
+        "product": "Abstained (insufficient HS codes or suppressed by commodity classification)",
+        "timing": "Regularity score: 0.29",
+        "externality": "Externality score: 0.32",
+        "industry": "All trades consistent with declared industry codes."
+      }
+    },
+    {
+      "ring_id": "R5229",
+      "canonical_key": "E009|E029|E021|E018|E020|E015|E025|E028",
+      "closure_type": "transaction",
+      "entities": [
+        "E009",
+        "E029",
+        "E021",
+        "E018",
+        "E020",
+        "E015",
+        "E025",
+        "E028"
+      ],
+      "hops": [
+        {
+          "hop_type": "invoice",
+          "from": "E009",
+          "to": "E029",
+          "invoice_id": "I0052",
+          "value": 100973640,
+          "hs_code": null,
+          "invoice_date": "2026-03-27",
+          "discounting_date": "2026-04-17"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E029",
+          "to": "E021",
+          "invoice_id": "I0017",
+          "value": 79184989,
+          "hs_code": "49011000",
+          "invoice_date": "2025-12-14",
+          "discounting_date": "2026-01-28"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E021",
+          "to": "E018",
+          "invoice_id": "I0023",
+          "value": 89902530,
+          "hs_code": "39012000",
+          "invoice_date": "2026-03-21",
+          "discounting_date": "2026-04-21"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E018",
+          "to": "E020",
+          "invoice_id": "I0025",
+          "value": 99283231,
+          "hs_code": "72081000",
+          "invoice_date": "2026-01-21",
+          "discounting_date": "2026-02-27"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E020",
+          "to": "E015",
+          "invoice_id": "I0014",
+          "value": 66619754,
+          "hs_code": "49011000",
+          "invoice_date": "2026-03-22",
+          "discounting_date": "2026-04-02"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E015",
+          "to": "E025",
+          "invoice_id": "I0127",
+          "value": 61253795,
+          "hs_code": "72081000",
+          "invoice_date": "2025-11-11",
+          "discounting_date": "2025-12-11"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E025",
+          "to": "E028",
+          "invoice_id": "I0121",
+          "value": 53050466,
+          "hs_code": "84571000",
+          "invoice_date": "2026-01-23",
+          "discounting_date": "2026-03-03"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E028",
+          "to": "E009",
+          "invoice_id": "I0040",
+          "value": 82458160,
+          "hs_code": "27101990",
+          "invoice_date": "2025-11-04",
+          "discounting_date": "2025-12-03"
+        }
+      ],
+      "scores": {
+        "value": 0.24,
+        "product": null,
+        "timing": 0.28,
+        "externality": 0.26
+      },
+      "abstained": [
+        "product"
+      ],
+      "aggregate": 0.26,
+      "expected_loss": 162773651,
+      "evidence": {
+        "value": "Net position score: 0.24",
+        "product": "Abstained (insufficient HS codes or suppressed by commodity classification)",
+        "timing": "Regularity score: 0.28",
+        "externality": "Externality score: 0.26",
+        "industry": "All trades consistent with declared industry codes."
+      }
+    },
+    {
+      "ring_id": "R5335",
+      "canonical_key": "E013|E030|E031|E032|E017|E029|E018|E020",
+      "closure_type": "transaction",
+      "entities": [
+        "E013",
+        "E030",
+        "E031",
+        "E032",
+        "E017",
+        "E029",
+        "E018",
+        "E020"
+      ],
+      "hops": [
+        {
+          "hop_type": "invoice",
+          "from": "E013",
+          "to": "E030",
+          "invoice_id": "I0045",
+          "value": 78457894,
+          "hs_code": "26011100",
+          "invoice_date": "2026-01-01",
+          "discounting_date": "2026-02-03"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E030",
+          "to": "E031",
+          "invoice_id": "I0134",
+          "value": 119445501,
+          "hs_code": "10063000",
+          "invoice_date": "2026-03-25",
+          "discounting_date": "2026-05-08"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E031",
+          "to": "E032",
+          "invoice_id": "I0075",
+          "value": 80273443,
+          "hs_code": "74031100",
+          "invoice_date": "2026-01-22",
+          "discounting_date": "2026-02-06"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E032",
+          "to": "E017",
+          "invoice_id": "I0044",
+          "value": 52730277,
+          "hs_code": "49011000",
+          "invoice_date": "2026-01-10",
+          "discounting_date": "2026-02-17"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E017",
+          "to": "E029",
+          "invoice_id": "I0034",
+          "value": 85103166,
+          "hs_code": null,
+          "invoice_date": "2025-11-14",
+          "discounting_date": "2025-12-09"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E029",
+          "to": "E018",
+          "invoice_id": "I0123",
+          "value": 89042300,
+          "hs_code": "49011000",
+          "invoice_date": "2025-12-26",
+          "discounting_date": "2026-01-30"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E018",
+          "to": "E020",
+          "invoice_id": "I0025",
+          "value": 99283231,
+          "hs_code": "72081000",
+          "invoice_date": "2026-01-21",
+          "discounting_date": "2026-02-27"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E020",
+          "to": "E013",
+          "invoice_id": "I0131",
+          "value": 94441896,
+          "hs_code": "84571000",
+          "invoice_date": "2025-11-20",
+          "discounting_date": "2025-12-25"
+        }
+      ],
+      "scores": {
+        "value": 0.19,
+        "product": null,
+        "timing": 0.19,
+        "externality": 0.36
+      },
+      "abstained": [
+        "product"
+      ],
+      "aggregate": 0.23,
+      "expected_loss": 162475284,
+      "evidence": {
+        "value": "Net position score: 0.19",
+        "product": "Abstained (insufficient HS codes or suppressed by commodity classification)",
+        "timing": "Regularity score: 0.19",
+        "externality": "Externality score: 0.36",
+        "industry": "All trades consistent with declared industry codes."
+      }
+    },
+    {
+      "ring_id": "R5339",
+      "canonical_key": "E013|E030|E032|E017|E029|E021|E018|E020",
+      "closure_type": "transaction",
+      "entities": [
+        "E013",
+        "E030",
+        "E032",
+        "E017",
+        "E029",
+        "E021",
+        "E018",
+        "E020"
+      ],
+      "hops": [
+        {
+          "hop_type": "invoice",
+          "from": "E013",
+          "to": "E030",
+          "invoice_id": "I0045",
+          "value": 78457894,
+          "hs_code": "26011100",
+          "invoice_date": "2026-01-01",
+          "discounting_date": "2026-02-03"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E030",
+          "to": "E032",
+          "invoice_id": "I0099",
+          "value": 99275859,
+          "hs_code": "72081000",
+          "invoice_date": "2025-12-10",
+          "discounting_date": "2026-01-08"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E032",
+          "to": "E017",
+          "invoice_id": "I0044",
+          "value": 52730277,
+          "hs_code": "49011000",
+          "invoice_date": "2026-01-10",
+          "discounting_date": "2026-02-17"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E017",
+          "to": "E029",
+          "invoice_id": "I0034",
+          "value": 85103166,
+          "hs_code": null,
+          "invoice_date": "2025-11-14",
+          "discounting_date": "2025-12-09"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E029",
+          "to": "E021",
+          "invoice_id": "I0017",
+          "value": 79184989,
+          "hs_code": "49011000",
+          "invoice_date": "2025-12-14",
+          "discounting_date": "2026-01-28"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E021",
+          "to": "E018",
+          "invoice_id": "I0023",
+          "value": 89902530,
+          "hs_code": "39012000",
+          "invoice_date": "2026-03-21",
+          "discounting_date": "2026-04-21"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E018",
+          "to": "E020",
+          "invoice_id": "I0025",
+          "value": 99283231,
+          "hs_code": "72081000",
+          "invoice_date": "2026-01-21",
+          "discounting_date": "2026-02-27"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E020",
+          "to": "E013",
+          "invoice_id": "I0131",
+          "value": 94441896,
+          "hs_code": "84571000",
+          "invoice_date": "2025-11-20",
+          "discounting_date": "2025-12-25"
+        }
+      ],
+      "scores": {
+        "value": 0.24,
+        "product": null,
+        "timing": 0.17,
+        "externality": 0.34
+      },
+      "abstained": [
+        "product"
+      ],
+      "aggregate": 0.24,
+      "expected_loss": 162451818,
+      "evidence": {
+        "value": "Net position score: 0.24",
+        "product": "Abstained (insufficient HS codes or suppressed by commodity classification)",
+        "timing": "Regularity score: 0.17",
+        "externality": "Externality score: 0.34",
+        "industry": "All trades consistent with declared industry codes."
+      }
+    },
+    {
+      "ring_id": "R5322",
+      "canonical_key": "E013|E028|E030|E017|E029|E018|E020",
+      "closure_type": "transaction",
+      "entities": [
+        "E013",
+        "E028",
+        "E030",
+        "E017",
+        "E029",
+        "E018",
+        "E020"
+      ],
+      "hops": [
+        {
+          "hop_type": "invoice",
+          "from": "E013",
+          "to": "E028",
+          "invoice_id": "I0092",
+          "value": 84263562,
+          "hs_code": "85176200",
+          "invoice_date": "2026-01-09",
+          "discounting_date": "2026-01-22"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E028",
+          "to": "E030",
+          "invoice_id": "I0116",
+          "value": 104796883,
+          "hs_code": "72081000",
+          "invoice_date": "2026-01-19",
+          "discounting_date": "2026-02-13"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E030",
+          "to": "E017",
+          "invoice_id": "I0085",
+          "value": 100627925,
+          "hs_code": "74031100",
+          "invoice_date": "2026-02-28",
+          "discounting_date": "2026-03-21"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E017",
+          "to": "E029",
+          "invoice_id": "I0034",
+          "value": 85103166,
+          "hs_code": null,
+          "invoice_date": "2025-11-14",
+          "discounting_date": "2025-12-09"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E029",
+          "to": "E018",
+          "invoice_id": "I0123",
+          "value": 89042300,
+          "hs_code": "49011000",
+          "invoice_date": "2025-12-26",
+          "discounting_date": "2026-01-30"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E018",
+          "to": "E020",
+          "invoice_id": "I0025",
+          "value": 99283231,
+          "hs_code": "72081000",
+          "invoice_date": "2026-01-21",
+          "discounting_date": "2026-02-27"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E020",
+          "to": "E013",
+          "invoice_id": "I0131",
+          "value": 94441896,
+          "hs_code": "84571000",
+          "invoice_date": "2025-11-20",
+          "discounting_date": "2025-12-25"
+        }
+      ],
+      "scores": {
+        "value": 0.49,
+        "product": null,
+        "timing": 0.1,
+        "externality": 0.29
+      },
+      "abstained": [
+        "product"
+      ],
+      "aggregate": 0.25,
+      "expected_loss": 161767620,
+      "evidence": {
+        "value": "Net position score: 0.49",
+        "product": "Abstained (insufficient HS codes or suppressed by commodity classification)",
+        "timing": "Regularity score: 0.10",
+        "externality": "Externality score: 0.29",
+        "industry": "All trades consistent with declared industry codes."
+      }
+    },
+    {
+      "ring_id": "R2462",
+      "canonical_key": "E003|E031|E008|E028|E030|E032|E017|E029",
+      "closure_type": "transaction",
+      "entities": [
+        "E003",
+        "E031",
+        "E008",
         "E028",
         "E030",
         "E032",
@@ -602,12 +4710,32 @@ const SCORED = {
         {
           "hop_type": "invoice",
           "from": "E003",
+          "to": "E031",
+          "invoice_id": "I0098",
+          "value": 56869830,
+          "hs_code": "39012000",
+          "invoice_date": "2026-03-18",
+          "discounting_date": "2026-03-29"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E031",
+          "to": "E008",
+          "invoice_id": "I0093",
+          "value": 86365017,
+          "hs_code": "74031100",
+          "invoice_date": "2026-02-28",
+          "discounting_date": "2026-03-07"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E008",
           "to": "E028",
-          "invoice_id": "I0067",
-          "value": 103807836,
-          "hs_code": "49011000",
-          "invoice_date": "2026-02-12",
-          "discounting_date": "2026-03-19"
+          "invoice_id": "I0118",
+          "value": 118095206,
+          "hs_code": "72081000",
+          "invoice_date": "2026-03-24",
+          "discounting_date": "2026-05-05"
         },
         {
           "hop_type": "invoice",
@@ -661,26 +4789,256 @@ const SCORED = {
         }
       ],
       "scores": {
-        "value": 0.28,
+        "value": 0.14,
         "product": null,
-        "timing": 0.36,
-        "externality": 0.21
+        "timing": 0.28,
+        "externality": 0.31
       },
       "abstained": [
         "product"
       ],
-      "aggregate": 0.29,
-      "expected_loss": 156414908,
+      "aggregate": 0.23,
+      "expected_loss": 160181469,
       "evidence": {
-        "value": "Net position score: 0.28",
+        "value": "Net position score: 0.14",
         "product": "Abstained (insufficient HS codes or suppressed by commodity classification)",
-        "timing": "Regularity score: 0.36",
-        "externality": "Externality score: 0.21",
-        "industry": "Flagged cross-industry trades: Entity E028 (NIC-4620) received HS 49011000; Entity E030 (NIC-4620) received HS 72081000; Entity E032 (NIC-5229) received HS 72081000; Entity E017 (NIC-8299) received HS 49011000; Entity E003 (NIC-5210) received HS 84571000"
+        "timing": "Regularity score: 0.28",
+        "externality": "Externality score: 0.31",
+        "industry": "All trades consistent with declared industry codes."
       }
     },
     {
-      "ring_id": "R600",
+      "ring_id": "R3692",
+      "canonical_key": "E005|E027|E032|E017|E029|E018|E030|E031",
+      "closure_type": "transaction",
+      "entities": [
+        "E005",
+        "E027",
+        "E032",
+        "E017",
+        "E029",
+        "E018",
+        "E030",
+        "E031"
+      ],
+      "hops": [
+        {
+          "hop_type": "invoice",
+          "from": "E005",
+          "to": "E027",
+          "invoice_id": "I0110",
+          "value": 83449956,
+          "hs_code": "84571000",
+          "invoice_date": "2026-01-10",
+          "discounting_date": "2026-02-21"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E027",
+          "to": "E032",
+          "invoice_id": "I0072",
+          "value": 112159236,
+          "hs_code": "49011000",
+          "invoice_date": "2025-12-08",
+          "discounting_date": "2026-01-04"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E032",
+          "to": "E017",
+          "invoice_id": "I0044",
+          "value": 52730277,
+          "hs_code": "49011000",
+          "invoice_date": "2026-01-10",
+          "discounting_date": "2026-02-17"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E017",
+          "to": "E029",
+          "invoice_id": "I0034",
+          "value": 85103166,
+          "hs_code": null,
+          "invoice_date": "2025-11-14",
+          "discounting_date": "2025-12-09"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E029",
+          "to": "E018",
+          "invoice_id": "I0123",
+          "value": 89042300,
+          "hs_code": "49011000",
+          "invoice_date": "2025-12-26",
+          "discounting_date": "2026-01-30"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E018",
+          "to": "E030",
+          "invoice_id": "I0065",
+          "value": 85035182,
+          "hs_code": "26011100",
+          "invoice_date": "2026-03-01",
+          "discounting_date": "2026-03-26"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E030",
+          "to": "E031",
+          "invoice_id": "I0134",
+          "value": 119445501,
+          "hs_code": "10063000",
+          "invoice_date": "2026-03-25",
+          "discounting_date": "2026-05-08"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E031",
+          "to": "E005",
+          "invoice_id": "I0053",
+          "value": 78494117,
+          "hs_code": "72081000",
+          "invoice_date": "2026-03-03",
+          "discounting_date": "2026-03-13"
+        }
+      ],
+      "scores": {
+        "value": 0.14,
+        "product": null,
+        "timing": 0.29,
+        "externality": 0.28
+      },
+      "abstained": [
+        "product"
+      ],
+      "aggregate": 0.23,
+      "expected_loss": 158755591,
+      "evidence": {
+        "value": "Net position score: 0.14",
+        "product": "Abstained (insufficient HS codes or suppressed by commodity classification)",
+        "timing": "Regularity score: 0.29",
+        "externality": "Externality score: 0.28",
+        "industry": "All trades consistent with declared industry codes."
+      }
+    },
+    {
+      "ring_id": "R3321",
+      "canonical_key": "E005|E019|E031|E008|E028|E030|E017|E029",
+      "closure_type": "transaction",
+      "entities": [
+        "E005",
+        "E019",
+        "E031",
+        "E008",
+        "E028",
+        "E030",
+        "E017",
+        "E029"
+      ],
+      "hops": [
+        {
+          "hop_type": "invoice",
+          "from": "E005",
+          "to": "E019",
+          "invoice_id": "I0079",
+          "value": 92203262,
+          "hs_code": "49011000",
+          "invoice_date": "2026-02-10",
+          "discounting_date": "2026-03-26"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E019",
+          "to": "E031",
+          "invoice_id": "I0050",
+          "value": 71326148,
+          "hs_code": "10063000",
+          "invoice_date": "2026-02-01",
+          "discounting_date": "2026-02-15"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E031",
+          "to": "E008",
+          "invoice_id": "I0093",
+          "value": 86365017,
+          "hs_code": "74031100",
+          "invoice_date": "2026-02-28",
+          "discounting_date": "2026-03-07"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E008",
+          "to": "E028",
+          "invoice_id": "I0118",
+          "value": 118095206,
+          "hs_code": "72081000",
+          "invoice_date": "2026-03-24",
+          "discounting_date": "2026-05-05"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E028",
+          "to": "E030",
+          "invoice_id": "I0116",
+          "value": 104796883,
+          "hs_code": "72081000",
+          "invoice_date": "2026-01-19",
+          "discounting_date": "2026-02-13"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E030",
+          "to": "E017",
+          "invoice_id": "I0085",
+          "value": 100627925,
+          "hs_code": "74031100",
+          "invoice_date": "2026-02-28",
+          "discounting_date": "2026-03-21"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E017",
+          "to": "E029",
+          "invoice_id": "I0034",
+          "value": 85103166,
+          "hs_code": null,
+          "invoice_date": "2025-11-14",
+          "discounting_date": "2025-12-09"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E029",
+          "to": "E005",
+          "invoice_id": "I0140",
+          "value": 88392555,
+          "hs_code": "39012000",
+          "invoice_date": "2026-01-12",
+          "discounting_date": "2026-02-08"
+        }
+      ],
+      "scores": {
+        "value": 0.38,
+        "product": null,
+        "timing": 0.1,
+        "externality": 0.24
+      },
+      "abstained": [
+        "product"
+      ],
+      "aggregate": 0.21,
+      "expected_loss": 158459484,
+      "evidence": {
+        "value": "Net position score: 0.38",
+        "product": "Abstained (insufficient HS codes or suppressed by commodity classification)",
+        "timing": "Regularity score: 0.10",
+        "externality": "Externality score: 0.24",
+        "industry": "All trades consistent with declared industry codes."
+      }
+    },
+    {
+      "ring_id": "R5046",
       "canonical_key": "E008|E028|E030|E032|E014|E031",
       "closure_type": "transaction",
       "entities": [
@@ -762,289 +5120,23 @@ const SCORED = {
       "abstained": [
         "product"
       ],
-      "aggregate": 0.23,
-      "expected_loss": 155606153,
+      "aggregate": 0.24,
+      "expected_loss": 157727635,
       "evidence": {
         "value": "Net position score: 0.22",
         "product": "Abstained (insufficient HS codes or suppressed by commodity classification)",
         "timing": "Regularity score: 0.25",
         "externality": "Externality score: 0.24",
-        "industry": "Flagged cross-industry trades: Entity E028 (NIC-4620) received HS 72081000; Entity E030 (NIC-4620) received HS 72081000; Entity E032 (NIC-5229) received HS 72081000; Entity E014 (NIC-2610) received HS 39012000; Entity E031 (NIC-4662) received HS 85176200; Entity E008 (NIC-4662) received HS 74031100"
+        "industry": "All trades consistent with declared industry codes."
       }
     },
     {
-      "ring_id": "R714",
-      "canonical_key": "E017|E029|E021|E018|E020|E030",
+      "ring_id": "R2429",
+      "canonical_key": "E003|E031|E005|E028|E030|E032|E017|E029",
       "closure_type": "transaction",
       "entities": [
-        "E017",
-        "E029",
-        "E021",
-        "E018",
-        "E020",
-        "E030"
-      ],
-      "hops": [
-        {
-          "hop_type": "invoice",
-          "from": "E017",
-          "to": "E029",
-          "invoice_id": "I0034",
-          "value": 85103166,
-          "hs_code": null,
-          "invoice_date": "2025-11-14",
-          "discounting_date": "2025-12-09"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E029",
-          "to": "E021",
-          "invoice_id": "I0017",
-          "value": 79184989,
-          "hs_code": "49011000",
-          "invoice_date": "2025-12-14",
-          "discounting_date": "2026-01-28"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E021",
-          "to": "E018",
-          "invoice_id": "I0023",
-          "value": 89902530,
-          "hs_code": "39012000",
-          "invoice_date": "2026-03-21",
-          "discounting_date": "2026-04-21"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E018",
-          "to": "E020",
-          "invoice_id": "I0025",
-          "value": 99283231,
-          "hs_code": "72081000",
-          "invoice_date": "2026-01-21",
-          "discounting_date": "2026-02-27"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E020",
-          "to": "E030",
-          "invoice_id": "I0038",
-          "value": 122941841,
-          "hs_code": "84571000",
-          "invoice_date": "2025-12-21",
-          "discounting_date": "2025-12-28"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E030",
-          "to": "E017",
-          "invoice_id": "I0085",
-          "value": 100627925,
-          "hs_code": "74031100",
-          "invoice_date": "2026-02-28",
-          "discounting_date": "2026-03-21"
-        }
-      ],
-      "scores": {
-        "value": 0.36,
-        "product": null,
-        "timing": 0.17,
-        "externality": 0.3
-      },
-      "abstained": [
-        "product"
-      ],
-      "aggregate": 0.27,
-      "expected_loss": 153768794,
-      "evidence": {
-        "value": "Net position score: 0.36",
-        "product": "Abstained (insufficient HS codes or suppressed by commodity classification)",
-        "timing": "Regularity score: 0.17",
-        "externality": "Externality score: 0.30",
-        "industry": "Flagged cross-industry trades: Entity E021 (NIC-1392) received HS 49011000; Entity E018 (NIC-2610) received HS 39012000; Entity E020 (NIC-5210) received HS 72081000; Entity E030 (NIC-4620) received HS 84571000; Entity E017 (NIC-8299) received HS 74031100"
-      }
-    },
-    {
-      "ring_id": "R705",
-      "canonical_key": "E017|E029|E018|E020|E030",
-      "closure_type": "transaction",
-      "entities": [
-        "E017",
-        "E029",
-        "E018",
-        "E020",
-        "E030"
-      ],
-      "hops": [
-        {
-          "hop_type": "invoice",
-          "from": "E017",
-          "to": "E029",
-          "invoice_id": "I0034",
-          "value": 85103166,
-          "hs_code": null,
-          "invoice_date": "2025-11-14",
-          "discounting_date": "2025-12-09"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E029",
-          "to": "E018",
-          "invoice_id": "I0123",
-          "value": 89042300,
-          "hs_code": "49011000",
-          "invoice_date": "2025-12-26",
-          "discounting_date": "2026-01-30"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E018",
-          "to": "E020",
-          "invoice_id": "I0025",
-          "value": 99283231,
-          "hs_code": "72081000",
-          "invoice_date": "2026-01-21",
-          "discounting_date": "2026-02-27"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E020",
-          "to": "E030",
-          "invoice_id": "I0038",
-          "value": 122941841,
-          "hs_code": "84571000",
-          "invoice_date": "2025-12-21",
-          "discounting_date": "2025-12-28"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E030",
-          "to": "E017",
-          "invoice_id": "I0085",
-          "value": 100627925,
-          "hs_code": "74031100",
-          "invoice_date": "2026-02-28",
-          "discounting_date": "2026-03-21"
-        }
-      ],
-      "scores": {
-        "value": 0.36,
-        "product": null,
-        "timing": 0.24,
-        "externality": 0.27
-      },
-      "abstained": [
-        "product"
-      ],
-      "aggregate": 0.3,
-      "expected_loss": 149413383,
-      "evidence": {
-        "value": "Net position score: 0.36",
-        "product": "Abstained (insufficient HS codes or suppressed by commodity classification)",
-        "timing": "Regularity score: 0.24",
-        "externality": "Externality score: 0.27",
-        "industry": "Flagged cross-industry trades: Entity E018 (NIC-2610) received HS 49011000; Entity E020 (NIC-5210) received HS 72081000; Entity E030 (NIC-4620) received HS 84571000; Entity E017 (NIC-8299) received HS 74031100"
-      }
-    },
-    {
-      "ring_id": "R662",
-      "canonical_key": "E013|E030|E017|E029|E018|E020",
-      "closure_type": "transaction",
-      "entities": [
-        "E013",
-        "E030",
-        "E017",
-        "E029",
-        "E018",
-        "E020"
-      ],
-      "hops": [
-        {
-          "hop_type": "invoice",
-          "from": "E013",
-          "to": "E030",
-          "invoice_id": "I0045",
-          "value": 78457894,
-          "hs_code": "26011100",
-          "invoice_date": "2026-01-01",
-          "discounting_date": "2026-02-03"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E030",
-          "to": "E017",
-          "invoice_id": "I0085",
-          "value": 100627925,
-          "hs_code": "74031100",
-          "invoice_date": "2026-02-28",
-          "discounting_date": "2026-03-21"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E017",
-          "to": "E029",
-          "invoice_id": "I0034",
-          "value": 85103166,
-          "hs_code": null,
-          "invoice_date": "2025-11-14",
-          "discounting_date": "2025-12-09"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E029",
-          "to": "E018",
-          "invoice_id": "I0123",
-          "value": 89042300,
-          "hs_code": "49011000",
-          "invoice_date": "2025-12-26",
-          "discounting_date": "2026-01-30"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E018",
-          "to": "E020",
-          "invoice_id": "I0025",
-          "value": 99283231,
-          "hs_code": "72081000",
-          "invoice_date": "2026-01-21",
-          "discounting_date": "2026-02-27"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E020",
-          "to": "E013",
-          "invoice_id": "I0131",
-          "value": 94441896,
-          "hs_code": "84571000",
-          "invoice_date": "2025-11-20",
-          "discounting_date": "2025-12-25"
-        }
-      ],
-      "scores": {
-        "value": 0.41,
-        "product": null,
-        "timing": 0.15,
-        "externality": 0.29
-      },
-      "abstained": [
-        "product"
-      ],
-      "aggregate": 0.27,
-      "expected_loss": 147821095,
-      "evidence": {
-        "value": "Net position score: 0.41",
-        "product": "Abstained (insufficient HS codes or suppressed by commodity classification)",
-        "timing": "Regularity score: 0.15",
-        "externality": "Externality score: 0.29",
-        "industry": "Flagged cross-industry trades: Entity E030 (NIC-4620) received HS 26011100; Entity E017 (NIC-8299) received HS 74031100; Entity E018 (NIC-2610) received HS 49011000; Entity E020 (NIC-5210) received HS 72081000; Entity E013 (NIC-1392) received HS 84571000"
-      }
-    },
-    {
-      "ring_id": "R426",
-      "canonical_key": "E005|E028|E030|E032|E017|E029",
-      "closure_type": "transaction",
-      "entities": [
+        "E003",
+        "E031",
         "E005",
         "E028",
         "E030",
@@ -1053,6 +5145,26 @@ const SCORED = {
         "E029"
       ],
       "hops": [
+        {
+          "hop_type": "invoice",
+          "from": "E003",
+          "to": "E031",
+          "invoice_id": "I0098",
+          "value": 56869830,
+          "hs_code": "39012000",
+          "invoice_date": "2026-03-18",
+          "discounting_date": "2026-03-29"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E031",
+          "to": "E005",
+          "invoice_id": "I0053",
+          "value": 78494117,
+          "hs_code": "72081000",
+          "invoice_date": "2026-03-03",
+          "discounting_date": "2026-03-13"
+        },
         {
           "hop_type": "invoice",
           "from": "E005",
@@ -1106,148 +5218,48 @@ const SCORED = {
         {
           "hop_type": "invoice",
           "from": "E029",
-          "to": "E005",
-          "invoice_id": "I0140",
-          "value": 88392555,
-          "hs_code": "39012000",
-          "invoice_date": "2026-01-12",
-          "discounting_date": "2026-02-08"
+          "to": "E003",
+          "invoice_id": "I0046",
+          "value": 93130035,
+          "hs_code": "84571000",
+          "invoice_date": "2026-01-02",
+          "discounting_date": "2026-01-24"
         }
       ],
       "scores": {
-        "value": 0.27,
+        "value": 0.17,
         "product": null,
-        "timing": 0.35,
-        "externality": 0.2
+        "timing": 0.26,
+        "externality": 0.31
       },
       "abstained": [
         "product"
       ],
-      "aggregate": 0.28,
-      "expected_loss": 146190430,
+      "aggregate": 0.24,
+      "expected_loss": 157647123,
       "evidence": {
-        "value": "Net position score: 0.27",
+        "value": "Net position score: 0.17",
         "product": "Abstained (insufficient HS codes or suppressed by commodity classification)",
-        "timing": "Regularity score: 0.35",
-        "externality": "Externality score: 0.20",
-        "industry": "Flagged cross-industry trades: Entity E028 (NIC-4620) received HS 39012000; Entity E030 (NIC-4620) received HS 72081000; Entity E032 (NIC-5229) received HS 72081000; Entity E017 (NIC-8299) received HS 49011000; Entity E005 (NIC-4690) received HS 39012000"
+        "timing": "Regularity score: 0.26",
+        "externality": "Externality score: 0.31",
+        "industry": "All trades consistent with declared industry codes."
       }
     },
     {
-      "ring_id": "R391",
-      "canonical_key": "E005|E027|E032|E014|E031",
+      "ring_id": "R5002",
+      "canonical_key": "E008|E028|E030|E020|E029|E018|E014|E031",
       "closure_type": "transaction",
       "entities": [
-        "E005",
-        "E027",
-        "E032",
+        "E008",
+        "E028",
+        "E030",
+        "E020",
+        "E029",
+        "E018",
         "E014",
         "E031"
       ],
       "hops": [
-        {
-          "hop_type": "invoice",
-          "from": "E005",
-          "to": "E027",
-          "invoice_id": "I0110",
-          "value": 83449956,
-          "hs_code": "84571000",
-          "invoice_date": "2026-01-10",
-          "discounting_date": "2026-02-21"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E027",
-          "to": "E032",
-          "invoice_id": "I0072",
-          "value": 112159236,
-          "hs_code": "49011000",
-          "invoice_date": "2025-12-08",
-          "discounting_date": "2026-01-04"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E032",
-          "to": "E014",
-          "invoice_id": "I0100",
-          "value": 117945293,
-          "hs_code": "39012000",
-          "invoice_date": "2025-12-26",
-          "discounting_date": "2026-01-26"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E014",
-          "to": "E031",
-          "invoice_id": "I0117",
-          "value": 143828973,
-          "hs_code": "85176200",
-          "invoice_date": "2026-01-29",
-          "discounting_date": "2026-03-08"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E031",
-          "to": "E005",
-          "invoice_id": "I0053",
-          "value": 78494117,
-          "hs_code": "72081000",
-          "invoice_date": "2026-03-03",
-          "discounting_date": "2026-03-13"
-        }
-      ],
-      "scores": {
-        "value": 0.2,
-        "product": null,
-        "timing": 0.45,
-        "externality": 0.21
-      },
-      "abstained": [
-        "product"
-      ],
-      "aggregate": 0.27,
-      "expected_loss": 142653076,
-      "evidence": {
-        "value": "Net position score: 0.20",
-        "product": "Abstained (insufficient HS codes or suppressed by commodity classification)",
-        "timing": "Regularity score: 0.45",
-        "externality": "Externality score: 0.21",
-        "industry": "Flagged cross-industry trades: Entity E027 (NIC-5229) received HS 84571000; Entity E032 (NIC-5229) received HS 49011000; Entity E014 (NIC-2610) received HS 39012000; Entity E031 (NIC-4662) received HS 85176200; Entity E005 (NIC-4690) received HS 72081000"
-      }
-    },
-    {
-      "ring_id": "R340",
-      "canonical_key": "E005|E019|E008|E028|E030|E031",
-      "closure_type": "transaction",
-      "entities": [
-        "E005",
-        "E019",
-        "E008",
-        "E028",
-        "E030",
-        "E031"
-      ],
-      "hops": [
-        {
-          "hop_type": "invoice",
-          "from": "E005",
-          "to": "E019",
-          "invoice_id": "I0079",
-          "value": 92203262,
-          "hs_code": "49011000",
-          "invoice_date": "2026-02-10",
-          "discounting_date": "2026-03-26"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E019",
-          "to": "E008",
-          "invoice_id": "I0088",
-          "value": 114847359,
-          "hs_code": "72081000",
-          "invoice_date": "2026-02-10",
-          "discounting_date": "2026-03-02"
-        },
         {
           "hop_type": "invoice",
           "from": "E008",
@@ -1271,49 +5283,90 @@ const SCORED = {
         {
           "hop_type": "invoice",
           "from": "E030",
+          "to": "E020",
+          "invoice_id": "I0048",
+          "value": 84274070,
+          "hs_code": "72081000",
+          "invoice_date": "2025-12-20",
+          "discounting_date": "2026-01-12"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E020",
+          "to": "E029",
+          "invoice_id": "I0056",
+          "value": 98071917,
+          "hs_code": "84571000",
+          "invoice_date": "2025-11-16",
+          "discounting_date": "2025-12-28"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E029",
+          "to": "E018",
+          "invoice_id": "I0123",
+          "value": 89042300,
+          "hs_code": "49011000",
+          "invoice_date": "2025-12-26",
+          "discounting_date": "2026-01-30"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E018",
+          "to": "E014",
+          "invoice_id": "I0009",
+          "value": 57889740,
+          "hs_code": "85176200",
+          "invoice_date": "2026-02-11",
+          "discounting_date": "2026-03-20"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E014",
           "to": "E031",
-          "invoice_id": "I0134",
-          "value": 119445501,
-          "hs_code": "10063000",
-          "invoice_date": "2026-03-25",
-          "discounting_date": "2026-05-08"
+          "invoice_id": "I0117",
+          "value": 143828973,
+          "hs_code": "85176200",
+          "invoice_date": "2026-01-29",
+          "discounting_date": "2026-03-08"
         },
         {
           "hop_type": "invoice",
           "from": "E031",
-          "to": "E005",
-          "invoice_id": "I0053",
-          "value": 78494117,
-          "hs_code": "72081000",
-          "invoice_date": "2026-03-03",
-          "discounting_date": "2026-03-13"
+          "to": "E008",
+          "invoice_id": "I0093",
+          "value": 86365017,
+          "hs_code": "74031100",
+          "invoice_date": "2026-02-28",
+          "discounting_date": "2026-03-07"
         }
       ],
       "scores": {
-        "value": 0.32,
+        "value": 0.11,
         "product": null,
-        "timing": 0.14,
-        "externality": 0.22
+        "timing": 0.29,
+        "externality": 0.26
       },
       "abstained": [
         "product"
       ],
-      "aggregate": 0.22,
-      "expected_loss": 139836691,
+      "aggregate": 0.2,
+      "expected_loss": 156343401,
       "evidence": {
-        "value": "Net position score: 0.32",
+        "value": "Net position score: 0.11",
         "product": "Abstained (insufficient HS codes or suppressed by commodity classification)",
-        "timing": "Regularity score: 0.14",
-        "externality": "Externality score: 0.22",
-        "industry": "Flagged cross-industry trades: Entity E019 (NIC-4620) received HS 49011000; Entity E008 (NIC-4662) received HS 72081000; Entity E028 (NIC-4620) received HS 72081000; Entity E030 (NIC-4620) received HS 72081000; Entity E031 (NIC-4662) received HS 10063000; Entity E005 (NIC-4690) received HS 72081000"
+        "timing": "Regularity score: 0.29",
+        "externality": "Externality score: 0.26",
+        "industry": "All trades consistent with declared industry codes."
       }
     },
     {
-      "ring_id": "R62",
-      "canonical_key": "E003|E008|E028|E030|E020|E029",
+      "ring_id": "R2460",
+      "canonical_key": "E003|E031|E008|E028|E030|E020|E029",
       "closure_type": "transaction",
       "entities": [
         "E003",
+        "E031",
         "E008",
         "E028",
         "E030",
@@ -1324,12 +5377,22 @@ const SCORED = {
         {
           "hop_type": "invoice",
           "from": "E003",
+          "to": "E031",
+          "invoice_id": "I0098",
+          "value": 56869830,
+          "hs_code": "39012000",
+          "invoice_date": "2026-03-18",
+          "discounting_date": "2026-03-29"
+        },
+        {
+          "hop_type": "invoice",
+          "from": "E031",
           "to": "E008",
-          "invoice_id": "I0091",
-          "value": 65510456,
-          "hs_code": "49011000",
-          "invoice_date": "2026-01-23",
-          "discounting_date": "2026-02-21"
+          "invoice_id": "I0093",
+          "value": 86365017,
+          "hs_code": "74031100",
+          "invoice_date": "2026-02-28",
+          "discounting_date": "2026-03-07"
         },
         {
           "hop_type": "invoice",
@@ -1385,2830 +5448,20 @@ const SCORED = {
       "scores": {
         "value": 0.21,
         "product": null,
-        "timing": 0.34,
-        "externality": 0.2
-      },
-      "abstained": [
-        "product"
-      ],
-      "aggregate": 0.24,
-      "expected_loss": 138020655,
-      "evidence": {
-        "value": "Net position score: 0.21",
-        "product": "Abstained (insufficient HS codes or suppressed by commodity classification)",
-        "timing": "Regularity score: 0.34",
-        "externality": "Externality score: 0.20",
-        "industry": "Flagged cross-industry trades: Entity E008 (NIC-4662) received HS 49011000; Entity E028 (NIC-4620) received HS 72081000; Entity E030 (NIC-4620) received HS 72081000; Entity E020 (NIC-5210) received HS 72081000; Entity E029 (NIC-4690) received HS 84571000; Entity E003 (NIC-5210) received HS 84571000"
-      }
-    },
-    {
-      "ring_id": "R435",
-      "canonical_key": "E006|E013|E028|E009|E023|E019",
-      "closure_type": "transaction",
-      "entities": [
-        "E006",
-        "E013",
-        "E028",
-        "E009",
-        "E023",
-        "E019"
-      ],
-      "hops": [
-        {
-          "hop_type": "invoice",
-          "from": "E006",
-          "to": "E013",
-          "invoice_id": "I0122",
-          "value": 74003244,
-          "hs_code": "85176200",
-          "invoice_date": "2025-11-13",
-          "discounting_date": "2025-11-21"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E013",
-          "to": "E028",
-          "invoice_id": "I0092",
-          "value": 84263562,
-          "hs_code": "85176200",
-          "invoice_date": "2026-01-09",
-          "discounting_date": "2026-01-22"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E028",
-          "to": "E009",
-          "invoice_id": "I0040",
-          "value": 82458160,
-          "hs_code": "27101990",
-          "invoice_date": "2025-11-04",
-          "discounting_date": "2025-12-03"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E009",
-          "to": "E023",
-          "invoice_id": "I0073",
-          "value": 92186165,
-          "hs_code": null,
-          "invoice_date": "2026-03-10",
-          "discounting_date": "2026-03-30"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E023",
-          "to": "E019",
-          "invoice_id": "I0124",
-          "value": 113317145,
-          "hs_code": null,
-          "invoice_date": "2026-01-18",
-          "discounting_date": "2026-01-23"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E019",
-          "to": "E006",
-          "invoice_id": "I0137",
-          "value": 127696693,
-          "hs_code": "72081000",
-          "invoice_date": "2026-03-29",
-          "discounting_date": "2026-05-06"
-        }
-      ],
-      "scores": {
-        "value": 0.28,
-        "product": null,
-        "timing": 0.2,
-        "externality": 0.21
-      },
-      "abstained": [
-        "product"
-      ],
-      "aggregate": 0.24,
-      "expected_loss": 136751591,
-      "evidence": {
-        "value": "Net position score: 0.28",
-        "product": "Abstained (insufficient HS codes or suppressed by commodity classification)",
-        "timing": "Regularity score: 0.20",
-        "externality": "Externality score: 0.21",
-        "industry": "Flagged cross-industry trades: Entity E013 (NIC-1392) received HS 85176200; Entity E028 (NIC-4620) received HS 85176200; Entity E009 (NIC-6202) received HS 27101990; Entity E006 (NIC-2610) received HS 72081000"
-      }
-    },
-    {
-      "ring_id": "R706",
-      "canonical_key": "E017|E029|E018|E020|E030|E032",
-      "closure_type": "transaction",
-      "entities": [
-        "E017",
-        "E029",
-        "E018",
-        "E020",
-        "E030",
-        "E032"
-      ],
-      "hops": [
-        {
-          "hop_type": "invoice",
-          "from": "E017",
-          "to": "E029",
-          "invoice_id": "I0034",
-          "value": 85103166,
-          "hs_code": null,
-          "invoice_date": "2025-11-14",
-          "discounting_date": "2025-12-09"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E029",
-          "to": "E018",
-          "invoice_id": "I0123",
-          "value": 89042300,
-          "hs_code": "49011000",
-          "invoice_date": "2025-12-26",
-          "discounting_date": "2026-01-30"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E018",
-          "to": "E020",
-          "invoice_id": "I0025",
-          "value": 99283231,
-          "hs_code": "72081000",
-          "invoice_date": "2026-01-21",
-          "discounting_date": "2026-02-27"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E020",
-          "to": "E030",
-          "invoice_id": "I0038",
-          "value": 122941841,
-          "hs_code": "84571000",
-          "invoice_date": "2025-12-21",
-          "discounting_date": "2025-12-28"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E030",
-          "to": "E032",
-          "invoice_id": "I0099",
-          "value": 99275859,
-          "hs_code": "72081000",
-          "invoice_date": "2025-12-10",
-          "discounting_date": "2026-01-08"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E032",
-          "to": "E017",
-          "invoice_id": "I0044",
-          "value": 52730277,
-          "hs_code": "49011000",
-          "invoice_date": "2026-01-10",
-          "discounting_date": "2026-02-17"
-        }
-      ],
-      "scores": {
-        "value": 0.18,
-        "product": null,
-        "timing": 0.36,
-        "externality": 0.29
-      },
-      "abstained": [
-        "product"
-      ],
-      "aggregate": 0.25,
-      "expected_loss": 136108749,
-      "evidence": {
-        "value": "Net position score: 0.18",
-        "product": "Abstained (insufficient HS codes or suppressed by commodity classification)",
-        "timing": "Regularity score: 0.36",
-        "externality": "Externality score: 0.29",
-        "industry": "Flagged cross-industry trades: Entity E018 (NIC-2610) received HS 49011000; Entity E020 (NIC-5210) received HS 72081000; Entity E030 (NIC-4620) received HS 84571000; Entity E032 (NIC-5229) received HS 72081000; Entity E017 (NIC-8299) received HS 49011000"
-      }
-    },
-    {
-      "ring_id": "R321",
-      "canonical_key": "E004|E032|E014|E031|E005|E019",
-      "closure_type": "transaction",
-      "entities": [
-        "E004",
-        "E032",
-        "E014",
-        "E031",
-        "E005",
-        "E019"
-      ],
-      "hops": [
-        {
-          "hop_type": "invoice",
-          "from": "E004",
-          "to": "E032",
-          "invoice_id": "I0115",
-          "value": 86359380,
-          "hs_code": "85176200",
-          "invoice_date": "2025-12-02",
-          "discounting_date": "2025-12-31"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E032",
-          "to": "E014",
-          "invoice_id": "I0100",
-          "value": 117945293,
-          "hs_code": "39012000",
-          "invoice_date": "2025-12-26",
-          "discounting_date": "2026-01-26"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E014",
-          "to": "E031",
-          "invoice_id": "I0117",
-          "value": 143828973,
-          "hs_code": "85176200",
-          "invoice_date": "2026-01-29",
-          "discounting_date": "2026-03-08"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E031",
-          "to": "E005",
-          "invoice_id": "I0053",
-          "value": 78494117,
-          "hs_code": "72081000",
-          "invoice_date": "2026-03-03",
-          "discounting_date": "2026-03-13"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E005",
-          "to": "E019",
-          "invoice_id": "I0079",
-          "value": 92203262,
-          "hs_code": "49011000",
-          "invoice_date": "2026-02-10",
-          "discounting_date": "2026-03-26"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E019",
-          "to": "E004",
-          "invoice_id": "I0129",
-          "value": 122878237,
-          "hs_code": "72081000",
-          "invoice_date": "2026-02-26",
-          "discounting_date": "2026-03-24"
-        }
-      ],
-      "scores": {
-        "value": 0.12,
-        "product": null,
-        "timing": 0.46,
-        "externality": 0.22
-      },
-      "abstained": [
-        "product"
-      ],
-      "aggregate": 0.21,
-      "expected_loss": 136072436,
-      "evidence": {
-        "value": "Net position score: 0.12",
-        "product": "Abstained (insufficient HS codes or suppressed by commodity classification)",
-        "timing": "Regularity score: 0.46",
-        "externality": "Externality score: 0.22",
-        "industry": "Flagged cross-industry trades: Entity E032 (NIC-5229) received HS 85176200; Entity E014 (NIC-2610) received HS 39012000; Entity E031 (NIC-4662) received HS 85176200; Entity E005 (NIC-4690) received HS 72081000; Entity E019 (NIC-4620) received HS 49011000; Entity E004 (NIC-2610) received HS 72081000"
-      }
-    },
-    {
-      "ring_id": "R592",
-      "canonical_key": "E008|E028|E030|E020|E015|E019",
-      "closure_type": "transaction",
-      "entities": [
-        "E008",
-        "E028",
-        "E030",
-        "E020",
-        "E015",
-        "E019"
-      ],
-      "hops": [
-        {
-          "hop_type": "invoice",
-          "from": "E008",
-          "to": "E028",
-          "invoice_id": "I0118",
-          "value": 118095206,
-          "hs_code": "72081000",
-          "invoice_date": "2026-03-24",
-          "discounting_date": "2026-05-05"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E028",
-          "to": "E030",
-          "invoice_id": "I0116",
-          "value": 104796883,
-          "hs_code": "72081000",
-          "invoice_date": "2026-01-19",
-          "discounting_date": "2026-02-13"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E030",
-          "to": "E020",
-          "invoice_id": "I0048",
-          "value": 84274070,
-          "hs_code": "72081000",
-          "invoice_date": "2025-12-20",
-          "discounting_date": "2026-01-12"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E020",
-          "to": "E015",
-          "invoice_id": "I0014",
-          "value": 66619754,
-          "hs_code": "49011000",
-          "invoice_date": "2026-03-22",
-          "discounting_date": "2026-04-02"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E015",
-          "to": "E019",
-          "invoice_id": "I0059",
-          "value": 70899137,
-          "hs_code": "94036000",
-          "invoice_date": "2025-12-30",
-          "discounting_date": "2026-01-18"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E019",
-          "to": "E008",
-          "invoice_id": "I0088",
-          "value": 114847359,
-          "hs_code": "72081000",
-          "invoice_date": "2026-02-10",
-          "discounting_date": "2026-03-02"
-        }
-      ],
-      "scores": {
-        "value": 0.29,
-        "product": null,
-        "timing": 0.21,
-        "externality": 0.16
-      },
-      "abstained": [
-        "product"
-      ],
-      "aggregate": 0.24,
-      "expected_loss": 134248425,
-      "evidence": {
-        "value": "Net position score: 0.29",
-        "product": "Abstained (insufficient HS codes or suppressed by commodity classification)",
-        "timing": "Regularity score: 0.21",
-        "externality": "Externality score: 0.16",
-        "industry": "Flagged cross-industry trades: Entity E028 (NIC-4620) received HS 72081000; Entity E030 (NIC-4620) received HS 72081000; Entity E020 (NIC-5210) received HS 72081000; Entity E015 (NIC-2013) received HS 49011000; Entity E019 (NIC-4620) received HS 94036000; Entity E008 (NIC-4662) received HS 72081000"
-      }
-    },
-    {
-      "ring_id": "R177",
-      "canonical_key": "E003|E027|E032|E014|E031|E008",
-      "closure_type": "transaction",
-      "entities": [
-        "E003",
-        "E027",
-        "E032",
-        "E014",
-        "E031",
-        "E008"
-      ],
-      "hops": [
-        {
-          "hop_type": "invoice",
-          "from": "E003",
-          "to": "E027",
-          "invoice_id": "I0063",
-          "value": 98268296,
-          "hs_code": "84571000",
-          "invoice_date": "2025-12-29",
-          "discounting_date": "2026-02-06"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E027",
-          "to": "E032",
-          "invoice_id": "I0072",
-          "value": 112159236,
-          "hs_code": "49011000",
-          "invoice_date": "2025-12-08",
-          "discounting_date": "2026-01-04"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E032",
-          "to": "E014",
-          "invoice_id": "I0100",
-          "value": 117945293,
-          "hs_code": "39012000",
-          "invoice_date": "2025-12-26",
-          "discounting_date": "2026-01-26"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E014",
-          "to": "E031",
-          "invoice_id": "I0117",
-          "value": 143828973,
-          "hs_code": "85176200",
-          "invoice_date": "2026-01-29",
-          "discounting_date": "2026-03-08"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E031",
-          "to": "E008",
-          "invoice_id": "I0093",
-          "value": 86365017,
-          "hs_code": "74031100",
-          "invoice_date": "2026-02-28",
-          "discounting_date": "2026-03-07"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E008",
-          "to": "E003",
-          "invoice_id": "I0071",
-          "value": 53177285,
-          "hs_code": "10063000",
-          "invoice_date": "2026-01-14",
-          "discounting_date": "2026-02-18"
-        }
-      ],
-      "scores": {
-        "value": 0.14,
-        "product": null,
-        "timing": 0.38,
-        "externality": 0.23
-      },
-      "abstained": [
-        "product"
-      ],
-      "aggregate": 0.21,
-      "expected_loss": 131401407,
-      "evidence": {
-        "value": "Net position score: 0.14",
-        "product": "Abstained (insufficient HS codes or suppressed by commodity classification)",
-        "timing": "Regularity score: 0.38",
-        "externality": "Externality score: 0.23",
-        "industry": "Flagged cross-industry trades: Entity E027 (NIC-5229) received HS 84571000; Entity E032 (NIC-5229) received HS 49011000; Entity E014 (NIC-2610) received HS 39012000; Entity E031 (NIC-4662) received HS 85176200; Entity E008 (NIC-4662) received HS 74031100; Entity E003 (NIC-5210) received HS 10063000"
-      }
-    },
-    {
-      "ring_id": "R61",
-      "canonical_key": "E003|E008|E028|E030|E017|E029",
-      "closure_type": "transaction",
-      "entities": [
-        "E003",
-        "E008",
-        "E028",
-        "E030",
-        "E017",
-        "E029"
-      ],
-      "hops": [
-        {
-          "hop_type": "invoice",
-          "from": "E003",
-          "to": "E008",
-          "invoice_id": "I0091",
-          "value": 65510456,
-          "hs_code": "49011000",
-          "invoice_date": "2026-01-23",
-          "discounting_date": "2026-02-21"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E008",
-          "to": "E028",
-          "invoice_id": "I0118",
-          "value": 118095206,
-          "hs_code": "72081000",
-          "invoice_date": "2026-03-24",
-          "discounting_date": "2026-05-05"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E028",
-          "to": "E030",
-          "invoice_id": "I0116",
-          "value": 104796883,
-          "hs_code": "72081000",
-          "invoice_date": "2026-01-19",
-          "discounting_date": "2026-02-13"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E030",
-          "to": "E017",
-          "invoice_id": "I0085",
-          "value": 100627925,
-          "hs_code": "74031100",
-          "invoice_date": "2026-02-28",
-          "discounting_date": "2026-03-21"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E017",
-          "to": "E029",
-          "invoice_id": "I0034",
-          "value": 85103166,
-          "hs_code": null,
-          "invoice_date": "2025-11-14",
-          "discounting_date": "2025-12-09"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E029",
-          "to": "E003",
-          "invoice_id": "I0046",
-          "value": 93130035,
-          "hs_code": "84571000",
-          "invoice_date": "2026-01-02",
-          "discounting_date": "2026-01-24"
-        }
-      ],
-      "scores": {
-        "value": 0.24,
-        "product": null,
-        "timing": 0.23,
-        "externality": 0.21
-      },
-      "abstained": [
-        "product"
-      ],
-      "aggregate": 0.23,
-      "expected_loss": 131011499,
-      "evidence": {
-        "value": "Net position score: 0.24",
-        "product": "Abstained (insufficient HS codes or suppressed by commodity classification)",
-        "timing": "Regularity score: 0.23",
-        "externality": "Externality score: 0.21",
-        "industry": "Flagged cross-industry trades: Entity E008 (NIC-4662) received HS 49011000; Entity E028 (NIC-4620) received HS 72081000; Entity E030 (NIC-4620) received HS 72081000; Entity E017 (NIC-8299) received HS 74031100; Entity E003 (NIC-5210) received HS 84571000"
-      }
-    },
-    {
-      "ring_id": "R671",
-      "canonical_key": "E014|E027|E032",
-      "closure_type": "corporate",
-      "entities": [
-        "E027",
-        "E032",
-        "E014"
-      ],
-      "hops": [
-        {
-          "hop_type": "invoice",
-          "from": "E027",
-          "to": "E032",
-          "invoice_id": "I0072",
-          "value": 112159236,
-          "hs_code": "49011000",
-          "invoice_date": "2025-12-08",
-          "discounting_date": "2026-01-04"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E032",
-          "to": "E014",
-          "invoice_id": "I0100",
-          "value": 117945293,
-          "hs_code": "39012000",
-          "invoice_date": "2025-12-26",
-          "discounting_date": "2026-01-26"
-        },
-        {
-          "hop_type": "corporate_bridge",
-          "from": "E014",
-          "to": "E027",
-          "bridge_kind": "shared_director",
-          "bridge_evidence": {
-            "director_id": "D42"
-          }
-        }
-      ],
-      "scores": {
-        "value": 0.85,
-        "product": null,
-        "timing": null,
-        "externality": 0.13
-      },
-      "abstained": [
-        "product",
-        "timing"
-      ],
-      "aggregate": 0.56,
-      "expected_loss": 128098531,
-      "evidence": {
-        "value": "Net position score: 0.85",
-        "product": "Abstained (insufficient HS codes or suppressed by commodity classification)",
-        "timing": "Abstained (fewer than 2 gaps or missing dates)",
-        "externality": "Externality score: 0.13",
-        "industry": "Flagged cross-industry trades: Entity E032 (NIC-5229) received HS 49011000; Entity E014 (NIC-2610) received HS 39012000"
-      }
-    },
-    {
-      "ring_id": "R219",
-      "canonical_key": "E003|E028|E030|E017|E029",
-      "closure_type": "transaction",
-      "entities": [
-        "E003",
-        "E028",
-        "E030",
-        "E017",
-        "E029"
-      ],
-      "hops": [
-        {
-          "hop_type": "invoice",
-          "from": "E003",
-          "to": "E028",
-          "invoice_id": "I0067",
-          "value": 103807836,
-          "hs_code": "49011000",
-          "invoice_date": "2026-02-12",
-          "discounting_date": "2026-03-19"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E028",
-          "to": "E030",
-          "invoice_id": "I0116",
-          "value": 104796883,
-          "hs_code": "72081000",
-          "invoice_date": "2026-01-19",
-          "discounting_date": "2026-02-13"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E030",
-          "to": "E017",
-          "invoice_id": "I0085",
-          "value": 100627925,
-          "hs_code": "74031100",
-          "invoice_date": "2026-02-28",
-          "discounting_date": "2026-03-21"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E017",
-          "to": "E029",
-          "invoice_id": "I0034",
-          "value": 85103166,
-          "hs_code": null,
-          "invoice_date": "2025-11-14",
-          "discounting_date": "2025-12-09"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E029",
-          "to": "E003",
-          "invoice_id": "I0046",
-          "value": 93130035,
-          "hs_code": "84571000",
-          "invoice_date": "2026-01-02",
-          "discounting_date": "2026-01-24"
-        }
-      ],
-      "scores": {
-        "value": 0.58,
-        "product": null,
-        "timing": 0.1,
-        "externality": 0.17
-      },
-      "abstained": [
-        "product"
-      ],
-      "aggregate": 0.26,
-      "expected_loss": 127830272,
-      "evidence": {
-        "value": "Net position score: 0.58",
-        "product": "Abstained (insufficient HS codes or suppressed by commodity classification)",
-        "timing": "Regularity score: 0.10",
-        "externality": "Externality score: 0.17",
-        "industry": "Flagged cross-industry trades: Entity E028 (NIC-4620) received HS 49011000; Entity E030 (NIC-4620) received HS 72081000; Entity E017 (NIC-8299) received HS 74031100; Entity E003 (NIC-5210) received HS 84571000"
-      }
-    },
-    {
-      "ring_id": "R715",
-      "canonical_key": "E017|E029|E021|E018|E030",
-      "closure_type": "transaction",
-      "entities": [
-        "E017",
-        "E029",
-        "E021",
-        "E018",
-        "E030"
-      ],
-      "hops": [
-        {
-          "hop_type": "invoice",
-          "from": "E017",
-          "to": "E029",
-          "invoice_id": "I0034",
-          "value": 85103166,
-          "hs_code": null,
-          "invoice_date": "2025-11-14",
-          "discounting_date": "2025-12-09"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E029",
-          "to": "E021",
-          "invoice_id": "I0017",
-          "value": 79184989,
-          "hs_code": "49011000",
-          "invoice_date": "2025-12-14",
-          "discounting_date": "2026-01-28"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E021",
-          "to": "E018",
-          "invoice_id": "I0023",
-          "value": 89902530,
-          "hs_code": "39012000",
-          "invoice_date": "2026-03-21",
-          "discounting_date": "2026-04-21"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E018",
-          "to": "E030",
-          "invoice_id": "I0065",
-          "value": 85035182,
-          "hs_code": "26011100",
-          "invoice_date": "2026-03-01",
-          "discounting_date": "2026-03-26"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E030",
-          "to": "E017",
-          "invoice_id": "I0085",
-          "value": 100627925,
-          "hs_code": "74031100",
-          "invoice_date": "2026-02-28",
-          "discounting_date": "2026-03-21"
-        }
-      ],
-      "scores": {
-        "value": 0.45,
-        "product": null,
-        "timing": 0.18,
-        "externality": 0.2
-      },
-      "abstained": [
-        "product"
-      ],
-      "aggregate": 0.29,
-      "expected_loss": 127541773,
-      "evidence": {
-        "value": "Net position score: 0.45",
-        "product": "Abstained (insufficient HS codes or suppressed by commodity classification)",
-        "timing": "Regularity score: 0.18",
-        "externality": "Externality score: 0.20",
-        "industry": "Flagged cross-industry trades: Entity E021 (NIC-1392) received HS 49011000; Entity E018 (NIC-2610) received HS 39012000; Entity E030 (NIC-4620) received HS 26011100; Entity E017 (NIC-8299) received HS 74031100"
-      }
-    },
-    {
-      "ring_id": "R728",
-      "canonical_key": "E018|E030|E020|E029",
-      "closure_type": "transaction",
-      "entities": [
-        "E018",
-        "E030",
-        "E020",
-        "E029"
-      ],
-      "hops": [
-        {
-          "hop_type": "invoice",
-          "from": "E018",
-          "to": "E030",
-          "invoice_id": "I0065",
-          "value": 85035182,
-          "hs_code": "26011100",
-          "invoice_date": "2026-03-01",
-          "discounting_date": "2026-03-26"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E030",
-          "to": "E020",
-          "invoice_id": "I0048",
-          "value": 84274070,
-          "hs_code": "72081000",
-          "invoice_date": "2025-12-20",
-          "discounting_date": "2026-01-12"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E020",
-          "to": "E029",
-          "invoice_id": "I0056",
-          "value": 98071917,
-          "hs_code": "84571000",
-          "invoice_date": "2025-11-16",
-          "discounting_date": "2025-12-28"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E029",
-          "to": "E018",
-          "invoice_id": "I0123",
-          "value": 89042300,
-          "hs_code": "49011000",
-          "invoice_date": "2025-12-26",
-          "discounting_date": "2026-01-30"
-        }
-      ],
-      "scores": {
-        "value": 0.6,
-        "product": null,
-        "timing": 0.23,
-        "externality": 0.18
-      },
-      "abstained": [
-        "product"
-      ],
-      "aggregate": 0.36,
-      "expected_loss": 127457292,
-      "evidence": {
-        "value": "Net position score: 0.60",
-        "product": "Abstained (insufficient HS codes or suppressed by commodity classification)",
-        "timing": "Regularity score: 0.23",
-        "externality": "Externality score: 0.18",
-        "industry": "Flagged cross-industry trades: Entity E030 (NIC-4620) received HS 26011100; Entity E020 (NIC-5210) received HS 72081000; Entity E029 (NIC-4690) received HS 84571000; Entity E018 (NIC-2610) received HS 49011000"
-      }
-    },
-    {
-      "ring_id": "R696",
-      "canonical_key": "E015|E029|E018|E030|E020",
-      "closure_type": "transaction",
-      "entities": [
-        "E015",
-        "E029",
-        "E018",
-        "E030",
-        "E020"
-      ],
-      "hops": [
-        {
-          "hop_type": "invoice",
-          "from": "E015",
-          "to": "E029",
-          "invoice_id": "I0097",
-          "value": 78601176,
-          "hs_code": "72081000",
-          "invoice_date": "2025-11-30",
-          "discounting_date": "2025-12-11"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E029",
-          "to": "E018",
-          "invoice_id": "I0123",
-          "value": 89042300,
-          "hs_code": "49011000",
-          "invoice_date": "2025-12-26",
-          "discounting_date": "2026-01-30"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E018",
-          "to": "E030",
-          "invoice_id": "I0065",
-          "value": 85035182,
-          "hs_code": "26011100",
-          "invoice_date": "2026-03-01",
-          "discounting_date": "2026-03-26"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E030",
-          "to": "E020",
-          "invoice_id": "I0048",
-          "value": 84274070,
-          "hs_code": "72081000",
-          "invoice_date": "2025-12-20",
-          "discounting_date": "2026-01-12"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E020",
-          "to": "E015",
-          "invoice_id": "I0014",
-          "value": 66619754,
-          "hs_code": "49011000",
-          "invoice_date": "2026-03-22",
-          "discounting_date": "2026-04-02"
-        }
-      ],
-      "scores": {
-        "value": 0.48,
-        "product": null,
-        "timing": 0.18,
-        "externality": 0.23
-      },
-      "abstained": [
-        "product"
-      ],
-      "aggregate": 0.3,
-      "expected_loss": 122444122,
-      "evidence": {
-        "value": "Net position score: 0.48",
-        "product": "Abstained (insufficient HS codes or suppressed by commodity classification)",
-        "timing": "Regularity score: 0.18",
-        "externality": "Externality score: 0.23",
-        "industry": "Flagged cross-industry trades: Entity E029 (NIC-4690) received HS 72081000; Entity E018 (NIC-2610) received HS 49011000; Entity E030 (NIC-4620) received HS 26011100; Entity E020 (NIC-5210) received HS 72081000; Entity E015 (NIC-2013) received HS 49011000"
-      }
-    },
-    {
-      "ring_id": "R417",
-      "canonical_key": "E005|E028|E030|E017|E029",
-      "closure_type": "transaction",
-      "entities": [
-        "E005",
-        "E028",
-        "E030",
-        "E017",
-        "E029"
-      ],
-      "hops": [
-        {
-          "hop_type": "invoice",
-          "from": "E005",
-          "to": "E028",
-          "invoice_id": "I0086",
-          "value": 92449408,
-          "hs_code": "39012000",
-          "invoice_date": "2026-02-17",
-          "discounting_date": "2026-03-08"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E028",
-          "to": "E030",
-          "invoice_id": "I0116",
-          "value": 104796883,
-          "hs_code": "72081000",
-          "invoice_date": "2026-01-19",
-          "discounting_date": "2026-02-13"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E030",
-          "to": "E017",
-          "invoice_id": "I0085",
-          "value": 100627925,
-          "hs_code": "74031100",
-          "invoice_date": "2026-02-28",
-          "discounting_date": "2026-03-21"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E017",
-          "to": "E029",
-          "invoice_id": "I0034",
-          "value": 85103166,
-          "hs_code": null,
-          "invoice_date": "2025-11-14",
-          "discounting_date": "2025-12-09"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E029",
-          "to": "E005",
-          "invoice_id": "I0140",
-          "value": 88392555,
-          "hs_code": "39012000",
-          "invoice_date": "2026-01-12",
-          "discounting_date": "2026-02-08"
-        }
-      ],
-      "scores": {
-        "value": 0.57,
-        "product": null,
-        "timing": 0.1,
-        "externality": 0.16
-      },
-      "abstained": [
-        "product"
-      ],
-      "aggregate": 0.26,
-      "expected_loss": 121293343,
-      "evidence": {
-        "value": "Net position score: 0.57",
-        "product": "Abstained (insufficient HS codes or suppressed by commodity classification)",
-        "timing": "Regularity score: 0.10",
-        "externality": "Externality score: 0.16",
-        "industry": "Flagged cross-industry trades: Entity E028 (NIC-4620) received HS 39012000; Entity E030 (NIC-4620) received HS 72081000; Entity E017 (NIC-8299) received HS 74031100; Entity E005 (NIC-4690) received HS 39012000"
-      }
-    },
-    {
-      "ring_id": "R418",
-      "canonical_key": "E005|E028|E030|E020|E014|E031",
-      "closure_type": "transaction",
-      "entities": [
-        "E005",
-        "E028",
-        "E030",
-        "E020",
-        "E014",
-        "E031"
-      ],
-      "hops": [
-        {
-          "hop_type": "invoice",
-          "from": "E005",
-          "to": "E028",
-          "invoice_id": "I0086",
-          "value": 92449408,
-          "hs_code": "39012000",
-          "invoice_date": "2026-02-17",
-          "discounting_date": "2026-03-08"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E028",
-          "to": "E030",
-          "invoice_id": "I0116",
-          "value": 104796883,
-          "hs_code": "72081000",
-          "invoice_date": "2026-01-19",
-          "discounting_date": "2026-02-13"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E030",
-          "to": "E020",
-          "invoice_id": "I0048",
-          "value": 84274070,
-          "hs_code": "72081000",
-          "invoice_date": "2025-12-20",
-          "discounting_date": "2026-01-12"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E020",
-          "to": "E014",
-          "invoice_id": "I0062",
-          "value": 97589062,
-          "hs_code": "84571000",
-          "invoice_date": "2026-02-21",
-          "discounting_date": "2026-03-01"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E014",
-          "to": "E031",
-          "invoice_id": "I0117",
-          "value": 143828973,
-          "hs_code": "85176200",
-          "invoice_date": "2026-01-29",
-          "discounting_date": "2026-03-08"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E031",
-          "to": "E005",
-          "invoice_id": "I0053",
-          "value": 78494117,
-          "hs_code": "72081000",
-          "invoice_date": "2026-03-03",
-          "discounting_date": "2026-03-13"
-        }
-      ],
-      "scores": {
-        "value": 0.15,
-        "product": null,
-        "timing": 0.28,
-        "externality": 0.24
-      },
-      "abstained": [
-        "product"
-      ],
-      "aggregate": 0.2,
-      "expected_loss": 121064469,
-      "evidence": {
-        "value": "Net position score: 0.15",
-        "product": "Abstained (insufficient HS codes or suppressed by commodity classification)",
-        "timing": "Regularity score: 0.28",
-        "externality": "Externality score: 0.24",
-        "industry": "Flagged cross-industry trades: Entity E028 (NIC-4620) received HS 39012000; Entity E030 (NIC-4620) received HS 72081000; Entity E020 (NIC-5210) received HS 72081000; Entity E014 (NIC-2610) received HS 84571000; Entity E031 (NIC-4662) received HS 85176200; Entity E005 (NIC-4690) received HS 72081000"
-      }
-    },
-    {
-      "ring_id": "R660",
-      "canonical_key": "E013|E028|E030|E020",
-      "closure_type": "transaction",
-      "entities": [
-        "E013",
-        "E028",
-        "E030",
-        "E020"
-      ],
-      "hops": [
-        {
-          "hop_type": "invoice",
-          "from": "E013",
-          "to": "E028",
-          "invoice_id": "I0092",
-          "value": 84263562,
-          "hs_code": "85176200",
-          "invoice_date": "2026-01-09",
-          "discounting_date": "2026-01-22"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E028",
-          "to": "E030",
-          "invoice_id": "I0116",
-          "value": 104796883,
-          "hs_code": "72081000",
-          "invoice_date": "2026-01-19",
-          "discounting_date": "2026-02-13"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E030",
-          "to": "E020",
-          "invoice_id": "I0048",
-          "value": 84274070,
-          "hs_code": "72081000",
-          "invoice_date": "2025-12-20",
-          "discounting_date": "2026-01-12"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E020",
-          "to": "E013",
-          "invoice_id": "I0131",
-          "value": 94441896,
-          "hs_code": "84571000",
-          "invoice_date": "2025-11-20",
-          "discounting_date": "2025-12-25"
-        }
-      ],
-      "scores": {
-        "value": 0.33,
-        "product": null,
-        "timing": 0.39,
-        "externality": 0.21
-      },
-      "abstained": [
-        "product"
-      ],
-      "aggregate": 0.33,
-      "expected_loss": 120249439,
-      "evidence": {
-        "value": "Net position score: 0.33",
-        "product": "Abstained (insufficient HS codes or suppressed by commodity classification)",
-        "timing": "Regularity score: 0.39",
-        "externality": "Externality score: 0.21",
-        "industry": "Flagged cross-industry trades: Entity E028 (NIC-4620) received HS 85176200; Entity E030 (NIC-4620) received HS 72081000; Entity E020 (NIC-5210) received HS 72081000; Entity E013 (NIC-1392) received HS 84571000"
-      }
-    },
-    {
-      "ring_id": "R591",
-      "canonical_key": "E008|E028|E030|E020|E014|E031",
-      "closure_type": "transaction",
-      "entities": [
-        "E008",
-        "E028",
-        "E030",
-        "E020",
-        "E014",
-        "E031"
-      ],
-      "hops": [
-        {
-          "hop_type": "invoice",
-          "from": "E008",
-          "to": "E028",
-          "invoice_id": "I0118",
-          "value": 118095206,
-          "hs_code": "72081000",
-          "invoice_date": "2026-03-24",
-          "discounting_date": "2026-05-05"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E028",
-          "to": "E030",
-          "invoice_id": "I0116",
-          "value": 104796883,
-          "hs_code": "72081000",
-          "invoice_date": "2026-01-19",
-          "discounting_date": "2026-02-13"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E030",
-          "to": "E020",
-          "invoice_id": "I0048",
-          "value": 84274070,
-          "hs_code": "72081000",
-          "invoice_date": "2025-12-20",
-          "discounting_date": "2026-01-12"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E020",
-          "to": "E014",
-          "invoice_id": "I0062",
-          "value": 97589062,
-          "hs_code": "84571000",
-          "invoice_date": "2026-02-21",
-          "discounting_date": "2026-03-01"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E014",
-          "to": "E031",
-          "invoice_id": "I0117",
-          "value": 143828973,
-          "hs_code": "85176200",
-          "invoice_date": "2026-01-29",
-          "discounting_date": "2026-03-08"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E031",
-          "to": "E008",
-          "invoice_id": "I0093",
-          "value": 86365017,
-          "hs_code": "74031100",
-          "invoice_date": "2026-02-28",
-          "discounting_date": "2026-03-07"
-        }
-      ],
-      "scores": {
-        "value": 0.15,
-        "product": null,
-        "timing": 0.23,
-        "externality": 0.24
-      },
-      "abstained": [
-        "product"
-      ],
-      "aggregate": 0.18,
-      "expected_loss": 117424089,
-      "evidence": {
-        "value": "Net position score: 0.15",
-        "product": "Abstained (insufficient HS codes or suppressed by commodity classification)",
-        "timing": "Regularity score: 0.23",
-        "externality": "Externality score: 0.24",
-        "industry": "Flagged cross-industry trades: Entity E028 (NIC-4620) received HS 72081000; Entity E030 (NIC-4620) received HS 72081000; Entity E020 (NIC-5210) received HS 72081000; Entity E014 (NIC-2610) received HS 84571000; Entity E031 (NIC-4662) received HS 85176200; Entity E008 (NIC-4662) received HS 74031100"
-      }
-    },
-    {
-      "ring_id": "R707",
-      "canonical_key": "E017|E029|E018|E030",
-      "closure_type": "transaction",
-      "entities": [
-        "E017",
-        "E029",
-        "E018",
-        "E030"
-      ],
-      "hops": [
-        {
-          "hop_type": "invoice",
-          "from": "E017",
-          "to": "E029",
-          "invoice_id": "I0034",
-          "value": 85103166,
-          "hs_code": null,
-          "invoice_date": "2025-11-14",
-          "discounting_date": "2025-12-09"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E029",
-          "to": "E018",
-          "invoice_id": "I0123",
-          "value": 89042300,
-          "hs_code": "49011000",
-          "invoice_date": "2025-12-26",
-          "discounting_date": "2026-01-30"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E018",
-          "to": "E030",
-          "invoice_id": "I0065",
-          "value": 85035182,
-          "hs_code": "26011100",
-          "invoice_date": "2026-03-01",
-          "discounting_date": "2026-03-26"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E030",
-          "to": "E017",
-          "invoice_id": "I0085",
-          "value": 100627925,
-          "hs_code": "74031100",
-          "invoice_date": "2026-02-28",
-          "discounting_date": "2026-03-21"
-        }
-      ],
-      "scores": {
-        "value": 0.48,
-        "product": null,
-        "timing": 0.23,
-        "externality": 0.16
-      },
-      "abstained": [
-        "product"
-      ],
-      "aggregate": 0.31,
-      "expected_loss": 112919278,
-      "evidence": {
-        "value": "Net position score: 0.48",
-        "product": "Abstained (insufficient HS codes or suppressed by commodity classification)",
-        "timing": "Regularity score: 0.23",
-        "externality": "Externality score: 0.16",
-        "industry": "Flagged cross-industry trades: Entity E018 (NIC-2610) received HS 49011000; Entity E030 (NIC-4620) received HS 26011100; Entity E017 (NIC-8299) received HS 74031100"
-      }
-    },
-    {
-      "ring_id": "R699",
-      "canonical_key": "E015|E029|E021|E018|E030|E020",
-      "closure_type": "transaction",
-      "entities": [
-        "E015",
-        "E029",
-        "E021",
-        "E018",
-        "E030",
-        "E020"
-      ],
-      "hops": [
-        {
-          "hop_type": "invoice",
-          "from": "E015",
-          "to": "E029",
-          "invoice_id": "I0097",
-          "value": 78601176,
-          "hs_code": "72081000",
-          "invoice_date": "2025-11-30",
-          "discounting_date": "2025-12-11"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E029",
-          "to": "E021",
-          "invoice_id": "I0017",
-          "value": 79184989,
-          "hs_code": "49011000",
-          "invoice_date": "2025-12-14",
-          "discounting_date": "2026-01-28"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E021",
-          "to": "E018",
-          "invoice_id": "I0023",
-          "value": 89902530,
-          "hs_code": "39012000",
-          "invoice_date": "2026-03-21",
-          "discounting_date": "2026-04-21"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E018",
-          "to": "E030",
-          "invoice_id": "I0065",
-          "value": 85035182,
-          "hs_code": "26011100",
-          "invoice_date": "2026-03-01",
-          "discounting_date": "2026-03-26"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E030",
-          "to": "E020",
-          "invoice_id": "I0048",
-          "value": 84274070,
-          "hs_code": "72081000",
-          "invoice_date": "2025-12-20",
-          "discounting_date": "2026-01-12"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E020",
-          "to": "E015",
-          "invoice_id": "I0014",
-          "value": 66619754,
-          "hs_code": "49011000",
-          "invoice_date": "2026-03-22",
-          "discounting_date": "2026-04-02"
-        }
-      ],
-      "scores": {
-        "value": 0.53,
-        "product": null,
-        "timing": 0.07,
+        "timing": 0.26,
         "externality": 0.26
       },
       "abstained": [
         "product"
       ],
-      "aggregate": 0.23,
-      "expected_loss": 112497443,
-      "evidence": {
-        "value": "Net position score: 0.53",
-        "product": "Abstained (insufficient HS codes or suppressed by commodity classification)",
-        "timing": "Regularity score: 0.07",
-        "externality": "Externality score: 0.26",
-        "industry": "Flagged cross-industry trades: Entity E029 (NIC-4690) received HS 72081000; Entity E021 (NIC-1392) received HS 49011000; Entity E018 (NIC-2610) received HS 39012000; Entity E030 (NIC-4620) received HS 26011100; Entity E020 (NIC-5210) received HS 72081000; Entity E015 (NIC-2013) received HS 49011000"
-      }
-    },
-    {
-      "ring_id": "R729",
-      "canonical_key": "E018|E030|E020|E029|E021",
-      "closure_type": "transaction",
-      "entities": [
-        "E018",
-        "E030",
-        "E020",
-        "E029",
-        "E021"
-      ],
-      "hops": [
-        {
-          "hop_type": "invoice",
-          "from": "E018",
-          "to": "E030",
-          "invoice_id": "I0065",
-          "value": 85035182,
-          "hs_code": "26011100",
-          "invoice_date": "2026-03-01",
-          "discounting_date": "2026-03-26"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E030",
-          "to": "E020",
-          "invoice_id": "I0048",
-          "value": 84274070,
-          "hs_code": "72081000",
-          "invoice_date": "2025-12-20",
-          "discounting_date": "2026-01-12"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E020",
-          "to": "E029",
-          "invoice_id": "I0056",
-          "value": 98071917,
-          "hs_code": "84571000",
-          "invoice_date": "2025-11-16",
-          "discounting_date": "2025-12-28"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E029",
-          "to": "E021",
-          "invoice_id": "I0017",
-          "value": 79184989,
-          "hs_code": "49011000",
-          "invoice_date": "2025-12-14",
-          "discounting_date": "2026-01-28"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E021",
-          "to": "E018",
-          "invoice_id": "I0023",
-          "value": 89902530,
-          "hs_code": "39012000",
-          "invoice_date": "2026-03-21",
-          "discounting_date": "2026-04-21"
-        }
-      ],
-      "scores": {
-        "value": 0.47,
-        "product": null,
-        "timing": 0.11,
-        "externality": 0.22
-      },
-      "abstained": [
-        "product"
-      ],
-      "aggregate": 0.25,
-      "expected_loss": 111275359,
-      "evidence": {
-        "value": "Net position score: 0.47",
-        "product": "Abstained (insufficient HS codes or suppressed by commodity classification)",
-        "timing": "Regularity score: 0.11",
-        "externality": "Externality score: 0.22",
-        "industry": "Flagged cross-industry trades: Entity E030 (NIC-4620) received HS 26011100; Entity E020 (NIC-5210) received HS 72081000; Entity E029 (NIC-4690) received HS 84571000; Entity E021 (NIC-1392) received HS 49011000; Entity E018 (NIC-2610) received HS 39012000"
-      }
-    },
-    {
-      "ring_id": "R322",
-      "canonical_key": "E004|E032|E017|E029|E005|E019",
-      "closure_type": "transaction",
-      "entities": [
-        "E004",
-        "E032",
-        "E017",
-        "E029",
-        "E005",
-        "E019"
-      ],
-      "hops": [
-        {
-          "hop_type": "invoice",
-          "from": "E004",
-          "to": "E032",
-          "invoice_id": "I0115",
-          "value": 86359380,
-          "hs_code": "85176200",
-          "invoice_date": "2025-12-02",
-          "discounting_date": "2025-12-31"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E032",
-          "to": "E017",
-          "invoice_id": "I0044",
-          "value": 52730277,
-          "hs_code": "49011000",
-          "invoice_date": "2026-01-10",
-          "discounting_date": "2026-02-17"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E017",
-          "to": "E029",
-          "invoice_id": "I0034",
-          "value": 85103166,
-          "hs_code": null,
-          "invoice_date": "2025-11-14",
-          "discounting_date": "2025-12-09"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E029",
-          "to": "E005",
-          "invoice_id": "I0140",
-          "value": 88392555,
-          "hs_code": "39012000",
-          "invoice_date": "2026-01-12",
-          "discounting_date": "2026-02-08"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E005",
-          "to": "E019",
-          "invoice_id": "I0079",
-          "value": 92203262,
-          "hs_code": "49011000",
-          "invoice_date": "2026-02-10",
-          "discounting_date": "2026-03-26"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E019",
-          "to": "E004",
-          "invoice_id": "I0129",
-          "value": 122878237,
-          "hs_code": "72081000",
-          "invoice_date": "2026-02-26",
-          "discounting_date": "2026-03-24"
-        }
-      ],
-      "scores": {
-        "value": 0.17,
-        "product": null,
-        "timing": 0.25,
-        "externality": 0.2
-      },
-      "abstained": [
-        "product"
-      ],
-      "aggregate": 0.2,
-      "expected_loss": 105153586,
-      "evidence": {
-        "value": "Net position score: 0.17",
-        "product": "Abstained (insufficient HS codes or suppressed by commodity classification)",
-        "timing": "Regularity score: 0.25",
-        "externality": "Externality score: 0.20",
-        "industry": "Flagged cross-industry trades: Entity E032 (NIC-5229) received HS 85176200; Entity E017 (NIC-8299) received HS 49011000; Entity E005 (NIC-4690) received HS 39012000; Entity E019 (NIC-4620) received HS 49011000; Entity E004 (NIC-2610) received HS 72081000"
-      }
-    },
-    {
-      "ring_id": "R220",
-      "canonical_key": "E003|E028|E030|E020|E015|E029",
-      "closure_type": "transaction",
-      "entities": [
-        "E003",
-        "E028",
-        "E030",
-        "E020",
-        "E015",
-        "E029"
-      ],
-      "hops": [
-        {
-          "hop_type": "invoice",
-          "from": "E003",
-          "to": "E028",
-          "invoice_id": "I0067",
-          "value": 103807836,
-          "hs_code": "49011000",
-          "invoice_date": "2026-02-12",
-          "discounting_date": "2026-03-19"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E028",
-          "to": "E030",
-          "invoice_id": "I0116",
-          "value": 104796883,
-          "hs_code": "72081000",
-          "invoice_date": "2026-01-19",
-          "discounting_date": "2026-02-13"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E030",
-          "to": "E020",
-          "invoice_id": "I0048",
-          "value": 84274070,
-          "hs_code": "72081000",
-          "invoice_date": "2025-12-20",
-          "discounting_date": "2026-01-12"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E020",
-          "to": "E015",
-          "invoice_id": "I0014",
-          "value": 66619754,
-          "hs_code": "49011000",
-          "invoice_date": "2026-03-22",
-          "discounting_date": "2026-04-02"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E015",
-          "to": "E029",
-          "invoice_id": "I0097",
-          "value": 78601176,
-          "hs_code": "72081000",
-          "invoice_date": "2025-11-30",
-          "discounting_date": "2025-12-11"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E029",
-          "to": "E003",
-          "invoice_id": "I0046",
-          "value": 93130035,
-          "hs_code": "84571000",
-          "invoice_date": "2026-01-02",
-          "discounting_date": "2026-01-24"
-        }
-      ],
-      "scores": {
-        "value": 0.38,
-        "product": null,
-        "timing": 0.07,
-        "externality": 0.21
-      },
-      "abstained": [
-        "product"
-      ],
-      "aggregate": 0.19,
-      "expected_loss": 102756908,
-      "evidence": {
-        "value": "Net position score: 0.38",
-        "product": "Abstained (insufficient HS codes or suppressed by commodity classification)",
-        "timing": "Regularity score: 0.07",
-        "externality": "Externality score: 0.21",
-        "industry": "Flagged cross-industry trades: Entity E028 (NIC-4620) received HS 49011000; Entity E030 (NIC-4620) received HS 72081000; Entity E020 (NIC-5210) received HS 72081000; Entity E015 (NIC-2013) received HS 49011000; Entity E029 (NIC-4690) received HS 72081000; Entity E003 (NIC-5210) received HS 84571000"
-      }
-    },
-    {
-      "ring_id": "R353",
-      "canonical_key": "E005|E019|E031|E032|E017|E029",
-      "closure_type": "transaction",
-      "entities": [
-        "E005",
-        "E019",
-        "E031",
-        "E032",
-        "E017",
-        "E029"
-      ],
-      "hops": [
-        {
-          "hop_type": "invoice",
-          "from": "E005",
-          "to": "E019",
-          "invoice_id": "I0079",
-          "value": 92203262,
-          "hs_code": "49011000",
-          "invoice_date": "2026-02-10",
-          "discounting_date": "2026-03-26"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E019",
-          "to": "E031",
-          "invoice_id": "I0050",
-          "value": 71326148,
-          "hs_code": "10063000",
-          "invoice_date": "2026-02-01",
-          "discounting_date": "2026-02-15"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E031",
-          "to": "E032",
-          "invoice_id": "I0075",
-          "value": 80273443,
-          "hs_code": "74031100",
-          "invoice_date": "2026-01-22",
-          "discounting_date": "2026-02-06"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E032",
-          "to": "E017",
-          "invoice_id": "I0044",
-          "value": 52730277,
-          "hs_code": "49011000",
-          "invoice_date": "2026-01-10",
-          "discounting_date": "2026-02-17"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E017",
-          "to": "E029",
-          "invoice_id": "I0034",
-          "value": 85103166,
-          "hs_code": null,
-          "invoice_date": "2025-11-14",
-          "discounting_date": "2025-12-09"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E029",
-          "to": "E005",
-          "invoice_id": "I0140",
-          "value": 88392555,
-          "hs_code": "39012000",
-          "invoice_date": "2026-01-12",
-          "discounting_date": "2026-02-08"
-        }
-      ],
-      "scores": {
-        "value": 0.25,
-        "product": null,
-        "timing": 0.19,
-        "externality": 0.17
-      },
-      "abstained": [
-        "product"
-      ],
-      "aggregate": 0.21,
-      "expected_loss": 100618186,
-      "evidence": {
-        "value": "Net position score: 0.25",
-        "product": "Abstained (insufficient HS codes or suppressed by commodity classification)",
-        "timing": "Regularity score: 0.19",
-        "externality": "Externality score: 0.17",
-        "industry": "Flagged cross-industry trades: Entity E019 (NIC-4620) received HS 49011000; Entity E031 (NIC-4662) received HS 10063000; Entity E032 (NIC-5229) received HS 74031100; Entity E017 (NIC-8299) received HS 49011000; Entity E005 (NIC-4690) received HS 39012000"
-      }
-    },
-    {
-      "ring_id": "R663",
-      "canonical_key": "E013|E030|E020",
-      "closure_type": "transaction",
-      "entities": [
-        "E013",
-        "E030",
-        "E020"
-      ],
-      "hops": [
-        {
-          "hop_type": "invoice",
-          "from": "E013",
-          "to": "E030",
-          "invoice_id": "I0045",
-          "value": 78457894,
-          "hs_code": "26011100",
-          "invoice_date": "2026-01-01",
-          "discounting_date": "2026-02-03"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E030",
-          "to": "E020",
-          "invoice_id": "I0048",
-          "value": 84274070,
-          "hs_code": "72081000",
-          "invoice_date": "2025-12-20",
-          "discounting_date": "2026-01-12"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E020",
-          "to": "E013",
-          "invoice_id": "I0131",
-          "value": 94441896,
-          "hs_code": "84571000",
-          "invoice_date": "2025-11-20",
-          "discounting_date": "2025-12-25"
-        }
-      ],
-      "scores": {
-        "value": 0.44,
-        "product": null,
-        "timing": 0.43,
-        "externality": 0.18
-      },
-      "abstained": [
-        "product"
-      ],
-      "aggregate": 0.38,
-      "expected_loss": 98591077,
-      "evidence": {
-        "value": "Net position score: 0.44",
-        "product": "Abstained (insufficient HS codes or suppressed by commodity classification)",
-        "timing": "Regularity score: 0.43",
-        "externality": "Externality score: 0.18",
-        "industry": "Flagged cross-industry trades: Entity E030 (NIC-4620) received HS 26011100; Entity E020 (NIC-5210) received HS 72081000; Entity E013 (NIC-1392) received HS 84571000"
-      }
-    },
-    {
-      "ring_id": "R726",
-      "canonical_key": "E018|E020|E029",
-      "closure_type": "transaction",
-      "entities": [
-        "E018",
-        "E020",
-        "E029"
-      ],
-      "hops": [
-        {
-          "hop_type": "invoice",
-          "from": "E018",
-          "to": "E020",
-          "invoice_id": "I0025",
-          "value": 99283231,
-          "hs_code": "72081000",
-          "invoice_date": "2026-01-21",
-          "discounting_date": "2026-02-27"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E020",
-          "to": "E029",
-          "invoice_id": "I0056",
-          "value": 98071917,
-          "hs_code": "84571000",
-          "invoice_date": "2025-11-16",
-          "discounting_date": "2025-12-28"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E029",
-          "to": "E018",
-          "invoice_id": "I0123",
-          "value": 89042300,
-          "hs_code": "49011000",
-          "invoice_date": "2025-12-26",
-          "discounting_date": "2026-01-30"
-        }
-      ],
-      "scores": {
-        "value": 0.62,
-        "product": null,
-        "timing": 0.2,
-        "externality": 0.12
-      },
-      "abstained": [
-        "product"
-      ],
-      "aggregate": 0.33,
-      "expected_loss": 94676261,
-      "evidence": {
-        "value": "Net position score: 0.62",
-        "product": "Abstained (insufficient HS codes or suppressed by commodity classification)",
-        "timing": "Regularity score: 0.20",
-        "externality": "Externality score: 0.12",
-        "industry": "Flagged cross-industry trades: Entity E020 (NIC-5210) received HS 72081000; Entity E029 (NIC-4690) received HS 84571000; Entity E018 (NIC-2610) received HS 49011000"
-      }
-    },
-    {
-      "ring_id": "R419",
-      "canonical_key": "E005|E028|E030|E020|E015|E029",
-      "closure_type": "transaction",
-      "entities": [
-        "E005",
-        "E028",
-        "E030",
-        "E020",
-        "E015",
-        "E029"
-      ],
-      "hops": [
-        {
-          "hop_type": "invoice",
-          "from": "E005",
-          "to": "E028",
-          "invoice_id": "I0086",
-          "value": 92449408,
-          "hs_code": "39012000",
-          "invoice_date": "2026-02-17",
-          "discounting_date": "2026-03-08"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E028",
-          "to": "E030",
-          "invoice_id": "I0116",
-          "value": 104796883,
-          "hs_code": "72081000",
-          "invoice_date": "2026-01-19",
-          "discounting_date": "2026-02-13"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E030",
-          "to": "E020",
-          "invoice_id": "I0048",
-          "value": 84274070,
-          "hs_code": "72081000",
-          "invoice_date": "2025-12-20",
-          "discounting_date": "2026-01-12"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E020",
-          "to": "E015",
-          "invoice_id": "I0014",
-          "value": 66619754,
-          "hs_code": "49011000",
-          "invoice_date": "2026-03-22",
-          "discounting_date": "2026-04-02"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E015",
-          "to": "E029",
-          "invoice_id": "I0097",
-          "value": 78601176,
-          "hs_code": "72081000",
-          "invoice_date": "2025-11-30",
-          "discounting_date": "2025-12-11"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E029",
-          "to": "E005",
-          "invoice_id": "I0140",
-          "value": 88392555,
-          "hs_code": "39012000",
-          "invoice_date": "2026-01-12",
-          "discounting_date": "2026-02-08"
-        }
-      ],
-      "scores": {
-        "value": 0.37,
-        "product": null,
-        "timing": 0.07,
-        "externality": 0.2
-      },
-      "abstained": [
-        "product"
-      ],
-      "aggregate": 0.18,
-      "expected_loss": 94044670,
-      "evidence": {
-        "value": "Net position score: 0.37",
-        "product": "Abstained (insufficient HS codes or suppressed by commodity classification)",
-        "timing": "Regularity score: 0.07",
-        "externality": "Externality score: 0.20",
-        "industry": "Flagged cross-industry trades: Entity E028 (NIC-4620) received HS 39012000; Entity E030 (NIC-4620) received HS 72081000; Entity E020 (NIC-5210) received HS 72081000; Entity E015 (NIC-2013) received HS 49011000; Entity E029 (NIC-4690) received HS 72081000; Entity E005 (NIC-4690) received HS 39012000"
-      }
-    },
-    {
-      "ring_id": "R178",
-      "canonical_key": "E003|E027|E032|E017|E029",
-      "closure_type": "transaction",
-      "entities": [
-        "E003",
-        "E027",
-        "E032",
-        "E017",
-        "E029"
-      ],
-      "hops": [
-        {
-          "hop_type": "invoice",
-          "from": "E003",
-          "to": "E027",
-          "invoice_id": "I0063",
-          "value": 98268296,
-          "hs_code": "84571000",
-          "invoice_date": "2025-12-29",
-          "discounting_date": "2026-02-06"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E027",
-          "to": "E032",
-          "invoice_id": "I0072",
-          "value": 112159236,
-          "hs_code": "49011000",
-          "invoice_date": "2025-12-08",
-          "discounting_date": "2026-01-04"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E032",
-          "to": "E017",
-          "invoice_id": "I0044",
-          "value": 52730277,
-          "hs_code": "49011000",
-          "invoice_date": "2026-01-10",
-          "discounting_date": "2026-02-17"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E017",
-          "to": "E029",
-          "invoice_id": "I0034",
-          "value": 85103166,
-          "hs_code": null,
-          "invoice_date": "2025-11-14",
-          "discounting_date": "2025-12-09"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E029",
-          "to": "E003",
-          "invoice_id": "I0046",
-          "value": 93130035,
-          "hs_code": "84571000",
-          "invoice_date": "2026-01-02",
-          "discounting_date": "2026-01-24"
-        }
-      ],
-      "scores": {
-        "value": 0.17,
-        "product": null,
-        "timing": 0.29,
-        "externality": 0.23
-      },
-      "abstained": [
-        "product"
-      ],
-      "aggregate": 0.21,
-      "expected_loss": 93317975,
-      "evidence": {
-        "value": "Net position score: 0.17",
-        "product": "Abstained (insufficient HS codes or suppressed by commodity classification)",
-        "timing": "Regularity score: 0.29",
-        "externality": "Externality score: 0.23",
-        "industry": "Flagged cross-industry trades: Entity E027 (NIC-5229) received HS 84571000; Entity E032 (NIC-5229) received HS 49011000; Entity E017 (NIC-8299) received HS 49011000; Entity E003 (NIC-5210) received HS 84571000"
-      }
-    },
-    {
-      "ring_id": "R549",
-      "canonical_key": "E007|E029|E018|E020|E013|E028",
-      "closure_type": "transaction",
-      "entities": [
-        "E007",
-        "E029",
-        "E018",
-        "E020",
-        "E013",
-        "E028"
-      ],
-      "hops": [
-        {
-          "hop_type": "invoice",
-          "from": "E007",
-          "to": "E029",
-          "invoice_id": "I0078",
-          "value": 31439592,
-          "hs_code": "74031100",
-          "invoice_date": "2026-02-13",
-          "discounting_date": "2026-03-29"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E029",
-          "to": "E018",
-          "invoice_id": "I0123",
-          "value": 89042300,
-          "hs_code": "49011000",
-          "invoice_date": "2025-12-26",
-          "discounting_date": "2026-01-30"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E018",
-          "to": "E020",
-          "invoice_id": "I0025",
-          "value": 99283231,
-          "hs_code": "72081000",
-          "invoice_date": "2026-01-21",
-          "discounting_date": "2026-02-27"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E020",
-          "to": "E013",
-          "invoice_id": "I0131",
-          "value": 94441896,
-          "hs_code": "84571000",
-          "invoice_date": "2025-11-20",
-          "discounting_date": "2025-12-25"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E013",
-          "to": "E028",
-          "invoice_id": "I0092",
-          "value": 84263562,
-          "hs_code": "85176200",
-          "invoice_date": "2026-01-09",
-          "discounting_date": "2026-01-22"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E028",
-          "to": "E007",
-          "invoice_id": "I0130",
-          "value": 61950968,
-          "hs_code": "27101990",
-          "invoice_date": "2026-03-15",
-          "discounting_date": "2026-03-23"
-        }
-      ],
-      "scores": {
-        "value": 0.14,
-        "product": null,
-        "timing": 0.34,
-        "externality": 0.18
-      },
-      "abstained": [
-        "product"
-      ],
-      "aggregate": 0.2,
-      "expected_loss": 91570484,
-      "evidence": {
-        "value": "Net position score: 0.14",
-        "product": "Abstained (insufficient HS codes or suppressed by commodity classification)",
-        "timing": "Regularity score: 0.34",
-        "externality": "Externality score: 0.18",
-        "industry": "Flagged cross-industry trades: Entity E029 (NIC-4690) received HS 74031100; Entity E018 (NIC-2610) received HS 49011000; Entity E020 (NIC-5210) received HS 72081000; Entity E013 (NIC-1392) received HS 84571000; Entity E028 (NIC-4620) received HS 85176200; Entity E007 (NIC-4662) received HS 27101990"
-      }
-    },
-    {
-      "ring_id": "R594",
-      "canonical_key": "E008|E028|E030|E031",
-      "closure_type": "transaction",
-      "entities": [
-        "E008",
-        "E028",
-        "E030",
-        "E031"
-      ],
-      "hops": [
-        {
-          "hop_type": "invoice",
-          "from": "E008",
-          "to": "E028",
-          "invoice_id": "I0118",
-          "value": 118095206,
-          "hs_code": "72081000",
-          "invoice_date": "2026-03-24",
-          "discounting_date": "2026-05-05"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E028",
-          "to": "E030",
-          "invoice_id": "I0116",
-          "value": 104796883,
-          "hs_code": "72081000",
-          "invoice_date": "2026-01-19",
-          "discounting_date": "2026-02-13"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E030",
-          "to": "E031",
-          "invoice_id": "I0134",
-          "value": 119445501,
-          "hs_code": "10063000",
-          "invoice_date": "2026-03-25",
-          "discounting_date": "2026-05-08"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E031",
-          "to": "E008",
-          "invoice_id": "I0093",
-          "value": 86365017,
-          "hs_code": "74031100",
-          "invoice_date": "2026-02-28",
-          "discounting_date": "2026-03-07"
-        }
-      ],
-      "scores": {
-        "value": 0.24,
-        "product": null,
-        "timing": 0.2,
-        "externality": 0.18
-      },
-      "abstained": [
-        "product"
-      ],
-      "aggregate": 0.21,
-      "expected_loss": 91535820,
-      "evidence": {
-        "value": "Net position score: 0.24",
-        "product": "Abstained (insufficient HS codes or suppressed by commodity classification)",
-        "timing": "Regularity score: 0.20",
-        "externality": "Externality score: 0.18",
-        "industry": "Flagged cross-industry trades: Entity E028 (NIC-4620) received HS 72081000; Entity E030 (NIC-4620) received HS 72081000; Entity E031 (NIC-4662) received HS 10063000; Entity E008 (NIC-4662) received HS 74031100"
-      }
-    },
-    {
-      "ring_id": "R727",
-      "canonical_key": "E018|E020|E029|E021",
-      "closure_type": "transaction",
-      "entities": [
-        "E018",
-        "E020",
-        "E029",
-        "E021"
-      ],
-      "hops": [
-        {
-          "hop_type": "invoice",
-          "from": "E018",
-          "to": "E020",
-          "invoice_id": "I0025",
-          "value": 99283231,
-          "hs_code": "72081000",
-          "invoice_date": "2026-01-21",
-          "discounting_date": "2026-02-27"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E020",
-          "to": "E029",
-          "invoice_id": "I0056",
-          "value": 98071917,
-          "hs_code": "84571000",
-          "invoice_date": "2025-11-16",
-          "discounting_date": "2025-12-28"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E029",
-          "to": "E021",
-          "invoice_id": "I0017",
-          "value": 79184989,
-          "hs_code": "49011000",
-          "invoice_date": "2025-12-14",
-          "discounting_date": "2026-01-28"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E021",
-          "to": "E018",
-          "invoice_id": "I0023",
-          "value": 89902530,
-          "hs_code": "39012000",
-          "invoice_date": "2026-03-21",
-          "discounting_date": "2026-04-21"
-        }
-      ],
-      "scores": {
-        "value": 0.48,
-        "product": null,
-        "timing": 0.11,
-        "externality": 0.18
-      },
-      "abstained": [
-        "product"
-      ],
-      "aggregate": 0.25,
-      "expected_loss": 91531994,
-      "evidence": {
-        "value": "Net position score: 0.48",
-        "product": "Abstained (insufficient HS codes or suppressed by commodity classification)",
-        "timing": "Regularity score: 0.11",
-        "externality": "Externality score: 0.18",
-        "industry": "Flagged cross-industry trades: Entity E020 (NIC-5210) received HS 72081000; Entity E029 (NIC-4690) received HS 84571000; Entity E021 (NIC-1392) received HS 49011000; Entity E018 (NIC-2610) received HS 39012000"
-      }
-    },
-    {
-      "ring_id": "R412",
-      "canonical_key": "E005|E028|E009|E029",
-      "closure_type": "transaction",
-      "entities": [
-        "E005",
-        "E028",
-        "E009",
-        "E029"
-      ],
-      "hops": [
-        {
-          "hop_type": "invoice",
-          "from": "E005",
-          "to": "E028",
-          "invoice_id": "I0086",
-          "value": 92449408,
-          "hs_code": "39012000",
-          "invoice_date": "2026-02-17",
-          "discounting_date": "2026-03-08"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E028",
-          "to": "E009",
-          "invoice_id": "I0040",
-          "value": 82458160,
-          "hs_code": "27101990",
-          "invoice_date": "2025-11-04",
-          "discounting_date": "2025-12-03"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E009",
-          "to": "E029",
-          "invoice_id": "I0052",
-          "value": 100973640,
-          "hs_code": null,
-          "invoice_date": "2026-03-27",
-          "discounting_date": "2026-04-17"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E029",
-          "to": "E005",
-          "invoice_id": "I0140",
-          "value": 88392555,
-          "hs_code": "39012000",
-          "invoice_date": "2026-01-12",
-          "discounting_date": "2026-02-08"
-        }
-      ],
-      "scores": {
-        "value": 0.44,
-        "product": null,
-        "timing": 0.14,
-        "externality": 0.15
-      },
-      "abstained": [
-        "product"
-      ],
-      "aggregate": 0.25,
-      "expected_loss": 90154606,
-      "evidence": {
-        "value": "Net position score: 0.44",
-        "product": "Abstained (insufficient HS codes or suppressed by commodity classification)",
-        "timing": "Regularity score: 0.14",
-        "externality": "Externality score: 0.15",
-        "industry": "Flagged cross-industry trades: Entity E028 (NIC-4620) received HS 39012000; Entity E009 (NIC-6202) received HS 27101990; Entity E005 (NIC-4690) received HS 39012000"
-      }
-    },
-    {
-      "ring_id": "R468",
-      "canonical_key": "E007|E012|E023|E019|E008|E028",
-      "closure_type": "transaction",
-      "entities": [
-        "E007",
-        "E012",
-        "E023",
-        "E019",
-        "E008",
-        "E028"
-      ],
-      "hops": [
-        {
-          "hop_type": "invoice",
-          "from": "E007",
-          "to": "E012",
-          "invoice_id": "I0108",
-          "value": 50159263,
-          "hs_code": "27101990",
-          "invoice_date": "2026-03-14",
-          "discounting_date": "2026-04-05"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E012",
-          "to": "E023",
-          "invoice_id": "I0049",
-          "value": 52157070,
-          "hs_code": "84571000",
-          "invoice_date": "2026-03-31",
-          "discounting_date": "2026-05-06"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E023",
-          "to": "E019",
-          "invoice_id": "I0124",
-          "value": 113317145,
-          "hs_code": null,
-          "invoice_date": "2026-01-18",
-          "discounting_date": "2026-01-23"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E019",
-          "to": "E008",
-          "invoice_id": "I0088",
-          "value": 114847359,
-          "hs_code": "72081000",
-          "invoice_date": "2026-02-10",
-          "discounting_date": "2026-03-02"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E008",
-          "to": "E028",
-          "invoice_id": "I0118",
-          "value": 118095206,
-          "hs_code": "72081000",
-          "invoice_date": "2026-03-24",
-          "discounting_date": "2026-05-05"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E028",
-          "to": "E007",
-          "invoice_id": "I0130",
-          "value": 61950968,
-          "hs_code": "27101990",
-          "invoice_date": "2026-03-15",
-          "discounting_date": "2026-03-23"
-        }
-      ],
-      "scores": {
-        "value": 0.17,
-        "product": null,
-        "timing": 0.17,
-        "externality": 0.23
-      },
-      "abstained": [
-        "product"
-      ],
-      "aggregate": 0.18,
-      "expected_loss": 90103401,
-      "evidence": {
-        "value": "Net position score: 0.17",
-        "product": "Abstained (insufficient HS codes or suppressed by commodity classification)",
-        "timing": "Regularity score: 0.17",
-        "externality": "Externality score: 0.23",
-        "industry": "Flagged cross-industry trades: Entity E012 (NIC-5229) received HS 27101990; Entity E023 (NIC-7020) received HS 84571000; Entity E008 (NIC-4662) received HS 72081000; Entity E028 (NIC-4620) received HS 72081000; Entity E007 (NIC-4662) received HS 27101990"
-      }
-    },
-    {
-      "ring_id": "R206",
-      "canonical_key": "E003|E028|E009|E029",
-      "closure_type": "transaction",
-      "entities": [
-        "E003",
-        "E028",
-        "E009",
-        "E029"
-      ],
-      "hops": [
-        {
-          "hop_type": "invoice",
-          "from": "E003",
-          "to": "E028",
-          "invoice_id": "I0067",
-          "value": 103807836,
-          "hs_code": "49011000",
-          "invoice_date": "2026-02-12",
-          "discounting_date": "2026-03-19"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E028",
-          "to": "E009",
-          "invoice_id": "I0040",
-          "value": 82458160,
-          "hs_code": "27101990",
-          "invoice_date": "2025-11-04",
-          "discounting_date": "2025-12-03"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E009",
-          "to": "E029",
-          "invoice_id": "I0052",
-          "value": 100973640,
-          "hs_code": null,
-          "invoice_date": "2026-03-27",
-          "discounting_date": "2026-04-17"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E029",
-          "to": "E003",
-          "invoice_id": "I0046",
-          "value": 93130035,
-          "hs_code": "84571000",
-          "invoice_date": "2026-01-02",
-          "discounting_date": "2026-01-24"
-        }
-      ],
-      "scores": {
-        "value": 0.36,
-        "product": null,
-        "timing": 0.15,
-        "externality": 0.16
-      },
-      "abstained": [
-        "product"
-      ],
       "aggregate": 0.24,
-      "expected_loss": 90025370,
+      "expected_loss": 156056430,
       "evidence": {
-        "value": "Net position score: 0.36",
+        "value": "Net position score: 0.21",
         "product": "Abstained (insufficient HS codes or suppressed by commodity classification)",
-        "timing": "Regularity score: 0.15",
-        "externality": "Externality score: 0.16",
-        "industry": "Flagged cross-industry trades: Entity E028 (NIC-4620) received HS 49011000; Entity E009 (NIC-6202) received HS 27101990; Entity E003 (NIC-5210) received HS 84571000"
-      }
-    },
-    {
-      "ring_id": "R223",
-      "canonical_key": "E003|E028|E030|E031|E008",
-      "closure_type": "transaction",
-      "entities": [
-        "E003",
-        "E028",
-        "E030",
-        "E031",
-        "E008"
-      ],
-      "hops": [
-        {
-          "hop_type": "invoice",
-          "from": "E003",
-          "to": "E028",
-          "invoice_id": "I0067",
-          "value": 103807836,
-          "hs_code": "49011000",
-          "invoice_date": "2026-02-12",
-          "discounting_date": "2026-03-19"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E028",
-          "to": "E030",
-          "invoice_id": "I0116",
-          "value": 104796883,
-          "hs_code": "72081000",
-          "invoice_date": "2026-01-19",
-          "discounting_date": "2026-02-13"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E030",
-          "to": "E031",
-          "invoice_id": "I0134",
-          "value": 119445501,
-          "hs_code": "10063000",
-          "invoice_date": "2026-03-25",
-          "discounting_date": "2026-05-08"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E031",
-          "to": "E008",
-          "invoice_id": "I0093",
-          "value": 86365017,
-          "hs_code": "74031100",
-          "invoice_date": "2026-02-28",
-          "discounting_date": "2026-03-07"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E008",
-          "to": "E003",
-          "invoice_id": "I0071",
-          "value": 53177285,
-          "hs_code": "10063000",
-          "invoice_date": "2026-01-14",
-          "discounting_date": "2026-02-18"
-        }
-      ],
-      "scores": {
-        "value": 0.15,
-        "product": null,
-        "timing": 0.24,
-        "externality": 0.25
-      },
-      "abstained": [
-        "product"
-      ],
-      "aggregate": 0.19,
-      "expected_loss": 88806184,
-      "evidence": {
-        "value": "Net position score: 0.15",
-        "product": "Abstained (insufficient HS codes or suppressed by commodity classification)",
-        "timing": "Regularity score: 0.24",
-        "externality": "Externality score: 0.25",
-        "industry": "Flagged cross-industry trades: Entity E028 (NIC-4620) received HS 49011000; Entity E030 (NIC-4620) received HS 72081000; Entity E031 (NIC-4662) received HS 10063000; Entity E008 (NIC-4662) received HS 74031100; Entity E003 (NIC-5210) received HS 10063000"
-      }
-    },
-    {
-      "ring_id": "R422",
-      "canonical_key": "E005|E028|E030|E031",
-      "closure_type": "transaction",
-      "entities": [
-        "E005",
-        "E028",
-        "E030",
-        "E031"
-      ],
-      "hops": [
-        {
-          "hop_type": "invoice",
-          "from": "E005",
-          "to": "E028",
-          "invoice_id": "I0086",
-          "value": 92449408,
-          "hs_code": "39012000",
-          "invoice_date": "2026-02-17",
-          "discounting_date": "2026-03-08"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E028",
-          "to": "E030",
-          "invoice_id": "I0116",
-          "value": 104796883,
-          "hs_code": "72081000",
-          "invoice_date": "2026-01-19",
-          "discounting_date": "2026-02-13"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E030",
-          "to": "E031",
-          "invoice_id": "I0134",
-          "value": 119445501,
-          "hs_code": "10063000",
-          "invoice_date": "2026-03-25",
-          "discounting_date": "2026-05-08"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E031",
-          "to": "E005",
-          "invoice_id": "I0053",
-          "value": 78494117,
-          "hs_code": "72081000",
-          "invoice_date": "2026-03-03",
-          "discounting_date": "2026-03-13"
-        }
-      ],
-      "scores": {
-        "value": 0.25,
-        "product": null,
-        "timing": 0.21,
-        "externality": 0.18
-      },
-      "abstained": [
-        "product"
-      ],
-      "aggregate": 0.22,
-      "expected_loss": 88199721,
-      "evidence": {
-        "value": "Net position score: 0.25",
-        "product": "Abstained (insufficient HS codes or suppressed by commodity classification)",
-        "timing": "Regularity score: 0.21",
-        "externality": "Externality score: 0.18",
-        "industry": "Flagged cross-industry trades: Entity E028 (NIC-4620) received HS 39012000; Entity E030 (NIC-4620) received HS 72081000; Entity E031 (NIC-4662) received HS 10063000; Entity E005 (NIC-4690) received HS 72081000"
-      }
-    },
-    {
-      "ring_id": "R238",
-      "canonical_key": "E003|E031|E005|E023|E019|E008",
-      "closure_type": "transaction",
-      "entities": [
-        "E003",
-        "E031",
-        "E005",
-        "E023",
-        "E019",
-        "E008"
-      ],
-      "hops": [
-        {
-          "hop_type": "invoice",
-          "from": "E003",
-          "to": "E031",
-          "invoice_id": "I0098",
-          "value": 56869830,
-          "hs_code": "39012000",
-          "invoice_date": "2026-03-18",
-          "discounting_date": "2026-03-29"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E031",
-          "to": "E005",
-          "invoice_id": "I0053",
-          "value": 78494117,
-          "hs_code": "72081000",
-          "invoice_date": "2026-03-03",
-          "discounting_date": "2026-03-13"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E005",
-          "to": "E023",
-          "invoice_id": "I0081",
-          "value": 98077236,
-          "hs_code": "49011000",
-          "invoice_date": "2025-11-24",
-          "discounting_date": "2025-12-24"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E023",
-          "to": "E019",
-          "invoice_id": "I0124",
-          "value": 113317145,
-          "hs_code": null,
-          "invoice_date": "2026-01-18",
-          "discounting_date": "2026-01-23"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E019",
-          "to": "E008",
-          "invoice_id": "I0088",
-          "value": 114847359,
-          "hs_code": "72081000",
-          "invoice_date": "2026-02-10",
-          "discounting_date": "2026-03-02"
-        },
-        {
-          "hop_type": "invoice",
-          "from": "E008",
-          "to": "E003",
-          "invoice_id": "I0071",
-          "value": 53177285,
-          "hs_code": "10063000",
-          "invoice_date": "2026-01-14",
-          "discounting_date": "2026-02-18"
-        }
-      ],
-      "scores": {
-        "value": 0.2,
-        "product": null,
-        "timing": 0.12,
-        "externality": 0.24
-      },
-      "abstained": [
-        "product"
-      ],
-      "aggregate": 0.17,
-      "expected_loss": 87555615,
-      "evidence": {
-        "value": "Net position score: 0.20",
-        "product": "Abstained (insufficient HS codes or suppressed by commodity classification)",
-        "timing": "Regularity score: 0.12",
-        "externality": "Externality score: 0.24",
-        "industry": "Flagged cross-industry trades: Entity E031 (NIC-4662) received HS 39012000; Entity E005 (NIC-4690) received HS 72081000; Entity E023 (NIC-7020) received HS 49011000; Entity E008 (NIC-4662) received HS 72081000; Entity E003 (NIC-5210) received HS 10063000"
+        "timing": "Regularity score: 0.26",
+        "externality": "Externality score: 0.26",
+        "industry": "All trades consistent with declared industry codes."
       }
     }
   ]
