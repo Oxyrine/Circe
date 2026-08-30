@@ -194,7 +194,14 @@ def _compute_layout(node_ids, edge_pairs, width=1800.0, height=1100.0):
             visited.add(u)
             for curr in queue:
                 comp.append(curr)
-                for neighbor in adj[curr]:
+                # sorted(): adj[curr] is a set, whose iteration order depends on
+                # Python's per-process string hash randomization. Left unsorted,
+                # BFS visits neighbors in a different order every run, which
+                # reorders `comp` -- the very node list _layout_component() feeds
+                # its seeded RNG in sequence -- so the "seeded" layout still came
+                # out different each run. Sorting makes traversal order (and so
+                # the final layout) deterministic across processes.
+                for neighbor in sorted(adj[curr]):
                     if neighbor not in visited:
                         visited.add(neighbor)
                         queue.append(neighbor)
@@ -294,9 +301,12 @@ def main():
         return 1
 
     data = _load(args.scored)
-    if args.limit and args.limit > 0 and len(data.get("rings", [])) > args.limit:
+    raw_rings = data.get("rings", [])
+    data["total_candidate_count"] = len(raw_rings)
+    data["high_risk_count"] = len([r for r in raw_rings if r.get("aggregate", 0) >= 0.70])
+    if args.limit and args.limit > 0 and len(raw_rings) > args.limit:
         # Sort descending by expected loss and take top-k
-        sorted_rings = sorted(data.get("rings", []), key=lambda r: r.get("expected_loss", 0), reverse=True)
+        sorted_rings = sorted(raw_rings, key=lambda r: r.get("expected_loss", 0), reverse=True)
         data["rings"] = sorted_rings[:args.limit]
         data["count"] = len(data["rings"])
 
