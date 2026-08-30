@@ -93,10 +93,58 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
         ctx.globalAlpha = 1;
-        if (document.getElementById('landing-page').style.visibility !== 'hidden') requestAnimationFrame(animateCanvas);
+        if (document.getElementById('landing-page') && document.getElementById('landing-page').style.visibility !== 'hidden') {
+            requestAnimationFrame(animateCanvas);
+        }
     }
     
     animateCanvas();
+
+    window.restartConstellation = function() {
+        requestAnimationFrame(animateCanvas);
+    };
+
+    window.returnToLanding = function() {
+        const lp = document.getElementById('landing-page');
+        const as = document.getElementById('app-shell');
+        if (lp) {
+            lp.style.display = 'flex';
+            const bigTitle = lp.querySelector('.circe-title-text');
+            if (bigTitle) {
+                bigTitle.style.animation = 'none';
+                void bigTitle.offsetWidth; // trigger reflow
+                bigTitle.style.animation = 'writeCursive 1.5s cubic-bezier(0.3, 0.0, 0.2, 1) 0.1s both';
+            }
+            const eyebrow = lp.querySelector('.eyebrow-text');
+            if (eyebrow) {
+                eyebrow.style.animation = 'none';
+                void eyebrow.offsetWidth;
+                eyebrow.style.animation = 'elegantFadeUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) 0.8s forwards';
+            }
+            const tagline = lp.querySelector('.tagline-text');
+            if (tagline) {
+                tagline.style.animation = 'none';
+                void tagline.offsetWidth;
+                tagline.style.animation = 'elegantFadeUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) 1.0s forwards';
+            }
+            const enterBtnEl = document.getElementById('enter-btn-new');
+            if (enterBtnEl) {
+                enterBtnEl.style.animation = 'none';
+                void enterBtnEl.offsetWidth;
+                enterBtnEl.style.animation = 'elegantFadeUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) 1.2s forwards';
+            }
+            
+            setTimeout(() => {
+                lp.style.opacity = '1';
+                lp.style.visibility = 'visible';
+                lp.style.pointerEvents = 'auto';
+                if (window.restartConstellation) window.restartConstellation();
+            }, 10);
+            if (as) {
+                as.classList.add('hidden-app');
+            }
+        }
+    };
 
     const enterBtn = document.getElementById('enter-btn-new');
     if (enterBtn) {
@@ -111,7 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     lp.style.display = 'none';
                     if (as) {
                         as.classList.remove('hidden-app');
-                        if (window.initializeOuroboros) window.initializeOuroboros();
+                        if (window.initializeCirce) window.initializeCirce();
                         if (window.initializeMap) window.initializeMap();
                     }
                 }, 400);

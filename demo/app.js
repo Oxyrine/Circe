@@ -6,7 +6,7 @@
 // --- PHASE 6 ADDITIONS ---
 window.INVESTIGATOR_INVOICES = {};
 try {
-  var stored = localStorage.getItem('ouroboros_investigator_invoices');
+  var stored = localStorage.getItem('circe_investigator_invoices');
   if (stored) {
     window.INVESTIGATOR_INVOICES = JSON.parse(stored);
   }
@@ -94,7 +94,7 @@ document.addEventListener("DOMContentLoaded", function() {
     if (Object.keys(window.INVESTIGATOR_INVOICES).length > 0) clearBtn.style.display = "inline-block";
     clearBtn.onclick = function() {
       if (confirm("Are you sure you want to clear all investigator-added data?")) {
-        localStorage.removeItem("ouroboros_investigator_invoices");
+        localStorage.removeItem("circe_investigator_invoices");
         window.INVESTIGATOR_INVOICES = {};
         clearBtn.style.display = "none";
         if (typeof renderLedger === "function") renderLedger();
@@ -167,7 +167,7 @@ window.submitAddInvoice = function() {
   };
 
   window.INVESTIGATOR_INVOICES[id] = inv;
-  localStorage.setItem("ouroboros_investigator_invoices", JSON.stringify(window.INVESTIGATOR_INVOICES));
+  localStorage.setItem("circe_investigator_invoices", JSON.stringify(window.INVESTIGATOR_INVOICES));
   
   document.getElementById("add-invoice-modal").classList.add("hidden");
   
@@ -188,7 +188,7 @@ window.submitAddInvoice = function() {
 window.removeInvestigatorInvoice = function(id) {
   if (confirm("Remove this investigator-added invoice?")) {
     delete window.INVESTIGATOR_INVOICES[id];
-    localStorage.setItem("ouroboros_investigator_invoices", JSON.stringify(window.INVESTIGATOR_INVOICES));
+    localStorage.setItem("circe_investigator_invoices", JSON.stringify(window.INVESTIGATOR_INVOICES));
     closeModal("invoice-modal");
     if (Object.keys(window.INVESTIGATOR_INVOICES).length === 0) {
       var clearBtn = document.getElementById("clear-investigator-btn");
@@ -202,11 +202,27 @@ window.removeInvestigatorInvoice = function(id) {
 
   var NS = "http://www.w3.org/2000/svg";
 
-  function fmtRupees(n) {
-    if (typeof n !== "number") return "—";
-    if (n >= 10000000) return "₹" + (n / 10000000).toFixed(2) + "cr";
-    if (n >= 100000) return "₹" + (n / 100000).toFixed(2) + "L";
-    return "₹" + n.toLocaleString("en-IN");
+  function fmtRupees(n, html) {
+    if (typeof n !== "number" || isNaN(n)) return "—";
+    var isNeg = n < 0;
+    var absN = Math.abs(n);
+    var numStr = "";
+    var unit = "";
+    if (absN >= 10000000) {
+      numStr = (absN / 10000000).toFixed(2);
+      unit = " Cr";
+    } else if (absN >= 100000) {
+      numStr = (absN / 100000).toFixed(2);
+      unit = " L";
+    } else {
+      numStr = absN.toLocaleString("en-IN", { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+      unit = "";
+    }
+    var prefix = isNeg ? "-₹" : "₹";
+    if (html) {
+      return (isNeg ? "-" : "") + "<span class='curr-sym'>₹</span><span class='num'>" + numStr + "</span><span class='curr-unit'>" + unit + "</span>";
+    }
+    return prefix + numStr + unit;
   }
 
   function hashId(str) {
@@ -246,10 +262,10 @@ window.removeInvestigatorInvoice = function(id) {
 
     var n = ring.entities.length;
     var size = 320;
-    var cx = size / 2, cy = size / 2;
-    var ringR = Math.min(82, 28 + n * 6);
-    var nodeR = 18; // slightly larger than old 16
-    var keepOutR = ringR + nodeR + 12;
+    var cx = size / 2, cy = (size / 2) - 15;
+    var ringR = Math.min(68, 22 + n * 5.5);
+    var nodeR = 15;
+    var keepOutR = ringR + nodeR + 14;
 
     var pos = {};
     ring.entities.forEach(function (id, i) {
@@ -273,7 +289,7 @@ window.removeInvestigatorInvoice = function(id) {
       markerWidth: "5", markerHeight: "5", orient: "auto-start-reverse",
     });
     marker.appendChild(svgEl("path", {
-      d: "M1 1L9 5L1 9", fill: "var(--accent-coral)", stroke: "none",
+      d: "M1 1L9 5L1 9", fill: "var(--blood)", stroke: "none",
     }));
     defs.appendChild(marker);
     
@@ -344,7 +360,7 @@ window.removeInvestigatorInvoice = function(id) {
       } else {
         line.setAttribute("class", "hop-invoice");
         line.setAttribute("marker-end", "url(#" + markerId + ")");
-        title.textContent = "INVOICE: ₹" + ((hop.value||0)/10000000).toFixed(2) + " Cr";
+        title.textContent = "INVOICE: " + fmtRupees(hop.value, false);
       }
       line.appendChild(title);
       edgesGroup.appendChild(line);
@@ -382,19 +398,6 @@ window.removeInvestigatorInvoice = function(id) {
       g.addEventListener("mouseenter", function() {
         wrapper.classList.add("hover-active");
         g.classList.add("hovered");
-        
-        // Highlight connected edges
-        var edges = edgesGroup.childNodes;
-        for (var j = 0; j < edges.length; j++) {
-          var e = edges[j];
-          var title = e.querySelector("title");
-          if (!title) continue;
-          var tStr = title.textContent;
-          // In a real impl we'd use data attributes for connections, but this is simple enough
-          // We can check if hop.from or hop.to match this id by traversing ring.hops
-        }
-        
-        // We'll actually do this more cleanly by adding data-from and data-to to edges
       });
       
       g.addEventListener("mouseleave", function() {
@@ -408,7 +411,7 @@ window.removeInvestigatorInvoice = function(id) {
 
     wrapper.appendChild(svg);
     
-    // Add legend
+    // Add legend as horizontal strip at bottom
     var legend = document.createElement("div");
     legend.className = "graph-legend mono";
     legend.innerHTML = `
@@ -471,26 +474,28 @@ window.removeInvestigatorInvoice = function(id) {
   function scoreRow(sig, score, isAbstained, evidence) {
     var wrapper = document.createElement("div");
     wrapper.className = "score-row";
-    if (isAbstained) {
-      wrapper.innerHTML = "<div class='sig-name'>" + sig.toUpperCase() + "</div><div class='sig-bar-wrap mono'>N/A</div><div class='sig-val mono'>-</div>";
-      return wrapper;
+    if (isAbstained || score === null || typeof score === "undefined") {
+      wrapper.innerHTML = "<div class='sig-name'>" + sig.toUpperCase() + "</div>" +
+                          "<div class='sig-bar-wrap' title='Signal abstained: Insufficient data across hops'>" +
+                            "<div class='sig-bar-track abstained'></div>" +
+                          "</div>" +
+                          "<div class='sig-val abstained mono'>ABSTAINED</div>";
+    } else {
+      var pct = Math.max(0, Math.min(100, Math.round(score * 100)));
+      var isRisk = (score >= 0.70);
+      var barClass = isRisk ? "sig-bar-fill risk" : "sig-bar-fill";
+      var valClass = isRisk ? "sig-val risk mono num" : "sig-val mono num";
+      wrapper.innerHTML = "<div class='sig-name'>" + sig.toUpperCase() + "</div>" +
+                          "<div class='sig-bar-wrap'><div class='sig-bar-track'><div class='" + barClass + "' style='width:" + pct + "%'></div></div></div>" +
+                          "<div class='" + valClass + "'>" + score.toFixed(2) + "</div>";
     }
-    var fullBlocks = Math.round((score || 0) * 10);
-    var bar = "";
-    for (var i = 0; i < 10; i++) {
-      bar += (i < fullBlocks) ? "█" : "░";
-    }
-    var valClass = (score > 0.8) ? "sig-val risk mono" : "sig-val mono";
-    wrapper.innerHTML = "<div class='sig-name'>" + sig.toUpperCase() + "</div>" +
-                        "<div class='sig-bar-wrap mono'>" + bar + "</div>" +
-                        "<div class='" + valClass + "'>" + score.toFixed(2) + "</div>";
     
     if (evidence) {
       var evDiv = document.createElement("div");
       evDiv.style.gridColumn = "1 / -1";
-      evDiv.style.fontSize = "9px";
-      evDiv.style.color = "var(--text-muted)";
-      evDiv.style.marginTop = "-8px";
+      evDiv.style.fontSize = "var(--fs-micro)";
+      evDiv.style.color = "var(--paper-muted)";
+      evDiv.style.marginTop = "-4px";
       evDiv.style.marginBottom = "4px";
       evDiv.textContent = evidence;
       wrapper.appendChild(evDiv);
@@ -502,116 +507,185 @@ window.removeInvestigatorInvoice = function(id) {
     var card = document.createElement("div");
     card.className = "ring-card";
     card.id = ring.ring_id;
-    
+
     var expLoss = (typeof ring.expected_loss === "number" ? ring.expected_loss : (ring.expected_loss_inr || 0));
-    var expLossCr = expLoss / 10000000;
-    
-    card.innerHTML = "<div class='ring-header'>" +
-      "<div class='rh-title'>" +
-        "<span class='rh-rank'>#" + (rank<10?"0"+rank:rank) + "</span>" +
-        "<span class='rh-id'>" + ring.ring_id + "</span>" +
-        "<span class='rh-type'>" + ring.closure_type.toUpperCase() + " CLOSED</span>" +
-      "</div>" +
-      "<div class='rh-metrics'>" +
-        "<div class='metric-group'>" +
-          "<span class='metric-label'>Expected Loss</span>" +
-          "<span class='metric-val risk mono'>₹" + expLossCr.toFixed(2) + " Cr</span>" +
-        "</div>" +
-        "<div class='metric-group'>" +
-          "<span class='metric-label'>Aggregate</span>" +
-          "<span class='metric-val mono'>" + (ring.aggregate || ring.aggregate_score || 0).toFixed(2) + "</span>" +
-        "</div>" +
-      "</div>" +
-    "</div>";
-    
+
+    var score = (ring.aggregate || ring.aggregate_score || 0);
+    var statusPill = score >= 0.70
+      ? "<span class='status-pill risk'>FLAGGED FRAUD</span>"
+      : "<span class='status-pill benign'>BENIGN LOOP</span>";
+
+    // Compute summary stats — reuse values buildCard already has
+    var invoiceCount = 0;
+    var totalValue = 0;
+    var invoiceDates = [];
+    (ring.hops || []).forEach(function(h) {
+      if (h.hop_type === "invoice") {
+        invoiceCount++;
+        totalValue += (h.value || 0);
+        if (h.invoice_date) invoiceDates.push(new Date(h.invoice_date));
+      }
+    });
+    var daySpan = 0;
+    if (invoiceDates.length >= 2) {
+      var minD = Math.min.apply(null, invoiceDates.map(function(d) { return d.getTime(); }));
+      var maxD = Math.max.apply(null, invoiceDates.map(function(d) { return d.getTime(); }));
+      daySpan = Math.round((maxD - minD) / 86400000);
+    }
+    var entityCount = (ring.entities || []).length;
+    var totalValueFormatted = fmtRupees(totalValue, false);
+    var isCorp = ring.closure_type === "corporate";
+
+    var summaryLine, sentenceLine;
+    if (isCorp) {
+      summaryLine = entityCount + " companies form a circle that closes through a shared director";
+      sentenceLine = totalValueFormatted + " moved across " + invoiceCount + " invoices.";
+    } else {
+      summaryLine = entityCount + " companies billed each other in a closed circle";
+      sentenceLine = daySpan > 0
+        ? totalValueFormatted + " moved in " + daySpan + " days and ended up back where it started."
+        : totalValueFormatted + " moved across " + invoiceCount + " invoices and ended up back where it started.";
+    }
+
+    // Collapsed header — full-width button, chevron, summary sentence, expected-loss number
+    var hdr = document.createElement("button");
+    hdr.className = "ring-card-header";
+    hdr.setAttribute("aria-expanded", "false");
+    hdr.innerHTML =
+      "<span class='rh-chevron' aria-hidden='true'>▸</span>" +
+      "<span class='rh-rank'>#" + (rank < 10 ? "0" + rank : rank) + "</span>" +
+      "<span class='rh-summary'>" +
+        "<span class='rh-primary'>" + summaryLine + ".</span>" +
+        "<span class='rh-sentence'>" + sentenceLine + "</span>" +
+      "</span>" +
+      statusPill +
+      "<span class='rh-loss-block'>" +
+        "<span class='rh-loss-val'>" + fmtRupees(expLoss, true) + "</span>" +
+        "<span class='rh-loss-label'><span class='gloss' tabindex='0' data-gloss='Rupees at risk if this ring is real.'>at risk</span></span>" +
+      "</span>" +
+      "<span class='rh-ring-id'>" + ring.ring_id + "</span>";
+
+    card.appendChild(hdr);
+
+    // Expanded body — hidden by default
     var body = document.createElement("div");
-    body.className = "ring-body";
-    
+    body.className = "ring-card-body";
+
+    var bodyInner = document.createElement("div");
+    bodyInner.className = "ring-body";
+
     var vizWrap = document.createElement("div");
     vizWrap.className = "ring-viz";
     vizWrap.appendChild(buildRingSVG(ring, backdrop));
-    body.appendChild(vizWrap);
-    
+    bodyInner.appendChild(vizWrap);
+
     var scores = document.createElement("div");
     scores.className = "ring-scores";
-    
+
     var sTitle = document.createElement("div");
     sTitle.className = "entity-section-title";
     sTitle.style.marginTop = "0";
     sTitle.textContent = "MODEL SCORES";
     scores.appendChild(sTitle);
-    
+
+    // Aggregate display with chip
+    var aggRow = document.createElement("div");
+    aggRow.style.cssText = "display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;font-size:var(--fs-micro);";
+    aggRow.innerHTML =
+      "<span class='gloss' tabindex='0' data-gloss='Overall suspicion score 0–1 combining the four signals. Rings here run 0.20–0.89.'>Aggregate</span>" +
+      "<div style='display:flex; align-items:center; gap:8px;'>" +
+        "<span class='mono num' style='color:var(--paper);font-weight:700;font-size:var(--fs-emphasis);'>" + score.toFixed(2) + "</span>" +
+        statusPill +
+      "</div>";
+    scores.appendChild(aggRow);
+
+    var closureRow = document.createElement("div");
+    closureRow.style.cssText = "font-size:var(--fs-micro);color:var(--paper-muted);margin-bottom:10px;";
+    var closureGloss = isCorp
+      ? "class='gloss' tabindex='0' data-gloss='The circle closes through a shared director rather than a final invoice.'"
+      : "class='gloss' tabindex='0' data-gloss='The circle closes through invoices alone.'";
+    closureRow.innerHTML = "<span " + closureGloss + ">" +
+      (isCorp ? "Corporate closed" : "Transaction closed") + "</span>";
+    scores.appendChild(closureRow);
+
     var sigs = ["value", "product", "timing", "externality"];
     var abstainedList = ring.abstained || [];
+    var glossMap = {
+      "value": "Money comes back around — each company passes on nearly what it received instead of actually buying something.",
+      "product": "The goods never change — the same commodity code is passed along unchanged.",
+      "timing": "The invoices are unnaturally evenly spaced and fast.",
+      "externality": "These companies trade almost only with each other, not the wider market. 1.00 = entirely internal."
+    };
     sigs.forEach(function(sig) {
       var isAbstained = abstainedList.indexOf(sig) !== -1;
-      var score = ring.scores ? ring.scores[sig] : null;
-      var evidence = ring.evidence ? ring.evidence[sig] : "";
-      scores.appendChild(scoreRow(sig, score, isAbstained, evidence));
+      var sigScore = ring.scores ? ring.scores[sig] : null;
+      var ev = ring.evidence ? ring.evidence[sig] : "";
+      var row = scoreRow(sig, sigScore, isAbstained, ev);
+      // Wrap signal name in gloss span
+      var nameEl = row.querySelector(".sig-name");
+      if (nameEl) {
+        var gloss = glossMap[sig];
+        if (gloss) {
+          nameEl.innerHTML = "<span class='gloss' tabindex='0' data-gloss='" + gloss.replace(/'/g, "&#39;") + "'>" + sig.toUpperCase() + "</span>";
+        }
+      }
+      scores.appendChild(row);
     });
-    
+
     if (ring.evidence && ring.evidence.industry) {
       var note = document.createElement("p");
-      note.className = "industry-note mono";
-      note.textContent = "INDUSTRY: " + ring.evidence.industry.toUpperCase();
+      var isFlagged = ring.evidence.industry.indexOf("Flagged Mismatch") !== -1;
+      note.className = isFlagged ? "industry-note flagged mono" : "industry-note mono";
+      note.innerHTML = "<strong style='letter-spacing:0.5px;'>INDUSTRY:</strong> " + ring.evidence.industry;
       scores.appendChild(note);
     }
-    body.appendChild(scores);
-    card.appendChild(body);
-    
+    bodyInner.appendChild(scores);
+    body.appendChild(bodyInner);
+
     var contextStrip = document.createElement("div");
     contextStrip.className = "trail-header";
     contextStrip.style.margin = "0";
     contextStrip.style.borderTop = "0";
     contextStrip.style.borderRadius = "0";
-    contextStrip.style.backgroundColor = "var(--bg-panel)";
-    
-    var invoiceCount = 0;
-    var totalValue = 0;
-    (ring.hops || []).forEach(function(h) {
-      if (h.hop_type === "invoice") {
-        invoiceCount++;
-        totalValue += (h.value || 0);
-      }
-    });
-    
+    contextStrip.style.backgroundColor = "var(--ink-panel)";
+
     var h1 = "<div class='trail-stat-group'>";
-    h1 += "<div class='trail-stat'><span class='ts-label'>ENTITIES</span><span class='ts-val mono'>" + (ring.entities || []).length + "</span></div>";
-    h1 += "<div class='trail-stat'><span class='ts-label'>INVOICES</span><span class='ts-val mono'>" + invoiceCount + "</span></div>";
+    h1 += "<div class='trail-stat'><span class='ts-label'>ENTITIES</span><span class='ts-val mono num'>" + (ring.entities || []).length + "</span></div>";
+    h1 += "<div class='trail-stat'><span class='ts-label'>INVOICES</span><span class='ts-val mono num'>" + invoiceCount + "</span></div>";
     if (invoiceCount > 0) {
-      h1 += "<div class='trail-stat'><span class='ts-label'>OBSERVED VALUE</span><span class='ts-val mono'>₹" + (totalValue/10000000).toFixed(2) + " Cr</span></div>";
+      h1 += "<div class='trail-stat'><span class='ts-label'>OBSERVED VALUE</span><span class='ts-val mono num'>" + fmtRupees(totalValue, true) + "</span></div>";
     }
     h1 += "</div>";
     contextStrip.innerHTML = h1;
-    card.appendChild(contextStrip);
-    
+    body.appendChild(contextStrip);
+
     var actionsWrap = document.createElement("div");
     actionsWrap.className = "trail-btn-wrap";
     actionsWrap.style.padding = "16px";
     actionsWrap.style.borderTop = "1px solid var(--border-muted)";
-    
+
     var trailBtn = document.createElement("button");
     trailBtn.className = "btn";
     trailBtn.textContent = "VIEW TRANSACTION TRAIL";
     actionsWrap.appendChild(trailBtn);
-    
+
     var timelineBtn = document.createElement("button");
     timelineBtn.className = "btn";
     timelineBtn.textContent = "VIEW INVESTIGATION TIMELINE";
     actionsWrap.appendChild(timelineBtn);
-    
-    card.appendChild(actionsWrap);
-    
+
+    body.appendChild(actionsWrap);
+
     var trailContainer = document.createElement("div");
     trailContainer.className = "trail-container hidden";
     trailContainer.style.padding = "0 16px 16px 16px";
-    card.appendChild(trailContainer);
-    
+    body.appendChild(trailContainer);
+
     var timelineContainer = document.createElement("div");
     timelineContainer.className = "timeline-container hidden";
     timelineContainer.style.padding = "0 16px 16px 16px";
-    card.appendChild(timelineContainer);
-    
+    body.appendChild(timelineContainer);
+
     trailBtn.addEventListener("click", function() {
       if (trailContainer.classList.contains("hidden")) {
         if (!trailContainer.hasChildNodes()) {
@@ -619,7 +693,7 @@ window.removeInvestigatorInvoice = function(id) {
         }
         trailContainer.classList.remove("hidden");
         trailBtn.textContent = "HIDE TRANSACTION TRAIL";
-        trailBtn.style.backgroundColor = "var(--bg-panel-hover)";
+        trailBtn.style.backgroundColor = "var(--ink-panel-hover)";
         timelineContainer.classList.add("hidden");
         timelineBtn.textContent = "VIEW INVESTIGATION TIMELINE";
         timelineBtn.style.backgroundColor = "";
@@ -629,7 +703,7 @@ window.removeInvestigatorInvoice = function(id) {
         trailBtn.style.backgroundColor = "";
       }
     });
-    
+
     timelineBtn.addEventListener("click", function() {
       if (timelineContainer.classList.contains("hidden")) {
         if (!timelineContainer.hasChildNodes()) {
@@ -637,7 +711,7 @@ window.removeInvestigatorInvoice = function(id) {
         }
         timelineContainer.classList.remove("hidden");
         timelineBtn.textContent = "HIDE INVESTIGATION TIMELINE";
-        timelineBtn.style.backgroundColor = "var(--bg-panel-hover)";
+        timelineBtn.style.backgroundColor = "var(--ink-panel-hover)";
         trailContainer.classList.add("hidden");
         trailBtn.textContent = "VIEW TRANSACTION TRAIL";
         trailBtn.style.backgroundColor = "";
@@ -647,25 +721,55 @@ window.removeInvestigatorInvoice = function(id) {
         timelineBtn.style.backgroundColor = "";
       }
     });
-    
+
+    card.appendChild(body);
+
+    // Toggle handler — persists open state per ring in localStorage
+    hdr.addEventListener("click", function() {
+      var isExpanded = hdr.getAttribute("aria-expanded") === "true";
+      if (isExpanded) {
+        body.classList.remove("expanded");
+        hdr.setAttribute("aria-expanded", "false");
+        try {
+          var stored = JSON.parse(localStorage.getItem("circe_expanded_rings") || "{}");
+          delete stored[ring.ring_id];
+          localStorage.setItem("circe_expanded_rings", JSON.stringify(stored));
+        } catch(e) {}
+      } else {
+        body.classList.add("expanded");
+        hdr.setAttribute("aria-expanded", "true");
+        try {
+          var stored = JSON.parse(localStorage.getItem("circe_expanded_rings") || "{}");
+          stored[ring.ring_id] = 1;
+          localStorage.setItem("circe_expanded_rings", JSON.stringify(stored));
+        } catch(e) {}
+      }
+    });
+
     return card;
   }
 
   function buildStatsBar(rings) {
-    var count = rings.length;
-    var totalLoss = rings.reduce(function(sum, r) { return sum + (typeof r.expected_loss === "number" ? r.expected_loss : (r.expected_loss_inr||0)); }, 0);
-    var crCount = totalLoss / 10000000;
+    var totalCandidates = (typeof SCORED !== "undefined" && SCORED.total_candidate_count) ? SCORED.total_candidate_count : 5542;
+    var highRiskRings = rings.filter(function(r) { return (r.aggregate || r.aggregate_score || 0) >= 0.70; });
+    var clearedRings = rings.filter(function(r) { return (r.aggregate || r.aggregate_score || 0) < 0.70; });
+    
+    var flaggedCount = highRiskRings.length;
+    var flaggedLoss = highRiskRings.reduce(function(sum, r) { return sum + (r.expected_loss || 0); }, 0);
+    
     var corpCount = rings.filter(function (r) { return r.closure_type === "corporate"; }).length;
     var transCount = rings.filter(function (r) { return r.closure_type === "transaction"; }).length;
     var aggs = rings.filter(function (r) { return typeof r.aggregate === "number" || typeof r.aggregate_score === "number"; });
     var avgAgg = aggs.length ? aggs.reduce(function (s, r) { return s + (r.aggregate || r.aggregate_score || 0); }, 0) / aggs.length : 0;
     
-    var s = "<div style='display:flex; gap:24px;'>";
-    s += "<div class='metric-group'><span class='metric-label'>FLAGGED</span> <span class='metric-val mono' style='color:var(--accent-teal)'>" + count + "</span></div>";
-    s += "<div class='metric-group'><span class='metric-label'>EXPECTED LOSS</span> <span class='metric-val risk mono'>₹" + crCount.toFixed(2) + " Cr</span></div>";
-    s += "<div class='metric-group'><span class='metric-label'>CORPORATE CLOSED</span> <span class='metric-val mono'>" + corpCount + "</span></div>";
-    s += "<div class='metric-group'><span class='metric-label'>TRANSACTION CLOSED</span> <span class='metric-val mono'>" + transCount + "</span></div>";
-    s += "<div class='metric-group'><span class='metric-label'>AVG AGGREGATE</span> <span class='metric-val mono'>" + avgAgg.toFixed(2) + "</span></div>";
+    var s = "<div style='display:flex; flex-wrap:wrap; gap:20px; align-items:center;'>";
+    s += "<div class='metric-group'><span class='metric-label'>FLAGGED FRAUD</span> <span class='metric-val risk mono num'>" + flaggedCount + " RINGS</span></div>";
+    s += "<div class='metric-group'><span class='metric-label'>FLAGGED AT-RISK LOSS</span> <span class='metric-val risk mono num'>" + fmtRupees(flaggedLoss, true) + "</span></div>";
+    s += "<div class='metric-group'><span class='metric-label'>BENIGN / CLEARED</span> <span class='metric-val mono num' style='color:var(--paper-muted);'>" + clearedRings.length + "</span></div>";
+    s += "<div class='metric-group'><span class='metric-label'>DISCOVERED CANDIDATE LOOPS</span> <span class='metric-val mono num' style='color:var(--seal);'>" + totalCandidates.toLocaleString() + "</span></div>";
+    s += "<div class='metric-group'><span class='metric-label'>CORPORATE CLOSED</span> <span class='metric-val mono num'>" + corpCount + "</span></div>";
+    s += "<div class='metric-group'><span class='metric-label'>TRANSACTION CLOSED</span> <span class='metric-val mono num'>" + transCount + "</span></div>";
+    s += "<div class='metric-group'><span class='metric-label'>QUEUE AVG SCORE</span> <span class='metric-val mono num'>" + avgAgg.toFixed(2) + "</span></div>";
     s += "</div>";
     
     var div = document.createElement("div");
@@ -690,13 +794,75 @@ window.removeInvestigatorInvoice = function(id) {
       return (b.expected_loss || 0) - (a.expected_loss || 0);
     });
 
-    if (statsRoot) statsRoot.appendChild(buildStatsBar(rings));
+    if (statsRoot) {
+      statsRoot.innerHTML = "";
+      statsRoot.appendChild(buildStatsBar(rings));
+    }
+
+    root.innerHTML = "";
 
     var backdrop = typeof BACKDROP !== "undefined" ? BACKDROP : null;
-    rings.forEach(function (ring, i) {
+    
+    var flaggedRings = rings.filter(function(r) { return (r.aggregate || r.aggregate_score || 0) >= 0.70; });
+    var clearedRings = rings.filter(function(r) { return (r.aggregate || r.aggregate_score || 0) < 0.70; });
+
+    // Render flagged rings first (5 rings)
+    flaggedRings.forEach(function(ring, i) {
       root.appendChild(buildCard(ring, i + 1, backdrop));
     });
+
+    // If there are cleared rings, render the divider and collapsible container (B1 Queue Triage)
+    if (clearedRings.length > 0) {
+      var divider = document.createElement("div");
+      divider.className = "cleared-divider-wrap";
+      divider.innerHTML =
+        "<button id='toggle-cleared-rings-btn' class='cleared-divider-btn' aria-expanded='false'>" +
+          "<span class='cd-count'>" + clearedRings.length + " cleared loops</span>" +
+          "<span class='cd-dot'>·</span>" +
+          "<span class='cd-action'>show</span>" +
+        "</button>";
+      root.appendChild(divider);
+
+      var clearedContainer = document.createElement("div");
+      clearedContainer.id = "cleared-rings-container";
+      clearedContainer.className = "cleared-rings-container hidden";
+      clearedRings.forEach(function(ring, i) {
+        clearedContainer.appendChild(buildCard(ring, flaggedRings.length + i + 1, backdrop));
+      });
+      root.appendChild(clearedContainer);
+
+      var btn = divider.querySelector("#toggle-cleared-rings-btn");
+      btn.addEventListener("click", function() {
+        var isHidden = clearedContainer.classList.contains("hidden");
+        if (isHidden) {
+          clearedContainer.classList.remove("hidden");
+          btn.setAttribute("aria-expanded", "true");
+          btn.querySelector(".cd-action").textContent = "hide";
+        } else {
+          clearedContainer.classList.add("hidden");
+          btn.setAttribute("aria-expanded", "false");
+          btn.querySelector(".cd-action").textContent = "show";
+        }
+      });
+    }
+
+    // Restore per-ring expanded state from localStorage; first card always expanded
+    try {
+      var expandedMap = JSON.parse(localStorage.getItem("circe_expanded_rings") || "{}");
+      rings.forEach(function(ring, i) {
+        var card = document.getElementById(ring.ring_id);
+        if (!card) return;
+        var hdr = card.querySelector(".ring-card-header");
+        var body = card.querySelector(".ring-card-body");
+        if (!hdr || !body) return;
+        if (i === 0 || expandedMap[ring.ring_id]) {
+          body.classList.add("expanded");
+          hdr.setAttribute("aria-expanded", "true");
+        }
+      });
+    } catch(e) {}
   }
+
 
   // --- PHASE 5 ADDITIONS ---
   function buildInvestigationTimeline(ring) {
@@ -1119,9 +1285,13 @@ window.removeInvestigatorInvoice = function(id) {
     var sections = document.querySelectorAll(".view-section");
     tabs.forEach(function(tab) {
       tab.addEventListener("click", function() {
-        tabs.forEach(function(t) { t.classList.remove("active"); });
+        tabs.forEach(function(t) {
+          t.classList.remove("active");
+          t.removeAttribute("aria-current");
+        });
         sections.forEach(function(s) { s.classList.remove("active"); });
         tab.classList.add("active");
+        tab.setAttribute("aria-current", "step");
         document.getElementById(tab.getAttribute("data-target")).classList.add("active");
       });
     });
@@ -1140,7 +1310,7 @@ window.removeInvestigatorInvoice = function(id) {
     function formatEntity(id) {
       var e = ENTITIES[id];
       if (!e) return "Entity information unavailable";
-      return "<div class='mono'>" + id + "</div><div>" + e.name + "</div>";
+      return "<div class='mono' style='font-size:var(--fs-micro); color:var(--paper-muted);'>" + id + "</div><div style='font-size:var(--fs-body);'>" + e.name + "</div>";
     }
 
     function update() {
@@ -1182,7 +1352,21 @@ window.removeInvestigatorInvoice = function(id) {
       });
 
       tbody.innerHTML = "";
+      var currentDate = null;
       filtered.forEach(function(inv) {
+        var invDate = inv.invoice_date || "UNDATED";
+        // Sticky date subhead (B4)
+        if (invDate !== currentDate) {
+          var trDate = document.createElement("tr");
+          trDate.className = "ledger-date-subhead";
+          var tdDateGroup = document.createElement("td");
+          tdDateGroup.colSpan = 8;
+          tdDateGroup.innerHTML = "<span class='date-badge mono'>" + invDate + "</span>";
+          trDate.appendChild(tdDateGroup);
+          tbody.appendChild(trDate);
+          currentDate = invDate;
+        }
+
         var tr = document.createElement("tr");
         tr.onclick = function() { window.openInvoice(inv.invoice_id); };
         tr.style.cursor = "pointer";
@@ -1205,9 +1389,10 @@ window.removeInvestigatorInvoice = function(id) {
         var tdBuyer = document.createElement("td");
         tdBuyer.innerHTML = formatEntity(inv.to);
         
+        // VALUE is dominant column (B4: --fs-emphasis, tabular, right-aligned)
         var tdAmt = document.createElement("td");
-        tdAmt.className = "mono val-col";
-        tdAmt.textContent = "₹" + (inv.value ? inv.value.toLocaleString() : "0");
+        tdAmt.className = "mono val-col num";
+        tdAmt.innerHTML = fmtRupees(inv.value, true);
         
         var tdHs = document.createElement("td");
         tdHs.className = "mono";
@@ -1248,7 +1433,7 @@ window.removeInvestigatorInvoice = function(id) {
           indHtml += "<div class='ls-row'>" +
             "<span class='ls-label'>" + k.toUpperCase() + "</span>" +
             "<div class='ls-bar-track'><div class='ls-bar-fill' style='width:" + pct + "%'></div></div>" +
-            "<span class='ls-val'>₹" + (v / 10000000).toFixed(2) + " Cr</span>" +
+            "<span class='ls-val mono num'>" + fmtRupees(v, true) + "</span>" +
             "</div>";
         });
         indHtml += "</div>";
@@ -1274,15 +1459,15 @@ window.removeInvestigatorInvoice = function(id) {
           hsHtml += "<div class='ls-row'>" +
             "<span class='ls-label'>" + hs + "</span>" +
             "<div class='ls-bar-track'><div class='ls-bar-fill' style='width:" + pct + "%'></div></div>" +
-            "<span class='ls-val'>₹" + (v / 10000000).toFixed(2) + " Cr</span>" +
+            "<span class='ls-val mono num'>" + fmtRupees(v, true) + "</span>" +
             "</div>";
         });
         if (noHsSum > 0 || sortedHs.length === 0) {
           var noHsPct = ((noHsSum / (maxHsVal || 1)) * 100).toFixed(0);
           hsHtml += "<div class='ls-row'>" +
-            "<span class='ls-label' style='color:var(--warn-amber);'>NO HS CODE (" + noHsCount + ")</span>" +
-            "<div class='ls-bar-track'><div class='ls-bar-fill' style='width:" + noHsPct + "%; background-color:var(--warn-amber);'></div></div>" +
-            "<span class='ls-val'>₹" + (noHsSum / 10000000).toFixed(2) + " Cr</span>" +
+            "<span class='ls-label' style='color:var(--amber);'>NO HS CODE (" + noHsCount + ")</span>" +
+            "<div class='ls-bar-track'><div class='ls-bar-fill' style='width:" + noHsPct + "%; background-color:var(--amber);'></div></div>" +
+            "<span class='ls-val mono num'>" + fmtRupees(noHsSum, true) + "</span>" +
             "</div>";
         }
         hsHtml += "</div>";
@@ -1313,13 +1498,13 @@ window.removeInvestigatorInvoice = function(id) {
           lagHtml += "<div class='ls-row'>" +
             "<span class='ls-label'>" + bKey + "</span>" +
             "<div class='ls-bar-track'><div class='ls-bar-fill' style='width:" + pct + "%'></div></div>" +
-            "<span class='ls-val'>" + c + " inv</span>" +
+            "<span class='ls-val mono num'>" + c + " inv</span>" +
             "</div>";
         });
         lagHtml += "</div>";
 
         statsBar.innerHTML = 
-          "<div class='ls-summary'>SHOWING <span class='mono' style='color:var(--text-main); font-weight:600;'>" + filtered.length + "</span> INVOICES &nbsp;|&nbsp; TOTAL OBSERVED VALUE <span class='mono' style='color:var(--text-main); font-weight:600;'>₹" + totalVal.toLocaleString() + " (₹" + (totalVal / 10000000).toFixed(2) + " Cr)</span></div>" +
+          "<div class='ls-summary'>SHOWING <span class='mono num' style='color:var(--paper); font-weight:600;'>" + filtered.length + "</span> INVOICES &nbsp;|&nbsp; TOTAL OBSERVED VALUE <span class='mono' style='color:var(--paper); font-weight:600;'>" + fmtRupees(totalVal, true) + "</span></div>" +
           "<div class='ls-panels'>" + indHtml + hsHtml + lagHtml + "</div>";
       }
     }
@@ -1354,7 +1539,7 @@ window.removeInvestigatorInvoice = function(id) {
     
     var isCustom = window.INVESTIGATOR_INVOICES && !!window.INVESTIGATOR_INVOICES[invoiceId];
     
-    document.getElementById("modal-title").innerHTML = "INVOICE <span class='mono' style='color:var(--text-main); margin-left:8px;'>" + invoiceId + "</span>" +
+    document.getElementById("modal-title").innerHTML = "INVOICE <span class='mono' style='color:var(--paper); margin-left:8px;'>" + invoiceId + "</span>" +
       (isCustom ? "<span class='src-badge investigator' style='margin-left:12px;'>INVESTIGATOR ADDED</span>" : "<span class='src-badge' style='margin-left:12px;'>DATASET</span>");
       
     var sE = ENTITIES[inv.from];
@@ -1364,21 +1549,21 @@ window.removeInvestigatorInvoice = function(id) {
 
     var html = "<div class='detail-grid'>";
     html += "<div class='detail-section'><h3>ISSUER / SELLER <button class='view-entity-btn' onclick='window.openEntity(\"" + inv.from + "\")'>VIEW ENTITY</button></h3>";
-    html += "<div class='detail-row'><span class='detail-value' style='font-size:14px;'>" + inv.from + "</span></div>";
-    html += "<div class='detail-row'><span class='detail-value' style='color:var(--text-muted);'>" + sName + "</span></div>";
+    html += "<div class='detail-row'><span class='detail-value mono' style='font-size:var(--fs-emphasis); font-weight:600;'>" + inv.from + "</span></div>";
+    html += "<div class='detail-row'><span class='detail-value' style='color:var(--paper-muted);'>" + sName + "</span></div>";
     html += "</div>";
     html += "<div class='detail-section'><h3>RECEIVER / BUYER <button class='view-entity-btn' onclick='window.openEntity(\"" + inv.to + "\")'>VIEW ENTITY</button></h3>";
-    html += "<div class='detail-row'><span class='detail-value' style='font-size:14px;'>" + inv.to + "</span></div>";
-    html += "<div class='detail-row'><span class='detail-value' style='color:var(--text-muted);'>" + bName + "</span></div>";
+    html += "<div class='detail-row'><span class='detail-value mono' style='font-size:var(--fs-emphasis); font-weight:600;'>" + inv.to + "</span></div>";
+    html += "<div class='detail-row'><span class='detail-value' style='color:var(--paper-muted);'>" + bName + "</span></div>";
     html += "</div>";
     html += "</div>";
 
     html += "<div class='detail-grid'>";
     html += "<div class='detail-section'><h3>TRANSACTION METADATA</h3>";
-    html += "<div class='detail-row'><span class='detail-label'>VALUE</span><span class='detail-value risk' style='font-size:14px;'>₹" + (inv.value ? inv.value.toLocaleString() : "0") + "</span></div>";
-    html += "<div class='detail-row'><span class='detail-label'>HS CODE</span><span class='detail-value'>" + (inv.hs_code || "N/A") + "</span></div>";
-    html += "<div class='detail-row'><span class='detail-label'>INVOICE DATE</span><span class='detail-value'>" + (inv.invoice_date || "N/A") + "</span></div>";
-    html += "<div class='detail-row'><span class='detail-label'>DISCOUNTING DATE</span><span class='detail-value'>" + (inv.discounting_date || "N/A") + "</span></div>";
+    html += "<div class='detail-row'><span class='detail-label'>VALUE</span><span class='detail-value risk mono num' style='font-size:var(--fs-emphasis); font-weight:600;'>" + fmtRupees(inv.value, true) + "</span></div>";
+    html += "<div class='detail-row'><span class='detail-label'>HS CODE</span><span class='detail-value mono'>" + (inv.hs_code || "N/A") + "</span></div>";
+    html += "<div class='detail-row'><span class='detail-label'>INVOICE DATE</span><span class='detail-value mono'>" + (inv.invoice_date || "N/A") + "</span></div>";
+    html += "<div class='detail-row'><span class='detail-label'>DISCOUNTING DATE</span><span class='detail-value mono'>" + (inv.discounting_date || "N/A") + "</span></div>";
     html += "</div>";
 
     html += "<div class='detail-section'><h3>RING CONTEXT</h3>";
@@ -1427,7 +1612,7 @@ window.removeInvestigatorInvoice = function(id) {
     var e = typeof ENTITIES !== 'undefined' ? ENTITIES[entityId] : null;
     if (!e) return;
     
-    document.getElementById("entity-modal-title").innerHTML = "ENTITY <span class='mono' style='color:var(--text-main); margin-left:8px;'>" + entityId + "</span>";
+    document.getElementById("entity-modal-title").innerHTML = "ENTITY <span class='mono' style='color:var(--paper); margin-left:8px;'>" + entityId + "</span>";
 
     var allInv = typeof getAllInvoices === "function" ? getAllInvoices() : INVOICES;
     var invs = Object.values(allInv).filter(function(i) {
@@ -1449,14 +1634,14 @@ window.removeInvestigatorInvoice = function(id) {
 
     html += "<div class='trail-header' style='margin-bottom:24px;'>";
     html += "<div class='trail-stat-group'>";
-    html += "<div class='trail-stat'><span class='ts-label'>DATASET INVOICES</span><span class='ts-val mono'>" + datasetInvs.length + "</span></div>";
+    html += "<div class='trail-stat'><span class='ts-label'>DATASET INVOICES</span><span class='ts-val mono num'>" + datasetInvs.length + "</span></div>";
     if (customInvs.length > 0) {
-      html += "<div class='trail-stat'><span class='ts-label'>INVESTIGATOR ADDED</span><span class='ts-val mono' style='color:var(--accent-teal);'>" + customInvs.length + "</span></div>";
+      html += "<div class='trail-stat'><span class='ts-label'>INVESTIGATOR ADDED</span><span class='ts-val mono num' style='color:var(--seal);'>" + customInvs.length + "</span></div>";
     }
-    html += "<div class='trail-stat'><span class='ts-label'>OBSERVED VALUE</span><span class='ts-val mono'>₹" + (totalVal/10000000).toFixed(2) + " Cr</span></div>";
-    html += "<div class='trail-stat'><span class='ts-label'>RINGS</span><span class='ts-val mono' style='" + (st.rings.length > 0 ? "color:var(--risk-coral); font-weight:700;" : "") + "'>" + st.rings.length + "</span></div>";
-    html += "<div class='trail-stat'><span class='ts-label'>EXPECTED LOSS</span><span class='ts-val risk mono'>₹" + (st.expectedLoss/10000000).toFixed(2) + " Cr</span></div>";
-    html += "<div class='trail-stat'><span class='ts-label'>AVG AGGREGATE</span><span class='ts-val mono'>" + avgAgg + "</span></div>";
+    html += "<div class='trail-stat'><span class='ts-label'>OBSERVED VALUE</span><span class='ts-val mono num'>" + fmtRupees(totalVal, true) + "</span></div>";
+    html += "<div class='trail-stat'><span class='ts-label'>RINGS</span><span class='ts-val mono num' style='" + (st.rings.length > 0 ? "color:var(--blood); font-weight:700;" : "") + "'>" + st.rings.length + "</span></div>";
+    html += "<div class='trail-stat'><span class='ts-label'>EXPECTED LOSS</span><span class='ts-val risk mono num'>" + fmtRupees(st.expectedLoss, true) + "</span></div>";
+    html += "<div class='trail-stat'><span class='ts-label'>AVG AGGREGATE</span><span class='ts-val mono num'>" + avgAgg + "</span></div>";
     html += "</div></div>";
 
     if (st.rings.length > 0) {
@@ -1474,7 +1659,7 @@ window.removeInvestigatorInvoice = function(id) {
     html += "<div class='detail-row'><span class='detail-label'>NIC CODE</span><span class='detail-value'>" + (e.industry_code || "N/A") + "</span></div>";
     html += "<div class='detail-row'><span class='detail-label'>REGISTERED</span><span class='detail-value'>" + (e.registration_date || "N/A") + "</span></div>";
     if (e.address) {
-      html += "<div style='margin-top:12px; font-size:10px; color:var(--text-muted);'>" + e.address.toUpperCase() + "</div>";
+      html += "<div style='margin-top:12px; font-size:var(--fs-micro); color:var(--paper-muted);'>" + e.address.toUpperCase() + "</div>";
     }
     html += "</div>";
 
@@ -1501,13 +1686,13 @@ window.removeInvestigatorInvoice = function(id) {
     html += "<div style='display:flex; flex-direction:column; gap:8px;'>";
     invs.forEach(function(i) {
       var isSeller = i.from === entityId;
-      var role = isSeller ? "<span style='color:var(--risk-coral)'>SELLER</span>" : "<span style='color:var(--accent-teal)'>BUYER</span>";
+      var role = isSeller ? "<span style='color:var(--blood)'>SELLER</span>" : "<span style='color:var(--seal)'>BUYER</span>";
       var otherE = isSeller ? i.to : i.from;
       var otherEName = ENTITIES[otherE] ? ENTITIES[otherE].name : "Unknown";
       var isC = window.INVESTIGATOR_INVOICES && !!window.INVESTIGATOR_INVOICES[i.invoice_id] ? " <span class='src-badge investigator'>INVESTIGATOR ADDED</span>" : "";
       
-      html += "<div style='display:flex; justify-content:space-between; border-bottom:1px solid var(--border-muted); padding-bottom:4px; font-size:11px; font-family:var(--font-mono); align-items:center;'>";
-      html += "<span>" + i.invoice_id + isC + " | " + role + " | ₹" + (i.value/10000000).toFixed(2) + " Cr</span>";
+      html += "<div style='display:flex; justify-content:space-between; border-bottom:1px solid var(--border-muted); padding-bottom:4px; font-size:var(--fs-micro); font-family:var(--font-mono); align-items:center;'>";
+      html += "<span>" + i.invoice_id + isC + " | " + role + " | " + fmtRupees(i.value, false) + "</span>";
       html += "<span>" + otherE + " " + otherEName + " <button class='view-entity-btn' onclick='window.openInvoice(\"" + i.invoice_id + "\")'>VIEW</button></span>";
       html += "</div>";
     });
@@ -1534,8 +1719,27 @@ window.removeInvestigatorInvoice = function(id) {
   window.viewRing = function(ringId) {
     closeAllModals();
     document.querySelector(".tab-btn[data-target='view-queue']").click();
+    var clearedContainer = document.getElementById("cleared-rings-container");
     var el = document.getElementById(ringId);
-    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    if (clearedContainer && el && clearedContainer.contains(el) && clearedContainer.classList.contains("hidden")) {
+      var btn = document.getElementById("toggle-cleared-rings-btn");
+      if (btn) btn.click();
+    }
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      // Also expand the card so the analyst sees the details
+      var hdr = el.querySelector(".ring-card-header");
+      var body = el.querySelector(".ring-card-body");
+      if (hdr && body && hdr.getAttribute("aria-expanded") !== "true") {
+        body.classList.add("expanded");
+        hdr.setAttribute("aria-expanded", "true");
+        try {
+          var stored = JSON.parse(localStorage.getItem("circe_expanded_rings") || "{}");
+          stored[ringId] = 1;
+          localStorage.setItem("circe_expanded_rings", JSON.stringify(stored));
+        } catch(e) {}
+      }
+    }
   };
 
   function openModal(id) {
@@ -1697,8 +1901,14 @@ window.removeInvestigatorInvoice = function(id) {
       tr.style.cursor = "pointer";
       tr.onclick = function() { window.openEntity(e.id); };
 
+      // Zero ring entities rendered muted (B3)
+      if (st.rings.length === 0) {
+        tr.classList.add("zero-rings-row");
+      }
+
+      // ENTITY column (B3: name at --fs-emphasis, ID below at --fs-micro muted)
       var tdEntity = document.createElement("td");
-      tdEntity.innerHTML = "<div class='mono' style='font-weight:600; color:var(--text-main);'>" + e.id + "</div><div>" + e.name + "</div>";
+      tdEntity.innerHTML = "<div class='dir-entity-name'>" + e.name + "</div><div class='dir-entity-id mono'>" + e.id + "</div>";
 
       var tdInd = document.createElement("td");
       tdInd.innerHTML = "<span class='ti-badge'>" + (e.industry_class || "N/A").toUpperCase() + "</span>";
@@ -1711,21 +1921,22 @@ window.removeInvestigatorInvoice = function(id) {
       tdDate.className = "mono";
       tdDate.textContent = e.registration_date || "N/A";
 
+      // Numeric columns right-aligned with .num (B3)
       var tdInvs = document.createElement("td");
-      tdInvs.className = "mono";
+      tdInvs.className = "mono num";
       tdInvs.textContent = st.invoiceCount;
 
       var tdRings = document.createElement("td");
-      tdRings.className = "mono";
+      tdRings.className = "mono num";
       if (st.rings.length > 0) {
-        tdRings.innerHTML = "<span style='color:var(--risk-coral); font-weight:700;'>" + st.rings.length + " RINGS</span>";
+        tdRings.innerHTML = "<span style='color:var(--blood); font-weight:700;'>" + st.rings.length + " RINGS</span>";
       } else {
-        tdRings.innerHTML = "<span style='color:var(--text-muted);'>0</span>";
+        tdRings.innerHTML = "<span style='color:var(--paper-muted);'>0</span>";
       }
 
       var tdLoss = document.createElement("td");
-      tdLoss.className = "mono val-col" + (st.expectedLoss > 0 ? " risk" : "");
-      tdLoss.textContent = st.expectedLoss > 0 ? "₹" + (st.expectedLoss / 10000000).toFixed(2) + " Cr" : "₹0.00";
+      tdLoss.className = "mono val-col num" + (st.expectedLoss > 0 ? " risk" : "");
+      tdLoss.innerHTML = fmtRupees(st.expectedLoss, true);
 
       tr.appendChild(tdEntity);
       tr.appendChild(tdInd);
@@ -1738,7 +1949,7 @@ window.removeInvestigatorInvoice = function(id) {
     });
 
     if (statsEl) {
-      statsEl.innerHTML = "SHOWING <span style='color:var(--text-main);'>" + filtered.length + "</span> / " + entitiesList.length + " ENTITIES";
+      statsEl.innerHTML = "SHOWING <span style='color:var(--paper); font-weight:600;'>" + filtered.length + "</span> / " + entitiesList.length + " ENTITIES";
     }
   }
 
@@ -1764,8 +1975,7 @@ window.removeInvestigatorInvoice = function(id) {
       sortedRings.forEach(function(r) {
         var opt = document.createElement("option");
         opt.value = r.ring_id;
-        var cr = ((r.expected_loss || 0) / 10000000).toFixed(1);
-        opt.textContent = r.ring_id + " · " + (r.aggregate || 0).toFixed(2) + " · ₹" + cr + " Cr (" + (r.closure_type || "").toUpperCase() + ")";
+        opt.textContent = r.ring_id + " · " + (r.aggregate || 0).toFixed(2) + " · " + fmtRupees(r.expected_loss, false) + " (" + (r.closure_type || "").toUpperCase() + ")";
         ringSelect.appendChild(opt);
       });
     }
@@ -1967,18 +2177,20 @@ window.removeInvestigatorInvoice = function(id) {
       title.textContent = (e ? e.name : n.id) + " (" + n.id + ")\n" +
         "Industry: " + n.industry_class.toUpperCase() + "\n" +
         "Flagged Rings: " + rCount + "\n" +
-        "Expected Loss: ₹" + (st.expectedLoss / 10000000).toFixed(2) + " Cr\n" +
-        "Observed Volume: ₹" + (st.invoiceValue / 10000000).toFixed(2) + " Cr";
+        "Expected Loss: " + fmtRupees(st.expectedLoss, false) + "\n" +
+        "Observed Volume: " + fmtRupees(st.invoiceValue, false);
       g.appendChild(title);
 
-      // Render crisp entity ID label for all nodes
-      var text = document.createElementNS("http://www.w3.org/2000/svg", "text");
-      text.setAttribute("x", n.x);
-      text.setAttribute("y", n.y - r - 4);
-      text.setAttribute("class", "node-label");
-      text.setAttribute("text-anchor", "middle");
-      text.textContent = n.id;
-      g.appendChild(text);
+      // Render crisp entity ID label for hub nodes only (ringCount >= 5) (B2)
+      if (rCount >= 5) {
+        var text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+        text.setAttribute("x", n.x);
+        text.setAttribute("y", n.y - r - 4);
+        text.setAttribute("class", "node-label");
+        text.setAttribute("text-anchor", "middle");
+        text.textContent = n.id;
+        g.appendChild(text);
+      }
 
       gNodes.appendChild(g);
     });
@@ -2128,15 +2340,15 @@ window.removeInvestigatorInvoice = function(id) {
         var avgAgg = st.rings.length > 0 ? (st.aggSum / st.rings.length).toFixed(2) : "—";
         var rHtml = "";
         rHtml += "<div class='detail-header'>";
-        rHtml += "<div class='detail-title'>" + e.name + " <span class='mono' style='font-size:12px; color:var(--text-muted);'>(" + entityId + ")</span></div>";
+        rHtml += "<div class='detail-title'>" + e.name + " <span class='mono' style='font-size:var(--fs-micro); color:var(--paper-muted);'>(" + entityId + ")</span></div>";
         rHtml += "<div class='detail-subtitle'>INDUSTRY: " + (e.industry_class || "").toUpperCase() + " | NIC: " + (e.industry_code || "N/A") + "</div>";
         rHtml += "</div>";
 
         rHtml += "<div class='trail-stat-group' style='margin-bottom:12px;'>";
-        rHtml += "<div class='trail-stat'><span class='ts-label'>INVOICES</span><span class='ts-val mono'>" + st.invoiceCount + "</span></div>";
-        rHtml += "<div class='trail-stat'><span class='ts-label'>RINGS</span><span class='ts-val mono' style='" + (st.rings.length > 0 ? "color:var(--risk-coral); font-weight:700;" : "") + "'>" + st.rings.length + "</span></div>";
-        rHtml += "<div class='trail-stat'><span class='ts-label'>EXP LOSS</span><span class='ts-val risk mono'>₹" + (st.expectedLoss / 10000000).toFixed(2) + " Cr</span></div>";
-        rHtml += "<div class='trail-stat'><span class='ts-label'>AVG AGG</span><span class='ts-val mono'>" + avgAgg + "</span></div>";
+        rHtml += "<div class='trail-stat'><span class='ts-label'>INVOICES</span><span class='ts-val mono num'>" + st.invoiceCount + "</span></div>";
+        rHtml += "<div class='trail-stat'><span class='ts-label'>RINGS</span><span class='ts-val mono num' style='" + (st.rings.length > 0 ? "color:var(--blood); font-weight:700;" : "") + "'>" + st.rings.length + "</span></div>";
+        rHtml += "<div class='trail-stat'><span class='ts-label'>EXP LOSS</span><span class='ts-val risk mono num'>" + fmtRupees(st.expectedLoss, true) + "</span></div>";
+        rHtml += "<div class='trail-stat'><span class='ts-label'>AVG AGG</span><span class='ts-val mono num'>" + avgAgg + "</span></div>";
         rHtml += "</div>";
 
         if (st.rings.length > 0) {
@@ -2159,9 +2371,9 @@ window.removeInvestigatorInvoice = function(id) {
           sortedCps.forEach(function(cpId) {
             var cpE = ENTITIES[cpId];
             var cpName = cpE ? cpE.name : "Unknown";
-            rHtml += "<div style='display:flex; justify-content:space-between; align-items:center; font-family:var(--font-mono); font-size:10px;'>" +
-              "<span class='clickable' onclick='window.highlightNetworkNode(\"" + cpId + "\")' style='color:var(--accent-teal);'>" + cpId + " " + cpName + "</span>" +
-              "<span>₹" + (cpMap[cpId] / 10000000).toFixed(2) + " Cr</span>" +
+            rHtml += "<div style='display:flex; justify-content:space-between; align-items:center; font-family:var(--font-mono); font-size:var(--fs-micro);'>" +
+              "<span class='clickable' onclick='window.highlightNetworkNode(\"" + cpId + "\")' style='color:var(--seal);'>" + cpId + " " + cpName + "</span>" +
+              "<span class='mono num'>" + fmtRupees(cpMap[cpId], true) + "</span>" +
               "</div>";
           });
           rHtml += "</div></div>";
@@ -2181,9 +2393,9 @@ window.removeInvestigatorInvoice = function(id) {
         if (coLinks.length > 0) {
           rHtml += "<div class='rail-section'><h4>Shared Director Relationships</h4><div style='display:flex; flex-direction:column; gap:6px;'>";
           coLinks.forEach(function(cl) {
-            rHtml += "<div style='font-size:10px; font-family:var(--font-mono);'>" +
+            rHtml += "<div style='font-size:var(--fs-micro); font-family:var(--font-mono);'>" +
               "<span class='ti-badge corp' style='margin-right:6px;'>DIN " + cl.din + "</span>" +
-              "<span class='clickable' onclick='window.highlightNetworkNode(\"" + cl.otherId + "\")' style='color:var(--warn-amber);'>" + cl.otherId + " " + cl.otherName + "</span>" +
+              "<span class='clickable' onclick='window.highlightNetworkNode(\"" + cl.otherId + "\")' style='color:var(--amber);'>" + cl.otherId + " " + cl.otherName + "</span>" +
               "</div>";
           });
           rHtml += "</div></div>";
@@ -2241,15 +2453,15 @@ window.removeInvestigatorInvoice = function(id) {
       if (rail) {
         rail.classList.remove("hidden");
         var rHtml = "<div class='detail-header'>";
-        rHtml += "<div class='detail-title'>" + ring.ring_id + " <span class='rh-type' style='font-size:10px; margin-left:6px;'>" + ring.closure_type.toUpperCase() + "</span></div>";
+        rHtml += "<div class='detail-title'>" + ring.ring_id + " <span class='rh-type' style='font-size:var(--fs-micro); margin-left:6px;'>" + ring.closure_type.toUpperCase() + "</span></div>";
         rHtml += "<div class='detail-subtitle'>CANONICAL: " + (ring.canonical_key || "") + "</div>";
         rHtml += "</div>";
 
         rHtml += "<div class='trail-stat-group' style='margin-bottom:12px;'>";
-        rHtml += "<div class='trail-stat'><span class='ts-label'>EXPECTED LOSS</span><span class='ts-val risk mono'>₹" + ((ring.expected_loss||0)/10000000).toFixed(2) + " Cr</span></div>";
-        rHtml += "<div class='trail-stat'><span class='ts-label'>AGGREGATE</span><span class='ts-val mono'>" + (ring.aggregate||0).toFixed(2) + "</span></div>";
-        rHtml += "<div class='trail-stat'><span class='ts-label'>ENTITIES</span><span class='ts-val mono'>" + (ring.entities||[]).length + "</span></div>";
-        rHtml += "<div class='trail-stat'><span class='ts-label'>HOPS</span><span class='ts-val mono'>" + (ring.hops||[]).length + "</span></div>";
+        rHtml += "<div class='trail-stat'><span class='ts-label'>EXPECTED LOSS</span><span class='ts-val risk mono num'>" + fmtRupees(ring.expected_loss, true) + "</span></div>";
+        rHtml += "<div class='trail-stat'><span class='ts-label'>AGGREGATE</span><span class='ts-val mono num'>" + (ring.aggregate||0).toFixed(2) + "</span></div>";
+        rHtml += "<div class='trail-stat'><span class='ts-label'>ENTITIES</span><span class='ts-val mono num'>" + (ring.entities||[]).length + "</span></div>";
+        rHtml += "<div class='trail-stat'><span class='ts-label'>HOPS</span><span class='ts-val mono num'>" + (ring.hops||[]).length + "</span></div>";
         rHtml += "</div>";
 
         rHtml += "<div class='rail-section'><h4>Component Signals</h4>";
@@ -2257,14 +2469,14 @@ window.removeInvestigatorInvoice = function(id) {
         SIGNALS.forEach(function(sig) {
           var val = sc[sig];
           var valStr = val !== null && val !== undefined ? val.toFixed(2) : "Abstained";
-          rHtml += "<div class='score-row' style='margin-bottom:4px;'><span class='sig-name' style='text-transform:uppercase;'>" + sig + "</span><span class='mono' style='text-align:right; font-weight:600;'>" + valStr + "</span></div>";
+          rHtml += "<div class='score-row' style='margin-bottom:4px;'><span class='sig-name' style='text-transform:uppercase;'>" + sig + "</span><span class='mono num' style='text-align:right; font-weight:600;'>" + valStr + "</span></div>";
         });
         rHtml += "</div>";
 
         if (ring.evidence) {
-          rHtml += "<div class='rail-section'><h4>Forensic Evidence Strings</h4><div style='display:flex; flex-direction:column; gap:6px; font-size:10px;'>";
+          rHtml += "<div class='rail-section'><h4>Forensic Evidence Strings</h4><div style='display:flex; flex-direction:column; gap:6px; font-size:var(--fs-micro);'>";
           for (var evKey in ring.evidence) {
-            rHtml += "<div><span class='mono' style='color:var(--text-muted); font-weight:600; text-transform:uppercase;'>" + evKey + ":</span> " + ring.evidence[evKey] + "</div>";
+            rHtml += "<div><span class='mono' style='color:var(--paper-muted); font-weight:600; text-transform:uppercase;'>" + evKey + ":</span> " + ring.evidence[evKey] + "</div>";
           }
           rHtml += "</div></div>";
         }
@@ -2373,4 +2585,295 @@ window.removeInvestigatorInvoice = function(id) {
   renderNetwork();
   render();
 
+  // --- PHASE 7 ADDITIONS ---
+
+  // B2 — Guide Me tour: six-step walkthrough with spotlight + coach card
+  function setupTour() {
+    var overlay = document.getElementById("tour-overlay");
+    var spotlight = document.getElementById("tour-spotlight");
+    var card = document.getElementById("tour-card");
+    var counterEl = document.getElementById("tour-counter");
+    var titleEl = document.getElementById("tour-title");
+    var bodyEl = document.getElementById("tour-body");
+    var backBtn = document.getElementById("tour-back");
+    var nextBtn = document.getElementById("tour-next");
+    var skipBtn = document.getElementById("tour-skip");
+    var guideBtn = document.getElementById("guide-me-btn");
+    if (!overlay || !card) return;
+
+    // Derive top ring from the sorted queue (first card)
+    function topRingId() {
+      if (typeof SCORED === "undefined" || !SCORED.rings || !SCORED.rings.length) return null;
+      var sorted = SCORED.rings.slice().sort(function(a, b) {
+        return (b.expected_loss || 0) - (a.expected_loss || 0);
+      });
+      return sorted[0].ring_id;
+    }
+
+    var STEPS = [
+      {
+        stage: null,
+        targetSelector: null,
+        title: "Welcome to Circe",
+        body: "Circe helps financial investigators detect <strong>circular invoice fraud</strong> — where businesses pass the same money in circles to artificially inflate credit.<br><br>The top navigation bar organizes your investigation into <strong>4 connected modules</strong>: Review, Explore, Entities, and Verify."
+      },
+      {
+        stage: "view-queue",
+        targetSelector: null, // set dynamically to the top ring card
+        title: "01 · Ring Review (Triage Queue)",
+        body: "Your prioritized action inbox. The <strong>5 critical fraud rings</strong> appear right here, ranked by total financial risk.<br><br><strong>What to do:</strong> Click any card to expand it. You can inspect the loop graph, 4 score breakdown bars, and invoice-by-invoice transaction trail."
+      },
+      {
+        stage: "view-network",
+        targetSelector: "#net-ring-select",
+        title: "02 · Interconnection Map",
+        body: "A visual bird's-eye view of all 60 companies.<br><br>• <strong>Scroll to zoom</strong> and <strong>drag to pan</strong>.<br>• <strong>Red lines</strong> show circular fraud; <strong>dashed gold lines</strong> show shared directors.<br>• <strong>Click any node</strong> to see its counterparty exposure in the right rail."
+      },
+      {
+        stage: "view-directory",
+        targetSelector: "#directory-body",
+        title: "03 · Entity Directory",
+        body: "A directory of every business in the dataset.<br><br>Companies with high <strong>RINGS</strong> count are key hub orchestrators.<br><br><strong>What to do:</strong> Click any company name to open its complete corporate dossier, GSTIN details, and full trade network."
+      },
+      {
+        stage: "view-ledger",
+        targetSelector: ".ledger-header-strip",
+        title: "04 · Invoice Ledger & Testing",
+        body: "Audit raw invoice records and test new intelligence.<br><br>Search or filter invoices by seller, buyer, or HS commodity code. Click <strong>+ ADD INVOICE</strong> to input a new document — the backend will instantly <strong>re-run detection</strong> across the platform!"
+      },
+      {
+        stage: null,
+        targetSelector: null,
+        title: "Quick Tips for Navigating",
+        body: "• <strong>Glossary:</strong> Hover over any underlined term for an instant explanation.<br>• <strong>Return to Intro:</strong> Click the animated <strong>Circe</strong> logo in the top-left anytime to return to the constellation screen.<br>• <strong>Reopen Guide:</strong> Click <strong>GUIDE ME</strong> anytime to review these steps."
+      }
+    ];
+
+    var currentStep = 0;
+    var resizeTimer;
+
+    function measureTarget(sel) {
+      if (!sel) return null;
+      var el = document.querySelector(sel);
+      if (!el) return null;
+      el.scrollIntoView({ block: "center" });
+      return el.getBoundingClientRect();
+    }
+
+    function positionSpotlight(rect) {
+      var pad = 6;
+      if (!rect) {
+        // No target — hide spotlight, centre card
+        spotlight.style.display = "none";
+        card.classList.add("center");
+        return;
+      }
+      card.classList.remove("center");
+      spotlight.style.display = "block";
+      spotlight.style.top = (rect.top - pad) + "px";
+      spotlight.style.left = (rect.left - pad) + "px";
+      spotlight.style.width = (rect.width + pad * 2) + "px";
+      spotlight.style.height = (rect.height + pad * 2) + "px";
+    }
+
+    function showStep(n) {
+      var step = STEPS[n];
+      counterEl.textContent = (n + 1) + " / " + STEPS.length;
+      titleEl.textContent = step.title;
+      bodyEl.innerHTML = step.body;
+      backBtn.disabled = (n === 0);
+      nextBtn.textContent = (n === STEPS.length - 1) ? "FINISH" : "NEXT";
+
+      // Switch stage
+      if (step.stage) {
+        var tabBtn = document.querySelector(".tab-btn[data-target='" + step.stage + "']");
+        if (tabBtn) tabBtn.click();
+      }
+
+      // Step 1: expand top ring card
+      var sel = step.targetSelector;
+      if (n === 1) {
+        var tid = topRingId();
+        if (tid) {
+          sel = "#" + tid;
+          window.viewRing(tid);
+        }
+      }
+      // Step 2: set network ring selector
+      if (n === 2) {
+        var tid = topRingId();
+        var rs = document.getElementById("net-ring-select");
+        if (rs && tid) {
+          rs.value = tid;
+          rs.dispatchEvent(new Event("change"));
+        }
+      }
+
+      // Wait one frame for DOM changes then measure
+      setTimeout(function() {
+        var rect = measureTarget(sel);
+        positionSpotlight(rect);
+      }, 100);
+    }
+
+    function tourStart() {
+      currentStep = 0;
+      overlay.classList.remove("hidden");
+      overlay.classList.add("active");
+      showStep(0);
+    }
+
+    function tourEnd(markSeen) {
+      overlay.classList.add("hidden");
+      overlay.classList.remove("active");
+      spotlight.style.display = "none";
+      if (markSeen) {
+        try { localStorage.setItem("circe_guide_seen", "1"); } catch(e) {}
+      }
+    }
+
+    nextBtn.addEventListener("click", function() {
+      if (currentStep >= STEPS.length - 1) {
+        tourEnd(true);
+        return;
+      }
+      currentStep++;
+      showStep(currentStep);
+    });
+
+    backBtn.addEventListener("click", function() {
+      if (currentStep <= 0) return;
+      currentStep--;
+      showStep(currentStep);
+    });
+
+    skipBtn.addEventListener("click", function() { tourEnd(true); });
+
+    document.addEventListener("keydown", function(e) {
+      if (e.key === "Escape" && !overlay.classList.contains("hidden")) {
+        tourEnd(true);
+      }
+    });
+
+    window.addEventListener("resize", function() {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function() {
+        if (!overlay.classList.contains("hidden")) showStep(currentStep);
+      }, 150);
+    });
+
+    if (guideBtn) guideBtn.addEventListener("click", tourStart);
+
+    // window.initializeCirce — already wired in constellation.js:103; auto-start tour on first visit
+    window.initializeCirce = function() {
+      try {
+        if (!localStorage.getItem("circe_guide_seen")) {
+          setTimeout(tourStart, 400);
+        }
+      } catch(e) {}
+    };
+  }
+
+  // C2 — Live rescore API: progressive enhancement, no-ops gracefully when server absent
+  function setupRescore() {
+    var HEALTH_URL = "/api/health";
+    var RESCORE_URL = "/api/rescore";
+    var banner = document.getElementById("rescore-banner");
+    var addInvForm = document.querySelector(".form-scope-note");
+
+    // Probe health — short timeout so file:// fails fast
+    var ctrl = new (window.AbortController || function() {
+      var c = {}; c.signal = {}; c.abort = function() {};  return c;
+    })();
+    var tid = setTimeout(function() { try { ctrl.abort(); } catch(e) {} }, 2000);
+
+    fetch(HEALTH_URL, { signal: ctrl.signal })
+      .then(function(r) {
+        clearTimeout(tid);
+        if (!r.ok) throw new Error("unhealthy");
+        return r.json();
+      })
+      .then(function() {
+        // Server is live — wire up the rescore button
+        if (addInvForm) {
+          addInvForm.innerHTML =
+            "Adding an invoice updates the ledger and entity views. " +
+            "<button id='rescore-btn' class='btn primary-action' style='margin-left:8px;font-size:var(--fs-micro);'>RE-RUN DETECTION</button>";
+          document.getElementById("rescore-btn").addEventListener("click", doRescore);
+        }
+      })
+      .catch(function() {
+        // file:// or server absent — keep static fallback, hide rescore affordance entirely
+      });
+
+    function doRescore() {
+      var btn = document.getElementById("rescore-btn");
+      if (btn) {
+        btn.disabled = true;
+        btn.innerHTML = "<span id='rescore-spinner'></span> SCORING…";
+      }
+
+      var investigatorInvoices = Object.values(window.INVESTIGATOR_INVOICES || {}).map(function(inv) {
+        return {
+          invoice_id: inv.invoice_id,
+          from: inv.from,
+          to: inv.to,
+          value: Math.round(inv.value),
+          hs_code: inv.hs_code || null,
+          invoice_date: inv.invoice_date,
+          discounting_date: inv.discounting_date || inv.invoice_date
+        };
+      });
+
+      fetch(RESCORE_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ investigator_invoices: investigatorInvoices })
+      })
+      .then(function(r) {
+        return r.json().then(function(data) {
+          if (!r.ok) throw new Error(JSON.stringify(data));
+          return data;
+        });
+      })
+      .then(function(data) {
+        // Re-render with new scores
+        window.SCORED = data;
+        var root = document.getElementById("queue");
+        var statsRoot = document.getElementById("stats");
+        if (root) root.innerHTML = "";
+        if (statsRoot) statsRoot.innerHTML = "";
+        render();
+        // Show banner
+        if (banner) {
+          var n = investigatorInvoices.length;
+          banner.style.display = "block";
+          banner.textContent = "Results now include " + n + " investigator invoice" + (n !== 1 ? "s" : "") + ".";
+        }
+        if (btn) { btn.disabled = false; btn.innerHTML = "RE-RUN DETECTION"; }
+        // Close modal
+        var modal = document.getElementById("add-invoice-modal");
+        if (modal) modal.classList.remove("open");
+      })
+      .catch(function(err) {
+        if (btn) { btn.disabled = false; btn.innerHTML = "RE-RUN DETECTION"; }
+        alert("Rescore failed: " + err.message);
+      });
+    }
+  }
+
+  var brandHomeBtn = document.getElementById("brand-home-btn");
+  if (brandHomeBtn) {
+    brandHomeBtn.addEventListener("keydown", function(e) {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        if (window.returnToLanding) window.returnToLanding();
+      }
+    });
+  }
+
+  setupTour();
+  setupRescore();
+
 })();
+
