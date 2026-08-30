@@ -157,7 +157,7 @@ body {
 
 .brand {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   gap: 8px;
   margin: 0;
   cursor: pointer;
@@ -169,26 +169,6 @@ body {
 }
 .brand:active {
   transform: scale(0.98);
-}
-
-.brand-symbol {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--seal);
-  flex-shrink: 0;
-  animation: symbolBreathe 3.5s ease-in-out infinite;
-}
-
-@keyframes symbolBreathe {
-  0%, 100% {
-    transform: scale(1);
-    opacity: 0.85;
-  }
-  50% {
-    transform: scale(1.12);
-    opacity: 1;
-  }
 }
 
 .brand-wordmark {
