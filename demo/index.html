@@ -3,18 +3,193 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Ouroboros — backup demo</title>
-<link rel="stylesheet" href="styles.css">
+<title>OUROBOROS - FINANCIAL RING INTELLIGENCE</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css?v=1788065689">
 </head>
 <body>
-<header class="topbar">
-  <p class="eyebrow">Ouroboros · frozen backup demo</p>
-  <h1>Ring review queue</h1>
-  <p class="sub">Candidate fraud rings, ranked by expected loss. Each ring is drawn at full fidelity against a dimmed sample of the wider platform, so a flagged cluster reads as what it is — a small anomaly inside a much larger web of ordinary trade.</p>
-</header>
-<div id="stats"></div>
-<main id="queue"></main>
-<script src="data.js"></script>
-<script src="app.js"></script>
+<div class="app-shell">
+  <!-- TOP HEADER -->
+  <header class="topbar">
+    <div class="topbar-left">
+      <h1 class="brand">OUROBOROS</h1>
+      <span class="brand-sub">FINANCIAL RING INTELLIGENCE</span>
+    </div>
+    <div class="topbar-center" id="global-stats-container">
+      <!-- Populated by JS -->
+    </div>
+    <div class="topbar-right">
+      <div class="status-badge system-online"><span class="dot"></span> SYSTEM ONLINE</div>
+      <div class="status-badge simulated-data"><span class="dot"></span> SIMULATED DATA</div>
+    </div>
+  </header>
+
+  <!-- SECONDARY NAVIGATION -->
+  <nav class="primary-nav">
+    <div class="nav-container">
+      <button class="tab-btn active" data-target="view-queue">RING REVIEW</button>
+      <button class="tab-btn" data-target="view-ledger">INVOICE LEDGER</button>
+    </div>
+  </nav>
+
+  <!-- PAGE CONTENT -->
+  <div class="content-area">
+    
+    <!-- RING REVIEW -->
+    <div id="view-queue" class="view-section active">
+      <div id="stats" class="summary-strip"></div>
+      <main id="queue" class="queue-grid"></main>
+    </div>
+
+    <!-- INVOICE LEDGER -->
+    <div id="view-ledger" class="view-section">
+      <div class="ledger-header-strip">
+        <div class="ledger-controls">
+          <input type="text" id="ledger-search" class="control-input" placeholder="Search ID, company, HS code..." />
+          <select id="ledger-sort" class="control-select">
+            <option value="date-new">Invoice Date (Newest first)</option>
+            <option value="date-old">Invoice Date (Oldest first)</option>
+            <option value="amount-high">Amount (Highest first)</option>
+            <option value="amount-low">Amount (Lowest first)</option>
+            <option value="id">Invoice ID</option>
+          </select>
+          <select id="ledger-filter" class="control-select">
+            <option value="all">ALL</option>
+            <option value="dataset">DATASET</option>
+            <option value="investigator">INVESTIGATOR ADDED</option>
+            <option value="has-hs">HAS HS CODE</option>
+            <option value="missing-hs">MISSING HS CODE</option>
+            <option value="discounted">DISCOUNTED</option>
+            <option value="not-discounted">NOT DISCOUNTED</option>
+          </select>
+        </div>
+        <div class="ledger-actions">
+          <button id="add-invoice-btn" class="btn primary-action">+ ADD INVOICE</button>
+          <button id="clear-investigator-btn" class="btn danger-action" style="display:none;">CLEAR INVESTIGATOR DATA</button>
+        </div>
+      </div>
+      
+      <div id="ledger-stats" class="ledger-stats-bar"></div>
+      
+      <main id="ledger-table-container">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>SOURCE</th>
+              <th>INVOICE</th>
+              <th>DATE</th>
+              <th>SELLER</th>
+              <th>BUYER</th>
+              <th>VALUE (₹)</th>
+              <th>HS CODE</th>
+              <th>DISCOUNTING</th>
+            </tr>
+          </thead>
+          <tbody id="ledger-body"></tbody>
+        </table>
+      </main>
+    </div>
+
+  </div>
+</div>
+
+<!-- MODALS -->
+
+<!-- INVOICE MODAL -->
+<div id="invoice-modal" class="modal-overlay hidden">
+  <div class="modal-window">
+    <div class="modal-header">
+      <h2 id="modal-title">INVOICE DETAIL</h2>
+      <button id="modal-close" class="modal-close-btn">&times;</button>
+    </div>
+    <div id="modal-body" class="modal-body"></div>
+  </div>
+</div>
+
+<!-- ENTITY MODAL -->
+<div id="entity-modal" class="modal-overlay hidden">
+  <div class="modal-window entity-window">
+    <div class="modal-header">
+      <h2 id="entity-modal-title">ENTITY DETAIL</h2>
+      <button id="entity-modal-close" class="modal-close-btn">&times;</button>
+    </div>
+    <div id="entity-modal-body" class="modal-body"></div>
+  </div>
+</div>
+
+<!-- ADD INVOICE MODAL -->
+<div id="add-invoice-modal" class="modal-overlay hidden">
+  <div class="modal-window add-invoice-window">
+    <div class="modal-header">
+      <h2>ADD INVESTIGATOR INVOICE</h2>
+      <button class="modal-close-btn" onclick="document.getElementById('add-invoice-modal').classList.add('hidden');">&times;</button>
+    </div>
+    <div class="modal-body form-body">
+      <div id="add-inv-error" class="form-error hidden"></div>
+      
+      <div class="form-grid">
+        <div class="form-group">
+          <label>INVOICE ID <span class="req">*</span></label>
+          <input type="text" id="add-inv-id" placeholder="e.g. I0201" class="form-input" />
+        </div>
+        
+        <div class="form-group">
+          <label>VALUE (₹) <span class="req">*</span></label>
+          <input type="number" id="add-inv-val" placeholder="e.g. 10000000" min="0" class="form-input" />
+        </div>
+
+        <div class="form-group">
+          <label>SELLER ENTITY ID <span class="req">*</span></label>
+          <input type="text" id="add-inv-seller" placeholder="e.g. E040" class="form-input" />
+        </div>
+        
+        <div class="form-group">
+          <label>BUYER ENTITY ID <span class="req">*</span></label>
+          <input type="text" id="add-inv-buyer" placeholder="e.g. E041" class="form-input" />
+        </div>
+        
+        <div class="form-group">
+          <label>INVOICE DATE <span class="req">*</span></label>
+          <input type="date" id="add-inv-date" class="form-input" />
+        </div>
+
+        <div class="form-group">
+          <label>HS CODE</label>
+          <input type="text" id="add-inv-hs" placeholder="Optional" class="form-input" />
+        </div>
+
+        <div class="form-group">
+          <label>DISCOUNTING DATE</label>
+          <input type="date" id="add-inv-discounting" class="form-input" />
+        </div>
+      </div>
+      
+      <div class="modal-actions">
+        <button class="btn secondary-btn" onclick="document.getElementById('add-invoice-modal').classList.add('hidden');">CANCEL</button>
+        <button class="btn primary-action" onclick="window.submitAddInvoice()">ADD INVOICE</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="data.js?v=1788065689"></script>
+<script src="app.js?v=1788065689"></script>
+<script>
+  // Global stats populator
+  document.addEventListener("DOMContentLoaded", function() {
+    if (typeof ENTITIES !== 'undefined' && typeof INVOICES !== 'undefined' && typeof SCORED !== 'undefined') {
+      var eCount = Object.keys(ENTITIES).length;
+      var iCount = Object.keys(INVOICES).length;
+      var rCount = (SCORED.rings || []).length;
+      
+      var container = document.getElementById("global-stats-container");
+      container.innerHTML = 
+        "<div class='global-stat'><span class='gs-label'>DATASET</span></div>" +
+        "<div class='global-stat'><span class='gs-val'>" + eCount + "</span><span class='gs-label'>ENTITIES</span></div>" +
+        "<div class='global-stat'><span class='gs-val'>" + iCount + "</span><span class='gs-label'>INVOICES</span></div>" +
+        "<div class='global-stat'><span class='gs-val'>" + rCount + "</span><span class='gs-label'>RINGS</span></div>";
+    }
+  });
+</script>
 </body>
 </html>
