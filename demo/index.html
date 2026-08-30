@@ -5,10 +5,176 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>OUROBOROS - FINANCIAL RING INTELLIGENCE</title>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=1788065689">
+<link rel="stylesheet" href="styles.css?v=1788078763">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 </head>
 <body>
-<div class="app-shell">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div id="landing-page" class="landing-page relative min-h-screen overflow-hidden flex flex-col font-sans text-white bg-black selection:bg-[#E8C468]/30 selection:text-[#E8C468]" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 3000; transition: opacity 0.8s ease, visibility 0.8s ease; background-color: #0A0A0A;">
+
+    <!-- WebGL Constellation Canvas (Untouched) -->
+    <div class="absolute inset-0 z-0 pointer-events-none opacity-80">
+        <canvas id="constellationCanvas" class="w-full h-full"></canvas>
+    </div>
+
+    <!-- Central Content -->
+    <main class="flex-grow flex flex-col items-center justify-center relative z-10 px-6 w-full">
+        
+        <!-- Eyebrow Line (New) -->
+        <p class="eyebrow-text uppercase mb-4 text-center">
+            TReDS CIRCULAR-TRADE DETECTION
+        </p>
+
+        <!-- Writing Animation Title (Untouched) -->
+        <div class="relative flex items-center justify-center mb-6 md:mb-8 w-full">
+            <h1 class="circe-title-text">Circe</h1>
+        </div>
+        
+        <!-- Tagline -->
+        <p class="tagline-text uppercase mb-12 md:mb-16 text-center">
+            Financial Ring Intelligence
+        </p>
+
+        <!-- Enter Button -->
+        <button id="enter-btn-new" class="enter-button uppercase transition-all flex items-center justify-center">
+            [ ENTER INVESTIGATION ]
+        </button>
+    </main>
+    
+    <!-- Footer Corner Meta Text (New) -->
+    <div class="absolute bottom-6 right-8 z-10 pointer-events-none">
+        <p class="footer-meta-text">
+            DevJams'26 · Exasol-backed audit trail
+        </p>
+    </div>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Yellowtail&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap');
+
+        /* Handwriting Wipe Title (Untouched logic, updated to requested exact gold) */
+        .circe-title-text {
+            font-family: 'Yellowtail', cursive;
+            font-size: clamp(100px, 14vw, 200px); 
+            font-weight: 400;
+            color: #E8C468;
+            margin: 0;
+            padding: 20px; 
+            line-height: 1;
+            text-shadow: 0 0 15px rgba(232, 196, 104, 0.3);
+            
+            -webkit-mask-image: linear-gradient(75deg, #000 45%, rgba(0,0,0,0) 55%);
+            mask-image: linear-gradient(75deg, #000 45%, rgba(0,0,0,0) 55%);
+            -webkit-mask-size: 300% 100%;
+            mask-size: 300% 100%;
+            -webkit-mask-position: 100% 0;
+            mask-position: 100% 0;
+            
+            animation: writeCursive 1.5s cubic-bezier(0.3, 0.0, 0.2, 1) 0.1s both;
+        }
+
+        @keyframes writeCursive {
+            0% { -webkit-mask-position: 100% 0; mask-position: 100% 0; }
+            100% { -webkit-mask-position: 0% 0; mask-position: 0% 0; }
+        }
+        
+        /* New Eyebrow Kicker */
+        .eyebrow-text {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
+            font-size: 11px;
+            letter-spacing: 0.25em;
+            margin-right: -0.25em; 
+            color: #5A6274;
+            
+            opacity: 0;
+            transform: translateY(10px);
+            animation: elegantFadeUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) 1.2s forwards;
+        }
+
+        /* Tagline (Updated to exact specs) */
+        .tagline-text {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
+            font-size: 13.5px; 
+            letter-spacing: 0.25em; 
+            margin-right: -0.25em;
+            color: #8A93A6;
+            
+            opacity: 0;
+            transform: translateY(10px);
+            animation: elegantFadeUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) 1.5s forwards;
+        }
+
+        /* Enter Button (Updated to exact specs) */
+        .enter-button {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 13px;
+            letter-spacing: 0.15em;
+            color: #E8C468;
+            background: transparent;
+            border: 1px solid rgba(232, 196, 104, 0.3);
+            border-radius: 4px;
+            padding: 16px 40px;
+            
+            opacity: 0;
+            transform: translateY(10px);
+            animation: elegantFadeUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) 1.8s forwards;
+        }
+
+        .enter-button:hover {
+            background: rgba(232, 196, 104, 0.05); /* 5% gold opacity fill */
+            border-color: #E8C468; /* Brightens to full gold */
+            box-shadow: 0 0 15px rgba(232, 196, 104, 0.15); /* Subtle glow */
+            cursor: pointer;
+        }
+        
+        /* Footer Corner Meta Text */
+        .footer-meta-text {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 400;
+            font-size: 11px;
+            color: #4A5161;
+            letter-spacing: 0.05em;
+            
+            opacity: 0;
+            animation: elegantFadeUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) 2.0s forwards;
+        }
+
+        @keyframes elegantFadeUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        #constellationCanvas {
+            /* filter removed for performance */
+        }
+
+    </style>
+
+</div>
+
+<div id="app-shell" class="app-shell hidden-app">
   <!-- TOP HEADER -->
   <header class="topbar">
     <div class="topbar-left">
@@ -27,8 +193,12 @@
   <!-- SECONDARY NAVIGATION -->
   <nav class="primary-nav">
     <div class="nav-container">
-      <button class="tab-btn active" data-target="view-queue">RING REVIEW</button>
-      <button class="tab-btn" data-target="view-ledger">INVOICE LEDGER</button>
+      
+        <button class="tab-btn active" data-target="view-queue">RING REVIEW</button>
+        <button class="tab-btn" data-target="view-map">UNIVERSAL MAP</button>
+        <button class="tab-btn" data-target="view-directory">ENTITY DIRECTORY</button>
+        <button class="tab-btn" data-target="view-ledger">INVOICE LEDGER</button>
+
     </div>
   </nav>
 
@@ -41,9 +211,148 @@
       <main id="queue" class="queue-grid"></main>
     </div>
 
-    <!-- INVOICE LEDGER -->
+    
+      <!-- UNIVERSAL MAP -->
+      <div id="view-map" class="view-section">
+        <div style="display:flex; height:100%;">
+            <div id="map-container" style="flex:1; position:relative; overflow:hidden; background:var(--bg-panel); border-right:1px solid var(--border-muted);">
+                <!-- Toolbar Zoom Strip -->
+                <div class="zoom-toolbar">
+                    <button id="zoom-out" class="icon-btn" title="Zoom Out">-</button>
+                    <span id="zoom-level">100%</span>
+                    <button id="zoom-in" class="icon-btn" title="Zoom In">+</button>
+                    <button id="zoom-reset" class="icon-btn" title="Reset Zoom">1:1</button>
+                </div>
+                
+                
+                <!-- Map Layer Toggles -->
+                <div class="map-toggles">
+                    <button id="btn-trade" class="map-toggle-btn active">TRADE LAYER</button>
+                    <button id="btn-corp" class="map-toggle-btn active">CORPORATE LAYER</button>
+                    <button id="btn-flagged" class="map-toggle-btn">FLAGGED ONLY</button>
+                    <select id="filter-industry" class="control-select" style="width:140px; margin-left:8px; border: 1px solid var(--border-muted); background: var(--bg-panel); color: var(--text-muted); font-size:10px; text-transform:uppercase;">
+                        <option value="">ALL INDUSTRIES</option>
+                    </select>
+                    <select id="filter-ring" class="control-select" style="width:140px; margin-left:8px; border: 1px solid var(--border-muted); background: var(--bg-panel); color: var(--text-muted); font-size:10px; text-transform:uppercase;">
+                        <option value="">-- ALL RINGS --</option>
+                    </select>
+                </div>
+
+
+                <svg id="universal-svg" viewBox="0 0 1800 1100" width="100%" height="100%" style="cursor: grab; display: block;">
+                    <g id="network-zoom-group">
+                        <g id="map-layer-trade"></g>
+                        <g id="map-layer-corp"></g>
+                        <g id="map-layer-rings"></g>
+                        <g id="map-layer-nodes"></g>
+                        <g id="map-layer-labels"></g>
+                    </g>
+                </svg>
+
+                <!-- Bottom Legend -->
+                <div style="position:absolute; bottom:16px; left:16px; display:flex; gap:16px; font-size:10px; color:var(--text-muted); z-index:10; background:var(--bg-base); padding:8px 16px; border-radius:4px; border:1px solid var(--border-muted); align-items:center;">
+                    <div style="display:flex; align-items:center; gap:6px;"><div style="width:16px; height:2px; background:var(--risk-coral);"></div> Invoice Hop</div>
+                    <div style="display:flex; align-items:center; gap:6px;"><div style="width:16px; height:2px; background:var(--warn-amber); border-top:2px dashed var(--bg-base);"></div> Corporate Bridge</div>
+                    <div style="display:flex; align-items:center; gap:6px;"><div style="width:16px; height:1px; background:rgba(106,115,138,0.5);"></div> Background Trade</div>
+                    <div style="width:1px; height:12px; background:var(--border-muted); margin:0 8px;"></div>
+                    <div style="display:flex; align-items:center; gap:4px;"><div style="width:8px; height:8px; border-radius:50%; border:2px solid var(--accent-teal);"></div> Standard Node</div>
+                    <div style="display:flex; align-items:center; gap:4px;"><div style="width:8px; height:8px; border-radius:50%; border:2px solid var(--risk-coral);"></div> Flagged Node</div>
+                </div>
+
+            </div>
+            
+            
+            <!-- Map Right Rail -->
+            <div id="map-rail" style="width:340px; padding:24px; display:none; flex-direction:column; gap:24px; overflow-y:auto; background:var(--bg-base); border-left:1px solid var(--border-muted);">
+                
+                <div>
+                    <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                        <h2 id="rail-name" style="font-size:16px; font-weight:400; color:var(--text-main); margin:0; line-height:1.2;">Deccan Supply Chain LLP <span id="rail-id" style="color:var(--text-muted); font-size:12px;">(E055)</span></h2>
+                        <button id="rail-close" class="icon-btn" style="background:transparent; border:none; color:var(--text-muted); font-size:16px; cursor:pointer; margin-top:-4px;">&#x2715;</button>
+                    </div>
+                    <div id="rail-ind-nic" style="font-size:10px; color:var(--text-muted); text-transform:uppercase; margin-top:8px; letter-spacing:1px;">INDUSTRY: DISTRIBUTION | NIC: NIC-5229</div>
+                </div>
+                
+                <!-- 4 Column Metrics -->
+                <div style="display:grid; grid-template-columns:1fr 1fr 1.2fr 1fr; gap:8px; font-size:10px;">
+                    <div><div style="color:var(--text-muted); margin-bottom:4px; letter-spacing:1px;">INVOICES</div><div id="rail-inv" class="mono" style="font-size:12px; color:var(--text-main);">0</div></div>
+                    <div><div style="color:var(--text-muted); margin-bottom:4px; letter-spacing:1px;">RINGS</div><div id="rail-rings" class="mono risk" style="font-size:12px; color:var(--risk-coral);">0</div></div>
+                    <div><div style="color:var(--text-muted); margin-bottom:4px; letter-spacing:1px;">EXP LOSS</div><div id="rail-exploss" class="mono risk" style="font-size:12px; color:var(--text-main);">₹0 Cr</div></div>
+                    <div><div style="color:var(--text-muted); margin-bottom:4px; letter-spacing:1px;">AVG AGG</div><div id="rail-avgagg" class="mono" style="font-size:12px; color:var(--text-main);">0.00</div></div>
+                </div>
+                
+                <!-- Flagged Rings Box -->
+                <div id="rail-flags-container">
+                    <div style="font-size:10px; color:var(--text-muted); font-weight:600; letter-spacing:1px; margin-bottom:8px; padding-bottom:8px; border-bottom:1px solid var(--border-muted);">FLAGGED RINGS (<span id="rail-flags-count">0</span>)</div>
+                    <div id="rail-flags-list" style="display:flex; flex-wrap:wrap; gap:8px;"></div>
+                </div>
+                
+                <!-- Top Counterparties -->
+                <div id="rail-cp-container">
+                    <div style="font-size:10px; color:var(--text-muted); font-weight:600; letter-spacing:1px; margin-bottom:8px; padding-bottom:8px; border-bottom:1px solid var(--border-muted);">TOP TRADE COUNTERPARTIES</div>
+                    <div id="rail-cp-list" style="display:flex; flex-direction:column; gap:6px;"></div>
+                </div>
+                
+                <!-- Directors -->
+                <div id="rail-dir-container">
+                    <div style="font-size:10px; color:var(--text-muted); font-weight:600; letter-spacing:1px; margin-bottom:8px; padding-bottom:8px; border-bottom:1px solid var(--border-muted);">SHARED DIRECTOR RELATIONSHIPS</div>
+                    <div id="rail-dir-list" style="display:flex; flex-wrap:wrap; gap:4px;"></div>
+                </div>
+                
+                <div style="display:flex; gap:8px; margin-top:auto;">
+                    <button id="rail-full-detail" style="flex:1; border:1px solid var(--accent-teal); color:var(--accent-teal); background:transparent; padding:12px; border-radius:2px; font-size:10px; font-weight:500; cursor:pointer; letter-spacing:1px; transition:all 0.2s;">VIEW FULL DETAIL</button>
+                    <button id="rail-close-btn" style="flex:1; border:1px solid var(--border-muted); color:var(--text-main); background:transparent; padding:12px; border-radius:2px; font-size:10px; font-weight:500; cursor:pointer; letter-spacing:1px; transition:all 0.2s;">CLOSE RAIL</button>
+                </div>
+            </div>
+
+      </div></div>
+      <!-- ENTITY DIRECTORY -->
+      <div id="view-directory" class="view-section" style="padding:24px; max-width:1400px; margin:0 auto; width:100%;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px;">
+              <div>
+                  <h2 style="font-size:16px; color:var(--text-main); margin-bottom:4px; font-weight:400; letter-spacing:1px;">ENTITY DIRECTORY</h2>
+                  <p style="color:var(--text-muted); font-size:12px;">Master registry of all network participants.</p>
+              </div>
+              <input type="text" id="dir-search" class="control-input" placeholder="Search ID, Name, or DIN..." style="width:300px; padding:8px; background:var(--bg-panel); border:1px solid var(--border-muted); color:var(--text-main);">
+          </div>
+          <div style="overflow-x:auto;">
+              <table class="ledger-table" style="width:100%; text-align:left; border-collapse:collapse;">
+                  <thead>
+                      <tr style="border-bottom:1px solid var(--border-muted); color:var(--text-muted); font-size:11px;">
+                          <th style="padding:12px 8px;">ENTITY ID</th>
+                          <th style="padding:12px 8px;">LEGAL NAME</th>
+                          <th style="padding:12px 8px;">INDUSTRY</th>
+                          <th style="padding:12px 8px;">DIRECTORS</th>
+                          <th style="padding:12px 8px; text-align:right;">INVOICES</th>
+                          <th style="padding:12px 8px; text-align:right;">RINGS</th>
+                          <th style="padding:12px 8px; text-align:right;">EXPOSURE (Cr)</th>
+                      </tr>
+                  </thead>
+                  <tbody id="directory-tbody"></tbody>
+              </table>
+          </div>
+      </div>
+
+      <!-- INVOICE LEDGER -->
     <div id="view-ledger" class="view-section">
-      <div class="ledger-header-strip">
+      
+        <!-- LEDGER ANALYTICS STRIP -->
+        <div id="ledger-analytics" style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px; margin-bottom:24px;">
+            <div class="metric-card" style="padding:16px; background:var(--bg-panel); border:1px solid var(--border-muted);">
+                <div style="font-size:10px; color:var(--text-muted); font-weight:600; letter-spacing:1px; margin-bottom:12px;">VALUE BY INDUSTRY</div>
+                <div id="analytics-industry" style="display:flex; flex-direction:column; gap:8px;"></div>
+            </div>
+            <div class="metric-card" style="padding:16px; background:var(--bg-panel); border:1px solid var(--border-muted);">
+                <div style="font-size:10px; color:var(--text-muted); font-weight:600; letter-spacing:1px; margin-bottom:12px;">TOP HS COMMODITY CODES</div>
+                <div id="analytics-hs" style="display:flex; flex-direction:column; gap:8px;"></div>
+            </div>
+            <div class="metric-card" style="padding:16px; background:var(--bg-panel); border:1px solid var(--border-muted);">
+                <div style="font-size:10px; color:var(--text-muted); font-weight:600; letter-spacing:1px; margin-bottom:12px;">FINANCING LAG DISTRIBUTION</div>
+                <div id="analytics-lag" style="display:flex; flex-direction:column; gap:8px;"></div>
+            </div>
+        </div>
+
+        <div class="ledger-header-strip">
         <div class="ledger-controls">
           <input type="text" id="ledger-search" class="control-input" placeholder="Search ID, company, HS code..." />
           <select id="ledger-sort" class="control-select">
@@ -172,8 +481,10 @@
   </div>
 </div>
 
-<script src="data.js?v=1788065689"></script>
-<script src="app.js?v=1788065689"></script>
+<script src="data.js?v=1788078763"></script>
+<script src="features.js"></script>
+    <script src="features_map.js?v=1788078763"></script>
+    <script src="app.js?v=1788078763"></script>
 <script>
   // Global stats populator
   document.addEventListener("DOMContentLoaded", function() {
@@ -191,5 +502,6 @@
     }
   });
 </script>
+  <script src="constellation.js?v=1788078763"></script>
 </body>
 </html>
