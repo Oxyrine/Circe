@@ -39,6 +39,8 @@ document.addEventListener("DOMContentLoaded", function() {
         window.INVESTIGATOR_INVOICES = {};
         clearBtn.style.display = "none";
         if (typeof renderLedger === "function") renderLedger();
+        if (typeof updateDirectory === "function") updateDirectory();
+        if (typeof renderNetwork === "function") renderNetwork();
       }
     };
   }
@@ -109,23 +111,28 @@ window.submitAddInvoice = function() {
   if (clearBtn) clearBtn.style.display = "inline-block";
 
   if (typeof renderLedger === "function") renderLedger();
+  if (typeof updateDirectory === "function") updateDirectory();
+  if (typeof renderNetwork === "function") renderNetwork();
   
   // Show the invoice detail immediately
-  document.getElementById("entity-modal").classList.add("hidden");
+  closeModal("entity-modal");
+  closeModal("add-invoice-modal");
   openInvoiceModal(id);
-  document.getElementById("invoice-modal").classList.remove("hidden");
+  openModal("invoice-modal");
 };
 
 window.removeInvestigatorInvoice = function(id) {
   if (confirm("Remove this investigator-added invoice?")) {
     delete window.INVESTIGATOR_INVOICES[id];
     localStorage.setItem("ouroboros_investigator_invoices", JSON.stringify(window.INVESTIGATOR_INVOICES));
-    document.getElementById("invoice-modal").classList.add("hidden");
+    closeModal("invoice-modal");
     if (Object.keys(window.INVESTIGATOR_INVOICES).length === 0) {
       var clearBtn = document.getElementById("clear-investigator-btn");
       if (clearBtn) clearBtn.style.display = "none";
     }
     if (typeof renderLedger === "function") renderLedger();
+    if (typeof updateDirectory === "function") updateDirectory();
+    if (typeof renderNetwork === "function") renderNetwork();
   }
 };
 
@@ -212,6 +219,34 @@ window.removeInvestigatorInvoice = function(id) {
     defs.appendChild(filter);
     
     svg.appendChild(defs);
+
+    // --- dimmed backdrop ---
+    var backdropGroup = svgEl("g", { class: "backdrop" });
+    if (backdrop && backdrop.nodes && backdrop.nodes.length) {
+      var ringIds = {};
+      ring.entities.forEach(function (id) { ringIds[id] = true; });
+      var bpos = {};
+      backdrop.nodes.forEach(function (node) {
+        if (ringIds[node.id]) return;
+        bpos[node.id] = backdropPosition(node.id, size, keepOutR);
+      });
+      var edgeCount = 0;
+      (backdrop.edges || []).forEach(function (edge) {
+        if (edgeCount >= 60) return;
+        var a = bpos[edge.from], b = bpos[edge.to];
+        if (!a || !b) return;
+        edgeCount++;
+        backdropGroup.appendChild(svgEl("line", {
+          x1: a.x, y1: a.y, x2: b.x, y2: b.y, class: "backdrop-edge",
+        }));
+      });
+      Object.keys(bpos).forEach(function (id) {
+        backdropGroup.appendChild(svgEl("circle", {
+          cx: bpos[id].x, cy: bpos[id].y, r: 2, class: "backdrop-node",
+        }));
+      });
+    }
+    svg.appendChild(backdropGroup);
 
     // --- the ring edges ---
     var edgesGroup = svgEl("g", { class: "ring-edges" });
@@ -1134,7 +1169,96 @@ window.removeInvestigatorInvoice = function(id) {
       var statsBar = document.getElementById("ledger-stats");
       if (statsBar) {
         var totalVal = filtered.reduce(function(acc, i) { return acc + (i.value || 0); }, 0);
-        statsBar.innerHTML = "SHOWING <span class='mono' style='color:var(--text-main)'>" + filtered.length + "</span> INVOICES &nbsp;|&nbsp; TOTAL VALUE <span class='mono' style='color:var(--text-main)'>₹" + totalVal.toLocaleString() + "</span>";
+        
+        // 1. VALUE BY INDUSTRY
+        var indSums = { distribution: 0, manufacturing: 0, trading: 0, services: 0 };
+        filtered.forEach(function(inv) {
+          var s = ENTITIES[inv.from];
+          var ic = s && s.industry_class ? s.industry_class : "services";
+          if (indSums[ic] !== undefined) indSums[ic] += (inv.value || 0);
+          else indSums[ic] = (indSums[ic] || 0) + (inv.value || 0);
+        });
+        var maxIndVal = Math.max.apply(null, Object.values(indSums).concat([1]));
+        var indHtml = "<div class='ls-panel'><h4>Value by Seller Industry</h4>";
+        Object.keys(indSums).forEach(function(k) {
+          var v = indSums[k];
+          var pct = ((v / (maxIndVal || 1)) * 100).toFixed(0);
+          indHtml += "<div class='ls-row'>" +
+            "<span class='ls-label'>" + k.toUpperCase() + "</span>" +
+            "<div class='ls-bar-track'><div class='ls-bar-fill' style='width:" + pct + "%'></div></div>" +
+            "<span class='ls-val'>₹" + (v / 10000000).toFixed(2) + " Cr</span>" +
+            "</div>";
+        });
+        indHtml += "</div>";
+
+        // 2. TOP HS CODES
+        var hsSums = {};
+        var noHsSum = 0;
+        var noHsCount = 0;
+        filtered.forEach(function(inv) {
+          if (inv.hs_code) {
+            hsSums[inv.hs_code] = (hsSums[inv.hs_code] || 0) + (inv.value || 0);
+          } else {
+            noHsSum += (inv.value || 0);
+            noHsCount++;
+          }
+        });
+        var sortedHs = Object.keys(hsSums).sort(function(a, b) { return hsSums[b] - hsSums[a]; }).slice(0, 5);
+        var maxHsVal = Math.max.apply(null, sortedHs.map(function(k) { return hsSums[k]; }).concat([noHsSum, 1]));
+        var hsHtml = "<div class='ls-panel'><h4>Top Commodity HS Codes</h4>";
+        sortedHs.forEach(function(hs) {
+          var v = hsSums[hs];
+          var pct = ((v / (maxHsVal || 1)) * 100).toFixed(0);
+          hsHtml += "<div class='ls-row'>" +
+            "<span class='ls-label'>" + hs + "</span>" +
+            "<div class='ls-bar-track'><div class='ls-bar-fill' style='width:" + pct + "%'></div></div>" +
+            "<span class='ls-val'>₹" + (v / 10000000).toFixed(2) + " Cr</span>" +
+            "</div>";
+        });
+        if (noHsSum > 0 || sortedHs.length === 0) {
+          var noHsPct = ((noHsSum / (maxHsVal || 1)) * 100).toFixed(0);
+          hsHtml += "<div class='ls-row'>" +
+            "<span class='ls-label' style='color:var(--warn-amber);'>NO HS CODE (" + noHsCount + ")</span>" +
+            "<div class='ls-bar-track'><div class='ls-bar-fill' style='width:" + noHsPct + "%; background-color:var(--warn-amber);'></div></div>" +
+            "<span class='ls-val'>₹" + (noHsSum / 10000000).toFixed(2) + " Cr</span>" +
+            "</div>";
+        }
+        hsHtml += "</div>";
+
+        // 3. DISCOUNTING LAG
+        var lags = [];
+        filtered.forEach(function(inv) {
+          if (inv.invoice_date && inv.discounting_date) {
+            var d1 = new Date(inv.invoice_date);
+            var d2 = new Date(inv.discounting_date);
+            var diffDays = Math.round((d2 - d1) / (1000 * 60 * 60 * 24));
+            if (!isNaN(diffDays) && diffDays >= 0) lags.push(diffDays);
+          }
+        });
+        var buckets = { "0–3 DAYS": 0, "4–7 DAYS": 0, "8–14 DAYS": 0, "15+ DAYS": 0 };
+        lags.forEach(function(d) {
+          if (d <= 3) buckets["0–3 DAYS"]++;
+          else if (d <= 7) buckets["4–7 DAYS"]++;
+          else if (d <= 14) buckets["8–14 DAYS"]++;
+          else buckets["15+ DAYS"]++;
+        });
+        var avgLag = lags.length > 0 ? (lags.reduce(function(a, b) { return a + b; }, 0) / lags.length).toFixed(1) : "—";
+        var maxBucketCount = Math.max.apply(null, Object.values(buckets).concat([1]));
+        var lagHtml = "<div class='ls-panel'><h4>Financing Lag (" + (avgLag !== "—" ? avgLag + "d avg" : "N/A") + ")</h4>";
+        Object.keys(buckets).forEach(function(bKey) {
+          var c = buckets[bKey];
+          var pct = ((c / (maxBucketCount || 1)) * 100).toFixed(0);
+          lagHtml += "<div class='ls-row'>" +
+            "<span class='ls-label'>" + bKey + "</span>" +
+            "<div class='ls-bar-track'><div class='ls-bar-fill' style='width:" + pct + "%'></div></div>" +
+            "<span class='ls-val'>" + c + " inv</span>" +
+            "</div>";
+        });
+        lagHtml += "</div>";
+
+        statsBar.innerHTML = 
+          "<div class='ls-summary'>SHOWING <span class='mono' style='color:var(--text-main); font-weight:600;'>" + filtered.length + "</span> INVOICES &nbsp;|&nbsp; TOTAL OBSERVED VALUE <span class='mono' style='color:var(--text-main); font-weight:600;'>₹" + totalVal.toLocaleString() + " (₹" + (totalVal / 10000000).toFixed(2) + " Cr)</span></div>" +
+          "<div class='ls-panels'>" + indHtml + hsHtml + lagHtml + "</div>";
       }
     }
 
@@ -1250,16 +1374,15 @@ window.removeInvestigatorInvoice = function(id) {
     
     var datasetInvs = invs.filter(function(i) { return !window.INVESTIGATOR_INVOICES || !window.INVESTIGATOR_INVOICES[i.invoice_id]; });
     var customInvs = invs.filter(function(i) { return window.INVESTIGATOR_INVOICES && !!window.INVESTIGATOR_INVOICES[i.invoice_id]; });
-    
     var totalVal = invs.reduce(function(acc, i) { return acc + (i.value || 0); }, 0);
     
-    var rings = typeof SCORED !== "undefined" && SCORED.rings ? SCORED.rings.filter(function(r) {
-      return (r.entities || []).indexOf(entityId) !== -1;
-    }) : [];
+    var entityIdx = buildEntityIndex();
+    var st = entityIdx[entityId] || { rings: [], expectedLoss: 0, aggSum: 0 };
+    var avgAgg = st.rings.length > 0 ? (st.aggSum / st.rings.length).toFixed(2) : "—";
 
     var html = "<div class='detail-header'>";
     html += "<div class='detail-title'>" + e.name + "</div>";
-    if (e.industry) html += "<div class='detail-subtitle'>INDUSTRY: " + e.industry.toUpperCase() + "</div>";
+    if (e.industry_class) html += "<div class='detail-subtitle'>INDUSTRY: " + e.industry_class.toUpperCase() + " | NIC: " + (e.industry_code || "N/A") + "</div>";
     html += "</div>";
 
     html += "<div class='trail-header' style='margin-bottom:24px;'>";
@@ -1269,27 +1392,46 @@ window.removeInvestigatorInvoice = function(id) {
       html += "<div class='trail-stat'><span class='ts-label'>INVESTIGATOR ADDED</span><span class='ts-val mono' style='color:var(--accent-teal);'>" + customInvs.length + "</span></div>";
     }
     html += "<div class='trail-stat'><span class='ts-label'>OBSERVED VALUE</span><span class='ts-val mono'>₹" + (totalVal/10000000).toFixed(2) + " Cr</span></div>";
-    html += "<div class='trail-stat'><span class='ts-label'>RINGS</span><span class='ts-val mono'>" + rings.length + "</span></div>";
+    html += "<div class='trail-stat'><span class='ts-label'>RINGS</span><span class='ts-val mono' style='" + (st.rings.length > 0 ? "color:var(--risk-coral); font-weight:700;" : "") + "'>" + st.rings.length + "</span></div>";
+    html += "<div class='trail-stat'><span class='ts-label'>EXPECTED LOSS</span><span class='ts-val risk mono'>₹" + (st.expectedLoss/10000000).toFixed(2) + " Cr</span></div>";
+    html += "<div class='trail-stat'><span class='ts-label'>AVG AGGREGATE</span><span class='ts-val mono'>" + avgAgg + "</span></div>";
     html += "</div></div>";
+
+    if (st.rings.length > 0) {
+      html += "<div class='detail-section' style='margin-bottom:24px;'><h3>FLAGGED IN RINGS (" + st.rings.length + ")</h3>";
+      html += "<div style='display:flex; flex-wrap:wrap; gap:8px;'>";
+      st.rings.forEach(function(rId) {
+        html += "<button class='btn' onclick='window.viewRing(\"" + rId + "\")'>" + rId + "</button>";
+      });
+      html += "</div></div>";
+    }
 
     html += "<div class='detail-grid'>";
     html += "<div class='detail-section'><h3>REGISTRATION & ADDRESS</h3>";
-    html += "<div class='detail-row'><span class='detail-label'>CIN</span><span class='detail-value'>" + (e.cin || "N/A") + "</span></div>";
-    html += "<div class='detail-row'><span class='detail-label'>REGISTRATION</span><span class='detail-value'>" + (e.registration_date || "N/A") + "</span></div>";
-    html += "<div class='detail-row'><span class='detail-label'>STATUS</span><span class='detail-value'>" + (e.status || "N/A").toUpperCase() + "</span></div>";
-    html += "<div class='detail-row'><span class='detail-label'>STATE</span><span class='detail-value'>" + (e.state || "N/A").toUpperCase() + "</span></div>";
+    html += "<div class='detail-row'><span class='detail-label'>INDUSTRY</span><span class='detail-value'>" + (e.industry_class || "N/A").toUpperCase() + "</span></div>";
+    html += "<div class='detail-row'><span class='detail-label'>NIC CODE</span><span class='detail-value'>" + (e.industry_code || "N/A") + "</span></div>";
+    html += "<div class='detail-row'><span class='detail-label'>REGISTERED</span><span class='detail-value'>" + (e.registration_date || "N/A") + "</span></div>";
     if (e.address) {
       html += "<div style='margin-top:12px; font-size:10px; color:var(--text-muted);'>" + e.address.toUpperCase() + "</div>";
     }
     html += "</div>";
 
-    html += "<div class='detail-section'><h3>DIRECTORS</h3>";
+    html += "<div class='detail-section'><h3>DIRECTORS & CORPORATE LINKS</h3>";
     if (e.directors && e.directors.length > 0) {
-      e.directors.forEach(function(d) {
-        html += "<div class='detail-row'><span class='detail-label'>" + d.din + "</span><span class='detail-value'>" + d.name + "</span></div>";
+      e.directors.forEach(function(din) {
+        var coLinked = Object.values(ENTITIES).filter(function(other) {
+          return other.id !== entityId && other.directors && other.directors.indexOf(din) !== -1;
+        });
+        var coHtml = "";
+        if (coLinked.length > 0) {
+          coLinked.forEach(function(co) {
+            coHtml += "<span class='co-director-link' onclick='window.openEntity(\"" + co.id + "\")'>" + co.id + " " + co.name + "</span>";
+          });
+        }
+        html += "<div class='detail-row'><span class='detail-label'>DIRECTOR</span><span class='detail-value'>" + din + coHtml + "</span></div>";
       });
     } else {
-      html += "<div class='detail-row'><span class='detail-label'>DIRECTORS</span><span class='detail-value'>N/A</span></div>";
+      html += "<div class='detail-row'><span class='detail-label'>DIRECTORS</span><span class='detail-value'>None listed</span></div>";
     }
     html += "</div></div>";
     
@@ -1311,83 +1453,862 @@ window.removeInvestigatorInvoice = function(id) {
     
     document.getElementById("entity-modal-body").innerHTML = html;
     
-    document.getElementById("invoice-modal").classList.add("hidden");
-    document.getElementById("entity-modal").classList.remove("hidden");
+    closeModal("invoice-modal");
+    openModal("entity-modal");
   }
   window.openEntity = openEntity;
+
   window.openInvoice = function(invoiceId) {
     try {
-      var eModal = document.getElementById("entity-modal");
-      if (eModal) eModal.classList.add("hidden");
-      
+      closeModal("entity-modal");
       openInvoiceModal(invoiceId);
-      
-      var iModal = document.getElementById("invoice-modal");
-      if (iModal) iModal.classList.remove("hidden");
+      openModal("invoice-modal");
     } catch (e) {
       console.error("Error opening invoice:", e);
       alert("Error opening invoice: " + e.message);
     }
   };
+
   window.viewRing = function(ringId) {
-    document.getElementById("invoice-modal").classList.add("hidden");
-    document.getElementById("entity-modal").classList.add("hidden");
+    closeAllModals();
     document.querySelector(".tab-btn[data-target='view-queue']").click();
     var el = document.getElementById(ringId);
     if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
   };
 
+  function openModal(id) {
+    var m = document.getElementById(id);
+    if (!m) return;
+    m.classList.remove("hidden");
+    m.classList.add("open");
+  }
+  window.openModal = openModal;
+
+  function closeModal(id) {
+    var m = document.getElementById(id);
+    if (!m) return;
+    m.classList.remove("open");
+  }
+  window.closeModal = closeModal;
+
+  function closeAllModals() {
+    var modals = document.querySelectorAll(".modal-overlay");
+    modals.forEach(function(m) {
+      m.classList.remove("open");
+    });
+  }
+  window.closeAllModals = closeAllModals;
+
   var invClose = document.getElementById("modal-close");
   if (invClose) {
     invClose.addEventListener("click", function() {
-      var m = document.getElementById("invoice-modal");
-      if (m) m.classList.add("hidden");
+      closeModal("invoice-modal");
     });
   }
   
   var entityClose = document.getElementById("entity-modal-close");
   if (entityClose) {
     entityClose.addEventListener("click", function() {
-      var m = document.getElementById("entity-modal");
-      if (m) m.classList.add("hidden");
+      closeModal("entity-modal");
     });
   }
 
-  
-  // --- CINEMATIC TRANSITION LOGIC ---
-  var enterBtn = document.getElementById("enter-btn");
-  if (enterBtn) {
-    enterBtn.addEventListener("click", function() {
-      var landingPage = document.getElementById("landing-page");
-      var appShell = document.getElementById("app-shell");
-      
-      if (landingPage && appShell) {
-        landingPage.classList.add("transitioning");
-        setTimeout(function() {
-          landingPage.classList.add("hidden-landing");
-          appShell.classList.remove("hidden-app");
-        }, 600);
+  var addInvClose = document.getElementById("add-invoice-close");
+  if (addInvClose) {
+    addInvClose.addEventListener("click", function() {
+      closeModal("add-invoice-modal");
+    });
+  }
+
+  var addInvBtn = document.getElementById("add-invoice-btn");
+  if (addInvBtn) {
+    addInvBtn.addEventListener("click", function() {
+      openModal("add-invoice-modal");
+    });
+  }
+
+  // Close modals when clicking the backdrop
+  document.addEventListener("click", function(e) {
+    if (e.target && e.target.classList && e.target.classList.contains("modal-overlay")) {
+      e.target.classList.remove("open");
+    }
+  });
+
+  // Close modals on Escape key, or clear network focus if no modals are open
+  document.addEventListener("keydown", function(e) {
+    if (e.key === "Escape" || e.key === "Esc") {
+      var openModals = document.querySelectorAll(".modal-overlay.open");
+      if (openModals.length > 0) {
+        closeAllModals();
+      } else if (typeof resetNetworkFocus === "function") {
+        resetNetworkFocus();
+      }
+    }
+  });
+
+  // --- PHASE 6 ADDITIONS: INTERCONNECTION MAP & ENTITY DIRECTORY ---
+
+  function buildEntityIndex() {
+    var idx = {};
+    if (typeof ENTITIES === "undefined") return idx;
+    Object.keys(ENTITIES).forEach(function (id) {
+      idx[id] = { invoiceCount: 0, invoiceValue: 0, rings: [], expectedLoss: 0, aggSum: 0 };
+    });
+    var allInvs = typeof getAllInvoices === "function" ? getAllInvoices() : (typeof INVOICES !== "undefined" ? INVOICES : {});
+    Object.values(allInvs).forEach(function (inv) {
+      [inv.from, inv.to].forEach(function (id) {
+        if (!idx[id]) return;
+        idx[id].invoiceCount++;
+        idx[id].invoiceValue += (inv.value || 0);
+      });
+    });
+    var ringsList = typeof SCORED !== "undefined" && SCORED.rings ? SCORED.rings : [];
+    ringsList.forEach(function (r) {
+      (r.entities || []).forEach(function (id) {
+        if (!idx[id]) return;
+        idx[id].rings.push(r.ring_id);
+        idx[id].expectedLoss += (typeof r.expected_loss === "number" ? r.expected_loss : (r.expected_loss_inr || 0));
+        idx[id].aggSum += (typeof r.aggregate === "number" ? r.aggregate : (r.aggregate_score || 0));
+      });
+    });
+    return idx;
+  }
+
+  function renderDirectory() {
+    var searchInput = document.getElementById("dir-search");
+    var sortSelect = document.getElementById("dir-sort");
+    var filterSelect = document.getElementById("dir-filter-industry");
+    if (!searchInput || !sortSelect || !filterSelect) return;
+
+    searchInput.addEventListener("input", updateDirectory);
+    sortSelect.addEventListener("change", updateDirectory);
+    filterSelect.addEventListener("change", updateDirectory);
+
+    updateDirectory();
+  }
+
+  function updateDirectory() {
+    var tbody = document.getElementById("directory-body");
+    var statsEl = document.getElementById("dir-stats");
+    var searchInput = document.getElementById("dir-search");
+    var sortSelect = document.getElementById("dir-sort");
+    var filterSelect = document.getElementById("dir-filter-industry");
+    if (!tbody || typeof ENTITIES === "undefined") return;
+
+    var entityIndex = buildEntityIndex();
+    var entitiesList = Object.values(ENTITIES);
+
+    var query = (searchInput ? searchInput.value : "").toLowerCase().trim();
+    var sort = sortSelect ? sortSelect.value : "rings-desc";
+    var indFilter = filterSelect ? filterSelect.value : "all";
+
+    var filtered = entitiesList.filter(function(e) {
+      var matchesInd = (indFilter === "all") || (e.industry_class === indFilter);
+      var matchesSearch = true;
+      if (query) {
+        var text = [e.id, e.name, e.industry_class, e.industry_code || "", e.address || ""].join(" ").toLowerCase();
+        matchesSearch = text.indexOf(query) !== -1;
+      }
+      return matchesInd && matchesSearch;
+    });
+
+    filtered.sort(function(a, b) {
+      var stA = entityIndex[a.id] || { rings: [], expectedLoss: 0, invoiceCount: 0 };
+      var stB = entityIndex[b.id] || { rings: [], expectedLoss: 0, invoiceCount: 0 };
+
+      if (sort === "rings-desc") {
+        if (stB.rings.length !== stA.rings.length) return stB.rings.length - stA.rings.length;
+        return stB.expectedLoss - stA.expectedLoss;
+      }
+      if (sort === "loss-desc") return stB.expectedLoss - stA.expectedLoss;
+      if (sort === "invoices-desc") return stB.invoiceCount - stA.invoiceCount;
+      if (sort === "name-asc") return a.name.localeCompare(b.name);
+      if (sort === "date-new") return (b.registration_date || "").localeCompare(a.registration_date || "");
+      if (sort === "id-asc") return a.id.localeCompare(b.id);
+      return 0;
+    });
+
+    tbody.innerHTML = "";
+    filtered.forEach(function(e) {
+      var st = entityIndex[e.id] || { rings: [], expectedLoss: 0, invoiceCount: 0 };
+      var tr = document.createElement("tr");
+      tr.style.cursor = "pointer";
+      tr.onclick = function() { window.openEntity(e.id); };
+
+      var tdEntity = document.createElement("td");
+      tdEntity.innerHTML = "<div class='mono' style='font-weight:600; color:var(--text-main);'>" + e.id + "</div><div>" + e.name + "</div>";
+
+      var tdInd = document.createElement("td");
+      tdInd.innerHTML = "<span class='ti-badge'>" + (e.industry_class || "N/A").toUpperCase() + "</span>";
+
+      var tdNic = document.createElement("td");
+      tdNic.className = "mono";
+      tdNic.textContent = e.industry_code || "N/A";
+
+      var tdDate = document.createElement("td");
+      tdDate.className = "mono";
+      tdDate.textContent = e.registration_date || "N/A";
+
+      var tdInvs = document.createElement("td");
+      tdInvs.className = "mono";
+      tdInvs.textContent = st.invoiceCount;
+
+      var tdRings = document.createElement("td");
+      tdRings.className = "mono";
+      if (st.rings.length > 0) {
+        tdRings.innerHTML = "<span style='color:var(--risk-coral); font-weight:700;'>" + st.rings.length + " RINGS</span>";
+      } else {
+        tdRings.innerHTML = "<span style='color:var(--text-muted);'>0</span>";
+      }
+
+      var tdLoss = document.createElement("td");
+      tdLoss.className = "mono val-col" + (st.expectedLoss > 0 ? " risk" : "");
+      tdLoss.textContent = st.expectedLoss > 0 ? "₹" + (st.expectedLoss / 10000000).toFixed(2) + " Cr" : "₹0.00";
+
+      tr.appendChild(tdEntity);
+      tr.appendChild(tdInd);
+      tr.appendChild(tdNic);
+      tr.appendChild(tdDate);
+      tr.appendChild(tdInvs);
+      tr.appendChild(tdRings);
+      tr.appendChild(tdLoss);
+      tbody.appendChild(tr);
+    });
+
+    if (statsEl) {
+      statsEl.innerHTML = "SHOWING <span style='color:var(--text-main);'>" + filtered.length + "</span> / " + entitiesList.length + " ENTITIES";
+    }
+  }
+
+  function renderNetwork() {
+    var svg = document.getElementById("network-svg");
+    var rail = document.getElementById("network-rail");
+    var ringSelect = document.getElementById("net-ring-select");
+    var indSelect = document.getElementById("net-industry-filter");
+    var btnTrade = document.getElementById("net-toggle-trade");
+    var btnCorp = document.getElementById("net-toggle-corp");
+    var btnFlagged = document.getElementById("net-toggle-flagged");
+    var btnReset = document.getElementById("net-reset-btn");
+    if (!svg || typeof BACKDROP === "undefined" || !BACKDROP || !BACKDROP.nodes) return;
+
+    var entityIndex = buildEntityIndex();
+    var allInvoices = typeof getAllInvoices === "function" ? getAllInvoices() : (typeof INVOICES !== "undefined" ? INVOICES : {});
+
+    // Populate ring dropdown once
+    if (ringSelect && ringSelect.options.length <= 1 && typeof SCORED !== "undefined" && SCORED.rings) {
+      var sortedRings = SCORED.rings.slice().sort(function(a, b) {
+        return (b.expected_loss || 0) - (a.expected_loss || 0);
+      });
+      sortedRings.forEach(function(r) {
+        var opt = document.createElement("option");
+        opt.value = r.ring_id;
+        var cr = ((r.expected_loss || 0) / 10000000).toFixed(1);
+        opt.textContent = r.ring_id + " · " + (r.aggregate || 0).toFixed(2) + " · ₹" + cr + " Cr (" + (r.closure_type || "").toUpperCase() + ")";
+        ringSelect.appendChild(opt);
+      });
+    }
+
+    // Node coordinate lookup
+    var nodePos = {};
+    BACKDROP.nodes.forEach(function(n) {
+      nodePos[n.id] = { x: n.x, y: n.y, industry_class: n.industry_class };
+    });
+
+    // Pair value lookup
+    var pairValues = {};
+    Object.values(allInvoices).forEach(function(inv) {
+      var k1 = inv.from + "->" + inv.to;
+      var k2 = inv.to + "->" + inv.from;
+      pairValues[k1] = (pairValues[k1] || 0) + (inv.value || 0);
+      pairValues[k2] = (pairValues[k2] || 0) + (inv.value || 0);
+    });
+
+    // Ring hops lookup
+    var ringHopsMap = {};
+    var ringEntitiesMap = {};
+    (typeof SCORED !== "undefined" && SCORED.rings ? SCORED.rings : []).forEach(function(r) {
+      (r.entities || []).forEach(function(e) {
+        ringEntitiesMap[e] = true;
+      });
+      (r.hops || []).forEach(function(h) {
+        var k = h.from + "->" + h.to;
+        ringHopsMap[k] = h;
+      });
+    });
+
+    // SVG building
+    svg.innerHTML = "";
+
+    var gZoomGroup = document.createElementNS("http://www.w3.org/2000/svg", "g");
+    gZoomGroup.setAttribute("id", "network-zoom-group");
+    svg.appendChild(gZoomGroup);
+
+    // 0. Cluster background zones
+    var gClusters = document.createElementNS("http://www.w3.org/2000/svg", "g");
+    gClusters.setAttribute("class", "layer-clusters");
+    
+    // Cluster 1 (Main Network - 50 entities)
+    var c1 = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+    c1.setAttribute("x", "40");
+    c1.setAttribute("y", "35");
+    c1.setAttribute("width", "1300");
+    c1.setAttribute("height", "1030");
+    c1.setAttribute("rx", "8");
+    c1.setAttribute("class", "cluster-bg");
+    gClusters.appendChild(c1);
+
+    var c1Title = document.createElementNS("http://www.w3.org/2000/svg", "text");
+    c1Title.setAttribute("x", "65");
+    c1Title.setAttribute("y", "68");
+    c1Title.setAttribute("class", "cluster-title");
+    c1Title.textContent = "PRIMARY INTERCONNECTED NETWORK · 50 ENTITIES";
+    gClusters.appendChild(c1Title);
+
+    // Cluster 2 (Sub-network A: E040-E045)
+    var c2 = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+    c2.setAttribute("x", "1380");
+    c2.setAttribute("y", "35");
+    c2.setAttribute("width", "380");
+    c2.setAttribute("height", "490");
+    c2.setAttribute("rx", "8");
+    c2.setAttribute("class", "cluster-bg");
+    gClusters.appendChild(c2);
+
+    var c2Title = document.createElementNS("http://www.w3.org/2000/svg", "text");
+    c2Title.setAttribute("x", "1405");
+    c2Title.setAttribute("y", "68");
+    c2Title.setAttribute("class", "cluster-title");
+    c2Title.textContent = "ISOLATED NETWORK A · 6 ENTITIES";
+    gClusters.appendChild(c2Title);
+
+    // Cluster 3 (Sub-network B: E057-E060)
+    var c3 = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+    c3.setAttribute("x", "1380");
+    c3.setAttribute("y", "560");
+    c3.setAttribute("width", "380");
+    c3.setAttribute("height", "505");
+    c3.setAttribute("rx", "8");
+    c3.setAttribute("class", "cluster-bg");
+    gClusters.appendChild(c3);
+
+    var c3Title = document.createElementNS("http://www.w3.org/2000/svg", "text");
+    c3Title.setAttribute("x", "1405");
+    c3Title.setAttribute("y", "593");
+    c3Title.setAttribute("class", "cluster-title");
+    c3Title.textContent = "ISOLATED NETWORK B · 4 ENTITIES";
+    gClusters.appendChild(c3Title);
+
+    gZoomGroup.appendChild(gClusters);
+
+    var gEdges = document.createElementNS("http://www.w3.org/2000/svg", "g");
+    gEdges.setAttribute("class", "layer-edges");
+    gZoomGroup.appendChild(gEdges);
+
+    var gNodes = document.createElementNS("http://www.w3.org/2000/svg", "g");
+    gNodes.setAttribute("class", "layer-nodes");
+    gZoomGroup.appendChild(gNodes);
+
+    // 1. Trade edges (162)
+    (BACKDROP.edges || []).forEach(function(e) {
+      var p1 = nodePos[e.from];
+      var p2 = nodePos[e.to];
+      if (!p1 || !p2) return;
+
+      var val = pairValues[e.from + "->" + e.to] || 0;
+      var sw = val > 50000000 ? 2.2 : (val > 10000000 ? 1.4 : 0.7);
+
+      var line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+      line.setAttribute("x1", p1.x);
+      line.setAttribute("y1", p1.y);
+      line.setAttribute("x2", p2.x);
+      line.setAttribute("y2", p2.y);
+      line.setAttribute("stroke-width", sw);
+      line.setAttribute("class", "backdrop-edge trade-edge");
+      line.setAttribute("data-from", e.from);
+      line.setAttribute("data-to", e.to);
+      line.setAttribute("data-pair", e.from + "->" + e.to);
+      gEdges.appendChild(line);
+    });
+
+    // 2. Ring edges (68 distinct hops)
+    Object.keys(ringHopsMap).forEach(function(k) {
+      var h = ringHopsMap[k];
+      var p1 = nodePos[h.from];
+      var p2 = nodePos[h.to];
+      if (!p1 || !p2) return;
+
+      var line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+      line.setAttribute("x1", p1.x);
+      line.setAttribute("y1", p1.y);
+      line.setAttribute("x2", p2.x);
+      line.setAttribute("y2", p2.y);
+      line.setAttribute("class", h.hop_type === "corporate_bridge" ? "hop-bridge ring-edge" : "ring-edge");
+      line.setAttribute("data-from", h.from);
+      line.setAttribute("data-to", h.to);
+      line.setAttribute("data-pair", h.from + "->" + h.to);
+      gEdges.appendChild(line);
+    });
+
+    // 3. Director edges (6)
+    (BACKDROP.director_edges || []).forEach(function(de) {
+      var p1 = nodePos[de.from];
+      var p2 = nodePos[de.to];
+      if (!p1 || !p2) return;
+
+      var line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+      line.setAttribute("x1", p1.x);
+      line.setAttribute("y1", p1.y);
+      line.setAttribute("x2", p2.x);
+      line.setAttribute("y2", p2.y);
+      line.setAttribute("class", "director-edge");
+      line.setAttribute("data-from", de.from);
+      line.setAttribute("data-to", de.to);
+      line.setAttribute("data-din", de.din);
+      gEdges.appendChild(line);
+    });
+
+    // 4. Nodes (60)
+    var indColors = {
+      distribution: "#b6a172",
+      manufacturing: "#c17a35",
+      trading: "#b5555f",
+      services: "#8b93a3"
+    };
+
+    BACKDROP.nodes.forEach(function(n) {
+      var e = typeof ENTITIES !== "undefined" ? ENTITIES[n.id] : null;
+      var st = entityIndex[n.id] || { rings: [], expectedLoss: 0, invoiceValue: 0, invoiceCount: 0 };
+      var rCount = st.rings.length;
+      var r = Math.max(5.0, Math.min(17.0, 4.5 + Math.sqrt(rCount) * 2.2));
+      var fill = indColors[n.industry_class] || "#8b93a3";
+
+      var g = document.createElementNS("http://www.w3.org/2000/svg", "g");
+      g.setAttribute("class", "ring-node network-node" + (rCount > 0 ? " has-rings" : ""));
+      g.setAttribute("data-id", n.id);
+      g.setAttribute("data-industry", n.industry_class);
+
+      var circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+      circle.setAttribute("cx", n.x);
+      circle.setAttribute("cy", n.y);
+      circle.setAttribute("r", r);
+      circle.setAttribute("fill", fill);
+      if (rCount > 0) {
+        circle.setAttribute("class", "node-circle");
+      } else {
+        circle.setAttribute("class", "backdrop-node");
+        circle.setAttribute("stroke", "rgba(255,255,255,0.18)");
+        circle.setAttribute("stroke-width", "1");
+      }
+      g.appendChild(circle);
+
+      var title = document.createElementNS("http://www.w3.org/2000/svg", "title");
+      title.textContent = (e ? e.name : n.id) + " (" + n.id + ")\n" +
+        "Industry: " + n.industry_class.toUpperCase() + "\n" +
+        "Flagged Rings: " + rCount + "\n" +
+        "Expected Loss: ₹" + (st.expectedLoss / 10000000).toFixed(2) + " Cr\n" +
+        "Observed Volume: ₹" + (st.invoiceValue / 10000000).toFixed(2) + " Cr";
+      g.appendChild(title);
+
+      // Render crisp entity ID label for all nodes
+      var text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+      text.setAttribute("x", n.x);
+      text.setAttribute("y", n.y - r - 4);
+      text.setAttribute("class", "node-label");
+      text.setAttribute("text-anchor", "middle");
+      text.textContent = n.id;
+      g.appendChild(text);
+
+      gNodes.appendChild(g);
+    });
+
+    // --- INTERACTIVE PAN & ZOOM ---
+    var zoomLevel = 1.0;
+    var panX = 0;
+    var panY = 0;
+    var isPanning = false;
+    var startMouseX = 0;
+    var startMouseY = 0;
+    var startPanX = 0;
+    var startPanY = 0;
+
+    function applyTransform() {
+      if (gZoomGroup) {
+        gZoomGroup.setAttribute("transform", "translate(" + panX.toFixed(1) + "," + panY.toFixed(1) + ") scale(" + zoomLevel.toFixed(3) + ")");
+      }
+      var valEl = document.getElementById("net-zoom-val");
+      if (valEl) {
+        valEl.textContent = Math.round(zoomLevel * 100) + "%";
+      }
+    }
+
+    function setZoom(newZoom, originX, originY) {
+      var clamped = Math.max(0.4, Math.min(3.5, newZoom));
+      if (originX !== undefined && originY !== undefined) {
+        var scaleRatio = clamped / zoomLevel;
+        panX = originX - (originX - panX) * scaleRatio;
+        panY = originY - (originY - panY) * scaleRatio;
+      }
+      zoomLevel = clamped;
+      applyTransform();
+    }
+
+    var btnZoomIn = document.getElementById("net-zoom-in");
+    if (btnZoomIn) btnZoomIn.onclick = function() { setZoom(zoomLevel * 1.25, 900, 550); };
+
+    var btnZoomOut = document.getElementById("net-zoom-out");
+    if (btnZoomOut) btnZoomOut.onclick = function() { setZoom(zoomLevel / 1.25, 900, 550); };
+
+    var btnZoomReset = document.getElementById("net-zoom-reset");
+    if (btnZoomReset) btnZoomReset.onclick = function() {
+      zoomLevel = 1.0;
+      panX = 0;
+      panY = 0;
+      applyTransform();
+    };
+
+    svg.onwheel = function(e) {
+      e.preventDefault();
+      var rect = svg.getBoundingClientRect();
+      var mouseSvgX = ((e.clientX - rect.left) / rect.width) * 1800;
+      var mouseSvgY = ((e.clientY - rect.top) / rect.height) * 1100;
+      var factor = e.deltaY < 0 ? 1.15 : 0.87;
+      setZoom(zoomLevel * factor, mouseSvgX, mouseSvgY);
+    };
+
+    svg.onmousedown = function(e) {
+      if (e.target.closest && e.target.closest(".network-node")) return;
+      isPanning = true;
+      startMouseX = e.clientX;
+      startMouseY = e.clientY;
+      startPanX = panX;
+      startPanY = panY;
+      svg.style.cursor = "grabbing";
+    };
+
+    window.addEventListener("mousemove", function(e) {
+      if (!isPanning) return;
+      var rect = svg.getBoundingClientRect();
+      var scaleX = 1800 / (rect.width || 1800);
+      var scaleY = 1100 / (rect.height || 1100);
+      panX = startPanX + (e.clientX - startMouseX) * scaleX;
+      panY = startPanY + (e.clientY - startMouseY) * scaleY;
+      applyTransform();
+    });
+
+    window.addEventListener("mouseup", function() {
+      if (isPanning) {
+        isPanning = false;
+        svg.style.cursor = "default";
       }
     });
+
+    // Interaction functions
+    var activeFocusNode = null;
+
+    function resetFocus() {
+      activeFocusNode = null;
+      svg.querySelectorAll(".network-node").forEach(function(el) {
+        el.classList.remove("selected", "node-dimmed");
+      });
+      svg.querySelectorAll("line").forEach(function(el) {
+        el.classList.remove("edge-dimmed", "edge-connected");
+      });
+      if (rail) {
+        rail.classList.add("hidden");
+        rail.innerHTML = "";
+      }
+      if (ringSelect) ringSelect.value = "";
+    }
+    window.resetNetworkFocus = resetFocus;
+
+    function highlightNode(entityId) {
+      activeFocusNode = entityId;
+      var e = typeof ENTITIES !== "undefined" ? ENTITIES[entityId] : null;
+      if (!e) return;
+      var st = entityIndex[entityId] || { rings: [], expectedLoss: 0, invoiceValue: 0, invoiceCount: 0, aggSum: 0 };
+
+      // Find neighbors
+      var neighbors = {};
+      neighbors[entityId] = true;
+      svg.querySelectorAll("line").forEach(function(line) {
+        var from = line.getAttribute("data-from");
+        var to = line.getAttribute("data-to");
+        if (from === entityId) {
+          neighbors[to] = true;
+          line.classList.remove("edge-dimmed");
+          line.classList.add("edge-connected");
+        } else if (to === entityId) {
+          neighbors[from] = true;
+          line.classList.remove("edge-dimmed");
+          line.classList.add("edge-connected");
+        } else {
+          line.classList.add("edge-dimmed");
+          line.classList.remove("edge-connected");
+        }
+      });
+
+      svg.querySelectorAll(".network-node").forEach(function(nodeEl) {
+        var id = nodeEl.getAttribute("data-id");
+        if (id === entityId) {
+          nodeEl.classList.add("selected");
+          nodeEl.classList.remove("node-dimmed");
+        } else if (neighbors[id]) {
+          nodeEl.classList.remove("node-dimmed", "selected");
+        } else {
+          nodeEl.classList.add("node-dimmed");
+          nodeEl.classList.remove("selected");
+        }
+      });
+
+      // Populate Rail
+      if (rail) {
+        rail.classList.remove("hidden");
+        var avgAgg = st.rings.length > 0 ? (st.aggSum / st.rings.length).toFixed(2) : "—";
+        var rHtml = "";
+        rHtml += "<div class='detail-header'>";
+        rHtml += "<div class='detail-title'>" + e.name + " <span class='mono' style='font-size:12px; color:var(--text-muted);'>(" + entityId + ")</span></div>";
+        rHtml += "<div class='detail-subtitle'>INDUSTRY: " + (e.industry_class || "").toUpperCase() + " | NIC: " + (e.industry_code || "N/A") + "</div>";
+        rHtml += "</div>";
+
+        rHtml += "<div class='trail-stat-group' style='margin-bottom:12px;'>";
+        rHtml += "<div class='trail-stat'><span class='ts-label'>INVOICES</span><span class='ts-val mono'>" + st.invoiceCount + "</span></div>";
+        rHtml += "<div class='trail-stat'><span class='ts-label'>RINGS</span><span class='ts-val mono' style='" + (st.rings.length > 0 ? "color:var(--risk-coral); font-weight:700;" : "") + "'>" + st.rings.length + "</span></div>";
+        rHtml += "<div class='trail-stat'><span class='ts-label'>EXP LOSS</span><span class='ts-val risk mono'>₹" + (st.expectedLoss / 10000000).toFixed(2) + " Cr</span></div>";
+        rHtml += "<div class='trail-stat'><span class='ts-label'>AVG AGG</span><span class='ts-val mono'>" + avgAgg + "</span></div>";
+        rHtml += "</div>";
+
+        if (st.rings.length > 0) {
+          rHtml += "<div class='rail-section'><h4>Flagged Rings (" + st.rings.length + ")</h4><div style='display:flex; flex-wrap:wrap; gap:6px;'>";
+          st.rings.forEach(function(rId) {
+            rHtml += "<button class='btn' onclick='window.viewRing(\"" + rId + "\")'>" + rId + "</button>";
+          });
+          rHtml += "</div></div>";
+        }
+
+        // Top 5 counterparties
+        var cpMap = {};
+        Object.values(allInvoices).forEach(function(inv) {
+          if (inv.from === entityId) cpMap[inv.to] = (cpMap[inv.to] || 0) + (inv.value || 0);
+          if (inv.to === entityId) cpMap[inv.from] = (cpMap[inv.from] || 0) + (inv.value || 0);
+        });
+        var sortedCps = Object.keys(cpMap).sort(function(a, b) { return cpMap[b] - cpMap[a]; }).slice(0, 5);
+        if (sortedCps.length > 0) {
+          rHtml += "<div class='rail-section'><h4>Top Trade Counterparties</h4><div style='display:flex; flex-direction:column; gap:6px;'>";
+          sortedCps.forEach(function(cpId) {
+            var cpE = ENTITIES[cpId];
+            var cpName = cpE ? cpE.name : "Unknown";
+            rHtml += "<div style='display:flex; justify-content:space-between; align-items:center; font-family:var(--font-mono); font-size:10px;'>" +
+              "<span class='clickable' onclick='window.highlightNetworkNode(\"" + cpId + "\")' style='color:var(--accent-teal);'>" + cpId + " " + cpName + "</span>" +
+              "<span>₹" + (cpMap[cpId] / 10000000).toFixed(2) + " Cr</span>" +
+              "</div>";
+          });
+          rHtml += "</div></div>";
+        }
+
+        // Corporate director links
+        var coLinks = [];
+        if (e.directors) {
+          e.directors.forEach(function(d) {
+            Object.values(ENTITIES).forEach(function(other) {
+              if (other.id !== entityId && other.directors && other.directors.indexOf(d) !== -1) {
+                coLinks.push({ din: d, otherId: other.id, otherName: other.name });
+              }
+            });
+          });
+        }
+        if (coLinks.length > 0) {
+          rHtml += "<div class='rail-section'><h4>Shared Director Relationships</h4><div style='display:flex; flex-direction:column; gap:6px;'>";
+          coLinks.forEach(function(cl) {
+            rHtml += "<div style='font-size:10px; font-family:var(--font-mono);'>" +
+              "<span class='ti-badge corp' style='margin-right:6px;'>DIN " + cl.din + "</span>" +
+              "<span class='clickable' onclick='window.highlightNetworkNode(\"" + cl.otherId + "\")' style='color:var(--warn-amber);'>" + cl.otherId + " " + cl.otherName + "</span>" +
+              "</div>";
+          });
+          rHtml += "</div></div>";
+        }
+
+        rHtml += "<div style='margin-top:12px; display:flex; gap:8px;'>";
+        rHtml += "<button class='btn primary-action' style='flex:1;' onclick='window.openEntity(\"" + entityId + "\")'>VIEW FULL DETAIL</button>";
+        rHtml += "<button class='btn' onclick='window.resetNetworkFocus()'>CLOSE RAIL</button>";
+        rHtml += "</div>";
+
+        rail.innerHTML = rHtml;
+      }
+    }
+    window.highlightNetworkNode = highlightNode;
+
+    function highlightRing(ringId) {
+      if (!ringId) {
+        resetFocus();
+        return;
+      }
+      var ring = (SCORED.rings || []).find(function(r) { return r.ring_id === ringId; });
+      if (!ring) return;
+
+      var ringEnts = {};
+      (ring.entities || []).forEach(function(id) { ringEnts[id] = true; });
+
+      var ringHopPairs = {};
+      (ring.hops || []).forEach(function(h) {
+        ringHopPairs[h.from + "->" + h.to] = true;
+      });
+
+      svg.querySelectorAll(".network-node").forEach(function(nodeEl) {
+        var id = nodeEl.getAttribute("data-id");
+        if (ringEnts[id]) {
+          nodeEl.classList.remove("node-dimmed");
+          nodeEl.classList.add("selected");
+        } else {
+          nodeEl.classList.add("node-dimmed");
+          nodeEl.classList.remove("selected");
+        }
+      });
+
+      svg.querySelectorAll("line").forEach(function(line) {
+        var from = line.getAttribute("data-from");
+        var to = line.getAttribute("data-to");
+        if (ringHopPairs[from + "->" + to]) {
+          line.classList.remove("edge-dimmed");
+          line.classList.add("edge-connected");
+        } else {
+          line.classList.add("edge-dimmed");
+          line.classList.remove("edge-connected");
+        }
+      });
+
+      if (rail) {
+        rail.classList.remove("hidden");
+        var rHtml = "<div class='detail-header'>";
+        rHtml += "<div class='detail-title'>" + ring.ring_id + " <span class='rh-type' style='font-size:10px; margin-left:6px;'>" + ring.closure_type.toUpperCase() + "</span></div>";
+        rHtml += "<div class='detail-subtitle'>CANONICAL: " + (ring.canonical_key || "") + "</div>";
+        rHtml += "</div>";
+
+        rHtml += "<div class='trail-stat-group' style='margin-bottom:12px;'>";
+        rHtml += "<div class='trail-stat'><span class='ts-label'>EXPECTED LOSS</span><span class='ts-val risk mono'>₹" + ((ring.expected_loss||0)/10000000).toFixed(2) + " Cr</span></div>";
+        rHtml += "<div class='trail-stat'><span class='ts-label'>AGGREGATE</span><span class='ts-val mono'>" + (ring.aggregate||0).toFixed(2) + "</span></div>";
+        rHtml += "<div class='trail-stat'><span class='ts-label'>ENTITIES</span><span class='ts-val mono'>" + (ring.entities||[]).length + "</span></div>";
+        rHtml += "<div class='trail-stat'><span class='ts-label'>HOPS</span><span class='ts-val mono'>" + (ring.hops||[]).length + "</span></div>";
+        rHtml += "</div>";
+
+        rHtml += "<div class='rail-section'><h4>Component Signals</h4>";
+        var sc = ring.scores || {};
+        SIGNALS.forEach(function(sig) {
+          var val = sc[sig];
+          var valStr = val !== null && val !== undefined ? val.toFixed(2) : "Abstained";
+          rHtml += "<div class='score-row' style='margin-bottom:4px;'><span class='sig-name' style='text-transform:uppercase;'>" + sig + "</span><span class='mono' style='text-align:right; font-weight:600;'>" + valStr + "</span></div>";
+        });
+        rHtml += "</div>";
+
+        if (ring.evidence) {
+          rHtml += "<div class='rail-section'><h4>Forensic Evidence Strings</h4><div style='display:flex; flex-direction:column; gap:6px; font-size:10px;'>";
+          for (var evKey in ring.evidence) {
+            rHtml += "<div><span class='mono' style='color:var(--text-muted); font-weight:600; text-transform:uppercase;'>" + evKey + ":</span> " + ring.evidence[evKey] + "</div>";
+          }
+          rHtml += "</div></div>";
+        }
+
+        rHtml += "<div style='margin-top:12px; display:flex; gap:8px;'>";
+        rHtml += "<button class='btn primary-action' style='flex:1;' onclick='window.viewRing(\"" + ring.ring_id + "\")'>VIEW IN QUEUE</button>";
+        rHtml += "<button class='btn' onclick='window.resetNetworkFocus()'>RESET VIEW</button>";
+        rHtml += "</div>";
+
+        rail.innerHTML = rHtml;
+      }
+    }
+
+    // Node hover & click listeners
+    svg.querySelectorAll(".network-node").forEach(function(nodeEl) {
+      var id = nodeEl.getAttribute("data-id");
+      nodeEl.addEventListener("mouseenter", function() {
+        if (activeFocusNode || (ringSelect && ringSelect.value)) return;
+        svg.querySelectorAll("line").forEach(function(line) {
+          var from = line.getAttribute("data-from");
+          var to = line.getAttribute("data-to");
+          if (from === id || to === id) {
+            line.classList.remove("edge-dimmed");
+            line.classList.add("edge-connected");
+          } else {
+            line.classList.add("edge-dimmed");
+          }
+        });
+      });
+      nodeEl.addEventListener("mouseleave", function() {
+        if (activeFocusNode || (ringSelect && ringSelect.value)) return;
+        svg.querySelectorAll("line").forEach(function(line) {
+          line.classList.remove("edge-dimmed", "edge-connected");
+        });
+      });
+      nodeEl.addEventListener("click", function(ev) {
+        ev.stopPropagation();
+        highlightNode(id);
+      });
+    });
+
+    // Control bar listeners
+    if (ringSelect) {
+      ringSelect.onchange = function() {
+        highlightRing(ringSelect.value);
+      };
+    }
+
+    if (indSelect) {
+      indSelect.onchange = function() {
+        var ind = indSelect.value;
+        svg.querySelectorAll(".network-node").forEach(function(nodeEl) {
+          var nodeInd = nodeEl.getAttribute("data-industry");
+          if (ind === "all" || nodeInd === ind) {
+            nodeEl.classList.remove("node-dimmed");
+          } else {
+            nodeEl.classList.add("node-dimmed");
+          }
+        });
+      };
+    }
+
+    if (btnTrade) {
+      btnTrade.onclick = function() {
+        var isPressed = btnTrade.getAttribute("aria-pressed") === "true";
+        btnTrade.setAttribute("aria-pressed", !isPressed ? "true" : "false");
+        btnTrade.classList.toggle("active", !isPressed);
+        svg.classList.toggle("hide-trade", isPressed);
+      };
+    }
+
+    if (btnCorp) {
+      btnCorp.onclick = function() {
+        var isPressed = btnCorp.getAttribute("aria-pressed") === "true";
+        btnCorp.setAttribute("aria-pressed", !isPressed ? "true" : "false");
+        btnCorp.classList.toggle("active", !isPressed);
+        svg.classList.toggle("hide-corporate", isPressed);
+      };
+    }
+
+    if (btnFlagged) {
+      btnFlagged.onclick = function() {
+        var isPressed = btnFlagged.getAttribute("aria-pressed") === "true";
+        btnFlagged.setAttribute("aria-pressed", !isPressed ? "true" : "false");
+        btnFlagged.classList.toggle("active", !isPressed);
+        svg.classList.toggle("flagged-only", !isPressed);
+      };
+    }
+
+    if (btnReset) {
+      btnReset.onclick = function() {
+        resetFocus();
+        if (indSelect) indSelect.value = "all";
+        svg.classList.remove("hide-trade", "hide-corporate", "flagged-only");
+        if (btnTrade) { btnTrade.setAttribute("aria-pressed", "true"); btnTrade.classList.add("active"); }
+        if (btnCorp) { btnCorp.setAttribute("aria-pressed", "true"); btnCorp.classList.add("active"); }
+        if (btnFlagged) { btnFlagged.setAttribute("aria-pressed", "false"); btnFlagged.classList.remove("active"); }
+        svg.querySelectorAll(".network-node").forEach(function(el) { el.classList.remove("node-dimmed", "selected"); });
+      };
+    }
   }
 
   setupTabs();
-  // DEFERRED TO AVOID ANIMATION LAG
-  window.initializeOuroboros = function() { renderLedger(); render(); };
-
-document.addEventListener("click", function(e) {
-  var imodal = document.getElementById("invoice-modal");
-  if (imodal && !imodal.classList.contains("hidden") && e.target === imodal) {
-    imodal.classList.add("hidden");
-  }
-  var emodal = document.getElementById("entity-modal");
-  if (emodal && !emodal.classList.contains("hidden") && e.target === emodal) {
-    emodal.classList.add("hidden");
-  }
-  var amodal = document.getElementById("add-invoice-modal");
-  if (amodal && !amodal.classList.contains("hidden") && e.target === amodal) {
-    amodal.classList.add("hidden");
-  }
-});
+  renderLedger();
+  renderDirectory();
+  renderNetwork();
+  render();
 
 })();
