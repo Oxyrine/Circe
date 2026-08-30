@@ -14,6 +14,7 @@ def _load(path):
         return json.load(f)
 
 def _compute_force_layout(nodes, edges):
+    random.seed(42)  # fixed seed for deterministic output (CI diff check requires this)
     adj = {n["id"]: [] for n in nodes}
     for e in edges:
         adj[e["from"]].append(e["to"])
