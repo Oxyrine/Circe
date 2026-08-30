@@ -16,7 +16,65 @@ function getAllInvoices() {
   return Object.assign({}, typeof INVOICES !== "undefined" ? INVOICES : {}, window.INVESTIGATOR_INVOICES);
 }
 
+// HS codes are transcribed from real invoices, not fabricated: there is no NIC<->HS
+// concordance table anywhere in this codebase (scoring.py's evidence() abstains on
+// exactly this comparison), so this only ever surfaces codes that already appear on
+// invoices from entities of the same industry_class -- a dataset-derived autocomplete
+// convenience, never a "correct code" or a consistency check.
+function hsCodesForIndustry(industryClass) {
+  var counts = {};
+  Object.values(getAllInvoices()).forEach(function(inv) {
+    if (!inv.hs_code) return;
+    var seller = ENTITIES[inv.from];
+    if (seller && seller.industry_class === industryClass) {
+      counts[inv.hs_code] = (counts[inv.hs_code] || 0) + 1;
+    }
+  });
+  return Object.keys(counts).sort(function(a, b) { return counts[b] - counts[a]; });
+}
+
+function clearChildren(el) {
+  while (el.firstChild) el.removeChild(el.firstChild);
+}
+
+function updateHsSuggestions() {
+  var sellerInput = document.getElementById("add-inv-seller");
+  var datalist = document.getElementById("hs-datalist");
+  var hint = document.getElementById("add-inv-hs-hint");
+  if (!sellerInput || !datalist || typeof ENTITIES === "undefined") return;
+  var seller = ENTITIES[sellerInput.value.trim()];
+  clearChildren(datalist);
+  if (!seller) {
+    if (hint) hint.textContent = "";
+    return;
+  }
+  var codes = hsCodesForIndustry(seller.industry_class);
+  codes.forEach(function(code) {
+    var opt = document.createElement("option");
+    opt.value = code;
+    datalist.appendChild(opt);
+  });
+  if (hint) {
+    hint.textContent = codes.length
+      ? "Commonly used for " + seller.industry_class.toUpperCase() + " in this dataset — not a correctness check."
+      : "No prior " + seller.industry_class.toUpperCase() + " invoices in this dataset to suggest from.";
+  }
+}
+
 document.addEventListener("DOMContentLoaded", function() {
+  var entityDatalist = document.getElementById("entity-ids");
+  if (entityDatalist && typeof ENTITIES !== "undefined") {
+    Object.keys(ENTITIES).sort().forEach(function(id) {
+      var opt = document.createElement("option");
+      opt.value = id;
+      opt.label = ENTITIES[id].name;
+      entityDatalist.appendChild(opt);
+    });
+  }
+
+  var sellerInput = document.getElementById("add-inv-seller");
+  if (sellerInput) sellerInput.addEventListener("input", updateHsSuggestions);
+
   var btn = document.getElementById("add-invoice-btn");
   if (btn) btn.onclick = function() {
     document.getElementById("add-inv-error").style.display = "none";
@@ -27,6 +85,7 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("add-inv-date").value = "";
     document.getElementById("add-inv-hs").value = "";
     document.getElementById("add-inv-discounting").value = "";
+    updateHsSuggestions();
     document.getElementById("add-invoice-modal").classList.remove("hidden");
   };
 
@@ -58,8 +117,13 @@ window.submitAddInvoice = function() {
   var hs = document.getElementById("add-inv-hs").value.trim();
   var disc = document.getElementById("add-inv-discounting").value;
 
-  if (!id || !seller || !buyer || isNaN(val) || !date) {
+  if (!id || !seller || !buyer || isNaN(val) || !date || !hs) {
     err.textContent = "Please fill in all required fields.";
+    err.style.display = "block";
+    return;
+  }
+  if (!/^\d{6,8}$/.test(hs)) {
+    err.textContent = "HS code must be 6-8 digits.";
     err.style.display = "block";
     return;
   }
@@ -97,7 +161,7 @@ window.submitAddInvoice = function() {
     to: buyer,
     value: val,
     invoice_date: date,
-    hs_code: hs || undefined,
+    hs_code: hs,
     discounting_date: disc || undefined,
     _source: "investigator"
   };
@@ -1102,8 +1166,6 @@ window.removeInvestigatorInvoice = function(id) {
         var matchesFilter = true;
         if (filter === "has-hs") matchesFilter = !!inv.hs_code;
         else if (filter === "missing-hs") matchesFilter = !inv.hs_code;
-        else if (filter === "discounted") matchesFilter = !!inv.discounting_date;
-        else if (filter === "not-discounted") matchesFilter = !inv.discounting_date;
         else if (filter === "dataset") matchesFilter = !isCustom;
         else if (filter === "investigator") matchesFilter = isCustom;
 
