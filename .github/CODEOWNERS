@@ -14,6 +14,10 @@
 # CI + this file itself
 /.github/     @person-b
 
+# Static investigator-console wireframe — separate from demo/, no overlap
+# with C's territory. See console/README.md.
+/console/     @person-b
+
 # artifacts/*.json is committed, not gitignored (the decoupling
 # mechanism — see WIRE_PROTOCOL.md §2), so single-writer ownership here
 # matters more than almost anywhere else in the repo.
