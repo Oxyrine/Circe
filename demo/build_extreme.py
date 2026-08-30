@@ -1,13 +1,8 @@
-import argparse
-import json
-import sys
 import math
 import random
+import json
+import sys
 from pathlib import Path
-
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-
-from contract.validate import validate_file  # noqa: E402
 
 def _load(path):
     with open(path, encoding="utf-8") as f:
@@ -44,25 +39,38 @@ def _compute_force_layout(nodes, edges):
     
     # 1800x1100 Canvas Zones
     zones = [
-        {"cx": 700, "cy": 550, "w": 1300, "h": 1030}, # Primary network gets massive area
-        {"cx": 1600, "cy": 250, "w": 380, "h": 500},  # Iso A
-        {"cx": 1600, "cy": 850, "w": 380, "h": 500}   # Iso B
+        {"cx": 650, "cy": 550, "w": 1300, "h": 1030}, # Center it more to the left so it fills the box
+        {"cx": 1600, "cy": 250, "w": 380, "h": 500},  
+        {"cx": 1600, "cy": 850, "w": 380, "h": 500}   
     ]
     
     node_lookup = {n["id"]: n for n in nodes}
     
     for c_idx, comp_node_ids in enumerate(components):
         zone = zones[c_idx] if c_idx < len(zones) else zones[0]
-        for nid in comp_node_ids:
-            # Spread initial positions much wider so they don't start in a knot
-            node_lookup[nid]["x"] = zone["cx"] + (random.random() - 0.5) * 800
-            node_lookup[nid]["y"] = zone["cy"] + (random.random() - 0.5) * 600
-            node_lookup[nid]["vx"] = 0
-            node_lookup[nid]["vy"] = 0
+        
+        # Grid initialization for primary network to guarantee spread before physics
+        if c_idx == 0:
+            grid_cols = math.ceil(math.sqrt(len(comp_node_ids)))
+            grid_spacing = 900 / grid_cols
+            start_x = zone["cx"] - 450
+            start_y = zone["cy"] - 450
+            for i, nid in enumerate(comp_node_ids):
+                r, c = divmod(i, grid_cols)
+                node_lookup[nid]["x"] = start_x + c * grid_spacing + (random.random()-0.5)*50
+                node_lookup[nid]["y"] = start_y + r * grid_spacing + (random.random()-0.5)*50
+                node_lookup[nid]["vx"] = 0
+                node_lookup[nid]["vy"] = 0
+        else:
+            for nid in comp_node_ids:
+                node_lookup[nid]["x"] = zone["cx"] + (random.random() - 0.5) * 200
+                node_lookup[nid]["y"] = zone["cy"] + (random.random() - 0.5) * 200
+                node_lookup[nid]["vx"] = 0
+                node_lookup[nid]["vy"] = 0
 
-        ITERATIONS = 500
+        ITERATIONS = 800
         for i in range(ITERATIONS):
-            # 1. Degree-Weighted Core Blossom Physics
+            # Repulsion
             for nid1 in comp_node_ids:
                 for nid2 in comp_node_ids:
                     if nid1 == nid2: continue
@@ -73,11 +81,9 @@ def _compute_force_layout(nodes, edges):
                     dist = math.hypot(dx, dy)
                     if dist < 0.1: dx, dy, dist = (random.random()-0.5), (random.random()-0.5), 0.1
                     
-                    # Massive repulsion to blow the core apart (F_rep = deg_u * deg_v * 22.0 * scalar)
-                    force = (n1["degree"] * n2["degree"] * 60.0) / (dist * dist)
-                    # Global repulsion to ensure it expands widely
-                    force += 1500.0 / (dist * dist)
-
+                    # VERY strong repulsion for primary to blow it wide open
+                    force = 8000.0 / (dist * dist) 
+                    
                     fx = (dx / dist) * force
                     fy = (dy / dist) * force
                     n1["vx"] += fx
@@ -85,7 +91,7 @@ def _compute_force_layout(nodes, edges):
                     n2["vx"] -= fx
                     n2["vy"] -= fy
 
-            # 2. Attraction
+            # Attraction
             for e in edges:
                 u, v = e["from"], e["to"]
                 if u in comp_node_ids and v in comp_node_ids:
@@ -95,10 +101,11 @@ def _compute_force_layout(nodes, edges):
                     dy = n1["y"] - n2["y"]
                     dist = math.hypot(dx, dy)
                     
-                    # L0 = 110px + 3.5(deg_u + deg_v)
-                    L0 = 150 + 8.5 * (n1["degree"] + n2["degree"])
+                    L0 = 200 # Target edge length
                     
-                    force = 0.02 * (dist - L0) # Weaker attraction so repulsion wins
+                    # Weaker attraction
+                    force = 0.005 * (dist - L0)
+                    if dist < L0: force = 0 # Don't pull them closer than L0
                     fx = (dx / dist) * force
                     fy = (dy / dist) * force
                     n1["vx"] -= fx
@@ -106,22 +113,22 @@ def _compute_force_layout(nodes, edges):
                     n2["vx"] += fx
                     n2["vy"] += fy
             
-            # 3. Very Weak Central gravity just to prevent infinite drift
+            # Central gravity to keep it in zone
             for nid in comp_node_ids:
                 n = node_lookup[nid]
-                n["vx"] += (zone["cx"] - n["x"]) * 0.001
-                n["vy"] += (zone["cy"] - n["y"]) * 0.001
+                n["vx"] += (zone["cx"] - n["x"]) * 0.0005
+                n["vy"] += (zone["cy"] - n["y"]) * 0.0005
                 
-            # Velocity update
             for nid in comp_node_ids:
                 n = node_lookup[nid]
                 n["x"] += n["vx"]
                 n["y"] += n["vy"]
-                n["vx"] *= 0.6 # High friction to stabilize
+                n["vx"] *= 0.6
                 n["vy"] *= 0.6
                 
-        # 4. Hard Anti-Collision Relaxation (150 iterations, >= 120px clearance)
-        for _ in range(150):
+        # Hard Anti-Collision (>= 150px clearance for primary, >= 120px for others)
+        clearance = 160 if c_idx == 0 else 120
+        for _ in range(200):
             for nid1 in comp_node_ids:
                 for nid2 in comp_node_ids:
                     if nid1 >= nid2: continue
@@ -131,8 +138,6 @@ def _compute_force_layout(nodes, edges):
                     dy = n1["y"] - n2["y"]
                     dist = math.hypot(dx, dy)
                     
-                    # Compute dynamic clearance based on node sizes
-                    clearance = 120
                     if dist < clearance:
                         push = (clearance - dist) / 2
                         if dist < 0.1: dx, dy, dist = (random.random()-0.5), (random.random()-0.5), 0.1
@@ -143,62 +148,40 @@ def _compute_force_layout(nodes, edges):
                         
     return nodes
 
-def _build_backdrop(entities_path, invoices_path):
-    entities = _load(entities_path).get("entities", [])
-    invoices = _load(invoices_path).get("invoices", [])
-    nodes = [{"id": e["id"], "industry_class": e["industry_class"], "name": e.get("name", "")} for e in entities]
+def rebuild():
+    data = _load("artifacts/scored_rings.json")
+    backdrop = None
+    
+    entities_list = _load("data/entities.json").get("entities", [])
+    invoices_list = _load("data/invoices.json").get("invoices", [])
+    
+    nodes = [{"id": e["id"], "industry_class": e["industry_class"], "name": e.get("name", "")} for e in entities_list]
     seen_pairs = set()
     edges = []
     
-    for inv in invoices:
+    for inv in invoices_list:
         pair = tuple(sorted((inv["from"], inv["to"])))
         if pair in seen_pairs: continue
         seen_pairs.add(pair)
         edges.append({"from": inv["from"], "to": inv["to"], "type": "trade"})
         
-    for i in range(len(entities)):
-        for j in range(i+1, len(entities)):
-            d1 = set(entities[i].get("directors", []))
-            d2 = set(entities[j].get("directors", []))
+    for i in range(len(entities_list)):
+        for j in range(i+1, len(entities_list)):
+            d1 = set(entities_list[i].get("directors", []))
+            d2 = set(entities_list[j].get("directors", []))
             if d1.intersection(d2):
-                pair = tuple(sorted((entities[i]["id"], entities[j]["id"])))
+                pair = tuple(sorted((entities_list[i]["id"], entities_list[j]["id"])))
                 if pair not in seen_pairs:
                     seen_pairs.add(pair)
-                    edges.append({"from": entities[i]["id"], "to": entities[j]["id"], "type": "corporate"})
+                    edges.append({"from": entities_list[i]["id"], "to": entities_list[j]["id"], "type": "corporate"})
 
     nodes = _compute_force_layout(nodes, edges)
-    return {"nodes": nodes, "edges": edges}
+    backdrop = {"nodes": nodes, "edges": edges}
+    
+    entities_dict = {e["id"]: e for e in entities_list}
+    invoices_dict = {i["invoice_id"]: i for i in invoices_list}
 
-def main():
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--scored", required=True)
-    ap.add_argument("--out", required=True)
-    ap.add_argument("--entities", help="optional: compile a dimmed backdrop graph alongside SCORED")
-    ap.add_argument("--invoices", help="optional, required if --entities is given")
-    ap.add_argument("--limit", type=int, default=50)
-    args = ap.parse_args()
-
-    errors = validate_file(args.scored, "scored")
-    if errors: return 1
-
-    data = _load(args.scored)
-    if args.limit and args.limit > 0 and len(data.get("rings", [])) > args.limit:
-        sorted_rings = sorted(data.get("rings", []), key=lambda r: r.get("expected_loss", 0), reverse=True)
-        data["rings"] = sorted_rings[:args.limit]
-        data["count"] = len(data["rings"])
-
-    backdrop = None
-    entities_dict = None
-    invoices_dict = None
-
-    if args.entities and args.invoices:
-        backdrop = _build_backdrop(args.entities, args.invoices)
-        entities_list = _load(args.entities).get("entities", [])
-        invoices_list = _load(args.invoices).get("invoices", [])
-        entities_dict = {e["id"]: e for e in entities_list}
-        invoices_dict = {i["invoice_id"]: i for i in invoices_list}
-
-    with open(args.out, "w", encoding="utf-8") as f:
+    with open("demo/data.js", "w", encoding="utf-8") as f:
         f.write("const SCORED = ")
         json.dump(data, f, indent=2)
         f.write(";\nconst BACKDROP = ")
@@ -209,8 +192,6 @@ def main():
         json.dump(invoices_dict, f, indent=2)
         f.write(";\n")
         
-    print("Rebuilt Data!")
-    return 0
+    print("Rebuilt with EXTREME spreading")
 
-if __name__ == "__main__":
-    sys.exit(main())
+rebuild()

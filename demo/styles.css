@@ -1,30 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
 /* ==========================================================================
    OUROBOROS - FINANCIAL RING INTELLIGENCE 
    OPERATIONAL TERMINAL THEME
    ========================================================================== */
 
 :root {
-  --bg-base: #0a0a0c;
-  --bg-panel: #111114;
-  --bg-panel-hover: #18181c;
+  --bg-base: #030303;
+  --bg-panel: #0a0a0c;
+  --bg-panel-hover: #121216;
   
-  --border-muted: #26262a;
-  --border-active: #3a3a40;
+  --border-muted: #1c1c22;
+  --border-active: #2a2a32;
   
   --text-main: #e2e2e8;
-  --text-muted: #84848a;
+  --text-muted: #6A738A;
   --text-dark: #4b4b52;
   
-  --accent-teal: #2ebfa5;
-  --accent-teal-dim: rgba(46, 191, 165, 0.15);
+  --accent-teal: #E6C879;
+  --accent-teal-dim: rgba(230, 200, 121, 0.15);
   
-  --risk-coral: #fca5a5;
-  --risk-coral-dim: rgba(252, 165, 165, 0.15);
+  --risk-coral: #D85C5C;
+  --risk-coral-dim: rgba(216, 92, 92, 0.15);
   
-  --warn-amber: #fbbf24;
-  --warn-amber-dim: rgba(251, 191, 36, 0.15);
+  --warn-amber: #D98E48;
+  --warn-amber-dim: rgba(217, 142, 72, 0.15);
   
-  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-sans: 'Montserrat', sans-serif;
   --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, monospace;
 }
 
@@ -926,8 +927,8 @@ body {
 
 /* Hover States */
 .ring-node:hover .node-circle {
-  fill: rgba(30, 180, 160, 0.15);
-  stroke: var(#4fecd2);
+  fill: rgba(246, 214, 115, 0.15);
+  stroke: var(--accent-teal);
   stroke-width: 3px;
 }
 
@@ -1017,4 +1018,399 @@ body {
   0% { transform: scale(0.5); opacity: 0; }
   70% { transform: scale(1.1); opacity: 1; }
   100% { transform: scale(1); opacity: 1; }
+}
+
+/* ==========================================================================
+   CINEMATIC LANDING PAGE (AESTHETIC)
+   ========================================================================== */
+
+.landing-page {
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background-color: #040405; /* Pitch black */
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.8s ease, visibility 0.8s ease;
+  overflow: hidden;
+  color: #fff;
+}
+
+.landing-page.hidden-landing {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.landing-geometry {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  pointer-events: none;
+  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s ease;
+}
+
+.landing-page.transitioning .landing-geometry {
+  transform: scale(0.95);
+  opacity: 0;
+}
+
+.mono {
+  font-family: 'IBM Plex Mono', monospace;
+}
+
+/* Geometry styles matching image */
+.l-line {
+  fill: none;
+  stroke: rgba(230, 200, 121, 0.3);
+  stroke-width: 1px;
+}
+.l-line-dim {
+  fill: none;
+  stroke: rgba(230, 200, 121, 0.15);
+  stroke-width: 0.5px;
+}
+
+.l-ring {
+  fill: none;
+  stroke: rgba(230, 200, 121, 0.3);
+  stroke-width: 1px;
+}
+
+.l-ring-thick {
+  fill: none;
+  stroke: rgba(230, 200, 121, 0.8);
+  stroke-width: 2px;
+}
+
+.l-node {
+  fill: rgba(230, 200, 121, 0.7);
+  stroke: none;
+}
+
+.l-node-bright {
+  fill: #E6C879;
+  stroke: none;
+}
+
+/* Very Smooth Animations */
+@media (prefers-reduced-motion: no-preference) {
+  .p-1 { stroke-dasharray: 2000; stroke-dashoffset: 2000; animation: lSmoothDraw 2.5s cubic-bezier(0.4, 0, 0.2, 1) forwards; animation-delay: 0.4s; }
+  .p-2 { stroke-dasharray: 2000; stroke-dashoffset: 2000; animation: lSmoothDraw 2.5s cubic-bezier(0.4, 0, 0.2, 1) forwards; animation-delay: 0.6s; }
+  .p-3 { stroke-dasharray: 1000; stroke-dashoffset: 1000; animation: lSmoothDraw 2.0s cubic-bezier(0.4, 0, 0.2, 1) forwards; animation-delay: 0.8s; }
+  .p-4 { stroke-dasharray: 1000; stroke-dashoffset: 1000; animation: lSmoothDraw 2.0s cubic-bezier(0.4, 0, 0.2, 1) forwards; animation-delay: 0.8s; }
+  
+  .p-5 { stroke-dasharray: 1200; stroke-dashoffset: 1200; animation: lSmoothDraw 2.0s cubic-bezier(0.4, 0, 0.2, 1) forwards; animation-delay: 1.0s; }
+  .p-6 { stroke-dasharray: 1200; stroke-dashoffset: 1200; animation: lSmoothDraw 2.0s cubic-bezier(0.4, 0, 0.2, 1) forwards; animation-delay: 1.2s; }
+  .p-7 { stroke-dasharray: 1200; stroke-dashoffset: 1200; animation: lSmoothDraw 2.0s cubic-bezier(0.4, 0, 0.2, 1) forwards; animation-delay: 1.4s; }
+  .p-8 { stroke-dasharray: 1200; stroke-dashoffset: 1200; animation: lSmoothDraw 2.0s cubic-bezier(0.4, 0, 0.2, 1) forwards; animation-delay: 1.6s; }
+
+  .r-1 { stroke-dasharray: 2200; stroke-dashoffset: 2200; animation: lSmoothDraw 3.0s cubic-bezier(0.4, 0, 0.2, 1) forwards; animation-delay: 2.0s; }
+  .r-2 { stroke-dasharray: 1800; stroke-dashoffset: 1800; animation: lSmoothDraw 3.0s cubic-bezier(0.4, 0, 0.2, 1) forwards; animation-delay: 2.3s; }
+
+  .n-1, .n-2, .n-3, .n-4 { opacity: 0; animation: lSmoothPop 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; animation-delay: 3.5s; }
+  .n-5, .n-6, .n-7, .n-8, .n-9, .n-10 { opacity: 0; animation: lSmoothPop 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; animation-delay: 1.8s; }
+
+  .landing-title { opacity: 0; animation: lSmoothFadeUp 1.2s ease forwards; animation-delay: 3.8s; }
+  .landing-divider { transform: scaleX(0); opacity: 0; animation: lSmoothScaleX 1.0s ease forwards; animation-delay: 4.0s; }
+  .landing-subtitle { opacity: 0; animation: lSmoothFadeUp 1.2s ease forwards; animation-delay: 4.2s; }
+  .landing-btn { opacity: 0; animation: lSmoothFadeUp 1.2s ease forwards; animation-delay: 4.6s; }
+}
+
+@keyframes lSmoothDraw {
+  from { stroke-dashoffset: inherit; }
+  to { stroke-dashoffset: 0; }
+}
+@keyframes lSmoothPop {
+  0% { transform: scale(0); opacity: 0; }
+  70% { transform: scale(1.4); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+@keyframes lSmoothFadeUp {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes lSmoothScaleX {
+  from { transform: scaleX(0); opacity: 0; }
+  to { transform: scaleX(1); opacity: 1; }
+}
+
+/* Landing Content Styling - matches image */
+.landing-content {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.landing-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 110px;
+  font-weight: 800; /* Extra bold */
+  letter-spacing: 0.12em;
+  color: #E6C879;
+  margin: 0;
+  text-transform: uppercase;
+  text-shadow: 0 0 16px rgba(230, 200, 121, 0.4);
+}
+
+.landing-divider {
+  width: 140px;
+  height: 3px;
+  background-color: #E6C879;
+  margin: 16px 0 24px 0;
+  box-shadow: 0 0 8px rgba(230, 200, 121, 0.4);
+}
+
+.landing-subtitle {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.4em;
+  color: #e2e2e8;
+  margin: 0 0 50px 0;
+}
+
+.landing-cta-wrapper {
+  margin-top: 10px;
+}
+
+.landing-btn {
+  background: transparent;
+  border: 1px solid rgba(230, 200, 121, 0.4);
+  color: #E6C879;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 14px 28px;
+  letter-spacing: 0.2em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 6px;
+}
+
+.landing-btn:hover {
+  background: rgba(230, 200, 121, 0.1);
+  border-color: #E6C879;
+  box-shadow: 0 0 16px rgba(230, 200, 121, 0.25);
+  transform: translateY(-1px);
+}
+
+/* App Shell Logic */
+.app-shell {
+  opacity: 1;
+  transition: opacity 0.8s ease;
+}
+
+.app-shell.hidden-app {
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+/* HUD System Styling */
+.c-gold { color: #E6C879; }
+.c-muted { color: #444; }
+
+.hud-top {
+  position: absolute;
+  top: 32px; left: 48px; right: 48px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: #666;
+  z-index: 5;
+}
+
+.hud-bottom {
+  position: absolute;
+  bottom: 32px; left: 48px; right: 48px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  color: #444;
+  z-index: 5;
+}
+
+.hud-side {
+  position: absolute;
+  top: 50%; left: 48px;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  color: #444;
+  z-index: 5;
+}
+
+.side-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.side-item.active {
+  color: #E6C879;
+}
+
+.s-dot {
+  font-size: 12px;
+}
+.s-dot.filled {
+  color: #E6C879;
+}
+
+.side-progress {
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #E6C879;
+}
+
+.side-bar {
+  width: 140px;
+  height: 2px;
+  background-color: #222;
+  position: relative;
+  overflow: hidden;
+}
+.side-bar::after { 
+  content: ''; 
+  display: block; 
+  height: 100%; 
+  background: #E6C879; 
+  width: 0; 
+  animation: lSmoothProgress 2.5s cubic-bezier(0.4, 0, 0.2, 1) forwards; 
+  animation-delay: 1.0s; 
+}
+@keyframes lSmoothProgress {
+  0% { width: 0%; }
+  40% { width: 50%; }
+  100% { width: 100%; }
+}
+
+.hud-anim { opacity: 0; animation: lSmoothPop 1s ease forwards; animation-delay: 4.0s; }
+
+/* OUROBOROS NEW TABS CSS */
+#view-map.active {
+    display: flex !important;
+    height: calc(100vh - 60px); /* Adjust based on navbar height */
+    flex-direction: column;
+}
+#view-map > div {
+    flex: 1;
+}
+#view-directory.active {
+    display: block;
+    height: calc(100vh - 60px);
+    overflow-y: auto;
+}
+.map-toggles {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    display: flex;
+    gap: 12px;
+    background: var(--bg-card);
+    padding: 8px 16px;
+    border-radius: 4px;
+    border: 1px solid var(--border-muted);
+    font-size: 11px;
+    align-items: center;
+    color: var(--text-muted);
+    z-index: 10;
+}
+.zoom-toolbar {
+    position: absolute;
+    bottom: 16px;
+    right: 16px;
+    display: flex;
+    gap: 4px;
+    background: var(--bg-card);
+    padding: 4px;
+    border-radius: 4px;
+    border: 1px solid var(--border-muted);
+    align-items: center;
+    z-index: 10;
+}
+.zoom-toolbar .icon-btn {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    color: var(--text-main);
+    cursor: pointer;
+    font-size: 14px;
+}
+.zoom-toolbar .icon-btn:hover {
+    background: var(--bg-panel-hover);
+}
+#zoom-level {
+    font-size: 11px;
+    font-family: monospace;
+    width: 40px;
+    text-align: center;
+}
+
+/* MAP GRAPH STYLES */
+.map-node {
+    fill: var(--bg-panel);
+    stroke-width: 2px;
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transform-origin: center;
+    cursor: pointer;
+}
+.map-node:hover {
+    transform: scale(1.4);
+    fill: rgba(230, 200, 121, 0.15);
+}
+.map-node.selected {
+    fill: var(--text-main) !important;
+    transform: scale(1.3);
+    stroke: var(--text-main) !important;
+    stroke-width: 3px !important;
+    filter: drop-shadow(0 0 10px rgba(255,255,255,0.4));
+}
+.map-toggle-btn {
+    background: transparent;
+    border: 1px solid var(--border-muted);
+    color: var(--text-muted);
+    padding: 8px 12px;
+    font-size: 10px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    border-radius: 2px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+.map-toggle-btn.active {
+    background: var(--bg-panel-hover);
+    color: var(--accent-teal);
+    border-color: var(--accent-teal);
+}
+.map-toggle-btn:hover {
+    border-color: var(--text-muted);
+}
+#rail-full-detail:hover {
+    background: rgba(230, 200, 121, 0.1);
+}
+#rail-close-btn:hover {
+    background: var(--bg-panel-hover);
+}
+.rail-cp-item {
+    display: flex; justify-content: space-between; font-size: 10px; color: var(--text-muted);
+}
+.rail-cp-item .val {
+    color: var(--text-main); font-family: monospace;
 }

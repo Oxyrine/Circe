@@ -213,34 +213,6 @@ window.removeInvestigatorInvoice = function(id) {
     
     svg.appendChild(defs);
 
-    // --- dimmed backdrop ---
-    var backdropGroup = svgEl("g", { class: "backdrop" });
-    if (backdrop && backdrop.nodes && backdrop.nodes.length) {
-      var ringIds = {};
-      ring.entities.forEach(function (id) { ringIds[id] = true; });
-      var bpos = {};
-      backdrop.nodes.forEach(function (node) {
-        if (ringIds[node.id]) return;
-        bpos[node.id] = backdropPosition(node.id, size, keepOutR);
-      });
-      var edgeCount = 0;
-      (backdrop.edges || []).forEach(function (edge) {
-        if (edgeCount >= 60) return;
-        var a = bpos[edge.from], b = bpos[edge.to];
-        if (!a || !b) return;
-        edgeCount++;
-        backdropGroup.appendChild(svgEl("line", {
-          x1: a.x, y1: a.y, x2: b.x, y2: b.y, class: "backdrop-edge",
-        }));
-      });
-      Object.keys(bpos).forEach(function (id) {
-        backdropGroup.appendChild(svgEl("circle", {
-          cx: bpos[id].x, cy: bpos[id].y, r: 2, class: "backdrop-node",
-        }));
-      });
-    }
-    svg.appendChild(backdropGroup);
-
     // --- the ring edges ---
     var edgesGroup = svgEl("g", { class: "ring-edges" });
     var bridgeIdx = ring.hops ? ring.hops.length : 0;
@@ -1381,9 +1353,27 @@ window.removeInvestigatorInvoice = function(id) {
     });
   }
 
+  
+  // --- CINEMATIC TRANSITION LOGIC ---
+  var enterBtn = document.getElementById("enter-btn");
+  if (enterBtn) {
+    enterBtn.addEventListener("click", function() {
+      var landingPage = document.getElementById("landing-page");
+      var appShell = document.getElementById("app-shell");
+      
+      if (landingPage && appShell) {
+        landingPage.classList.add("transitioning");
+        setTimeout(function() {
+          landingPage.classList.add("hidden-landing");
+          appShell.classList.remove("hidden-app");
+        }, 600);
+      }
+    });
+  }
+
   setupTabs();
-  renderLedger();
-  render();
+  // DEFERRED TO AVOID ANIMATION LAG
+  window.initializeOuroboros = function() { renderLedger(); render(); };
 
 document.addEventListener("click", function(e) {
   var imodal = document.getElementById("invoice-modal");
