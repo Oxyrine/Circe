@@ -5471,1394 +5471,1044 @@ const BACKDROP = {
     {
       "id": "E001",
       "industry_class": "distribution",
-      "name": "Meridian Supply Chain Ltd",
-      "degree": 6,
-      "x": 701.1371073803572,
-      "y": 70.68709102354283,
-      "vx": 0.012163417676085328,
-      "vy": 0.031142826100468278
+      "x": 694.9,
+      "y": 1001.6
     },
     {
       "id": "E002",
       "industry_class": "trading",
-      "name": "Coastal Trading Pvt Ltd",
-      "degree": 7,
-      "x": 391.01788313868326,
-      "y": 358.77747310192956,
-      "vx": 0.00898434916307519,
-      "vy": -0.025138694922324067
+      "x": 675.1,
+      "y": 471.4
     },
     {
       "id": "E003",
       "industry_class": "distribution",
-      "name": "Trueform Logistics Co",
-      "degree": 7,
-      "x": 727.0784639481827,
-      "y": 369.76687092095796,
-      "vx": -0.029534908307410117,
-      "vy": -0.038611330323312945
+      "x": 508.5,
+      "y": 952.4
     },
     {
       "id": "E004",
       "industry_class": "manufacturing",
-      "name": "Silverline Industries Pvt Ltd",
-      "degree": 6,
-      "x": 800.7739007628221,
-      "y": 275.06215829957097,
-      "vx": -0.0008481251837514997,
-      "vy": 0.05999354629099793
+      "x": 362.7,
+      "y": 858.6
     },
     {
       "id": "E005",
       "industry_class": "distribution",
-      "name": "Ashoka Freight Pvt Ltd",
-      "degree": 8,
-      "x": 964.3544125565641,
-      "y": 370.6425935852512,
-      "vx": 0.011679170977262386,
-      "vy": 0.00031913932406530955
+      "x": 656.9,
+      "y": 858.0
     },
     {
       "id": "E006",
       "industry_class": "manufacturing",
-      "name": "Redstone Industries Pvt Ltd",
-      "degree": 5,
-      "x": 564.5889315081664,
-      "y": 627.1206139549249,
-      "vx": 0.006225001412886488,
-      "vy": -0.003652032300240801
+      "x": 800.3,
+      "y": 762.8
     },
     {
       "id": "E007",
       "industry_class": "trading",
-      "name": "Silverline Commodities Pvt Ltd",
-      "degree": 15,
-      "x": 1016.2671478585473,
-      "y": 478.83255575118505,
-      "vx": -0.0016467085697337124,
-      "vy": 0.023197094771411717
+      "x": 421.5,
+      "y": 788.9
     },
     {
       "id": "E008",
       "industry_class": "trading",
-      "name": "Redstone Commodities Pvt Ltd",
-      "degree": 8,
-      "x": 628.6994002855674,
-      "y": 728.5595053348346,
-      "vx": -0.0033578462198652404,
-      "vy": 0.021741703081185015
+      "x": 450.6,
+      "y": 880.4
     },
     {
       "id": "E009",
       "industry_class": "services",
-      "name": "Falcon Business Services Co",
-      "degree": 8,
-      "x": 755.906176317906,
-      "y": 486.50782742864925,
-      "vx": -0.11953186586109595,
-      "vy": 0.10318524816529855
+      "x": 597.9,
+      "y": 929.1
     },
     {
       "id": "E010",
       "industry_class": "trading",
-      "name": "Amber Impex Co",
-      "degree": 5,
-      "x": 947.1848080444315,
-      "y": 142.43291886540825,
-      "vx": 0.010872370554000999,
-      "vy": 0.019119317204140274
+      "x": 723.0,
+      "y": 917.3
     },
     {
       "id": "E011",
       "industry_class": "manufacturing",
-      "name": "Global Works Pvt Ltd",
-      "degree": 3,
-      "x": 523.6946338390254,
-      "y": 269.2036253034511,
-      "vx": 0.005255212388893443,
-      "vy": 0.0058351671668364635
+      "x": 803.6,
+      "y": 896.0
     },
     {
       "id": "E012",
       "industry_class": "distribution",
-      "name": "Ashoka Supply Chain LLP",
-      "degree": 8,
-      "x": 533.3461028540543,
-      "y": 507.9644026652725,
-      "vx": -0.0626570419844172,
-      "vy": 0.00964148504981559
+      "x": 605.3,
+      "y": 781.3
     },
     {
       "id": "E013",
       "industry_class": "manufacturing",
-      "name": "Granite Components Pvt Ltd",
-      "degree": 7,
-      "x": 897.5626547833233,
-      "y": 496.41787132282263,
-      "vx": 0.0022433659345854396,
-      "vy": -0.095713406872236
+      "x": 727.6,
+      "y": 659.1
     },
     {
       "id": "E014",
       "industry_class": "manufacturing",
-      "name": "Global Fabricators Pvt Ltd",
-      "degree": 8,
-      "x": 500.94433468084907,
-      "y": 728.8524442475538,
-      "vx": 0.016759055756452552,
-      "vy": -0.003610581013582947
+      "x": 768.3,
+      "y": 549.1
     },
     {
       "id": "E015",
       "industry_class": "manufacturing",
-      "name": "Suncrest Manufacturing Co",
-      "degree": 7,
-      "x": 337.573656940162,
-      "y": 637.3276276165814,
-      "vx": -0.01409283693792519,
-      "vy": 0.002744595890046139
+      "x": 355.0,
+      "y": 574.9
     },
     {
       "id": "E016",
       "industry_class": "manufacturing",
-      "name": "Highbank Fabricators Co",
-      "degree": 10,
-      "x": 292.5095866776474,
-      "y": 526.1105894822418,
-      "vx": -0.01644596505970883,
-      "vy": -0.00654992400503249
+      "x": 699.4,
+      "y": 745.5
     },
     {
       "id": "E017",
       "industry_class": "services",
-      "name": "Marigold Advisory Co",
-      "degree": 5,
-      "x": 382.57533176708694,
-      "y": 748.5699275859969,
-      "vx": 0.0027990679708079333,
-      "vy": 0.006886951626203585
+      "x": 443.4,
+      "y": 502.9
     },
     {
       "id": "E018",
       "industry_class": "manufacturing",
-      "name": "Redstone Manufacturing Pvt Ltd",
-      "degree": 9,
-      "x": 845.64991948134,
-      "y": 388.2279091568887,
-      "vx": 0.034558405492555795,
-      "vy": 0.06867236698893216
+      "x": 515.1,
+      "y": 670.7
     },
     {
       "id": "E019",
       "industry_class": "trading",
-      "name": "Ironclad Impex Ltd",
-      "degree": 14,
-      "x": 407.6578704730703,
-      "y": 238.61817864080888,
-      "vx": 0.011797893645322338,
-      "vy": -0.0015941840610857237
+      "x": 543.0,
+      "y": 854.3
     },
     {
       "id": "E020",
       "industry_class": "distribution",
-      "name": "Trueform Logistics Pvt Ltd",
-      "degree": 10,
-      "x": 507.3827719042204,
-      "y": 388.089802633786,
-      "vx": 0.01951629047432573,
-      "vy": 0.009847081545753127
+      "x": 509.7,
+      "y": 562.1
     },
     {
       "id": "E021",
       "industry_class": "manufacturing",
-      "name": "Kaveri Manufacturing Co",
-      "degree": 6,
-      "x": 449.347505277275,
-      "y": 593.6629184350002,
-      "vx": -0.018251377480598373,
-      "vy": 0.026144958174750807
+      "x": 397.6,
+      "y": 951.6
     },
     {
       "id": "E022",
       "industry_class": "manufacturing",
-      "name": "Sapphire Industries Co",
-      "degree": 6,
-      "x": 713.9909388570962,
-      "y": 644.1476966342659,
-      "vx": 0.004339134119428831,
-      "vy": 0.0292427815205359
+      "x": 519.7,
+      "y": 1040.5
     },
     {
       "id": "E023",
       "industry_class": "services",
-      "name": "Vertex Consultants Ltd",
-      "degree": 7,
-      "x": 642.7268987015307,
-      "y": 284.4128304668507,
-      "vx": 0.012851959060174384,
-      "vy": 0.023960151212955683
+      "x": 606.4,
+      "y": 1021.1
     },
     {
       "id": "E024",
       "industry_class": "manufacturing",
-      "name": "Vertex Works LLP",
-      "degree": 5,
-      "x": 716.4239896236899,
-      "y": 189.70940502927226,
-      "vx": 0.016281110711637143,
-      "vy": 0.03348574867093402
+      "x": 627.1,
+      "y": 697.1
     },
     {
       "id": "E025",
       "industry_class": "distribution",
-      "name": "Deccan Logistics LLP",
-      "degree": 9,
-      "x": 649.8804728303129,
-      "y": 542.7088079089419,
-      "vx": -0.009007957162034726,
-      "vy": 0.019069389847160032
+      "x": 434.6,
+      "y": 621.8
     },
     {
       "id": "E026",
       "industry_class": "manufacturing",
-      "name": "Brightline Fabricators Ltd",
-      "degree": 5,
-      "x": 621.1725848974763,
-      "y": 426.19332555437506,
-      "vx": -0.029144528566934426,
-      "vy": 0.07545680493425477
+      "x": 335.6,
+      "y": 775.5
     },
     {
       "id": "E027",
       "industry_class": "distribution",
-      "name": "Northgate Freight Pvt Ltd",
-      "degree": 11,
-      "x": 597.4761973314735,
-      "y": 173.26495213679874,
-      "vx": 0.014489700932620166,
-      "vy": -9.411818210451895e-05
+      "x": 745.0,
+      "y": 830.0
     },
     {
       "id": "E028",
       "industry_class": "trading",
-      "name": "Highbank Commodities LLP",
-      "degree": 8,
-      "x": 880.8029483725165,
-      "y": 808.7082150368714,
-      "vx": -0.005719744764544732,
-      "vy": -0.014432156396630185
+      "x": 512.6,
+      "y": 764.8
     },
     {
       "id": "E029",
       "industry_class": "distribution",
-      "name": "Palmgrove Freight LLP",
-      "degree": 12,
-      "x": 730.798514586257,
-      "y": 793.2874129114387,
-      "vx": -0.00472354190144082,
-      "vy": 0.027145491457351505
+      "x": 376.3,
+      "y": 698.1
     },
     {
       "id": "E030",
       "industry_class": "trading",
-      "name": "Granite Commodities Ltd",
-      "degree": 10,
-      "x": 580.8919894786135,
-      "y": 838.6251742417882,
-      "vx": 0.003128289474265866,
-      "vy": -0.0040964325248677436
+      "x": 598.3,
+      "y": 519.5
     },
     {
       "id": "E031",
       "industry_class": "trading",
-      "name": "Palmgrove Trading LLP",
-      "degree": 12,
-      "x": 938.1477843197372,
-      "y": 609.3983055332051,
-      "vx": 0.0005352968940281366,
-      "vy": -0.018135313863145184
+      "x": 592.7,
+      "y": 617.2
     },
     {
       "id": "E032",
       "industry_class": "distribution",
-      "name": "Deccan Supply Chain LLP",
-      "degree": 10,
-      "x": 404.0007777952676,
-      "y": 481.52668641217764,
-      "vx": -0.03618573122447336,
-      "vy": -0.013756262800424154
+      "x": 681.6,
+      "y": 581.1
     },
     {
       "id": "E033",
       "industry_class": "services",
-      "name": "Granite Advisory Ltd",
-      "degree": 1,
-      "x": 847.1034636052733,
-      "y": 76.22321795043236,
-      "vx": 0.009734283746221673,
-      "vy": 0.015770971512170207
+      "x": 1016.3,
+      "y": 507.7
     },
     {
       "id": "E034",
       "industry_class": "distribution",
-      "name": "Kaveri Distribution LLP",
-      "degree": 2,
-      "x": 919.7274944099562,
-      "y": 259.24942424019684,
-      "vx": 0.049427551072712676,
-      "vy": 0.0068573719458007495
+      "x": 962.2,
+      "y": 568.2
     },
     {
       "id": "E035",
       "industry_class": "trading",
-      "name": "Novapoint Commodities Pvt Ltd",
-      "degree": 4,
-      "x": 820.0642590168204,
-      "y": 588.0366393434551,
-      "vx": 0.10983021133370699,
-      "vy": 0.009988048947757287
+      "x": 874.2,
+      "y": 655.1
     },
     {
       "id": "E036",
       "industry_class": "distribution",
-      "name": "Redstone Distribution LLP",
-      "degree": 2,
-      "x": 967.5096472529027,
-      "y": 725.7507056162889,
-      "vx": 0.014705123644803407,
-      "vy": 0.08246537071971154
+      "x": 1020.9,
+      "y": 683.1
     },
     {
       "id": "E037",
       "industry_class": "manufacturing",
-      "name": "Crestline Works Ltd",
-      "degree": 2,
-      "x": 896.118078481115,
-      "y": 927.726897560905,
-      "vx": 0.023596992780703617,
-      "vy": 0.04587946175426599
+      "x": 1123.7,
+      "y": 687.8
     },
     {
       "id": "E038",
       "industry_class": "trading",
-      "name": "Deccan Impex Pvt Ltd",
-      "degree": 2,
-      "x": 949.9179047916978,
-      "y": 1104.0559371871257,
-      "vx": -0.1771292104499314,
-      "vy": 0.09885753470617088
+      "x": 1205.3,
+      "y": 685.4
     },
     {
       "id": "E039",
       "industry_class": "services",
-      "name": "Nilgiri Consultants Co",
-      "degree": 1,
-      "x": 1112.0515031368911,
-      "y": 1026.3995097529921,
-      "vx": -0.17574861601573163,
-      "vy": 0.10515830281484326
+      "x": 1284.6,
+      "y": 676.4
     },
     {
       "id": "E040",
       "industry_class": "services",
-      "name": "Brightline Business Services Ltd",
-      "degree": 2,
-      "x": 1377.4976287070874,
-      "y": 315.26176104057623,
-      "vx": 0.027661786170642477,
-      "vy": 0.009364929142836464
+      "x": 1695.0,
+      "y": 383.7
     },
     {
       "id": "E041",
       "industry_class": "distribution",
-      "name": "Palmgrove Freight Co",
-      "degree": 2,
-      "x": 1544.4949897647323,
-      "y": 240.76268180227794,
-      "vx": -0.0013207221819753047,
-      "vy": -0.055672313131069184
+      "x": 1566.7,
+      "y": 460.0
     },
     {
       "id": "E042",
       "industry_class": "distribution",
-      "name": "Ironclad Distribution LLP",
-      "degree": 2,
-      "x": 1580.2824035634699,
-      "y": 61.46622141517339,
-      "vx": 0.06448632442540662,
-      "vy": -0.04267961831446255
+      "x": 1485.2,
+      "y": 315.8
     },
     {
       "id": "E043",
       "industry_class": "services",
-      "name": "Marigold Solutions Pvt Ltd",
-      "degree": 2,
-      "x": 1724.9126953719676,
-      "y": 181.59742900048656,
-      "vx": 0.04340342553702148,
-      "vy": -0.019898640880613112
+      "x": 1534.5,
+      "y": 100.0
     },
     {
       "id": "E044",
       "industry_class": "distribution",
-      "name": "Falcon Distribution Pvt Ltd",
-      "degree": 2,
-      "x": 1707.084532832808,
-      "y": 368.3608697500812,
-      "vx": 0.032683769217113946,
-      "vy": -0.023345782135850777
+      "x": 1445.0,
+      "y": 153.3
     },
     {
       "id": "E045",
       "industry_class": "trading",
-      "name": "Novapoint Commodities Co",
-      "degree": 2,
-      "x": 1528.811688721855,
-      "y": 426.967895801285,
-      "vx": 0.039756093003682345,
-      "vy": -0.010287983319370924
+      "x": 1633.1,
+      "y": 227.8
     },
     {
       "id": "E046",
       "industry_class": "manufacturing",
-      "name": "Amber Industries Co",
-      "degree": 2,
-      "x": 127.91473692841664,
-      "y": 304.6105913718764,
-      "vx": -0.07897174618297864,
-      "vy": 0.08435615656785606
+      "x": 141.2,
+      "y": 458.7
     },
     {
       "id": "E047",
       "industry_class": "manufacturing",
-      "name": "Novapoint Components Co",
-      "degree": 3,
-      "x": 168.56444593995616,
-      "y": 495.18059880463306,
-      "vx": -0.0657309396315284,
-      "vy": 0.08779907003121436
+      "x": 236.6,
+      "y": 474.3
     },
     {
       "id": "E048",
       "industry_class": "distribution",
-      "name": "Palmgrove Logistics Ltd",
-      "degree": 2,
-      "x": 95.44422805593479,
-      "y": 671.6333910772627,
-      "vx": -0.11242197389379935,
-      "vy": 0.06650672939223788
+      "x": 180.9,
+      "y": 376.8
     },
     {
       "id": "E049",
       "industry_class": "services",
-      "name": "Meridian Solutions LLP",
-      "degree": 2,
-      "x": 48.38890683684197,
-      "y": 481.6165072505587,
-      "vx": -0.09474954067282312,
-      "vy": 0.06805522412258115
+      "x": 98.2,
+      "y": 380.7
     },
     {
       "id": "E050",
       "industry_class": "distribution",
-      "name": "Global Logistics LLP",
-      "degree": 2,
-      "x": 1217.9695941823293,
-      "y": 530.8193309134125,
-      "vx": 0.040293255841462323,
-      "vy": -0.003492553552853675
+      "x": 738.8,
+      "y": 100.0
     },
     {
       "id": "E051",
       "industry_class": "trading",
-      "name": "Ironclad Traders LLP",
-      "degree": 2,
-      "x": 1057.7567798128089,
-      "y": 619.0782029476637,
-      "vx": 0.011109960500099192,
-      "vy": -0.04750834146585487
+      "x": 775.3,
+      "y": 195.7
     },
     {
       "id": "E052",
       "industry_class": "trading",
-      "name": "Global Commodities Pvt Ltd",
-      "degree": 3,
-      "x": 815.6212003375973,
-      "y": 707.9543579240427,
-      "vx": 0.013125987156135254,
-      "vy": -0.03409632471226406
+      "x": 730.1,
+      "y": 341.5
     },
     {
       "id": "E053",
       "industry_class": "trading",
-      "name": "Trueform Trading Co",
-      "degree": 2,
-      "x": 1077.8731926729272,
-      "y": 772.8663913517441,
-      "vx": 0.08574344803498271,
-      "vy": -0.11020583452410608
+      "x": 700.4,
+      "y": 244.4
     },
     {
       "id": "E054",
       "industry_class": "services",
-      "name": "Palmgrove Advisory Pvt Ltd",
-      "degree": 2,
-      "x": 1232.0562694886687,
-      "y": 833.1154985647107,
-      "vx": 0.036998912242685235,
-      "vy": 0.024387877848474637
+      "x": 621.9,
+      "y": 220.2
     },
     {
       "id": "E055",
       "industry_class": "distribution",
-      "name": "Deccan Supply Chain LLP",
-      "degree": 3,
-      "x": 1052.0229183898325,
-      "y": 890.0489980794015,
-      "vx": 0.020572598048383395,
-      "vy": -0.04519576064747519
+      "x": 614.5,
+      "y": 319.0
     },
     {
       "id": "E056",
       "industry_class": "distribution",
-      "name": "Northgate Freight Pvt Ltd",
-      "degree": 2,
-      "x": 1202.3887369184474,
-      "y": 716.8406624599246,
-      "vx": 0.05373146337005461,
-      "vy": -0.0038029231743237466
+      "x": 664.1,
+      "y": 143.1
     },
     {
       "id": "E057",
       "industry_class": "manufacturing",
-      "name": "Horizon Industries LLP",
-      "degree": 2,
-      "x": 1569.9295201710956,
-      "y": 750.7486306916999,
-      "vx": -0.032829105657513014,
-      "vy": 0.00952118556680682
+      "x": 1695.0,
+      "y": 834.0
     },
     {
       "id": "E058",
       "industry_class": "manufacturing",
-      "name": "Wavelength Manufacturing Co",
-      "degree": 2,
-      "x": 1666.7231612158143,
-      "y": 935.6158152619723,
-      "vx": -0.03328531894197127,
-      "vy": 0.009647110615831136
+      "x": 1587.1,
+      "y": 1000.0
     },
     {
       "id": "E059",
       "industry_class": "services",
-      "name": "Granite Consultants Pvt Ltd",
-      "degree": 2,
-      "x": 1688.9116547808292,
-      "y": 766.3451573470568,
-      "vx": -0.022473080151109992,
-      "vy": 0.010878683718806051
+      "x": 1552.9,
+      "y": 625.0
     },
     {
       "id": "E060",
       "industry_class": "trading",
-      "name": "Falcon Commodities Ltd",
-      "degree": 2,
-      "x": 1547.741026606081,
-      "y": 920.0192886066155,
-      "vx": -0.022064735582828746,
-      "vy": 0.01111793754310841
+      "x": 1445.0,
+      "y": 790.9
     }
   ],
   "edges": [
     {
       "from": "E032",
-      "to": "E009",
-      "type": "trade"
+      "to": "E009"
     },
     {
       "from": "E022",
-      "to": "E023",
-      "type": "trade"
+      "to": "E023"
     },
     {
       "from": "E001",
-      "to": "E023",
-      "type": "trade"
+      "to": "E023"
     },
     {
       "from": "E010",
-      "to": "E001",
-      "type": "trade"
+      "to": "E001"
     },
     {
       "from": "E016",
-      "to": "E025",
-      "type": "trade"
+      "to": "E025"
     },
     {
       "from": "E016",
-      "to": "E011",
-      "type": "trade"
+      "to": "E011"
     },
     {
       "from": "E018",
-      "to": "E007",
-      "type": "trade"
+      "to": "E007"
     },
     {
       "from": "E030",
-      "to": "E012",
-      "type": "trade"
+      "to": "E012"
     },
     {
       "from": "E018",
-      "to": "E014",
-      "type": "trade"
+      "to": "E014"
     },
     {
       "from": "E002",
-      "to": "E014",
-      "type": "trade"
+      "to": "E014"
     },
     {
       "from": "E028",
-      "to": "E025",
-      "type": "trade"
+      "to": "E025"
     },
     {
       "from": "E013",
-      "to": "E030",
-      "type": "trade"
+      "to": "E030"
     },
     {
       "from": "E024",
-      "to": "E025",
-      "type": "trade"
+      "to": "E025"
     },
     {
       "from": "E020",
-      "to": "E015",
-      "type": "trade"
+      "to": "E015"
     },
     {
       "from": "E027",
-      "to": "E016",
-      "type": "trade"
+      "to": "E016"
+    },
+    {
+      "from": "E001",
+      "to": "E010"
     },
     {
       "from": "E029",
-      "to": "E021",
-      "type": "trade"
+      "to": "E021"
     },
     {
       "from": "E019",
-      "to": "E025",
-      "type": "trade"
+      "to": "E025"
     },
     {
       "from": "E013",
-      "to": "E002",
-      "type": "trade"
+      "to": "E002"
     },
     {
       "from": "E013",
-      "to": "E027",
-      "type": "trade"
+      "to": "E027"
     },
     {
       "from": "E007",
-      "to": "E008",
-      "type": "trade"
+      "to": "E008"
     },
     {
       "from": "E016",
-      "to": "E006",
-      "type": "trade"
+      "to": "E006"
     },
     {
       "from": "E021",
-      "to": "E018",
-      "type": "trade"
+      "to": "E018"
     },
     {
       "from": "E031",
-      "to": "E012",
-      "type": "trade"
+      "to": "E012"
     },
     {
       "from": "E018",
-      "to": "E020",
-      "type": "trade"
+      "to": "E020"
     },
     {
       "from": "E009",
-      "to": "E016",
-      "type": "trade"
+      "to": "E016"
     },
     {
       "from": "E022",
-      "to": "E027",
-      "type": "trade"
+      "to": "E027"
     },
     {
       "from": "E002",
-      "to": "E031",
-      "type": "trade"
+      "to": "E031"
     },
     {
       "from": "E025",
-      "to": "E029",
-      "type": "trade"
+      "to": "E029"
     },
     {
       "from": "E032",
-      "to": "E017",
-      "type": "trade"
+      "to": "E017"
     },
     {
       "from": "E026",
-      "to": "E029",
-      "type": "trade"
+      "to": "E029"
     },
     {
       "from": "E002",
-      "to": "E016",
-      "type": "trade"
+      "to": "E016"
     },
     {
       "from": "E025",
-      "to": "E031",
-      "type": "trade"
+      "to": "E031"
     },
     {
       "from": "E017",
-      "to": "E029",
-      "type": "trade"
+      "to": "E029"
     },
     {
       "from": "E005",
-      "to": "E001",
-      "type": "trade"
+      "to": "E001"
     },
     {
       "from": "E010",
-      "to": "E018",
-      "type": "trade"
+      "to": "E018"
     },
     {
       "from": "E024",
-      "to": "E007",
-      "type": "trade"
+      "to": "E007"
     },
     {
       "from": "E020",
-      "to": "E030",
-      "type": "trade"
+      "to": "E030"
     },
     {
       "from": "E016",
-      "to": "E019",
-      "type": "trade"
+      "to": "E019"
     },
     {
       "from": "E028",
-      "to": "E009",
-      "type": "trade"
+      "to": "E009"
     },
     {
       "from": "E007",
-      "to": "E025",
-      "type": "trade"
+      "to": "E025"
     },
     {
       "from": "E031",
-      "to": "E020",
-      "type": "trade"
+      "to": "E020"
     },
     {
       "from": "E016",
-      "to": "E023",
-      "type": "trade"
+      "to": "E023"
     },
     {
       "from": "E029",
-      "to": "E003",
-      "type": "trade"
+      "to": "E003"
     },
     {
       "from": "E024",
-      "to": "E032",
-      "type": "trade"
+      "to": "E032"
+    },
+    {
+      "from": "E030",
+      "to": "E020"
     },
     {
       "from": "E012",
-      "to": "E023",
-      "type": "trade"
+      "to": "E023"
     },
     {
       "from": "E019",
-      "to": "E031",
-      "type": "trade"
+      "to": "E031"
     },
     {
       "from": "E001",
-      "to": "E011",
-      "type": "trade"
+      "to": "E011"
     },
     {
       "from": "E009",
-      "to": "E029",
-      "type": "trade"
+      "to": "E029"
     },
     {
       "from": "E031",
-      "to": "E005",
-      "type": "trade"
+      "to": "E005"
     },
     {
       "from": "E026",
-      "to": "E001",
-      "type": "trade"
+      "to": "E001"
     },
     {
       "from": "E016",
-      "to": "E030",
-      "type": "trade"
+      "to": "E030"
     },
     {
       "from": "E020",
-      "to": "E029",
-      "type": "trade"
+      "to": "E029"
     },
     {
       "from": "E012",
-      "to": "E008",
-      "type": "trade"
+      "to": "E008"
     },
     {
       "from": "E015",
-      "to": "E019",
-      "type": "trade"
+      "to": "E019"
     },
     {
       "from": "E013",
-      "to": "E032",
-      "type": "trade"
+      "to": "E032"
     },
     {
       "from": "E004",
-      "to": "E019",
-      "type": "trade"
+      "to": "E019"
     },
     {
       "from": "E020",
-      "to": "E014",
-      "type": "trade"
+      "to": "E014"
     },
     {
       "from": "E003",
-      "to": "E027",
-      "type": "trade"
+      "to": "E027"
     },
     {
       "from": "E002",
-      "to": "E030",
-      "type": "trade"
+      "to": "E030"
     },
     {
       "from": "E018",
-      "to": "E030",
-      "type": "trade"
+      "to": "E030"
     },
     {
       "from": "E022",
-      "to": "E007",
-      "type": "trade"
+      "to": "E007"
     },
     {
       "from": "E003",
-      "to": "E028",
-      "type": "trade"
+      "to": "E028"
     },
     {
       "from": "E004",
-      "to": "E008",
-      "type": "trade"
+      "to": "E008"
     },
     {
       "from": "E016",
-      "to": "E020",
-      "type": "trade"
+      "to": "E020"
     },
     {
       "from": "E008",
-      "to": "E003",
-      "type": "trade"
+      "to": "E003"
     },
     {
       "from": "E027",
-      "to": "E032",
-      "type": "trade"
+      "to": "E032"
     },
     {
       "from": "E009",
-      "to": "E023",
-      "type": "trade"
+      "to": "E023"
     },
     {
       "from": "E019",
-      "to": "E023",
-      "type": "trade"
+      "to": "E023"
     },
     {
       "from": "E031",
-      "to": "E032",
-      "type": "trade"
+      "to": "E032"
     },
     {
       "from": "E025",
-      "to": "E017",
-      "type": "trade"
+      "to": "E017"
     },
     {
       "from": "E007",
-      "to": "E029",
-      "type": "trade"
+      "to": "E029"
     },
     {
       "from": "E005",
-      "to": "E019",
-      "type": "trade"
+      "to": "E019"
     },
     {
       "from": "E022",
-      "to": "E021",
-      "type": "trade"
+      "to": "E021"
     },
     {
       "from": "E005",
-      "to": "E023",
-      "type": "trade"
+      "to": "E023"
     },
     {
       "from": "E007",
-      "to": "E020",
-      "type": "trade"
+      "to": "E020"
     },
     {
       "from": "E024",
-      "to": "E012",
-      "type": "trade"
+      "to": "E012"
     },
     {
       "from": "E006",
-      "to": "E027",
-      "type": "trade"
+      "to": "E027"
     },
     {
       "from": "E030",
-      "to": "E017",
-      "type": "trade"
+      "to": "E017"
     },
     {
       "from": "E005",
-      "to": "E028",
-      "type": "trade"
+      "to": "E028"
     },
     {
       "from": "E020",
-      "to": "E017",
-      "type": "trade"
+      "to": "E017"
     },
     {
       "from": "E019",
-      "to": "E008",
-      "type": "trade"
+      "to": "E008"
     },
     {
       "from": "E004",
-      "to": "E021",
-      "type": "trade"
+      "to": "E021"
+    },
+    {
+      "from": "E015",
+      "to": "E020"
+    },
+    {
+      "from": "E003",
+      "to": "E008"
     },
     {
       "from": "E013",
-      "to": "E028",
-      "type": "trade"
+      "to": "E028"
     },
     {
       "from": "E031",
-      "to": "E008",
-      "type": "trade"
+      "to": "E008"
     },
     {
       "from": "E015",
-      "to": "E026",
-      "type": "trade"
+      "to": "E026"
     },
     {
       "from": "E026",
-      "to": "E007",
-      "type": "trade"
+      "to": "E007"
     },
     {
       "from": "E024",
-      "to": "E010",
-      "type": "trade"
+      "to": "E010"
     },
     {
       "from": "E015",
-      "to": "E029",
-      "type": "trade"
+      "to": "E029"
     },
     {
       "from": "E003",
-      "to": "E031",
-      "type": "trade"
+      "to": "E031"
     },
     {
       "from": "E030",
-      "to": "E032",
-      "type": "trade"
+      "to": "E032"
     },
     {
       "from": "E032",
-      "to": "E014",
-      "type": "trade"
+      "to": "E014"
     },
     {
       "from": "E002",
-      "to": "E015",
-      "type": "trade"
+      "to": "E015"
     },
     {
       "from": "E014",
-      "to": "E012",
-      "type": "trade"
+      "to": "E012"
     },
     {
       "from": "E009",
-      "to": "E008",
-      "type": "trade"
+      "to": "E008"
+    },
+    {
+      "from": "E023",
+      "to": "E012"
     },
     {
       "from": "E027",
-      "to": "E007",
-      "type": "trade"
+      "to": "E007"
     },
     {
       "from": "E007",
-      "to": "E012",
-      "type": "trade"
+      "to": "E012"
     },
     {
       "from": "E002",
-      "to": "E018",
-      "type": "trade"
+      "to": "E018"
     },
     {
       "from": "E005",
-      "to": "E027",
-      "type": "trade"
+      "to": "E027"
     },
     {
       "from": "E021",
-      "to": "E019",
-      "type": "trade"
+      "to": "E019"
     },
     {
       "from": "E006",
-      "to": "E011",
-      "type": "trade"
+      "to": "E011"
     },
     {
       "from": "E004",
-      "to": "E032",
-      "type": "trade"
+      "to": "E032"
     },
     {
       "from": "E028",
-      "to": "E030",
-      "type": "trade"
+      "to": "E030"
     },
     {
       "from": "E014",
-      "to": "E031",
-      "type": "trade"
+      "to": "E031"
     },
     {
       "from": "E008",
-      "to": "E028",
-      "type": "trade"
+      "to": "E028"
     },
     {
       "from": "E018",
-      "to": "E019",
-      "type": "trade"
+      "to": "E019"
     },
     {
       "from": "E010",
-      "to": "E027",
-      "type": "trade"
+      "to": "E027"
+    },
+    {
+      "from": "E025",
+      "to": "E028"
     },
     {
       "from": "E006",
-      "to": "E013",
-      "type": "trade"
+      "to": "E013"
     },
     {
       "from": "E029",
-      "to": "E018",
-      "type": "trade"
+      "to": "E018"
+    },
+    {
+      "from": "E023",
+      "to": "E019"
     },
     {
       "from": "E026",
-      "to": "E004",
-      "type": "trade"
+      "to": "E004"
     },
     {
       "from": "E019",
-      "to": "E001",
-      "type": "trade"
+      "to": "E001"
     },
     {
       "from": "E015",
-      "to": "E025",
-      "type": "trade"
+      "to": "E025"
     },
     {
       "from": "E030",
-      "to": "E031",
-      "type": "trade"
+      "to": "E031"
+    },
+    {
+      "from": "E019",
+      "to": "E004"
     },
     {
       "from": "E028",
-      "to": "E007",
-      "type": "trade"
+      "to": "E007"
     },
     {
       "from": "E020",
-      "to": "E013",
-      "type": "trade"
+      "to": "E013"
+    },
+    {
+      "from": "E008",
+      "to": "E012"
     },
     {
       "from": "E010",
-      "to": "E005",
-      "type": "trade"
+      "to": "E005"
     },
     {
       "from": "E021",
-      "to": "E007",
-      "type": "trade"
+      "to": "E007"
     },
     {
       "from": "E004",
-      "to": "E007",
-      "type": "trade"
+      "to": "E007"
     },
     {
       "from": "E019",
-      "to": "E006",
-      "type": "trade"
+      "to": "E006"
     },
     {
       "from": "E029",
-      "to": "E012",
-      "type": "trade"
+      "to": "E012"
     },
     {
       "from": "E029",
-      "to": "E005",
-      "type": "trade"
+      "to": "E017"
+    },
+    {
+      "from": "E029",
+      "to": "E005"
     },
     {
       "from": "E019",
-      "to": "E007",
-      "type": "trade"
+      "to": "E007"
     },
     {
       "from": "E007",
-      "to": "E003",
-      "type": "trade"
+      "to": "E003"
     },
     {
       "from": "E003",
-      "to": "E022",
-      "type": "trade"
+      "to": "E022"
     },
     {
       "from": "E022",
-      "to": "E009",
-      "type": "trade"
+      "to": "E009"
     },
     {
       "from": "E009",
-      "to": "E019",
-      "type": "trade"
+      "to": "E019"
     },
     {
       "from": "E033",
-      "to": "E034",
-      "type": "trade"
+      "to": "E034"
     },
     {
       "from": "E034",
-      "to": "E035",
-      "type": "trade"
+      "to": "E035"
     },
     {
       "from": "E035",
-      "to": "E036",
-      "type": "trade"
+      "to": "E036"
     },
     {
       "from": "E036",
-      "to": "E037",
-      "type": "trade"
+      "to": "E037"
     },
     {
       "from": "E037",
-      "to": "E038",
-      "type": "trade"
+      "to": "E038"
     },
     {
       "from": "E038",
-      "to": "E039",
-      "type": "trade"
+      "to": "E039"
     },
     {
       "from": "E040",
-      "to": "E041",
-      "type": "trade"
+      "to": "E041"
     },
     {
       "from": "E041",
-      "to": "E042",
-      "type": "trade"
+      "to": "E042"
     },
     {
       "from": "E042",
-      "to": "E043",
-      "type": "trade"
+      "to": "E043"
     },
     {
       "from": "E043",
-      "to": "E044",
-      "type": "trade"
+      "to": "E044"
     },
     {
       "from": "E044",
-      "to": "E045",
-      "type": "trade"
+      "to": "E045"
     },
     {
       "from": "E045",
-      "to": "E040",
-      "type": "trade"
+      "to": "E040"
     },
     {
       "from": "E046",
-      "to": "E047",
-      "type": "trade"
+      "to": "E047"
     },
     {
       "from": "E047",
-      "to": "E048",
-      "type": "trade"
+      "to": "E048"
     },
     {
       "from": "E048",
-      "to": "E049",
-      "type": "trade"
+      "to": "E049"
     },
     {
       "from": "E049",
-      "to": "E046",
-      "type": "trade"
+      "to": "E046"
     },
     {
       "from": "E050",
-      "to": "E051",
-      "type": "trade"
+      "to": "E051"
     },
     {
       "from": "E051",
-      "to": "E052",
-      "type": "trade"
+      "to": "E052"
     },
     {
       "from": "E052",
-      "to": "E053",
-      "type": "trade"
+      "to": "E053"
     },
     {
       "from": "E053",
-      "to": "E054",
-      "type": "trade"
+      "to": "E054"
     },
     {
       "from": "E054",
-      "to": "E055",
-      "type": "trade"
+      "to": "E055"
     },
     {
       "from": "E055",
-      "to": "E056",
-      "type": "trade"
+      "to": "E056"
     },
     {
       "from": "E056",
-      "to": "E050",
-      "type": "trade"
+      "to": "E050"
     },
     {
       "from": "E057",
-      "to": "E058",
-      "type": "trade"
+      "to": "E058"
     },
     {
       "from": "E058",
-      "to": "E059",
-      "type": "trade"
+      "to": "E059"
     },
     {
       "from": "E059",
-      "to": "E060",
-      "type": "trade"
+      "to": "E060"
     },
     {
       "from": "E060",
-      "to": "E057",
-      "type": "trade"
-    },
+      "to": "E057"
+    }
+  ],
+  "director_edges": [
     {
       "from": "E014",
       "to": "E027",
-      "type": "corporate"
+      "din": "D42"
     },
     {
       "from": "E014",
       "to": "E035",
-      "type": "corporate"
-    },
-    {
-      "from": "E015",
-      "to": "E047",
-      "type": "corporate"
+      "din": "D42"
     },
     {
       "from": "E027",
       "to": "E035",
-      "type": "corporate"
+      "din": "D42"
+    },
+    {
+      "from": "E015",
+      "to": "E047",
+      "din": "D282"
     },
     {
       "from": "E031",
       "to": "E055",
-      "type": "corporate"
+      "din": "D55"
     },
     {
       "from": "E032",
       "to": "E052",
-      "type": "corporate"
+      "din": "D136"
     }
   ]
 };
