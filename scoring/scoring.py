@@ -250,7 +250,13 @@ def evidence(ring: dict, scores: dict, entities: dict) -> dict[str, str]:
     else:
         ev["externality"] = "Abstained (no counterparty activity found in invoice registry)"
 
-    # Industry consistency check (evidence string only, not folded into score)
+    # Industry consistency check (evidence string only, not folded into score).
+    # HS codes (trade-tariff chapters) and industry_code (NIC economic-activity codes,
+    # e.g. "NIC-4662" per Wire Protocol §3) are different taxonomies with no available
+    # concordance table -- comparing their prefixes is only ever valid when industry_code
+    # happens to itself be a bare numeric/HS-shaped string. Guard with isdigit() on both
+    # sides so a NIC-prefixed code produces no claim instead of a guaranteed-false one;
+    # asserting a mismatch the data can't support is worse than staying silent.
     invoice_hops = get_invoice_hops(ring)
     inconsistencies = []
     for hop in invoice_hops:
@@ -258,7 +264,9 @@ def evidence(ring: dict, scores: dict, entities: dict) -> dict[str, str]:
         _, target_entity = get_hop_endpoints(hop)
         if hs_code and target_entity in entities:
             target_ind = str(entities[target_entity].get("industry_code") or "")
-            if target_ind and len(hs_code) >= 2 and len(target_ind) >= 2 and hs_code[:2] != target_ind[:2]:
+            if (target_ind and hs_code.isdigit() and target_ind.isdigit()
+                    and len(hs_code) >= 2 and len(target_ind) >= 2
+                    and hs_code[:2] != target_ind[:2]):
                 inconsistencies.append(f"Entity {target_entity} ({target_ind}) received HS {hs_code}")
 
     if inconsistencies:
@@ -424,7 +432,7 @@ def benchmark_degradation(candidate_rings: list, all_invoices: list, entities: d
 
 
 def run_checks():
-    """Runs all 10 regression, specification, and adversarial test asserts."""
+    """Runs all 11 regression, specification, and adversarial test asserts."""
     # Test 1: Fabricated 3-hop, all ₹10cr -> s_value == 1.0 (using Wire Protocol 'from'/'to')
     r1 = {
         "entities": ["E1", "E2", "E3"],
@@ -596,7 +604,43 @@ def run_checks():
     # The 4-signal evasion successfully collapses the geometric aggregate
     assert sr_adv["aggregate"] < 0.15, f"Adversarial aggregate check failed: {sr_adv['aggregate']} >= 0.15"
 
-    print("All 10 checks and adversarial benchmark passed successfully.")
+    # Test 11 (NIC vs HS Taxonomy Guard): real entities carry "NIC-XXXX" industry_code
+    # (Wire Protocol §3), which is not comparable to a bare numeric HS code -- must
+    # not produce a false cross-industry flag. A genuine numeric mismatch must still fire.
+    r11 = {
+        "ring_id": "R11",
+        "entities": ["N1", "N2"],
+        "hops": [
+            {"from": "N1", "to": "N2", "value": 1000, "hop_type": "invoice", "invoice_date": "2023-01-01", "hs_code": "72081000"},
+        ],
+    }
+    nic_entities = {
+        "N1": {"id": "N1", "industry_code": "NIC-7208", "industry_class": "manufacturing"},
+        "N2": {"id": "N2", "industry_code": "NIC-7208", "industry_class": "manufacturing"},
+    }
+    scores11a = {
+        "value": s_value(r11), "product": s_product(r11, nic_entities), "timing": s_timing(r11), "externality": s_externality(r11, [])
+    }
+    ev11a = evidence(r11, scores11a, nic_entities)
+    assert ev11a["industry"] == "All trades consistent with declared industry codes.", f"Test 11a failed: {ev11a['industry']}"
+
+    numeric_entities = {
+        "N1": {"id": "N1", "industry_code": "72", "industry_class": "manufacturing"},
+        "N2": {"id": "N2", "industry_code": "72", "industry_class": "manufacturing"},
+    }
+    r11b = {
+        "ring_id": "R11b",
+        "entities": ["N1", "N2"],
+        "hops": [
+            {"from": "N1", "to": "N2", "value": 1000, "hop_type": "invoice", "invoice_date": "2023-01-01", "hs_code": "85171200"},
+        ],
+    }
+    ev11b = evidence(r11b, {
+        "value": s_value(r11b), "product": s_product(r11b, numeric_entities), "timing": s_timing(r11b), "externality": s_externality(r11b, [])
+    }, numeric_entities)
+    assert ev11b["industry"].startswith("Flagged"), f"Test 11b failed: {ev11b['industry']}"
+
+    print("All 11 checks and adversarial benchmark passed successfully.")
 
 
 def main():
