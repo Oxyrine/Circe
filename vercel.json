@@ -36,6 +36,22 @@
       "dest": "/console/$1"
     },
     {
+      "src": "/styles.css",
+      "dest": "/demo/styles.css"
+    },
+    {
+      "src": "/data.js",
+      "dest": "/demo/data.js"
+    },
+    {
+      "src": "/app.js",
+      "dest": "/demo/app.js"
+    },
+    {
+      "src": "/constellation.js",
+      "dest": "/demo/constellation.js"
+    },
+    {
       "src": "/demo",
       "dest": "/demo/index.html"
     },
