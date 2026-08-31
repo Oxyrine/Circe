@@ -107,10 +107,11 @@ class OuroborosHandler(http.server.SimpleHTTPRequestHandler):
         self.end_headers()
 
     def do_GET(self):
-        if self.path == "/api/health":
+        clean_path = self.path.split("?")[0]
+        if clean_path in ("/api/health", "/health"):
             self._send_json(200, {"status": "ok"})
             return
-        if self.path in ("/", ""):
+        if clean_path in ("/", ""):
             self.send_response(302)
             self.send_header("Location", "/demo/")
             self.end_headers()
@@ -118,7 +119,8 @@ class OuroborosHandler(http.server.SimpleHTTPRequestHandler):
         super().do_GET()
 
     def do_POST(self):
-        if self.path != "/api/rescore":
+        clean_path = self.path.split("?")[0]
+        if clean_path not in ("/api/rescore", "/rescore"):
             self.send_error(404, "Not found")
             return
 
@@ -183,6 +185,12 @@ class OuroborosHandler(http.server.SimpleHTTPRequestHandler):
         if args and "/api/" in str(args[0]):
             return
         super().log_message(fmt, *args)
+
+
+# Top-level exports for Vercel Serverless Python runtime
+handler = OuroborosHandler
+app = handler
+application = handler
 
 
 if __name__ == '__main__':
