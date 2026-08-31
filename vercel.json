@@ -1,8 +1,51 @@
 {
-  "rewrites": [
-    { "source": "/", "destination": "/demo/index.html" },
-    { "source": "/demo", "destination": "/demo/index.html" },
-    { "source": "/console", "destination": "/console/index.html" },
-    { "source": "/api/(.*)", "destination": "/api/index.py" }
+  "version": 2,
+  "builds": [
+    {
+      "src": "api/*.py",
+      "use": "@vercel/python"
+    },
+    {
+      "src": "demo/**",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "console/**",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "index.html",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/health",
+      "dest": "/api/health.py"
+    },
+    {
+      "src": "/api/rescore",
+      "dest": "/api/rescore.py"
+    },
+    {
+      "src": "/demo/(.*)",
+      "dest": "/demo/$1"
+    },
+    {
+      "src": "/console/(.*)",
+      "dest": "/console/$1"
+    },
+    {
+      "src": "/demo",
+      "dest": "/demo/index.html"
+    },
+    {
+      "src": "/console",
+      "dest": "/console/index.html"
+    },
+    {
+      "src": "/",
+      "dest": "/demo/index.html"
+    }
   ]
 }
