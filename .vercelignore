@@ -1,0 +1,8 @@
+server.py
+plans/
+graphify-out/
+.pytest_cache/
+__pycache__/
+*.pyc
+.venv/
+venv/
