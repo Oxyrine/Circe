@@ -444,24 +444,29 @@
 <script src="/demo/data.js?v=1788330000"></script>
 <script src="/demo/app.js?v=1788330000"></script>
 <script src="/demo/constellation.js?v=1788330000"></script>
+<!-- Local-only: real Exasol audit trail via server.py's /api/audit. See exasol/README.md. -->
+<script src="/demo/audit-trail.js?v=1"></script>
 <script>
   // Global stats populator
   document.addEventListener("DOMContentLoaded", function() {
-    if (typeof ENTITIES !== 'undefined' && typeof INVOICES !== 'undefined' && typeof SCORED !== 'undefined') {
+    var scoredData = window.CirceStore ? window.CirceStore.getScored() : (typeof SCORED !== 'undefined' ? SCORED : null);
+    if (typeof ENTITIES !== 'undefined' && typeof INVOICES !== 'undefined' && scoredData) {
       var eCount = Object.keys(ENTITIES).length;
       var iCount = Object.keys(INVOICES).length;
-      var totLoops = (typeof SCORED !== 'undefined' && SCORED.total_candidate_count) ? SCORED.total_candidate_count : 5542;
-      var flaggedCount = (typeof SCORED !== 'undefined' && SCORED.high_risk_count) ? SCORED.high_risk_count : 5;
+      var totLoops = scoredData.total_candidate_count || 5542;
+      var flaggedCount = scoredData.high_risk_count || 5;
       
       var container = document.getElementById("global-stats-container");
-      container.innerHTML = 
-        "<div class='global-stat'><span class='gs-val mono num'>" + eCount + "</span><span class='gs-label'>ENTITIES</span></div>" +
-        "<div class='gs-divider'></div>" +
-        "<div class='global-stat'><span class='gs-val mono num'>" + iCount + "</span><span class='gs-label'>INVOICES</span></div>" +
-        "<div class='gs-divider'></div>" +
-        "<div class='global-stat'><span class='gs-val mono num'>" + totLoops.toLocaleString() + "</span><span class='gs-label'>DISCOVERED LOOPS</span></div>" +
-        "<div class='gs-divider'></div>" +
-        "<div class='global-stat'><span class='gs-val risk mono num'>" + flaggedCount + "</span><span class='gs-label risk'>FLAGGED FRAUD</span></div>";
+      if (container) {
+        container.innerHTML = 
+          "<div class='global-stat'><span class='gs-val mono num'>" + eCount + "</span><span class='gs-label'>ENTITIES</span></div>" +
+          "<div class='gs-divider'></div>" +
+          "<div class='global-stat'><span class='gs-val mono num'>" + iCount + "</span><span class='gs-label'>INVOICES</span></div>" +
+          "<div class='gs-divider'></div>" +
+          "<div class='global-stat'><span class='gs-val mono num'>" + totLoops.toLocaleString() + "</span><span class='gs-label'>DISCOVERED LOOPS</span></div>" +
+          "<div class='gs-divider'></div>" +
+          "<div class='global-stat'><span class='gs-val risk mono num'>" + flaggedCount + "</span><span class='gs-label risk'>FLAGGED FRAUD</span></div>";
+      }
     }
   });
 </script>
