@@ -52,6 +52,25 @@ REGIMES = {
         "messy_hs_null_rate": 0.10,
         "messy_address_noise_rate": 0.12,
     },
+    "SCALE": {
+        "num_firms": 250,
+        "sector_mix": {"manufacturing": 0.30, "trading": 0.30, "distribution": 0.25, "services": 0.15},
+        "num_trade_events": 1000,
+        "value_range": (1_000_000, 100_000_000),
+        "margin_range": (0.05, 0.25),
+        "lead_time_days": (2, 45),
+        "date_start": "2025-06-01",
+        "date_span_days": 270,
+        "num_fraud_rings": 12,
+        "fraud_ring_length_range": (3, 8),
+        "fraud_ring_min_long": 3,
+        "fraud_hard_case_count": 2,
+        "fraud_corporate_close_fraction": 0.5,
+        "fraud_value_variance": 0.03,
+        "fraud_timing_gap_days": (1, 4),
+        "messy_hs_null_rate": 0.05,
+        "messy_address_noise_rate": 0.08,
+    },
 }
 
 
