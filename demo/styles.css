@@ -14,7 +14,7 @@
 
   --paper: #EFE7D8;
   --paper-muted: #9A8F7E;
-  --paper-dark: #62584B;
+  --paper-dark: #8E8272; /* WCAG 2.1 AA compliant (>= 4.5:1 on ink backgrounds) */
 
   --seal: #C9A227;
   --seal-dim: rgba(201, 162, 39, 0.15);
@@ -130,6 +130,18 @@ body {
 
 .hidden {
   display: none !important;
+}
+
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
 }
 
 /* APP SHELL */
@@ -1743,7 +1755,7 @@ body {
   flex-shrink: 0;
   font-family: var(--font-mono);
   font-size: var(--fs-micro);
-  color: var(--paper-dark);
+  color: var(--paper-muted);
   min-width: 50px;
   text-align: right;
 }
@@ -1918,7 +1930,7 @@ body {
 }
 #tour-skip {
   margin-left: auto;
-  color: var(--paper-dark);
+  color: var(--paper-muted);
   border-color: transparent;
   font-size: var(--fs-micro);
 }

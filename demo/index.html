@@ -127,7 +127,7 @@
             font-family: var(--font-sans);
             font-weight: 400;
             font-size: var(--fs-micro);
-            color: var(--paper-dark);
+            color: var(--paper-muted);
             letter-spacing: 0.05em;
             opacity: 0;
             animation: elegantFadeUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) 2.0s forwards;
@@ -205,10 +205,10 @@
             <button id="net-toggle-corp" class="btn active" aria-pressed="true">CORPORATE LAYER</button>
             <button id="net-toggle-flagged" class="btn" aria-pressed="false">FLAGGED ONLY</button>
           </div>
-          <select id="net-ring-select" class="control-select">
+          <select id="net-ring-select" class="control-select" aria-label="Filter network by ring">
             <option value="">— ALL RINGS —</option>
           </select>
-          <select id="net-industry-filter" class="control-select">
+          <select id="net-industry-filter" class="control-select" aria-label="Filter network by industry">
             <option value="all">ALL INDUSTRIES</option>
             <option value="distribution">DISTRIBUTION</option>
             <option value="manufacturing">MANUFACTURING</option>
@@ -217,10 +217,10 @@
           </select>
           <button id="net-reset-btn" class="btn">RESET VIEW</button>
           <div class="network-zoom-controls" style="display:flex; gap:4px; align-items:center; margin-left:auto;">
-            <button id="net-zoom-out" class="btn" title="Zoom Out" style="padding:4px 10px; font-weight:bold;">−</button>
+            <button id="net-zoom-out" class="btn" title="Zoom Out" aria-label="Zoom Out" style="padding:4px 10px; font-weight:bold;">−</button>
             <span id="net-zoom-val" class="mono" style="font-size:var(--fs-micro); color:var(--paper-muted); min-width:42px; text-align:center;">100%</span>
-            <button id="net-zoom-in" class="btn" title="Zoom In" style="padding:4px 10px; font-weight:bold;">+</button>
-            <button id="net-zoom-reset" class="btn" title="Reset Zoom" style="padding:4px 8px; font-size:var(--fs-micro);">1:1</button>
+            <button id="net-zoom-in" class="btn" title="Zoom In" aria-label="Zoom In" style="padding:4px 10px; font-weight:bold;">+</button>
+            <button id="net-zoom-reset" class="btn" title="Reset Zoom" aria-label="Reset Zoom to 100%" style="padding:4px 8px; font-size:var(--fs-micro);">1:1</button>
           </div>
         </div>
       </div>
@@ -247,8 +247,10 @@
     <div id="view-directory" class="view-section">
       <div class="ledger-header-strip">
         <div class="ledger-controls">
-          <input type="text" id="dir-search" class="control-input" placeholder="Search entity ID, name, industry, NIC..." />
-          <select id="dir-sort" class="control-select">
+          <label for="dir-search" class="sr-only">Search entities</label>
+          <input type="text" id="dir-search" class="control-input" placeholder="Search entity ID, name, industry, NIC..." aria-label="Search entities by ID, name, industry, or NIC" />
+          <label for="dir-sort" class="sr-only">Sort entities</label>
+          <select id="dir-sort" class="control-select" aria-label="Sort entities">
             <option value="rings-desc">Flagged Rings (Most first)</option>
             <option value="loss-desc">Expected Loss (Highest first)</option>
             <option value="invoices-desc">Invoices (Most first)</option>
@@ -256,7 +258,8 @@
             <option value="date-new">Registration Date (Newest first)</option>
             <option value="id-asc">Entity ID (Ascending)</option>
           </select>
-          <select id="dir-filter-industry" class="control-select">
+          <label for="dir-filter-industry" class="sr-only">Filter entities by industry</label>
+          <select id="dir-filter-industry" class="control-select" aria-label="Filter entities by industry">
             <option value="all">ALL INDUSTRIES</option>
             <option value="distribution">DISTRIBUTION</option>
             <option value="manufacturing">MANUFACTURING</option>
@@ -289,15 +292,18 @@
     <div id="view-ledger" class="view-section">
       <div class="ledger-header-strip">
         <div class="ledger-controls">
-          <input type="text" id="ledger-search" class="control-input" placeholder="Search ID, company, HS code..." />
-          <select id="ledger-sort" class="control-select">
+          <label for="ledger-search" class="sr-only">Search invoices</label>
+          <input type="text" id="ledger-search" class="control-input" placeholder="Search ID, company, HS code..." aria-label="Search invoices by ID, company, or HS code" />
+          <label for="ledger-sort" class="sr-only">Sort invoices</label>
+          <select id="ledger-sort" class="control-select" aria-label="Sort invoices">
             <option value="date-new">Invoice Date (Newest first)</option>
             <option value="date-old">Invoice Date (Oldest first)</option>
             <option value="amount-high">Amount (Highest first)</option>
             <option value="amount-low">Amount (Lowest first)</option>
             <option value="id">Invoice ID</option>
           </select>
-          <select id="ledger-filter" class="control-select">
+          <label for="ledger-filter" class="sr-only">Filter invoices</label>
+          <select id="ledger-filter" class="control-select" aria-label="Filter invoices">
             <option value="all">ALL</option>
             <option value="dataset">DATASET</option>
             <option value="investigator">INVESTIGATOR ADDED</option>
@@ -342,7 +348,7 @@
   <div class="modal-window">
     <div class="modal-header">
       <h2 id="modal-title">INVOICE DETAIL</h2>
-      <button id="modal-close" class="modal-close-btn">&times;</button>
+      <button id="modal-close" class="modal-close-btn" aria-label="Close invoice details modal" title="Close modal">&times;</button>
     </div>
     <div id="modal-body" class="modal-body"></div>
   </div>
@@ -353,7 +359,7 @@
   <div class="modal-window entity-window">
     <div class="modal-header">
       <h2 id="entity-modal-title">ENTITY DETAIL</h2>
-      <button id="entity-modal-close" class="modal-close-btn">&times;</button>
+      <button id="entity-modal-close" class="modal-close-btn" aria-label="Close entity details modal" title="Close modal">&times;</button>
     </div>
     <div id="entity-modal-body" class="modal-body"></div>
   </div>
@@ -364,45 +370,45 @@
   <div class="modal-window add-invoice-window">
     <div class="modal-header">
       <h2>ADD INVESTIGATOR INVOICE</h2>
-      <button id="add-invoice-close" class="modal-close-btn">&times;</button>
+      <button id="add-invoice-close" class="modal-close-btn" aria-label="Close add invoice modal" title="Close modal">&times;</button>
     </div>
     <div class="modal-body form-body">
       <div id="add-inv-error" class="form-error hidden"></div>
       
       <div class="form-grid">
         <div class="form-group">
-          <label>INVOICE ID <span class="req">*</span></label>
+          <label for="add-inv-id">INVOICE ID <span class="req">*</span></label>
           <input type="text" id="add-inv-id" placeholder="e.g. I0201" class="form-input" />
         </div>
         
         <div class="form-group">
-          <label>VALUE (₹) <span class="req">*</span></label>
+          <label for="add-inv-val">VALUE (₹) <span class="req">*</span></label>
           <input type="number" id="add-inv-val" placeholder="e.g. 10000000" min="0" class="form-input" />
         </div>
 
         <div class="form-group">
-          <label>SELLER ENTITY ID <span class="req">*</span></label>
+          <label for="add-inv-seller">SELLER ENTITY ID <span class="req">*</span></label>
           <input type="text" id="add-inv-seller" list="entity-ids" placeholder="e.g. E040" class="form-input" />
         </div>
 
         <div class="form-group">
-          <label>BUYER ENTITY ID <span class="req">*</span></label>
+          <label for="add-inv-buyer">BUYER ENTITY ID <span class="req">*</span></label>
           <input type="text" id="add-inv-buyer" list="entity-ids" placeholder="e.g. E041" class="form-input" />
         </div>
 
         <div class="form-group">
-          <label>INVOICE DATE <span class="req">*</span></label>
+          <label for="add-inv-date">INVOICE DATE <span class="req">*</span></label>
           <input type="date" id="add-inv-date" class="form-input" />
         </div>
 
         <div class="form-group">
-          <label>HS CODE <span class="req">*</span></label>
+          <label for="add-inv-hs">HS CODE <span class="req">*</span></label>
           <input type="text" id="add-inv-hs" list="hs-datalist" placeholder="6-8 digit HS code" class="form-input" />
           <div id="add-inv-hs-hint" class="form-hint"></div>
         </div>
 
         <div class="form-group">
-          <label>DISCOUNTING DATE</label>
+          <label for="add-inv-discounting">DISCOUNTING DATE</label>
           <input type="date" id="add-inv-discounting" class="form-input" />
         </div>
       </div>
