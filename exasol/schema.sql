@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS STARTER_KIT.INVOICES (
   INVOICE_ID        VARCHAR(20)   PRIMARY KEY,
   FROM_ENTITY       VARCHAR(20)   NOT NULL,
   TO_ENTITY         VARCHAR(20)   NOT NULL,
-  VALUE             DECIMAL(18,0) NOT NULL,
+  "VALUE"           DECIMAL(18,0) NOT NULL,       -- VALUE is an Exasol reserved word, so it must stay quoted everywhere
   HS_CODE           VARCHAR(10),
   INVOICE_DATE      DATE          NOT NULL,
   DISCOUNTING_DATE  DATE          NOT NULL
@@ -70,7 +70,7 @@ CREATE TABLE IF NOT EXISTS STARTER_KIT.RING_HOPS (
   FROM_ENTITY       VARCHAR(20)   NOT NULL,
   TO_ENTITY         VARCHAR(20)   NOT NULL,
   INVOICE_ID        VARCHAR(20),
-  VALUE             DECIMAL(18,0),
+  "VALUE"           DECIMAL(18,0),                -- VALUE is an Exasol reserved word, so it must stay quoted everywhere
   HS_CODE           VARCHAR(10),
   INVOICE_DATE      DATE,
   DISCOUNTING_DATE  DATE,

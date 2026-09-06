@@ -219,23 +219,14 @@ def score_candidate_rings_in_db_client(conn) -> int:
         conn.execute("TRUNCATE TABLE STARTER_KIT.SCORED_RINGS")
         conn.import_from_iterable(
             scored_rows,
-            "STARTER_KIT.SCORED_RINGS",
-            columns=[
-                "RING_ID", "CANONICAL_KEY", "CLOSURE_TYPE", "ENTITIES",
-                "SCORE_VALUE", "SCORE_PRODUCT", "SCORE_TIMING", "SCORE_EXTERNALITY",
-                "ABSTAINED", "AGGREGATE_SCORE", "EXPECTED_LOSS"
-            ],
+            ("STARTER_KIT", "SCORED_RINGS"),
         )
 
     if evidence_rows:
         conn.execute("TRUNCATE TABLE STARTER_KIT.RING_EVIDENCE")
         conn.import_from_iterable(
             evidence_rows,
-            "STARTER_KIT.RING_EVIDENCE",
-            columns=[
-                "RING_ID", "EVIDENCE_VALUE", "EVIDENCE_PRODUCT",
-                "EVIDENCE_TIMING", "EVIDENCE_EXTERNALITY", "EVIDENCE_INDUSTRY"
-            ],
+            ("STARTER_KIT", "RING_EVIDENCE"),
         )
 
     return len(scored_rows)

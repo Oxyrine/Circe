@@ -5,31 +5,13 @@
     "entities": 60
   },
   "python_out_of_db": {
-    "wall_clock_seconds": 2.1102,
-    "rings_per_second": 2626.28
+    "wall_clock_seconds": 1.3327,
+    "rings_per_second": 4158.63
   },
   "exasol_in_db": {
-    "status": "unreachable",
-    "wall_clock_seconds": null,
-    "rings_per_second": null
+    "status": "measured",
+    "wall_clock_seconds": 90.8368,
+    "rings_per_second": 61.01
   },
-  "timestamp_utc": "2026-09-06T06:12:35Z",
-  "scale_ladder": {
-    "budget_seconds": 30.0,
-    "highest_completed_rung": 1000,
-    "stopped_reason": "all_rungs_completed",
-    "rungs": [
-      {
-        "target_invoices": 1000,
-        "actual_invoices": 1032,
-        "actual_entities": 150,
-        "candidate_rings_found": 36905,
-        "generation_seconds": 0.0192,
-        "detection_seconds": 2.0258,
-        "scoring_seconds": 26.3768,
-        "total_seconds": 28.4217,
-        "scoring_throughput_rings_per_sec": 1399.15
-      }
-    ]
-  }
+  "timestamp_utc": "2026-09-06T12:40:15Z"
 }
