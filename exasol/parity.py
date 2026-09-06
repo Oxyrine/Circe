@@ -21,7 +21,19 @@ from exasol.scoring import compute_externality_in_sql
 from scoring.scoring import score_ring, s_externality
 
 
-def approx_equal(a, b, tol=1e-4):
+def approx_equal(a, b, tol=6e-3):
+    """Tolerates the reference engine's own 2dp rounding, not just float noise.
+
+    scoring.score_ring() rounds its returned scores/aggregate to 2 decimal
+    places (see scoring/scoring.py), while SCORED_RINGS stores them at
+    DECIMAL(4,3) -- three decimal places, effectively unrounded. The same
+    underlying value can therefore legitimately read as e.g. 0.21 from the
+    reference and 0.208 from Exasol; the maximum possible gap from a single
+    round-to-nearest-0.01 step is 0.005, so 1e-4 (float-noise-only tolerance)
+    flags every such pair as a false mismatch. 6e-3 clears that known
+    rounding step with headroom while still catching a genuine computation
+    error, which would be off by far more than a rounding unit.
+    """
     if a is None and b is None:
         return True
     if a is None or b is None:
