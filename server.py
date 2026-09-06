@@ -24,10 +24,9 @@ try:
 except ImportError:
     _HAS_EXASOL = False
 
-# Pipeline imports — same pure functions used by build_data.py
+# Pipeline imports — centralized in pipeline.service
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from graph.run import find_candidate_rings
-from scoring.scoring import score_ring
+from pipeline.service import run_rescore, get_scored_rings_data
 
 # ---------------------------------------------------------------------------
 # Exasol audit-trail config — local dev only
@@ -66,60 +65,6 @@ class DualStackHTTPServer(http.server.ThreadingHTTPServer):
         super().server_bind()
 
 
-# Load invoice schema once at startup
-_SCHEMA_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "contract", "invoice.schema.json")
-_INVOICE_SCHEMA = None
-if os.path.exists(_SCHEMA_PATH):
-    with open(_SCHEMA_PATH, "r", encoding="utf-8") as _f:
-        _INVOICE_SCHEMA = json.load(_f)
-
-
-def _load_json(path):
-    with open(path, "r", encoding="utf-8") as f:
-        return json.load(f)
-
-
-def _entities_map(path):
-    data = _load_json(path)
-    if isinstance(data, dict) and "entities" in data and isinstance(data["entities"], list):
-        ent_list = data["entities"]
-    elif isinstance(data, list):
-        ent_list = data
-    else:
-        ent_list = []
-    result = {}
-    for e in ent_list:
-        eid = e.get("id") or e.get("entity_id")
-        if eid:
-            result[eid] = e
-    return result
-
-
-def _invoices_list(path):
-    data = _load_json(path)
-    return data.get("invoices", data if isinstance(data, list) else [])
-
-
-def _validate_invoices(invoices):
-    """Validate posted invoices against the invoice schema.
-    Returns a list of error strings, or [] if valid.
-    """
-    if not _HAS_SCHEMA or _INVOICE_SCHEMA is None:
-        return []
-    # Build a wrapper matching the schema's top-level shape
-    wrapped = {
-        "schema_version": 1,
-        "source_dataset": "investigator",
-        "count": len(invoices),
-        "invoices": invoices,
-    }
-    try:
-        jsonschema.validate(wrapped, _INVOICE_SCHEMA)
-        return []
-    except jsonschema.ValidationError as e:
-        return [e.message]
-    except jsonschema.SchemaError as e:
-        return ["Schema error: " + e.message]
 
 
 class OuroborosHandler(http.server.SimpleHTTPRequestHandler):
@@ -203,6 +148,9 @@ class OuroborosHandler(http.server.SimpleHTTPRequestHandler):
         if clean_path in ("/api/audit", "/audit"):
             self._handle_audit_post()
             return
+        if clean_path in ("/api/ai/narrative", "/ai/narrative"):
+            self._handle_ai_narrative_post()
+            return
         if clean_path not in ("/api/rescore", "/rescore"):
             self.send_error(404, "Not found")
             return
@@ -217,51 +165,37 @@ class OuroborosHandler(http.server.SimpleHTTPRequestHandler):
             return
 
         investigator_invoices = body.get("investigator_invoices", [])
-        if not isinstance(investigator_invoices, list):
-            self._send_json(400, {"error": "investigator_invoices must be an array"})
-            return
-
-        # Schema validation — never feed unvalidated input to the detector
-        errors = _validate_invoices(investigator_invoices)
-        if errors:
-            self._send_json(400, {"error": "Schema validation failed", "details": errors})
-            return
-
-        # Load base data
         base_dir = os.path.dirname(os.path.abspath(__file__))
-        entities_path = os.path.join(base_dir, "data", "entities.json")
-        invoices_path = os.path.join(base_dir, "data", "invoices.json")
+        status, response = run_rescore(investigator_invoices, base_dir=base_dir)
+        self._send_json(status, response)
 
+    def _handle_ai_narrative_post(self):
+        length = int(self.headers.get("Content-Length", 0))
+        raw = self.rfile.read(length)
         try:
-            entities = _entities_map(entities_path)
-            base_invoices = _invoices_list(invoices_path)
-        except Exception as e:
-            self._send_json(500, {"error": "Failed to load base data: " + str(e)})
+            body = json.loads(raw.decode("utf-8") if raw else "{}")
+        except json.JSONDecodeError as e:
+            self._send_json(400, {"error": "Invalid JSON: " + str(e)})
             return
 
-        # Merge investigator invoices and run detection + scoring (mirrors build_data.py --limit 50)
-        merged_invoices = list(base_invoices) + list(investigator_invoices)
-        entities_list = list(entities.values())
-
-        try:
-            candidate_rings = find_candidate_rings(entities_list, merged_invoices, max_depth=8)
-            scored = [score_ring(r, merged_invoices, entities) for r in candidate_rings]
-            scored.sort(key=lambda r: r.get("expected_loss", 0), reverse=True)
-            top50 = scored[:50]
-        except Exception as e:
-            self._send_json(500, {"error": "Pipeline error: " + str(e)})
+        ring = body.get("ring", {})
+        if not ring:
+            ring_id = body.get("ring_id")
+            if ring_id:
+                base_dir = os.path.dirname(os.path.abspath(__file__))
+                scored_data = get_scored_rings_data(base_dir=base_dir)
+                for r in scored_data.get("rings", []):
+                    if r.get("ring_id") == ring_id:
+                        ring = r
+                        break
+        if not ring:
+            self._send_json(400, {"error": "ring or ring_id is required"})
             return
 
-        # Return same shape as SCORED global in data.js
-        high_risk = [r for r in top50 if (r.get("aggregate") or 0) >= 0.70]
-        response = {
-            "rings": top50,
-            "total_candidate_count": len(candidate_rings),
-            "high_risk_count": len(high_risk),
-            "schema_version": 1,
-            "source": "live_rescore",
-        }
-        self._send_json(200, response)
+        actor = body.get("actor", "investigator")
+        from ai.provider import generate_narrative
+        res = generate_narrative(ring, actor=actor)
+        self._send_json(200, res)
 
     def _handle_audit_post(self):
         if not _HAS_EXASOL:

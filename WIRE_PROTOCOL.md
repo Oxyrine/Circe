@@ -377,4 +377,12 @@ Then open `viz/index.html` directly in a browser. No server.
 
 ---
 
+### Amendment 2026-09-06: Exasol Integration & Carve-out
+
+1. **Third-Party Dependency Carve-out (`pyexasol`)**: To integrate Exasol Personal / Nano as the mandatory data platform for the Exasol AI + Data Challenge 2026, `pyexasol` is recognized as an approved optional driver for local and in-database scoring execution. In accordance with §2, `pyexasol` remains absent from root `requirements.txt` to keep core CI lightweight and preserve offline demo portability.
+2. **System of Record & Offline Demo Invariant**: In-database scoring inside Exasol (`exasol/`) serves as the production compute surface. `demo/data.js` is formalized as an export artifact of the Exasol platform, guaranteeing that §8.3's zero-server, zero-database offline demo invariant is fully preserved.
+3. **Ownership Relaxation**: Strict folder-level single-writer ownership (§1) is relaxed by unanimous team agreement for cross-track integration across `exasol/`, `pipeline/`, `ai/`, and `demo/`.
+
+---
+
 *Ouroboros · Wire Protocol v1 · Frozen H0 · additive-only after H16 · supersedes the three individual track plans wherever they disagree*
