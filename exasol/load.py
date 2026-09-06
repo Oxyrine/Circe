@@ -45,8 +45,7 @@ def load_entities(conn, entities_path):
         conn.execute("TRUNCATE TABLE STARTER_KIT.ENTITIES")
         conn.import_from_iterable(
             rows,
-            "STARTER_KIT.ENTITIES",
-            columns=["ID", "NAME", "INDUSTRY_CODE", "INDUSTRY_CLASS", "DIRECTORS", "ADDRESS", "REGISTRATION_DATE"],
+            ("STARTER_KIT", "ENTITIES"),
         )
     print(f"Loaded {len(rows)} entities into Exasol.")
 
@@ -69,8 +68,7 @@ def load_invoices(conn, invoices_path):
         conn.execute("TRUNCATE TABLE STARTER_KIT.INVOICES")
         conn.import_from_iterable(
             rows,
-            "STARTER_KIT.INVOICES",
-            columns=["INVOICE_ID", "FROM_ENTITY", "TO_ENTITY", "VALUE", "HS_CODE", "INVOICE_DATE", "DISCOUNTING_DATE"],
+            ("STARTER_KIT", "INVOICES"),
         )
     print(f"Loaded {len(rows)} invoices into Exasol.")
 
@@ -91,8 +89,7 @@ def load_ground_truth(conn, ground_truth_path):
         conn.execute("TRUNCATE TABLE STARTER_KIT.GROUND_TRUTH_RINGS")
         conn.import_from_iterable(
             rows,
-            "STARTER_KIT.GROUND_TRUTH_RINGS",
-            columns=["TRUTH_ID", "ENTITIES", "HIDDEN_LEGS"],
+            ("STARTER_KIT", "GROUND_TRUTH_RINGS"),
         )
     print(f"Loaded {len(rows)} ground truth rings into Exasol.")
 
@@ -133,26 +130,19 @@ def load_candidates(conn, candidates_path):
         conn.execute("TRUNCATE TABLE STARTER_KIT.CANDIDATE_RINGS")
         conn.import_from_iterable(
             ring_rows,
-            "STARTER_KIT.CANDIDATE_RINGS",
-            columns=["RING_ID", "CANONICAL_KEY", "CLOSURE_TYPE", "ENTITIES"],
+            ("STARTER_KIT", "CANDIDATE_RINGS"),
         )
     if ent_rows:
         conn.execute("TRUNCATE TABLE STARTER_KIT.RING_ENTITIES")
         conn.import_from_iterable(
             ent_rows,
-            "STARTER_KIT.RING_ENTITIES",
-            columns=["RING_ID", "ENTITY_ID"],
+            ("STARTER_KIT", "RING_ENTITIES"),
         )
     if hop_rows:
         conn.execute("TRUNCATE TABLE STARTER_KIT.RING_HOPS")
         conn.import_from_iterable(
             hop_rows,
-            "STARTER_KIT.RING_HOPS",
-            columns=[
-                "RING_ID", "HOP_INDEX", "HOP_TYPE", "FROM_ENTITY", "TO_ENTITY",
-                "INVOICE_ID", "VALUE", "HS_CODE", "INVOICE_DATE", "DISCOUNTING_DATE",
-                "BRIDGE_KIND", "BRIDGE_EVIDENCE"
-            ],
+            ("STARTER_KIT", "RING_HOPS"),
         )
     print(f"Loaded {len(ring_rows)} candidate rings ({len(ent_rows)} entity junctions, {len(hop_rows)} hops) into Exasol.")
 
@@ -192,22 +182,13 @@ def load_scored(conn, scored_path):
         conn.execute("TRUNCATE TABLE STARTER_KIT.SCORED_RINGS")
         conn.import_from_iterable(
             scored_rows,
-            "STARTER_KIT.SCORED_RINGS",
-            columns=[
-                "RING_ID", "CANONICAL_KEY", "CLOSURE_TYPE", "ENTITIES",
-                "SCORE_VALUE", "SCORE_PRODUCT", "SCORE_TIMING", "SCORE_EXTERNALITY",
-                "ABSTAINED", "AGGREGATE_SCORE", "EXPECTED_LOSS"
-            ],
+            ("STARTER_KIT", "SCORED_RINGS"),
         )
     if evidence_rows:
         conn.execute("TRUNCATE TABLE STARTER_KIT.RING_EVIDENCE")
         conn.import_from_iterable(
             evidence_rows,
-            "STARTER_KIT.RING_EVIDENCE",
-            columns=[
-                "RING_ID", "EVIDENCE_VALUE", "EVIDENCE_PRODUCT",
-                "EVIDENCE_TIMING", "EVIDENCE_EXTERNALITY", "EVIDENCE_INDUSTRY"
-            ],
+            ("STARTER_KIT", "RING_EVIDENCE"),
         )
     print(f"Loaded {len(scored_rows)} scored rings into Exasol.")
 
