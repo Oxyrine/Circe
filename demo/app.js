@@ -3,6 +3,20 @@
 
   var SIGNALS = ["value", "product", "timing", "externality"];
 
+  // Mutable data store to prevent const shadowing issues with live rescoring
+  var CirceStore = {
+    getScored: function() {
+      if (window._LIVE_SCORED) return window._LIVE_SCORED;
+      if (typeof window.SCORED !== "undefined" && window.SCORED) return window.SCORED;
+      return typeof SCORED !== "undefined" ? SCORED : null;
+    },
+    setScored: function(data) {
+      window._LIVE_SCORED = data;
+      window.SCORED = data;
+    }
+  };
+  window.CirceStore = CirceStore;
+
 // --- PHASE 6 ADDITIONS ---
 window.INVESTIGATOR_INVOICES = {};
 try {
@@ -755,7 +769,8 @@ window.removeInvestigatorInvoice = function(id) {
   }
 
   function buildStatsBar(rings) {
-    var totalCandidates = (typeof SCORED !== "undefined" && SCORED.total_candidate_count) ? SCORED.total_candidate_count : 5542;
+    var scoredData = CirceStore.getScored();
+    var totalCandidates = (scoredData && scoredData.total_candidate_count) ? scoredData.total_candidate_count : 5542;
     var highRiskRings = rings.filter(function(r) { return (r.aggregate || r.aggregate_score || 0) >= 0.70; });
     var clearedRings = rings.filter(function(r) { return (r.aggregate || r.aggregate_score || 0) < 0.70; });
     
@@ -787,7 +802,8 @@ window.removeInvestigatorInvoice = function(id) {
     var root = document.getElementById("queue");
     if (!root) return;
 
-    if (typeof SCORED === "undefined" || !SCORED.rings || !SCORED.rings.length) {
+    var scoredData = CirceStore.getScored();
+    if (!scoredData || !scoredData.rings || !scoredData.rings.length) {
       var note = document.createElement("p");
       note.className = "empty-note";
       note.textContent = "No scored rings loaded — run build_data.py against a scored_rings artifact.";
@@ -795,7 +811,7 @@ window.removeInvestigatorInvoice = function(id) {
       return;
     }
 
-    var rings = SCORED.rings.slice().sort(function (a, b) {
+    var rings = scoredData.rings.slice().sort(function (a, b) {
       return (b.expected_loss || 0) - (a.expected_loss || 0);
     });
 
@@ -1522,9 +1538,10 @@ window.removeInvestigatorInvoice = function(id) {
   }
 
   function getRelatedRings(invoiceId) {
-    if (typeof SCORED === "undefined" || !SCORED.rings) return [];
+    var scoredData = CirceStore.getScored();
+    if (!scoredData || !scoredData.rings) return [];
     var related = [];
-    SCORED.rings.forEach(function(ring) {
+    scoredData.rings.forEach(function(ring) {
       if (ring.hops) {
         for (var i = 0; i < ring.hops.length; i++) {
           if (ring.hops[i].hop_type === "invoice" && ring.hops[i].invoice_id === invoiceId) {
@@ -1833,7 +1850,8 @@ window.removeInvestigatorInvoice = function(id) {
         idx[id].invoiceValue += (inv.value || 0);
       });
     });
-    var ringsList = typeof SCORED !== "undefined" && SCORED.rings ? SCORED.rings : [];
+    var scoredData = CirceStore.getScored();
+    var ringsList = scoredData && scoredData.rings ? scoredData.rings : [];
     ringsList.forEach(function (r) {
       (r.entities || []).forEach(function (id) {
         if (!idx[id]) return;
@@ -1972,9 +1990,11 @@ window.removeInvestigatorInvoice = function(id) {
     var entityIndex = buildEntityIndex();
     var allInvoices = typeof getAllInvoices === "function" ? getAllInvoices() : (typeof INVOICES !== "undefined" ? INVOICES : {});
 
-    // Populate ring dropdown once
-    if (ringSelect && ringSelect.options.length <= 1 && typeof SCORED !== "undefined" && SCORED.rings) {
-      var sortedRings = SCORED.rings.slice().sort(function(a, b) {
+    // Populate ring dropdown
+    var scoredData = CirceStore.getScored();
+    if (ringSelect && scoredData && scoredData.rings) {
+      ringSelect.innerHTML = "<option value=''>— ALL RINGS —</option>";
+      var sortedRings = scoredData.rings.slice().sort(function(a, b) {
         return (b.expected_loss || 0) - (a.expected_loss || 0);
       });
       sortedRings.forEach(function(r) {
@@ -2003,7 +2023,7 @@ window.removeInvestigatorInvoice = function(id) {
     // Ring hops lookup
     var ringHopsMap = {};
     var ringEntitiesMap = {};
-    (typeof SCORED !== "undefined" && SCORED.rings ? SCORED.rings : []).forEach(function(r) {
+    (scoredData && scoredData.rings ? scoredData.rings : []).forEach(function(r) {
       (r.entities || []).forEach(function(e) {
         ringEntitiesMap[e] = true;
       });
@@ -2421,7 +2441,8 @@ window.removeInvestigatorInvoice = function(id) {
         resetFocus();
         return;
       }
-      var ring = (SCORED.rings || []).find(function(r) { return r.ring_id === ringId; });
+      var scoredData = CirceStore.getScored();
+      var ring = (scoredData && scoredData.rings ? scoredData.rings : []).find(function(r) { return r.ring_id === ringId; });
       if (!ring) return;
 
       var ringEnts = {};
@@ -2608,8 +2629,9 @@ window.removeInvestigatorInvoice = function(id) {
 
     // Derive top ring from the sorted queue (first card)
     function topRingId() {
-      if (typeof SCORED === "undefined" || !SCORED.rings || !SCORED.rings.length) return null;
-      var sorted = SCORED.rings.slice().sort(function(a, b) {
+      var scoredData = CirceStore.getScored();
+      if (!scoredData || !scoredData.rings || !scoredData.rings.length) return null;
+      var sorted = scoredData.rings.slice().sort(function(a, b) {
         return (b.expected_loss || 0) - (a.expected_loss || 0);
       });
       return sorted[0].ring_id;
@@ -2843,12 +2865,30 @@ window.removeInvestigatorInvoice = function(id) {
       })
       .then(function(data) {
         // Re-render with new scores
-        window.SCORED = data;
+        CirceStore.setScored(data);
         var root = document.getElementById("queue");
         var statsRoot = document.getElementById("stats");
         if (root) root.innerHTML = "";
         if (statsRoot) statsRoot.innerHTML = "";
         render();
+        renderDirectory();
+        renderNetwork();
+
+        var globalStats = document.getElementById("global-stats-container");
+        if (globalStats && typeof ENTITIES !== "undefined" && typeof INVOICES !== "undefined") {
+          var eCount = Object.keys(ENTITIES).length;
+          var iCount = Object.keys(INVOICES).length + investigatorInvoices.length;
+          var totLoops = data.total_candidate_count || 5542;
+          var flaggedCount = data.high_risk_count || (data.rings ? data.rings.filter(function(r) { return (r.aggregate || r.aggregate_score || 0) >= 0.70; }).length : 5);
+          globalStats.innerHTML = 
+            "<div class='global-stat'><span class='gs-val mono num'>" + eCount + "</span><span class='gs-label'>ENTITIES</span></div>" +
+            "<div class='gs-divider'></div>" +
+            "<div class='global-stat'><span class='gs-val mono num'>" + iCount + "</span><span class='gs-label'>INVOICES</span></div>" +
+            "<div class='gs-divider'></div>" +
+            "<div class='global-stat'><span class='gs-val mono num'>" + totLoops.toLocaleString() + "</span><span class='gs-label'>DISCOVERED LOOPS</span></div>" +
+            "<div class='gs-divider'></div>" +
+            "<div class='global-stat'><span class='gs-val risk mono num'>" + flaggedCount + "</span><span class='gs-label risk'>FLAGGED FRAUD</span></div>";
+        }
         // Show banner
         if (banner) {
           var n = investigatorInvoices.length;
