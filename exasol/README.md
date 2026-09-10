@@ -123,3 +123,38 @@ Available endpoints:
 * `POST /api/audit`: Persist investigator escalation or override
 * `POST /api/ai/narrative`: Generate compliance memo and log to Exasol audit trail
 * Web UI: `http://localhost:8000/demo/`
+
+---
+
+## 8. Deployment
+
+The challenge accepts **Local** as a deployment target. The deployed system *is* the
+stack above: the Exasol Personal / Nano starter kit plus `python server.py 8000`, with
+`server.py` reading its Exasol connection from `EXASOL_DSN` / `EXASOL_USER` /
+`EXASOL_PASSWORD` / `EXASOL_SCHEMA` (see `exasol/connection.py`).
+
+The public `*.vercel.app` link is a **labelled frozen export** for judges without a
+local setup — it serves `demo/` and `demo/data.js` (an Exasol export artifact) only.
+`server.py` is excluded via `.vercelignore` and `vercel.json` routes just
+`/api/health` and `/api/rescore`, so `/api/audit` and the live Exasol path do not
+exist there by design.
+
+### 8.1 Temporary public URL for the demo / judging
+
+To expose the live local stack on a temporary HTTPS URL during the demo window:
+
+```bash
+python server.py 8000          # terminal 1 — with the starter kit already running
+./exasol/expose.sh 8000        # terminal 2 — prints a https://…trycloudflare.com URL
+```
+
+Only `server.py` is tunneled; Exasol stays bound to localhost. Needs `cloudflared`
+(no account) or `ngrok` on PATH. Stop the tunnel with Ctrl-C when the demo is done.
+
+### 8.2 Always-on cloud (optional, not required)
+
+Exasol Personal can also be provisioned into your own AWS or Azure account via the
+Exasol launcher, with `server.py` hosted on any always-on container host (Fly.io,
+Render, a small VM) and the `EXASOL_*` variables pointed at it. This is a real
+ongoing cost and is not needed for the submission — the local deployment plus this
+guide satisfies the requirement.
