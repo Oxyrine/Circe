@@ -92,7 +92,13 @@ def connect(autocommit=True):
             dsn=_EXASOL_DSN,
             user=_EXASOL_USER,
             password=password,
-            schema=_EXASOL_SCHEMA,
+            # No schema= here on purpose: every query in this codebase is
+            # already fully schema-qualified ("STARTER_KIT"."TABLE"), and
+            # pyexasol's schema kwarg does a USE SCHEMA at login time, which
+            # fails before init_schema() has had a chance to create it --
+            # breaking connect() on a genuinely fresh database. _EXASOL_SCHEMA
+            # is still used to build qualified names elsewhere.
+            #
             # The starter kit's Nano container requires TLS on login ("Only TLS
             # connections are allowed"), so encryption can't simply be turned
             # off. cert_reqs=0 covers the query/control (websocket) channel;
