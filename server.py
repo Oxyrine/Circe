@@ -45,9 +45,13 @@ def _exasol_password():
 
 
 def _exasol_connect():
+    # No schema= here on purpose -- see the matching comment in
+    # exasol/connection.py: every query is already schema-qualified, and
+    # passing schema forces a USE SCHEMA at login that fails before
+    # init_schema() has created it on a fresh database.
     return pyexasol.connect(
         dsn=_EXASOL_DSN, user=_EXASOL_USER, password=_exasol_password(),
-        schema=_EXASOL_SCHEMA, encryption=True, websocket_sslopt={"cert_reqs": 0},
+        encryption=True, websocket_sslopt={"cert_reqs": 0},
     )
 
 
