@@ -6,7 +6,7 @@
 
 Automated detection and discrimination of circular trading fraud on trade receivables and invoice discounting platforms (TReDS), powered by Exasol Personal / Nano as the high-performance system of record and in-database analytical compute surface.
 
-📹 **[Watch the 3-minute demo video](circe-demo-video.mp4)**
+📹 **[Watch the 3-minute demo video](circe-demo-video.mp4)** · 📊 **[View the pitch deck](circe-pitch-deck.pptx)**
 
 ---
 
