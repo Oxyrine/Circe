@@ -1,3 +1,4 @@
+import gzip
 import http.server
 import json
 import os
@@ -5,6 +6,11 @@ import re
 import socket
 import sys
 from pathlib import Path
+
+_COMPRESSIBLE_TYPES = {
+    "text/html", "text/css", "text/plain", "text/javascript",
+    "application/javascript", "application/json", "image/svg+xml",
+}
 
 # jsonschema is already in requirements.txt
 try:
@@ -104,7 +110,42 @@ class OuroborosHandler(http.server.SimpleHTTPRequestHandler):
             self.send_header("Location", "/demo/")
             self.end_headers()
             return
+        if self._serve_static_file():
+            return
         super().do_GET()
+
+    def _serve_static_file(self):
+        # demo/data.js (222KB) was intermittently truncated mid-transfer at a
+        # fixed ~196KB on this stack (ERR_CONNECTION_RESET), independent of
+        # how the response was written — some local network layer outside our
+        # control was stalling and then cutting off large plain responses.
+        # Gzipping compressible assets keeps the wire size well under whatever
+        # threshold that was, which reliably avoids it; smaller files were
+        # never affected and this also just cuts bytes on the wire generally.
+        fs_path = self.translate_path(self.path)
+        if not os.path.isfile(fs_path):
+            return False
+        try:
+            with open(fs_path, "rb") as f:
+                body = f.read()
+        except OSError:
+            return False
+
+        ctype = self.guess_type(fs_path)
+        accept_encoding = self.headers.get("Accept-Encoding", "")
+        use_gzip = ctype in _COMPRESSIBLE_TYPES and "gzip" in accept_encoding
+        if use_gzip:
+            body = gzip.compress(body, compresslevel=6)
+
+        self.send_response(200)
+        self.send_header("Content-Type", ctype)
+        if use_gzip:
+            self.send_header("Content-Encoding", "gzip")
+        self.send_header("Content-Length", str(len(body)))
+        self.send_header("Access-Control-Allow-Origin", "*")
+        self.end_headers()
+        self.wfile.write(body)
+        return True
 
     def _handle_audit_get(self):
         if not _HAS_EXASOL:
