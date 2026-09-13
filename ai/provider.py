@@ -109,22 +109,31 @@ def log_ai_action_to_exasol(ring_id: str, note: str, aggregate_val: float, closu
     try:
         conn = connect()
         try:
+            # pyexasol has no positional "?" placeholders -- it substitutes
+            # named {param} tokens from a dict (see server.py's _handle_audit_post
+            # for the same pattern). An earlier version of this used "?" with a
+            # positional tuple, which pyexasol silently can't format, and the
+            # bare `except Exception: pass` below hid the resulting TypeError
+            # instead of ever logging a single narrative action.
             sql = '''
             INSERT INTO "STARTER_KIT"."CIRCE_AUDIT_LOG"
             ("RING_ID", "ACTION_TYPE", "ACTOR", "ACTOR_ROLE", "NOTE", "AGGREGATE_AT_TIME", "CLOSURE_TYPE_AT_TIME")
-            VALUES (?, 'narrative_generated', ?, 'evidence_explainer', ?, ?, ?)
+            VALUES ({ring_id}, 'narrative_generated', {actor}, 'evidence_explainer', {note}, {aggregate_val}, {closure_type})
             '''
-            conn.execute(sql, (
-                ring_id,
-                actor,
-                note[:2000],
-                float(aggregate_val),
-                closure_type,
-            ))
+            conn.execute(sql, {
+                "ring_id": ring_id,
+                "actor": actor,
+                "note": note[:2000],
+                "aggregate_val": float(aggregate_val),
+                "closure_type": closure_type,
+            })
         finally:
             conn.close()
-    except Exception:
-        pass
+    except Exception as e:
+        # Best-effort: a broken audit write must never break narrative
+        # generation for the investigator, but it must not vanish silently
+        # either -- print so it shows up in server.py's own console output.
+        print(f"log_ai_action_to_exasol failed: {e}")
 
 
 def generate_narrative(ring: dict, actor="investigator") -> dict:

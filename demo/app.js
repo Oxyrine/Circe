@@ -693,6 +693,11 @@ window.removeInvestigatorInvoice = function(id) {
     timelineBtn.textContent = "VIEW INVESTIGATION TIMELINE";
     actionsWrap.appendChild(timelineBtn);
 
+    var narrativeBtn = document.createElement("button");
+    narrativeBtn.className = "btn";
+    narrativeBtn.textContent = "GENERATE AI EVIDENCE NARRATIVE";
+    actionsWrap.appendChild(narrativeBtn);
+
     body.appendChild(actionsWrap);
 
     var trailContainer = document.createElement("div");
@@ -704,6 +709,11 @@ window.removeInvestigatorInvoice = function(id) {
     timelineContainer.className = "timeline-container hidden";
     timelineContainer.style.padding = "0 16px 16px 16px";
     body.appendChild(timelineContainer);
+
+    var narrativeContainer = document.createElement("div");
+    narrativeContainer.className = "trail-container hidden";
+    narrativeContainer.style.padding = "0 16px 16px 16px";
+    body.appendChild(narrativeContainer);
 
     trailBtn.addEventListener("click", function() {
       if (trailContainer.classList.contains("hidden")) {
@@ -739,6 +749,61 @@ window.removeInvestigatorInvoice = function(id) {
         timelineBtn.textContent = "VIEW INVESTIGATION TIMELINE";
         timelineBtn.style.backgroundColor = "";
       }
+    });
+
+    narrativeBtn.addEventListener("click", function() {
+      if (!narrativeContainer.classList.contains("hidden")) {
+        narrativeContainer.classList.add("hidden");
+        narrativeBtn.textContent = "GENERATE AI EVIDENCE NARRATIVE";
+        narrativeBtn.style.backgroundColor = "";
+        return;
+      }
+      narrativeContainer.classList.remove("hidden");
+      narrativeBtn.style.backgroundColor = "var(--ink-panel-hover)";
+      if (narrativeContainer.hasChildNodes()) {
+        narrativeBtn.textContent = "HIDE AI EVIDENCE NARRATIVE";
+        return;
+      }
+      narrativeBtn.disabled = true;
+      narrativeBtn.textContent = "GENERATING…";
+      fetch("/api/ai/narrative", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ring_id: ring.ring_id, actor: "investigator" })
+      })
+      .then(function(r) {
+        return r.json().then(function(data) {
+          if (!r.ok) throw new Error(data.error || "narrative request failed");
+          return data;
+        });
+      })
+      .then(function(data) {
+        var box = document.createElement("div");
+        box.className = "industry-note mono";
+        box.style.whiteSpace = "pre-wrap";
+        box.style.lineHeight = "1.5";
+        box.textContent = data.narrative || "(no narrative returned)";
+        narrativeContainer.appendChild(box);
+        if (data.governance_note) {
+          var note = document.createElement("p");
+          note.style.opacity = "0.6";
+          note.style.fontStyle = "italic";
+          note.style.marginTop = "8px";
+          note.textContent = (data.ai_available ? "" : "[deterministic fallback, no LLM key configured] ") + data.governance_note;
+          narrativeContainer.appendChild(note);
+        }
+        narrativeBtn.textContent = "HIDE AI EVIDENCE NARRATIVE";
+      })
+      .catch(function(err) {
+        var box = document.createElement("div");
+        box.className = "industry-note flagged mono";
+        box.textContent = "Narrative generation failed: " + err.message;
+        narrativeContainer.appendChild(box);
+        narrativeBtn.textContent = "HIDE AI EVIDENCE NARRATIVE";
+      })
+      .finally(function() {
+        narrativeBtn.disabled = false;
+      });
     });
 
     card.appendChild(body);
