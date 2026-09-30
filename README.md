@@ -229,4 +229,4 @@ Evaluated against the ground-truth benchmark dataset (`data/ground_truth.json`):
 
 ## License
 
-Internal research and prototype developed for DevJams'26 and the Exasol AI + Data Challenge 2026. All rights reserved.
+Internal research and prototype developed for the Exasol AI + Data Challenge 2026. All rights reserved.

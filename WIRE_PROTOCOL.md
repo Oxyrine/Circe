@@ -1,6 +1,6 @@
 # Ouroboros — The Wire Protocol
 
-**Ouroboros · DevJams'26 · frozen at hour 0**
+**Ouroboros · frozen at hour 0**
 Supersedes all three individual track plans wherever they disagree · Python, stdlib only · `schema_version: 1` · additive-only changes after H16
 
 One contract, three tracks, four handoffs. Everything below is frozen before anyone opens an editor, so A, B and C can each build for sixteen hours without asking each other a single question.
