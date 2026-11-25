@@ -12,3 +12,9 @@ Thumbs.db
 
 .claude/
 graphify-out/
+
+# large generated/binary files, kept out of the repo to stay under 10 MB
+artifacts/candidate_rings.json
+artifacts/scored_rings.json
+*.mp4
+*.pptx
